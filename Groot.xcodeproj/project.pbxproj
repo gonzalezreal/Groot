@@ -1,0 +1,421 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		99EB2D8A19644636008FC282 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EB2D8919644636008FC282 /* Foundation.framework */; };
+		99EB2D8F19644636008FC282 /* Groot.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 99EB2D8E19644636008FC282 /* Groot.h */; };
+		99EB2D9119644636008FC282 /* Groot.m in Sources */ = {isa = PBXBuildFile; fileRef = 99EB2D9019644636008FC282 /* Groot.m */; };
+		99EB2D9819644636008FC282 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EB2D9719644636008FC282 /* XCTest.framework */; };
+		99EB2D9919644636008FC282 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EB2D8919644636008FC282 /* Foundation.framework */; };
+		99EB2D9B19644636008FC282 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EB2D9A19644636008FC282 /* UIKit.framework */; };
+		99EB2D9E19644636008FC282 /* libGroot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EB2D8619644636008FC282 /* libGroot.a */; };
+		99EB2DA419644636008FC282 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 99EB2DA219644636008FC282 /* InfoPlist.strings */; };
+		99EB2DA619644636008FC282 /* GrootTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 99EB2DA519644636008FC282 /* GrootTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		99EB2D9C19644636008FC282 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 99EB2D7E19644636008FC282 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 99EB2D8519644636008FC282;
+			remoteInfo = Groot;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		99EB2D8419644636008FC282 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				99EB2D8F19644636008FC282 /* Groot.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		99EB2D8619644636008FC282 /* libGroot.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGroot.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		99EB2D8919644636008FC282 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		99EB2D8D19644636008FC282 /* Groot-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Groot-Prefix.pch"; sourceTree = "<group>"; };
+		99EB2D8E19644636008FC282 /* Groot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Groot.h; sourceTree = "<group>"; };
+		99EB2D9019644636008FC282 /* Groot.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Groot.m; sourceTree = "<group>"; };
+		99EB2D9619644636008FC282 /* GrootTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GrootTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		99EB2D9719644636008FC282 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		99EB2D9A19644636008FC282 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		99EB2DA119644636008FC282 /* GrootTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GrootTests-Info.plist"; sourceTree = "<group>"; };
+		99EB2DA319644636008FC282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		99EB2DA519644636008FC282 /* GrootTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GrootTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		99EB2D8319644636008FC282 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				99EB2D8A19644636008FC282 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		99EB2D9319644636008FC282 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				99EB2D9819644636008FC282 /* XCTest.framework in Frameworks */,
+				99EB2D9B19644636008FC282 /* UIKit.framework in Frameworks */,
+				99EB2D9919644636008FC282 /* Foundation.framework in Frameworks */,
+				99EB2D9E19644636008FC282 /* libGroot.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		99EB2D7D19644636008FC282 = {
+			isa = PBXGroup;
+			children = (
+				99EB2D8B19644636008FC282 /* Groot */,
+				99EB2D9F19644636008FC282 /* GrootTests */,
+				99EB2D8819644636008FC282 /* Frameworks */,
+				99EB2D8719644636008FC282 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		99EB2D8719644636008FC282 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				99EB2D8619644636008FC282 /* libGroot.a */,
+				99EB2D9619644636008FC282 /* GrootTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		99EB2D8819644636008FC282 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				99EB2D8919644636008FC282 /* Foundation.framework */,
+				99EB2D9719644636008FC282 /* XCTest.framework */,
+				99EB2D9A19644636008FC282 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		99EB2D8B19644636008FC282 /* Groot */ = {
+			isa = PBXGroup;
+			children = (
+				99EB2D8E19644636008FC282 /* Groot.h */,
+				99EB2D9019644636008FC282 /* Groot.m */,
+				99EB2D8C19644636008FC282 /* Supporting Files */,
+			);
+			path = Groot;
+			sourceTree = "<group>";
+		};
+		99EB2D8C19644636008FC282 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				99EB2D8D19644636008FC282 /* Groot-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		99EB2D9F19644636008FC282 /* GrootTests */ = {
+			isa = PBXGroup;
+			children = (
+				99EB2DA519644636008FC282 /* GrootTests.m */,
+				99EB2DA019644636008FC282 /* Supporting Files */,
+			);
+			path = GrootTests;
+			sourceTree = "<group>";
+		};
+		99EB2DA019644636008FC282 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				99EB2DA119644636008FC282 /* GrootTests-Info.plist */,
+				99EB2DA219644636008FC282 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		99EB2D8519644636008FC282 /* Groot */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 99EB2DA919644636008FC282 /* Build configuration list for PBXNativeTarget "Groot" */;
+			buildPhases = (
+				99EB2D8219644636008FC282 /* Sources */,
+				99EB2D8319644636008FC282 /* Frameworks */,
+				99EB2D8419644636008FC282 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Groot;
+			productName = Groot;
+			productReference = 99EB2D8619644636008FC282 /* libGroot.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		99EB2D9519644636008FC282 /* GrootTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 99EB2DAC19644636008FC282 /* Build configuration list for PBXNativeTarget "GrootTests" */;
+			buildPhases = (
+				99EB2D9219644636008FC282 /* Sources */,
+				99EB2D9319644636008FC282 /* Frameworks */,
+				99EB2D9419644636008FC282 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				99EB2D9D19644636008FC282 /* PBXTargetDependency */,
+			);
+			name = GrootTests;
+			productName = GrootTests;
+			productReference = 99EB2D9619644636008FC282 /* GrootTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		99EB2D7E19644636008FC282 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = GRT;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Guillermo Gonzalez";
+			};
+			buildConfigurationList = 99EB2D8119644636008FC282 /* Build configuration list for PBXProject "Groot" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 99EB2D7D19644636008FC282;
+			productRefGroup = 99EB2D8719644636008FC282 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				99EB2D8519644636008FC282 /* Groot */,
+				99EB2D9519644636008FC282 /* GrootTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		99EB2D9419644636008FC282 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				99EB2DA419644636008FC282 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		99EB2D8219644636008FC282 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				99EB2D9119644636008FC282 /* Groot.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		99EB2D9219644636008FC282 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				99EB2DA619644636008FC282 /* GrootTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		99EB2D9D19644636008FC282 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 99EB2D8519644636008FC282 /* Groot */;
+			targetProxy = 99EB2D9C19644636008FC282 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		99EB2DA219644636008FC282 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				99EB2DA319644636008FC282 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		99EB2DA719644636008FC282 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		99EB2DA819644636008FC282 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		99EB2DAA19644636008FC282 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Groot.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Groot/Groot-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		99EB2DAB19644636008FC282 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Groot.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Groot/Groot-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		99EB2DAD19644636008FC282 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Groot/Groot-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "GrootTests/GrootTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		99EB2DAE19644636008FC282 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Groot/Groot-Prefix.pch";
+				INFOPLIST_FILE = "GrootTests/GrootTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		99EB2D8119644636008FC282 /* Build configuration list for PBXProject "Groot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				99EB2DA719644636008FC282 /* Debug */,
+				99EB2DA819644636008FC282 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		99EB2DA919644636008FC282 /* Build configuration list for PBXNativeTarget "Groot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				99EB2DAA19644636008FC282 /* Debug */,
+				99EB2DAB19644636008FC282 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		99EB2DAC19644636008FC282 /* Build configuration list for PBXNativeTarget "GrootTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				99EB2DAD19644636008FC282 /* Debug */,
+				99EB2DAE19644636008FC282 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 99EB2D7E19644636008FC282 /* Project object */;
+}
