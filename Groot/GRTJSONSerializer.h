@@ -1,4 +1,4 @@
-// Groot.h
+// GRTJSONSerializer.h
 //
 // Copyright (c) 2014 Guillermo Gonzalez
 //
@@ -20,5 +20,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Groot/GRTManagedStore.h>
-#import <Groot/GRTJSONSerializer.h>
+#import <CoreData/CoreData.h>
+
+@interface GRTJSONSerializer : NSObject
+
++ (id)insertObjectForEntityName:(NSString *)entityName
+             fromJSONDictionary:(NSDictionary *)JSONDictionary
+         inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+
++ (NSArray *)insertObjectsForEntityName:(NSString *)entityName
+                          fromJSONArray:(NSArray *)JSONArray
+                 inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+
++ (id)mergeObjectForEntityName:(NSString *)entityName
+            fromJSONDictionary:(NSDictionary *)JSONDictionary
+        inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+
++ (NSArray *)mergeObjectsForEntityName:(NSString *)entityName
+                         fromJSONArray:(NSArray *)JSONArray
+                inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+
+@end
