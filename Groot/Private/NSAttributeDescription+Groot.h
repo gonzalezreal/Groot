@@ -24,6 +24,6 @@
 
 @interface NSAttributeDescription (Groot)
 
-- (NSValueTransformer *)JSONValueTransformer;
+- (NSValueTransformer *)JSONTransformer;
 
 @end

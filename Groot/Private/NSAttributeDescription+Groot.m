@@ -22,12 +22,13 @@
 
 #import "NSAttributeDescription+Groot.h"
 
-static NSString * const GRTJSONValueTransformerKey = @"JSONValueTransformer";
+static NSString * const GRTJSONTransformerNameKey = @"JSONTransformerName";
 
 @implementation NSAttributeDescription (Groot)
 
-- (NSValueTransformer *)JSONValueTransformer {
-    return [self userInfo][GRTJSONValueTransformerKey];
+- (NSValueTransformer *)JSONTransformer {
+    NSString *name = [self userInfo][GRTJSONTransformerNameKey];
+    return name ? [NSValueTransformer valueTransformerForName:name] : nil;
 }
 
 @end
