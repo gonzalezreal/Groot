@@ -26,7 +26,7 @@ static NSString * const GRTJSONTransformerNameKey = @"JSONTransformerName";
 
 @implementation NSAttributeDescription (Groot)
 
-- (NSValueTransformer *)JSONTransformer {
+- (NSValueTransformer *)grt_JSONTransformer {
     NSString *name = [self userInfo][GRTJSONTransformerNameKey];
     return name ? [NSValueTransformer valueTransformerForName:name] : nil;
 }
