@@ -26,18 +26,22 @@
 
 + (id)insertObjectForEntityName:(NSString *)entityName
              fromJSONDictionary:(NSDictionary *)JSONDictionary
-         inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+         inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
+                          error:(NSError **)error;
 
 + (NSArray *)insertObjectsForEntityName:(NSString *)entityName
                           fromJSONArray:(NSArray *)JSONArray
-                 inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+                 inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
+                                  error:(NSError **)error;
 
 + (id)mergeObjectForEntityName:(NSString *)entityName
             fromJSONDictionary:(NSDictionary *)JSONDictionary
-        inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+        inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
+                         error:(NSError **)error;
 
 + (NSArray *)mergeObjectsForEntityName:(NSString *)entityName
                          fromJSONArray:(NSArray *)JSONArray
-                inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+                inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
+                                 error:(NSError **)error;
 
 @end

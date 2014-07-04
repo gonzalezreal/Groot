@@ -27,6 +27,7 @@
 + (id)insertObjectForEntityName:(NSString *)entityName
              fromJSONDictionary:(NSDictionary *)JSONDictionary
          inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
+                          error:(NSError *__autoreleasing *)error
 {
     return nil;
 }
@@ -34,6 +35,7 @@
 + (NSArray *)insertObjectsForEntityName:(NSString *)entityName
                           fromJSONArray:(NSArray *)JSONArray
                  inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
+                                  error:(NSError *__autoreleasing *)error
 {
     return nil;
 }
@@ -41,6 +43,7 @@
 + (id)mergeObjectForEntityName:(NSString *)entityName
             fromJSONDictionary:(NSDictionary *)JSONDictionary
         inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
+                         error:(NSError *__autoreleasing *)error
 {
     return nil;
 }
@@ -48,6 +51,7 @@
 + (NSArray *)mergeObjectsForEntityName:(NSString *)entityName
                          fromJSONArray:(NSArray *)JSONArray
                 inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
+                                 error:(NSError *__autoreleasing *)error
 {
     return nil;
 }
