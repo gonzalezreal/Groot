@@ -22,11 +22,15 @@
 
 #import <CoreData/CoreData.h>
 
-@interface GRTJSONSerializer : NSObject
+extern NSString * const GRTJSONSerializationErrorDomain;
+
+extern const NSInteger GRTJSONSerializationErrorInvalidRelationshipClass;
+
+@interface GRTJSONSerialization : NSObject
 
 + (id)insertObjectForEntityName:(NSString *)entityName
              fromJSONDictionary:(NSDictionary *)JSONDictionary
-         inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
+         inManagedObjectContext:(NSManagedObjectContext *)context
                           error:(NSError **)error;
 
 + (NSArray *)insertObjectsForEntityName:(NSString *)entityName

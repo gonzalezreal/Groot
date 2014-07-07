@@ -21,4 +21,4 @@
 // THE SOFTWARE.
 
 #import <Groot/GRTManagedStore.h>
-#import <Groot/GRTJSONSerializer.h>
+#import <Groot/GRTJSONSerialization.h>

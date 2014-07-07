@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		99591DC319658DB400027DB5 /* GRTManagedStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 99591DC119658DB400027DB5 /* GRTManagedStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		99591DC419658DB400027DB5 /* GRTManagedStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 99591DC219658DB400027DB5 /* GRTManagedStore.m */; };
-		99591DC71965922900027DB5 /* GRTJSONSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 99591DC51965922900027DB5 /* GRTJSONSerializer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		99591DC81965922900027DB5 /* GRTJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 99591DC61965922900027DB5 /* GRTJSONSerializer.m */; };
+		99591DC71965922900027DB5 /* GRTJSONSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 99591DC51965922900027DB5 /* GRTJSONSerialization.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		99591DC81965922900027DB5 /* GRTJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 99591DC61965922900027DB5 /* GRTJSONSerialization.m */; };
 		99591DCA1965934F00027DB5 /* GRTJSONSerializerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 99591DC91965934F00027DB5 /* GRTJSONSerializerTests.m */; };
 		99591DD21965A17200027DB5 /* NSAttributeDescription+Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = 99591DD01965A17200027DB5 /* NSAttributeDescription+Groot.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		99591DD31965A17200027DB5 /* NSAttributeDescription+Groot.m in Sources */ = {isa = PBXBuildFile; fileRef = 99591DD11965A17200027DB5 /* NSAttributeDescription+Groot.m */; };
@@ -50,8 +50,8 @@
 /* Begin PBXFileReference section */
 		99591DC119658DB400027DB5 /* GRTManagedStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTManagedStore.h; sourceTree = "<group>"; };
 		99591DC219658DB400027DB5 /* GRTManagedStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTManagedStore.m; sourceTree = "<group>"; };
-		99591DC51965922900027DB5 /* GRTJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTJSONSerializer.h; sourceTree = "<group>"; };
-		99591DC61965922900027DB5 /* GRTJSONSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTJSONSerializer.m; sourceTree = "<group>"; };
+		99591DC51965922900027DB5 /* GRTJSONSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTJSONSerialization.h; sourceTree = "<group>"; };
+		99591DC61965922900027DB5 /* GRTJSONSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTJSONSerialization.m; sourceTree = "<group>"; };
 		99591DC91965934F00027DB5 /* GRTJSONSerializerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTJSONSerializerTests.m; sourceTree = "<group>"; };
 		99591DD01965A17200027DB5 /* NSAttributeDescription+Groot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributeDescription+Groot.h"; sourceTree = "<group>"; };
 		99591DD11965A17200027DB5 /* NSAttributeDescription+Groot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributeDescription+Groot.m"; sourceTree = "<group>"; };
@@ -137,8 +137,8 @@
 				99EB2D8E19644636008FC282 /* Groot.h */,
 				99591DC119658DB400027DB5 /* GRTManagedStore.h */,
 				99591DC219658DB400027DB5 /* GRTManagedStore.m */,
-				99591DC51965922900027DB5 /* GRTJSONSerializer.h */,
-				99591DC61965922900027DB5 /* GRTJSONSerializer.m */,
+				99591DC51965922900027DB5 /* GRTJSONSerialization.h */,
+				99591DC61965922900027DB5 /* GRTJSONSerialization.m */,
 				99591DCF1965A17200027DB5 /* Private */,
 				99EB2D8C19644636008FC282 /* Supporting Files */,
 			);
@@ -179,7 +179,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				996DF56C1965777E00F9DB74 /* Groot.h in Headers */,
-				99591DC71965922900027DB5 /* GRTJSONSerializer.h in Headers */,
+				99591DC71965922900027DB5 /* GRTJSONSerialization.h in Headers */,
 				99591DC319658DB400027DB5 /* GRTManagedStore.h in Headers */,
 				99591DD21965A17200027DB5 /* NSAttributeDescription+Groot.h in Headers */,
 				99591DD61965A29500027DB5 /* NSPropertyDescription+Groot.h in Headers */,
@@ -272,7 +272,7 @@
 				99591DD71965A29500027DB5 /* NSPropertyDescription+Groot.m in Sources */,
 				99591DD31965A17200027DB5 /* NSAttributeDescription+Groot.m in Sources */,
 				99591DC419658DB400027DB5 /* GRTManagedStore.m in Sources */,
-				99591DC81965922900027DB5 /* GRTJSONSerializer.m in Sources */,
+				99591DC81965922900027DB5 /* GRTJSONSerialization.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
