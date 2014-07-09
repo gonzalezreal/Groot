@@ -1,4 +1,4 @@
-// GRTJSONSerializer.m
+// GRTJSONSerialization.m
 //
 // Copyright (c) 2014 Guillermo Gonzalez
 //
@@ -28,12 +28,17 @@
 NSString * const GRTJSONSerializationErrorDomain = @"GRTJSONSerializationErrorDomain";
 const NSInteger GRTJSONSerializationErrorInvalidJSONObject = 0xcaca;
 
+static BOOL GRTIsNullKeyPath(NSString *keyPath) {
+    static NSString * const kNullKeyPath = @"null";
+    return [keyPath isEqualToString:kNullKeyPath];
+}
+
 @implementation GRTJSONSerialization
 
 + (id)insertObjectForEntityName:(NSString *)entityName fromJSONDictionary:(NSDictionary *)JSONDictionary inManagedObjectContext:(NSManagedObjectContext *)context error:(NSError *__autoreleasing *)error {
     NSParameterAssert(JSONDictionary);
     
-    return [self insertObjectsForEntityName:entityName fromJSONArray:@[JSONDictionary] inManagedObjectContext:context error:error];
+    return [[self insertObjectsForEntityName:entityName fromJSONArray:@[JSONDictionary] inManagedObjectContext:context error:error] firstObject];
 }
 
 + (NSArray *)insertObjectsForEntityName:(NSString *)entityName fromJSONArray:(NSArray *)JSONArray inManagedObjectContext:(NSManagedObjectContext *)context error:(NSError *__autoreleasing *)error {
@@ -106,7 +111,13 @@ const NSInteger GRTJSONSerializationErrorInvalidJSONObject = 0xcaca;
 #pragma mark - Private
 
 + (BOOL)serializeAttribute:(NSAttributeDescription *)attribute fromJSONDictionary:(NSDictionary *)JSONDictionary inManagedObject:(NSManagedObject *)managedObject merge:(BOOL)merge error:(NSError *__autoreleasing *)error {
-    id value = [self valueForKeyPath:[attribute grt_JSONKeyPath]];
+    NSString *keyPath = [attribute grt_JSONKeyPath];
+    
+    if (GRTIsNullKeyPath(keyPath)) {
+        return YES;
+    }
+    
+    id value = [JSONDictionary valueForKeyPath:keyPath];
 
     if (merge && value == nil) {
         return YES;
@@ -132,7 +143,13 @@ const NSInteger GRTJSONSerializationErrorInvalidJSONObject = 0xcaca;
 }
 
 + (BOOL)serializeRelationship:(NSRelationshipDescription *)relationship fromJSONDictionary:(NSDictionary *)JSONDictionary inManagedObject:(NSManagedObject *)managedObject merge:(BOOL)merge error:(NSError *__autoreleasing *)error {
-    id value = [self valueForKeyPath:[relationship grt_JSONKeyPath]];
+    NSString *keyPath = [relationship grt_JSONKeyPath];
+    
+    if (GRTIsNullKeyPath(keyPath)) {
+        return YES;
+    }
+    
+    id value = [JSONDictionary valueForKeyPath:keyPath];
     
     if (merge && value == nil) {
         return YES;
@@ -143,7 +160,7 @@ const NSInteger GRTJSONSerializationErrorInvalidJSONObject = 0xcaca;
     }
     
     if (value != nil) {
-        NSString *entityName = relationship.entity.name;
+        NSString *entityName = relationship.destinationEntity.name;
         NSManagedObjectContext *context = managedObject.managedObjectContext;
         NSError *tmpError = nil;
         

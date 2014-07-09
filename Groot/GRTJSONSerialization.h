@@ -1,4 +1,4 @@
-// GRTJSONSerializer.h
+// GRTJSONSerialization.h
 //
 // Copyright (c) 2014 Guillermo Gonzalez
 //
