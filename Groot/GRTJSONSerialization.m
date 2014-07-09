@@ -26,46 +26,63 @@
 #import "NSAttributeDescription+Groot.h"
 
 NSString * const GRTJSONSerializationErrorDomain = @"GRTJSONSerializationErrorDomain";
-const NSInteger GRTJSONSerializationErrorInvalidRelationshipClass = 2;
+const NSInteger GRTJSONSerializationErrorInvalidJSONObject = 0xcaca;
 
 @implementation GRTJSONSerialization
 
-+ (id)insertObjectForEntityName:(NSString *)entityName
-             fromJSONDictionary:(NSDictionary *)JSONDictionary
-         inManagedObjectContext:(NSManagedObjectContext *)context
-                          error:(NSError *__autoreleasing *)error
-{
-    NSParameterAssert(entityName);
++ (id)insertObjectForEntityName:(NSString *)entityName fromJSONDictionary:(NSDictionary *)JSONDictionary inManagedObjectContext:(NSManagedObjectContext *)context error:(NSError *__autoreleasing *)error {
     NSParameterAssert(JSONDictionary);
+    
+    return [self insertObjectsForEntityName:entityName fromJSONArray:@[JSONDictionary] inManagedObjectContext:context error:error];
+}
+
++ (NSArray *)insertObjectsForEntityName:(NSString *)entityName fromJSONArray:(NSArray *)JSONArray inManagedObjectContext:(NSManagedObjectContext *)context error:(NSError *__autoreleasing *)error {
+    NSParameterAssert(entityName);
+    NSParameterAssert(JSONArray);
     NSParameterAssert(context);
     
     NSError * __block tmpError = nil;
-    NSManagedObject * __block managedObject = nil;
+    NSMutableArray * __block managedObjects = [NSMutableArray arrayWithCapacity:JSONArray.count];
+    
+    if (JSONArray.count == 0) {
+        // Return early and avoid any processing in the context queue
+        return managedObjects;
+    }
     
     [context performBlockAndWait:^{
-        managedObject = [NSEntityDescription insertNewObjectForEntityForName:entityName
-                                                      inManagedObjectContext:context];
-        NSDictionary *propertiesByName = managedObject.entity.propertiesByName;
-        
-        [propertiesByName enumerateKeysAndObjectsUsingBlock:^(NSString *name, NSPropertyDescription *property, BOOL *stop) {
-            if ([property isKindOfClass:[NSAttributeDescription class]]) {
-                *stop = ![self serializeAttribute:(NSAttributeDescription *)property
-                               fromJSONDictionary:JSONDictionary
-                                  inManagedObject:managedObject
-                                            merge:NO
-                                            error:&tmpError];
-            } else if ([property isKindOfClass:[NSRelationshipDescription class]]) {
-                *stop = ![self serializeRelationship:(NSRelationshipDescription *)property
-                                  fromJSONDictionary:JSONDictionary
-                                     inManagedObject:managedObject
-                                               merge:NO
-                                               error:&tmpError];
+        for (NSDictionary *dictionary in JSONArray) {
+            if ([dictionary isEqual:NSNull.null]) {
+                continue;
             }
-        }];
-        
-        if (tmpError != nil) {
-            [context deleteObject:managedObject];
-            managedObject = nil;
+            
+            if (![dictionary isKindOfClass:NSDictionary.class]) {
+                NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Cannot serialize %@. Expected a JSON dictionary.", @""), dictionary];
+                NSDictionary *userInfo = @{
+                    NSLocalizedDescriptionKey: message
+                };
+                
+                tmpError = [NSError errorWithDomain:GRTJSONSerializationErrorDomain code:GRTJSONSerializationErrorInvalidJSONObject userInfo:userInfo];
+                
+                break;
+            }
+            
+            NSManagedObject *managedObject = [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:context];
+            NSDictionary *propertiesByName = managedObject.entity.propertiesByName;
+            
+            [propertiesByName enumerateKeysAndObjectsUsingBlock:^(NSString *name, NSPropertyDescription *property, BOOL *stop) {
+                if ([property isKindOfClass:NSAttributeDescription.class]) {
+                    *stop = ![self serializeAttribute:(NSAttributeDescription *)property fromJSONDictionary:dictionary inManagedObject:managedObject merge:NO error:&tmpError];
+                } else if ([property isKindOfClass:NSRelationshipDescription.class]) {
+                    *stop = ![self serializeRelationship:(NSRelationshipDescription *)property fromJSONDictionary:dictionary inManagedObject:managedObject merge:NO error:&tmpError];
+                }
+            }];
+            
+            if (tmpError == nil) {
+                [managedObjects addObject:managedObject];
+            } else {
+                [context deleteObject:managedObject];
+                break;
+            }
         }
     }];
     
@@ -73,44 +90,22 @@ const NSInteger GRTJSONSerializationErrorInvalidRelationshipClass = 2;
         *error = tmpError;
     }
     
-    return managedObject;
+    return managedObjects;
 }
 
-+ (NSArray *)insertObjectsForEntityName:(NSString *)entityName
-                          fromJSONArray:(NSArray *)JSONArray
-                 inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
-                                  error:(NSError *__autoreleasing *)error
-{
++ (id)mergeObjectForEntityName:(NSString *)entityName fromJSONDictionary:(NSDictionary *)JSONDictionary inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext error:(NSError *__autoreleasing *)error {
     // TODO: implement
     return nil;
 }
 
-+ (id)mergeObjectForEntityName:(NSString *)entityName
-            fromJSONDictionary:(NSDictionary *)JSONDictionary
-        inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
-                         error:(NSError *__autoreleasing *)error
-{
-    // TODO: implement
-    return nil;
-}
-
-+ (NSArray *)mergeObjectsForEntityName:(NSString *)entityName
-                         fromJSONArray:(NSArray *)JSONArray
-                inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
-                                 error:(NSError *__autoreleasing *)error
-{
++ (NSArray *)mergeObjectsForEntityName:(NSString *)entityName fromJSONArray:(NSArray *)JSONArray inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext error:(NSError *__autoreleasing *)error {
     // TODO: implement
     return nil;
 }
 
 #pragma mark - Private
 
-+ (BOOL)serializeAttribute:(NSAttributeDescription *)attribute
-        fromJSONDictionary:(NSDictionary *)JSONDictionary
-           inManagedObject:(NSManagedObject *)managedObject
-                     merge:(BOOL)merge
-                     error:(NSError *__autoreleasing *)error
-{
++ (BOOL)serializeAttribute:(NSAttributeDescription *)attribute fromJSONDictionary:(NSDictionary *)JSONDictionary inManagedObject:(NSManagedObject *)managedObject merge:(BOOL)merge error:(NSError *__autoreleasing *)error {
     id value = [self valueForKeyPath:[attribute grt_JSONKeyPath]];
 
     if (merge && value == nil) {
@@ -136,12 +131,7 @@ const NSInteger GRTJSONSerializationErrorInvalidRelationshipClass = 2;
     return NO;
 }
 
-+ (BOOL)serializeRelationship:(NSRelationshipDescription *)relationship
-           fromJSONDictionary:(NSDictionary *)JSONDictionary
-              inManagedObject:(NSManagedObject *)managedObject
-                        merge:(BOOL)merge
-                        error:(NSError *__autoreleasing *)error
-{
++ (BOOL)serializeRelationship:(NSRelationshipDescription *)relationship fromJSONDictionary:(NSDictionary *)JSONDictionary inManagedObject:(NSManagedObject *)managedObject merge:(BOOL)merge error:(NSError *__autoreleasing *)error {
     id value = [self valueForKeyPath:[relationship grt_JSONKeyPath]];
     
     if (merge && value == nil) {
@@ -160,57 +150,39 @@ const NSInteger GRTJSONSerializationErrorInvalidRelationshipClass = 2;
         if ([relationship isToMany]) {
             if (![value isKindOfClass:[NSArray class]]) {
                 if (error) {
-                    NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Value with key path %@ cannot be serialized into a to-many relationship", @""), [relationship grt_JSONKeyPath]];
+                    NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Cannot serialize %@ into a to-many relationship. Expected a JSON array.", @""), [relationship grt_JSONKeyPath]];
                     NSDictionary *userInfo = @{
                         NSLocalizedDescriptionKey: message
                     };
                     
-                    *error = [NSError errorWithDomain:GRTJSONSerializationErrorDomain
-                                                 code:GRTJSONSerializationErrorInvalidRelationshipClass
-                                             userInfo:userInfo];
+                    *error = [NSError errorWithDomain:GRTJSONSerializationErrorDomain code:GRTJSONSerializationErrorInvalidJSONObject userInfo:userInfo];
                 }
                 
                 return NO;
             }
             
-            if (merge) {
-                value = [self mergeObjectsForEntityName:entityName
-                                          fromJSONArray:value
-                                 inManagedObjectContext:context
-                                                  error:&tmpError];
-            } else {
-                value = [self insertObjectsForEntityName:entityName
-                                           fromJSONArray:value
-                                  inManagedObjectContext:context
-                                                   error:&tmpError];
-            }
+            NSArray *objects = merge
+                ? [self mergeObjectsForEntityName:entityName fromJSONArray:value inManagedObjectContext:context error:&tmpError]
+                : [self insertObjectsForEntityName:entityName fromJSONArray:value inManagedObjectContext:context error:&tmpError];
+            
+            value = [relationship isOrdered] ? [NSOrderedSet orderedSetWithArray:objects] : [NSSet setWithArray:objects];
         } else {
             if (![value isKindOfClass:[NSDictionary class]]) {
                 if (error) {
-                    NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Value with key path %@ cannot be serialized into a to-one relationship", @""), [relationship grt_JSONKeyPath]];
+                    NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Cannot serialize %@ into a to-one relationship. Expected a JSON dictionary.", @""), [relationship grt_JSONKeyPath]];
                     NSDictionary *userInfo = @{
                         NSLocalizedDescriptionKey: message
                     };
                     
-                    *error = [NSError errorWithDomain:GRTJSONSerializationErrorDomain
-                                                 code:GRTJSONSerializationErrorInvalidRelationshipClass
-                                             userInfo:userInfo];
+                    *error = [NSError errorWithDomain:GRTJSONSerializationErrorDomain code:GRTJSONSerializationErrorInvalidJSONObject userInfo:userInfo];
                 }
                 
                 return NO;
             }
             
-            if (merge) {
-                value = [self mergeObjectForEntityName:entityName
-                                    fromJSONDictionary:value
-                                inManagedObjectContext:context
-                                                 error:&tmpError];
-            } else {
-                value = [self insertObjectForEntityName:entityName
-                                     fromJSONDictionary:value
-                                 inManagedObjectContext:context
-                                                  error:&tmpError];
-            }
+            value = merge
+                ? [self mergeObjectForEntityName:entityName fromJSONDictionary:value inManagedObjectContext:context error:&tmpError]
+                : [self insertObjectForEntityName:entityName fromJSONDictionary:value inManagedObjectContext:context error:&tmpError];
         }
         
         if (tmpError != nil) {

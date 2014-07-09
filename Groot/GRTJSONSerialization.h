@@ -23,29 +23,16 @@
 #import <CoreData/CoreData.h>
 
 extern NSString * const GRTJSONSerializationErrorDomain;
-
-extern const NSInteger GRTJSONSerializationErrorInvalidRelationshipClass;
+extern const NSInteger GRTJSONSerializationErrorInvalidJSONObject;
 
 @interface GRTJSONSerialization : NSObject
 
-+ (id)insertObjectForEntityName:(NSString *)entityName
-             fromJSONDictionary:(NSDictionary *)JSONDictionary
-         inManagedObjectContext:(NSManagedObjectContext *)context
-                          error:(NSError **)error;
++ (id)insertObjectForEntityName:(NSString *)entityName fromJSONDictionary:(NSDictionary *)JSONDictionary inManagedObjectContext:(NSManagedObjectContext *)context error:(NSError **)error;
 
-+ (NSArray *)insertObjectsForEntityName:(NSString *)entityName
-                          fromJSONArray:(NSArray *)JSONArray
-                 inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
-                                  error:(NSError **)error;
++ (NSArray *)insertObjectsForEntityName:(NSString *)entityName fromJSONArray:(NSArray *)JSONArray inManagedObjectContext:(NSManagedObjectContext *)context error:(NSError **)error;
 
-+ (id)mergeObjectForEntityName:(NSString *)entityName
-            fromJSONDictionary:(NSDictionary *)JSONDictionary
-        inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
-                         error:(NSError **)error;
++ (id)mergeObjectForEntityName:(NSString *)entityName fromJSONDictionary:(NSDictionary *)JSONDictionary inManagedObjectContext:(NSManagedObjectContext *)context error:(NSError **)error;
 
-+ (NSArray *)mergeObjectsForEntityName:(NSString *)entityName
-                         fromJSONArray:(NSArray *)JSONArray
-                inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
-                                 error:(NSError **)error;
++ (NSArray *)mergeObjectsForEntityName:(NSString *)entityName fromJSONArray:(NSArray *)JSONArray inManagedObjectContext:(NSManagedObjectContext *)context error:(NSError **)error;
 
 @end
