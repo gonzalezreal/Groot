@@ -27,8 +27,8 @@ static NSString * const GRTJSONKeyPathKey = @"JSONKeyPath";
 @implementation NSPropertyDescription (Groot)
 
 - (NSString *)grt_JSONKeyPath {
-    NSString *JSONKeyPath = [self userInfo][GRTJSONKeyPathKey];
-    return JSONKeyPath ? : [self name];
+    NSString *JSONKeyPath = self.userInfo[GRTJSONKeyPathKey];
+    return JSONKeyPath ? : self.name;
 }
 
 @end

@@ -1,4 +1,4 @@
-// NSAttributeDescription+Groot.m
+// NSEntityDescription+Groot.m
 //
 // Copyright (c) 2014 Guillermo Gonzalez
 //
@@ -20,15 +20,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "NSAttributeDescription+Groot.h"
+#import "NSEntityDescription+Groot.h"
 
-static NSString * const GRTJSONTransformerNameKey = @"JSONTransformerName";
+static NSString * const GRTIdentityAttributeKey = @"identityAttribute";
 
-@implementation NSAttributeDescription (Groot)
+@implementation NSEntityDescription (Groot)
 
-- (NSValueTransformer *)grt_JSONTransformer {
-    NSString *name = self.userInfo[GRTJSONTransformerNameKey];
-    return name ? [NSValueTransformer valueTransformerForName:name] : nil;
+- (NSAttributeDescription *)grt_identityAttribute {
+    NSString *identityAttribute = self.userInfo[GRTIdentityAttributeKey];
+    
+    if (identityAttribute) {
+        return self.attributesByName[identityAttribute];
+    }
+    
+    return nil;
 }
 
 @end

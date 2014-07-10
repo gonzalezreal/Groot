@@ -19,6 +19,9 @@
         </attribute>
         <relationship name="powers" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Power" inverseName="characters" inverseEntity="Power" syncable="YES"/>
         <relationship name="publisher" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Publisher" inverseName="characters" inverseEntity="Publisher" syncable="YES"/>
+        <userInfo>
+            <entry key="identityAttribute" value="identifier"/>
+        </userInfo>
     </entity>
     <entity name="Power" representedClassName="GRTPower" syncable="YES">
         <attribute name="identifier" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES">
@@ -28,6 +31,9 @@
         </attribute>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="characters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Character" inverseName="powers" inverseEntity="Character" syncable="YES"/>
+        <userInfo>
+            <entry key="identityAttribute" value="identifier"/>
+        </userInfo>
     </entity>
     <entity name="Publisher" representedClassName="GRTPublisher" syncable="YES">
         <attribute name="identifier" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES">
@@ -37,10 +43,13 @@
         </attribute>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="characters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Character" inverseName="publisher" inverseEntity="Character" syncable="YES"/>
+        <userInfo>
+            <entry key="identityAttribute" value="identifier"/>
+        </userInfo>
     </entity>
     <elements>
         <element name="Character" positionX="-317" positionY="-180" width="128" height="133"/>
-        <element name="Power" positionX="-119" positionY="-135" width="128" height="88"/>
-        <element name="Publisher" positionX="-533" positionY="-9" width="128" height="88"/>
+        <element name="Power" positionX="-119" positionY="-115" width="128" height="88"/>
+        <element name="Publisher" positionX="-524" positionY="-9" width="128" height="88"/>
     </elements>
 </model>

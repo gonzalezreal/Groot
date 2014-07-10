@@ -24,6 +24,8 @@
 
 #import "NSPropertyDescription+Groot.h"
 #import "NSAttributeDescription+Groot.h"
+#import "NSEntityDescription+Groot.h"
+#import "NSDictionary+Groot.h"
 
 NSString * const GRTJSONSerializationErrorDomain = @"GRTJSONSerializationErrorDomain";
 const NSInteger GRTJSONSerializationErrorInvalidJSONObject = 0xcaca;
@@ -98,14 +100,95 @@ static BOOL GRTIsNullKeyPath(NSString *keyPath) {
     return managedObjects;
 }
 
-+ (id)mergeObjectForEntityName:(NSString *)entityName fromJSONDictionary:(NSDictionary *)JSONDictionary inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext error:(NSError *__autoreleasing *)error {
-    // TODO: implement
-    return nil;
++ (id)mergeObjectForEntityName:(NSString *)entityName fromJSONDictionary:(NSDictionary *)JSONDictionary inManagedObjectContext:(NSManagedObjectContext *)context error:(NSError *__autoreleasing *)error {
+    NSParameterAssert(JSONDictionary);
+    
+    return [[self mergeObjectsForEntityName:entityName fromJSONArray:@[JSONDictionary] inManagedObjectContext:context error:error] firstObject];
 }
 
-+ (NSArray *)mergeObjectsForEntityName:(NSString *)entityName fromJSONArray:(NSArray *)JSONArray inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext error:(NSError *__autoreleasing *)error {
-    // TODO: implement
-    return nil;
++ (NSArray *)mergeObjectsForEntityName:(NSString *)entityName fromJSONArray:(NSArray *)JSONArray inManagedObjectContext:(NSManagedObjectContext *)context error:(NSError *__autoreleasing *)error {
+    NSParameterAssert(entityName);
+    NSParameterAssert(JSONArray);
+    NSParameterAssert(context);
+    
+    NSError * __block tmpError = nil;
+    NSMutableArray * __block managedObjects = [NSMutableArray arrayWithCapacity:JSONArray.count];
+    
+    if (JSONArray.count == 0) {
+        // Return early and avoid any processing in the context queue
+        return managedObjects;
+    }
+    
+    [context performBlockAndWait:^{
+        NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
+        
+        NSAttributeDescription *identityAttribute = [entity grt_identityAttribute];
+        NSAssert(identityAttribute != nil, @"An identity attribute must be specified in order to merge objects");
+        NSAssert(!GRTIsNullKeyPath([identityAttribute grt_JSONKeyPath]), @"The identity attribute must have an valid JSON key path");
+        
+        NSMutableArray *identifiers = [NSMutableArray arrayWithCapacity:JSONArray.count];
+        for (NSDictionary *dictionary in JSONArray) {
+            if ([dictionary isEqual:NSNull.null]) {
+                continue;
+            }
+            
+            id identifier = [dictionary grt_valueForAttribute:identityAttribute];
+            if (identifier != nil) [identifiers addObject:identifier];
+        }
+        
+        NSDictionary *existingObjects = [self fetchObjectsForEntity:entity withIdentifiers:identifiers inManagedObjectContext:context error:&tmpError];
+        
+        for (NSDictionary *dictionary in JSONArray) {
+            if ([dictionary isEqual:NSNull.null]) {
+                continue;
+            }
+            
+            if (![dictionary isKindOfClass:NSDictionary.class]) {
+                NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Cannot serialize %@. Expected a JSON dictionary.", @""), dictionary];
+                NSDictionary *userInfo = @{
+                    NSLocalizedDescriptionKey: message
+                };
+                
+                tmpError = [NSError errorWithDomain:GRTJSONSerializationErrorDomain code:GRTJSONSerializationErrorInvalidJSONObject userInfo:userInfo];
+                
+                break;
+            }
+            
+            NSManagedObject *managedObject = nil;
+            id identifier = [dictionary grt_valueForAttribute:identityAttribute];
+            
+            if (identifier) {
+                managedObject = existingObjects[identifier];
+            }
+            
+            if (!managedObject) {
+                managedObject = [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:context];
+            }
+            
+            NSDictionary *propertiesByName = managedObject.entity.propertiesByName;
+            
+            [propertiesByName enumerateKeysAndObjectsUsingBlock:^(NSString *name, NSPropertyDescription *property, BOOL *stop) {
+                if ([property isKindOfClass:NSAttributeDescription.class]) {
+                    *stop = ![self serializeAttribute:(NSAttributeDescription *)property fromJSONDictionary:dictionary inManagedObject:managedObject merge:YES error:&tmpError];
+                } else if ([property isKindOfClass:NSRelationshipDescription.class]) {
+                    *stop = ![self serializeRelationship:(NSRelationshipDescription *)property fromJSONDictionary:dictionary inManagedObject:managedObject merge:YES error:&tmpError];
+                }
+            }];
+            
+            if (tmpError == nil) {
+                [managedObjects addObject:managedObject];
+            } else {
+                [context deleteObject:managedObject];
+                break;
+            }
+        }
+    }];
+    
+    if (error != nil) {
+        *error = tmpError;
+    }
+    
+    return managedObjects;
 }
 
 #pragma mark - Private
@@ -216,6 +299,30 @@ static BOOL GRTIsNullKeyPath(NSString *keyPath) {
     }
     
     return NO;
+}
+
++ (NSDictionary *)fetchObjectsForEntity:(NSEntityDescription *)entity withIdentifiers:(NSArray *)identifiers inManagedObjectContext:(NSManagedObjectContext *)context error:(NSError *__autoreleasing *)error {
+    NSString *identityKey = [[entity grt_identityAttribute] name];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    fetchRequest.entity = entity;
+    fetchRequest.returnsObjectsAsFaults = NO;
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"%K IN %@", identityKey, identifiers];
+    
+    NSArray *objects = [context executeFetchRequest:fetchRequest error:error];
+    
+    if (objects.count > 0) {
+        NSMutableDictionary *objectsByIdentifier = [NSMutableDictionary dictionaryWithCapacity:objects.count];
+        
+        for (NSManagedObject *object in objects) {
+            id identifier = [object valueForKey:identityKey];
+            objectsByIdentifier[identifier] = object;
+        }
+        
+        return objectsByIdentifier;
+    }
+    
+    return nil;
 }
 
 @end
