@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Character" representedClassName="GRTCharacter" syncable="YES">
-        <attribute name="birthday" optional="YES" attributeType="Date" syncable="YES">
-            <userInfo>
-                <entry key="JSONKeyPath" value="null"/>
-            </userInfo>
-        </attribute>
         <attribute name="identifier" optional="YES" attributeType="Integer 32" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="id"/>
+                <entry key="JSONTransformerName" value="GRTTestTransformer"/>
             </userInfo>
         </attribute>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -27,6 +23,7 @@
         <attribute name="identifier" optional="YES" attributeType="Integer 32" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="id"/>
+                <entry key="JSONTransformerName" value="GRTTestTransformer"/>
             </userInfo>
         </attribute>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -39,6 +36,7 @@
         <attribute name="identifier" optional="YES" attributeType="Integer 32" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="id"/>
+                <entry key="JSONTransformerName" value="GRTTestTransformer"/>
             </userInfo>
         </attribute>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -48,7 +46,7 @@
         </userInfo>
     </entity>
     <elements>
-        <element name="Character" positionX="-317" positionY="-180" width="128" height="133"/>
+        <element name="Character" positionX="-317" positionY="-180" width="128" height="118"/>
         <element name="Power" positionX="-119" positionY="-115" width="128" height="88"/>
         <element name="Publisher" positionX="-524" positionY="-9" width="128" height="88"/>
     </elements>

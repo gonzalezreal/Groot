@@ -30,10 +30,24 @@
     self.store = [GRTManagedStore managedStoreWithModel:model];
     self.context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     self.context.persistentStoreCoordinator = self.store.persistentStoreCoordinator;
+    
+    NSValueTransformer *transformer = [GRTValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *value) {
+        if (value) {
+            return @([value integerValue]);
+        }
+        
+        return nil;
+    } reverseBlock:^id(NSNumber *value) {
+        return [value stringValue];
+    }];
+    
+    [NSValueTransformer setValueTransformer:transformer forName:@"GRTTestTransformer"];
 }
 
 - (void)tearDown {
     self.store = nil;
+    [NSValueTransformer setValueTransformer:nil forName:@"GRTTestTransformer"];
+    
     [super tearDown];
 }
 
@@ -41,20 +55,20 @@
     NSDictionary *batmanJSON = @{
         @"name": @"Batman",
         @"real_name": @"Bruce Wayne",
-        @"id": @1699,
+        @"id": @"1699",
         @"powers": @[
             @{
-                @"id": @4,
+                @"id": @"4",
                 @"name": @"Agility"
             },
             NSNull.null,
             @{
-                @"id": @9,
+                @"id": @"9",
                 @"name": @"Insanely Rich"
             }
         ],
         @"publisher": @{
-            @"id": @10,
+            @"id": @"10",
             @"name": @"DC Comics"
         }
     };
@@ -98,11 +112,11 @@
 
 - (void)testInsertInvalidToManyRelationship {
     NSDictionary *invalidBatman = @{
-        @"id": @1699,
+        @"id": @"1699",
         @"name": @"Batman",
         @"real_name": @"Bruce Wayne",
         @"powers": @{                   // This should be a JSON array
-            @"id": @4,
+            @"id": @"4",
             @"name": @"Agility"
         }
     };
@@ -117,7 +131,7 @@
 
 - (void)testInsertInvalidToOneRelationship {
     NSDictionary *invalidBatman = @{
-        @"id": @1699,
+        @"id": @"1699",
         @"name": @"Batman",
         @"real_name": @"Bruce Wayne",
         @"publisher": @"DC"             // This should be a JSON dictionary
@@ -133,22 +147,22 @@
 
 - (void)testMergeObject {
     NSDictionary *batmanJSON = @{
-        @"id": @1699,
+        @"id": @"1699",
         @"name": @"Batman",
         @"real_name": @"Bruce Wayne",
         @"powers": @[
             @{
-                @"id": @4,
+                @"id": @"4",
                 @"name": @"Agility"
             },
             NSNull.null,
             @{
-                @"id": @9,
+                @"id": @"9",
                 @"name": @"Insanely Rich"
             }
         ],
         @"publisher": @{
-            @"id": @10,
+            @"id": @"10",
             @"name": @"DC"
         }
     };
@@ -159,24 +173,24 @@
     
     NSArray *updateJSON = @[
         @{
-            @"id": @1699,
+            @"id": @"1699",
             @"real_name": NSNull.null,  // Should reset Batman real name
             @"publisher" : @{
-                @"id": @10,
+                @"id": @"10",
                 @"name": @"DC Comics"   // Should update the publisher name
             }
         },
         @{
-            @"id": @1455,
+            @"id": @"1455",
             @"name": @"Iron Man",
             @"real_name": @"Tony Stark",
             @"powers": @[
                 @{
-                    @"id": @31,
+                    @"id": @"31",
                     @"name": @"Power Suit"
                 },
                 @{
-                    @"id": @9,
+                    @"id": @"9",
                     @"name": @"Filthy Rich" // Should update the 'Rich' power name
                 }
             ],
@@ -258,11 +272,11 @@
 
 - (void)testMergeInvalidToManyRelationship {
     NSDictionary *invalidBatman = @{
-        @"id": @1699,
+        @"id": @"1699",
         @"name": @"Batman",
         @"real_name": @"Bruce Wayne",
         @"powers": @{                   // This should be a JSON array
-            @"id": @4,
+            @"id": @"4",
             @"name": @"Agility"
         }
     };
@@ -277,7 +291,7 @@
 
 - (void)testMergeInvalidToOneRelationship {
     NSDictionary *invalidBatman = @{
-        @"id": @1699,
+        @"id": @"1699",
         @"name": @"Batman",
         @"real_name": @"Bruce Wayne",
         @"publisher": @"DC"             // This should be a JSON dictionary
@@ -296,12 +310,12 @@
     powerEntity.userInfo = @{}; // Remove the identity attribute name from the entity
     
     NSDictionary *batman = @{
-        @"id": @1699,
+        @"id": @"1699",
         @"name": @"Batman",
         @"real_name": @"Bruce Wayne",
         @"powers": @[
             @{
-                @"id": @4,
+                @"id": @"4",
                 @"name": @"Agility"
             }
         ]
@@ -318,12 +332,12 @@
     };
     
     NSDictionary *batman = @{
-        @"id": @1699,
+        @"id": @"1699",
         @"name": @"Batman",
         @"real_name": @"Bruce Wayne",
         @"powers": @[
             @{
-                @"id": @4,
+                @"id": @"4",
                 @"name": @"Agility"
             }
         ]
@@ -355,21 +369,21 @@
     NSDictionary *JSONDictionary = [GRTJSONSerialization JSONDictionaryFromManagedObject:batman];
     
     NSDictionary *expectedDictionary = @{
-        @"id": @1699,
+        @"id": @"1699",
         @"name": @"Batman",
         @"real_name": @"Bruce Wayne",
         @"powers": @[
             @{
-                @"id": @4,
+                @"id": @"4",
                 @"name": @"Agility"
             },
             @{
-                @"id": @9,
+                @"id": @"9",
                 @"name": @"Insanely Rich"
             }
         ],
         @"publisher": @{
-            @"id": @10,
+            @"id": @"10",
             @"name": @"DC Comics"
         }
     };
