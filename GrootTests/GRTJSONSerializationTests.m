@@ -418,4 +418,33 @@
     XCTAssertEqualObjects(expectedDictionary, JSONDictionary, @"should serialize attributes with complex JSON key paths");
 }
 
+- (void)testJSONArrayFromManagedObjects {
+    GRTCharacter *batman = [NSEntityDescription insertNewObjectForEntityForName:@"Character" inManagedObjectContext:self.context];
+    batman.name = @"Batman";
+    
+    GRTCharacter *ironMan = [NSEntityDescription insertNewObjectForEntityForName:@"Character" inManagedObjectContext:self.context];
+    ironMan.name = @"Iron Man";
+    
+    NSArray *JSONArray = [GRTJSONSerialization JSONArrayFromManagedObjects:@[batman, ironMan]];
+    
+    NSArray *expectedArray = @[
+        @{
+            @"id": NSNull.null,
+            @"name": @"Batman",
+            @"real_name": NSNull.null,
+            @"powers": @[],
+            @"publisher": NSNull.null
+        },
+        @{
+            @"id": NSNull.null,
+            @"name": @"Iron Man",
+            @"real_name": NSNull.null,
+            @"powers": @[],
+            @"publisher": NSNull.null
+        }
+    ];
+    
+    XCTAssertEqualObjects(expectedArray, JSONArray, @"should serialize managed objects to JSON array");
+}
+
 @end
