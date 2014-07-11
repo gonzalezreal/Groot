@@ -332,4 +332,90 @@
     XCTAssertThrows([GRTJSONSerialization mergeObjectForEntityName:@"Character" fromJSONDictionary:batman inManagedObjectContext:self.context error:NULL], @"merge should assert when the identity attribute doesn't have a JSON key path");
 }
 
+- (void)testJSONDictionaryFromManagedObject {
+    GRTPublisher *dc = [NSEntityDescription insertNewObjectForEntityForName:@"Publisher" inManagedObjectContext:self.context];
+    dc.identifier = @10;
+    dc.name = @"DC Comics";
+    
+    GRTPower *agility = [NSEntityDescription insertNewObjectForEntityForName:@"Power" inManagedObjectContext:self.context];
+    agility.identifier = @4;
+    agility.name = @"Agility";
+    
+    GRTPower *wealth = [NSEntityDescription insertNewObjectForEntityForName:@"Power" inManagedObjectContext:self.context];
+    wealth.identifier = @9;
+    wealth.name = @"Insanely Rich";
+    
+    GRTCharacter *batman = [NSEntityDescription insertNewObjectForEntityForName:@"Character" inManagedObjectContext:self.context];
+    batman.identifier = @1699;
+    batman.name = @"Batman";
+    batman.realName = @"Bruce Wayne";
+    batman.powers = [[NSOrderedSet alloc] initWithArray:@[agility, wealth]];
+    batman.publisher = dc;
+    
+    NSDictionary *JSONDictionary = [GRTJSONSerialization JSONDictionaryFromManagedObject:batman];
+    
+    NSDictionary *expectedDictionary = @{
+        @"id": @1699,
+        @"name": @"Batman",
+        @"real_name": @"Bruce Wayne",
+        @"powers": @[
+            @{
+                @"id": @4,
+                @"name": @"Agility"
+            },
+            @{
+                @"id": @9,
+                @"name": @"Insanely Rich"
+            }
+        ],
+        @"publisher": @{
+            @"id": @10,
+            @"name": @"DC Comics"
+        }
+    };
+    
+    XCTAssertEqualObjects(expectedDictionary, JSONDictionary, @"should serialize an initialized managed object to JSON dictionary");
+}
+
+- (void)testJSONDictionaryFromEmptyManagedObject {
+    GRTCharacter *batman = [NSEntityDescription insertNewObjectForEntityForName:@"Character" inManagedObjectContext:self.context];
+    NSDictionary *JSONDictionary = [GRTJSONSerialization JSONDictionaryFromManagedObject:batman];
+    
+    NSDictionary *expectedDictionary = @{
+        @"id": NSNull.null,
+        @"name": NSNull.null,
+        @"real_name": NSNull.null,
+        @"powers": @[],
+        @"publisher": NSNull.null
+    };
+    
+    XCTAssertEqualObjects(expectedDictionary, JSONDictionary, @"should serialize an uninitialized managed object to JSON dictionary");
+}
+
+- (void)testJSONDictionaryFromManagedObjectWithNestedDictionaries {
+    NSEntityDescription *entity = self.store.managedObjectModel.entitiesByName[@"Character"];
+    NSAttributeDescription *realNameAttribute = entity.attributesByName[@"realName"];
+    
+    realNameAttribute.userInfo = @{
+        @"JSONKeyPath": @"real_name.name"
+    };
+    
+    GRTCharacter *batman = [NSEntityDescription insertNewObjectForEntityForName:@"Character" inManagedObjectContext:self.context];
+    batman.realName = @"Bruce Wayne";
+    
+    NSDictionary *JSONDictionary = [GRTJSONSerialization JSONDictionaryFromManagedObject:batman];
+    
+    NSDictionary *expectedDictionary = @{
+        @"id": NSNull.null,
+        @"name": NSNull.null,
+        @"real_name": @{
+                @"name": @"Bruce Wayne"
+        },
+        @"powers": @[],
+        @"publisher": NSNull.null
+    };
+    
+    XCTAssertEqualObjects(expectedDictionary, JSONDictionary, @"should serialize attributes with complex JSON key paths");
+}
+
 @end

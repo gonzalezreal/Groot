@@ -24,10 +24,19 @@
 
 static NSString * const GRTJSONKeyPathKey = @"JSONKeyPath";
 
+static BOOL GRTIsNullKeyPath(NSString *keyPath) {
+    return [keyPath isEqual:NSNull.null] || [keyPath isEqualToString:@"null"];
+}
+
 @implementation NSPropertyDescription (Groot)
 
 - (NSString *)grt_JSONKeyPath {
     NSString *JSONKeyPath = self.userInfo[GRTJSONKeyPathKey];
+    
+    if (GRTIsNullKeyPath(JSONKeyPath)) {
+        return nil;
+    }
+    
     return JSONKeyPath ? : self.name;
 }
 

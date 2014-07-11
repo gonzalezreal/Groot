@@ -6,7 +6,7 @@
                 <entry key="JSONKeyPath" value="null"/>
             </userInfo>
         </attribute>
-        <attribute name="identifier" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES">
+        <attribute name="identifier" optional="YES" attributeType="Integer 32" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="id"/>
             </userInfo>
@@ -24,7 +24,7 @@
         </userInfo>
     </entity>
     <entity name="Power" representedClassName="GRTPower" syncable="YES">
-        <attribute name="identifier" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES">
+        <attribute name="identifier" optional="YES" attributeType="Integer 32" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="id"/>
             </userInfo>
@@ -36,7 +36,7 @@
         </userInfo>
     </entity>
     <entity name="Publisher" representedClassName="GRTPublisher" syncable="YES">
-        <attribute name="identifier" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES">
+        <attribute name="identifier" optional="YES" attributeType="Integer 32" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="id"/>
             </userInfo>

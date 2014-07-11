@@ -35,4 +35,8 @@ extern const NSInteger GRTJSONSerializationErrorInvalidJSONObject;
 
 + (NSArray *)mergeObjectsForEntityName:(NSString *)entityName fromJSONArray:(NSArray *)JSONArray inManagedObjectContext:(NSManagedObjectContext *)context error:(NSError **)error;
 
++ (NSDictionary *)JSONDictionaryFromManagedObject:(NSManagedObject *)managedObject;
+
++ (NSArray *)JSONArrayFromManagedObjects:(NSArray *)managedObjects;
+
 @end

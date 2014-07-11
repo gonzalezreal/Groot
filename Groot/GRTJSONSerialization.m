@@ -30,11 +30,6 @@
 NSString * const GRTJSONSerializationErrorDomain = @"GRTJSONSerializationErrorDomain";
 const NSInteger GRTJSONSerializationErrorInvalidJSONObject = 0xcaca;
 
-static BOOL GRTIsNullKeyPath(NSString *keyPath) {
-    static NSString * const kNullKeyPath = @"null";
-    return [keyPath isEqualToString:kNullKeyPath];
-}
-
 @implementation GRTJSONSerialization
 
 + (id)insertObjectForEntityName:(NSString *)entityName fromJSONDictionary:(NSDictionary *)JSONDictionary inManagedObjectContext:(NSManagedObjectContext *)context error:(NSError *__autoreleasing *)error {
@@ -124,7 +119,7 @@ static BOOL GRTIsNullKeyPath(NSString *keyPath) {
         
         NSAttributeDescription *identityAttribute = [entity grt_identityAttribute];
         NSAssert(identityAttribute != nil, @"An identity attribute must be specified in order to merge objects");
-        NSAssert(!GRTIsNullKeyPath([identityAttribute grt_JSONKeyPath]), @"The identity attribute must have an valid JSON key path");
+        NSAssert([identityAttribute grt_JSONKeyPath] != nil, @"The identity attribute must have an valid JSON key path");
         
         NSMutableArray *identifiers = [NSMutableArray arrayWithCapacity:JSONArray.count];
         for (NSDictionary *dictionary in JSONArray) {
@@ -190,12 +185,108 @@ static BOOL GRTIsNullKeyPath(NSString *keyPath) {
     return managedObjects;
 }
 
++ (NSDictionary *)JSONDictionaryFromManagedObject:(NSManagedObject *)managedObject {
+    // Keeping track of in process relationships avoids infinite recursion when serializing inverse relationships
+    NSMutableSet *processingRelationships = [NSMutableSet set];
+    return [self JSONDictionaryFromManagedObject:managedObject processingRelationships:processingRelationships];
+}
+
++ (NSArray *)JSONArrayFromManagedObjects:(NSArray *)managedObjects {
+    // Keeping track of in process relationships avoids infinite recursion when serializing inverse relationships
+    NSMutableSet *processingRelationships = [NSMutableSet set];
+    return [self JSONArrayFromManagedObjects:managedObjects processingRelationships:processingRelationships];
+}
+
 #pragma mark - Private
+
++ (NSDictionary *)JSONDictionaryFromManagedObject:(NSManagedObject *)managedObject processingRelationships:(NSMutableSet *)processingRelationships {
+    NSMutableDictionary * __block JSONDictionary = nil;
+    NSManagedObjectContext *context = managedObject.managedObjectContext;
+    
+    if (!managedObject) {
+        return nil;
+    }
+    
+    [context performBlockAndWait:^{
+        NSDictionary *propertiesByName = managedObject.entity.propertiesByName;
+        JSONDictionary = [NSMutableDictionary dictionaryWithCapacity:propertiesByName.count];
+        
+        [propertiesByName enumerateKeysAndObjectsUsingBlock:^(NSString *name, NSPropertyDescription *property, BOOL *stop) {
+            NSString *JSONKeyPath = [property grt_JSONKeyPath];
+            
+            if (JSONKeyPath == nil) {
+                return;
+            }
+            
+            NSLog(@"%@.%@", managedObject.entity.name, name);
+            
+            id value = [managedObject valueForKey:name];
+            
+            if ([property isKindOfClass:NSAttributeDescription.class]) {
+                NSAttributeDescription *attribute = (NSAttributeDescription *)property;
+                NSValueTransformer *transformer = [attribute grt_JSONTransformer];
+                
+                if (transformer != nil && [transformer.class allowsReverseTransformation]) {
+                    value = [transformer reverseTransformedValue:value];
+                }
+            } else if ([property isKindOfClass:NSRelationshipDescription.class]) {
+                NSRelationshipDescription *relationship = (NSRelationshipDescription *)property;
+                
+                if ([processingRelationships containsObject:relationship.inverseRelationship]) {
+                    // Skip if the inverse relationship is being serialized
+                    return;
+                }
+                
+                [processingRelationships addObject:relationship];
+                
+                if ([relationship isToMany]) {
+                    NSArray *objects = [value isKindOfClass:NSOrderedSet.class] ? [value array] : [value allObjects];
+                    value = [self JSONArrayFromManagedObjects:objects processingRelationships:processingRelationships];
+                } else {
+                    value = [self JSONDictionaryFromManagedObject:value processingRelationships:processingRelationships];
+                }
+            }
+            
+            if (value == nil) {
+                value = NSNull.null;
+            }
+            
+            NSArray *components = [JSONKeyPath componentsSeparatedByString:@"."];
+            
+            if (components.count > 1) {
+                // Create a dictionary for each key path component
+                id obj = JSONDictionary;
+                for (NSString *component in components) {
+                    if ([obj valueForKey:component] == nil) {
+                        [obj setValue:[NSMutableDictionary dictionary] forKey:component];
+                    }
+                    
+                    obj = [obj valueForKey:component];
+                }
+            }
+            
+            [JSONDictionary setValue:value forKeyPath:JSONKeyPath];
+        }];
+    }];
+    
+    return JSONDictionary;
+}
+
++ (NSArray *)JSONArrayFromManagedObjects:(NSArray *)managedObjects processingRelationships:(NSMutableSet *)processingRelationships {
+    NSMutableArray *JSONArray = [NSMutableArray arrayWithCapacity:managedObjects.count];
+    
+    for (NSManagedObject *managedObject in managedObjects) {
+        NSDictionary *JSONDictionary = [self JSONDictionaryFromManagedObject:managedObject processingRelationships:processingRelationships];
+        [JSONArray addObject:JSONDictionary];
+    }
+    
+    return JSONArray;
+}
 
 + (BOOL)serializeAttribute:(NSAttributeDescription *)attribute fromJSONDictionary:(NSDictionary *)JSONDictionary inManagedObject:(NSManagedObject *)managedObject merge:(BOOL)merge error:(NSError *__autoreleasing *)error {
     NSString *keyPath = [attribute grt_JSONKeyPath];
     
-    if (GRTIsNullKeyPath(keyPath)) {
+    if (keyPath == nil) {
         return YES;
     }
     
@@ -227,7 +318,7 @@ static BOOL GRTIsNullKeyPath(NSString *keyPath) {
 + (BOOL)serializeRelationship:(NSRelationshipDescription *)relationship fromJSONDictionary:(NSDictionary *)JSONDictionary inManagedObject:(NSManagedObject *)managedObject merge:(BOOL)merge error:(NSError *__autoreleasing *)error {
     NSString *keyPath = [relationship grt_JSONKeyPath];
     
-    if (GRTIsNullKeyPath(keyPath)) {
+    if (keyPath == nil) {
         return YES;
     }
     
