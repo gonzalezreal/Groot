@@ -132,6 +132,16 @@ static BOOL GRTIsNullKeyPath(NSString *keyPath) {
                 continue;
             }
             
+            if (![dictionary isKindOfClass:NSDictionary.class]) {
+                NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Cannot serialize value %@. Expected a JSON dictionary.", @""), dictionary];
+                NSDictionary *userInfo = @{
+                    NSLocalizedDescriptionKey: message
+                };
+
+                tmpError = [NSError errorWithDomain:GRTJSONSerializationErrorDomain code:GRTJSONSerializationErrorInvalidJSONObject userInfo:userInfo];
+                return;
+            }
+            
             id identifier = [dictionary grt_valueForAttribute:identityAttribute];
             if (identifier != nil) [identifiers addObject:identifier];
         }
@@ -141,17 +151,6 @@ static BOOL GRTIsNullKeyPath(NSString *keyPath) {
         for (NSDictionary *dictionary in JSONArray) {
             if ([dictionary isEqual:NSNull.null]) {
                 continue;
-            }
-            
-            if (![dictionary isKindOfClass:NSDictionary.class]) {
-                NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Cannot serialize value %@. Expected a JSON dictionary.", @""), dictionary];
-                NSDictionary *userInfo = @{
-                    NSLocalizedDescriptionKey: message
-                };
-                
-                tmpError = [NSError errorWithDomain:GRTJSONSerializationErrorDomain code:GRTJSONSerializationErrorInvalidJSONObject userInfo:userInfo];
-                
-                break;
             }
             
             NSManagedObject *managedObject = nil;

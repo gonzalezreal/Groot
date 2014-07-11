@@ -10,6 +10,7 @@
 #import <Groot/Groot.h>
 
 #import "GRTModels.h"
+#import "NSEntityDescription+Groot.h"
 
 @interface GRTJSONSerializationTests : XCTestCase
 
@@ -242,6 +243,93 @@
     fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Publisher"];
     NSUInteger publisherCount = [self.context countForFetchRequest:fetchRequest error:NULL];
     XCTAssertEqual(1U, publisherCount, @"there should be 1 publisher objects");
+}
+
+- (void)testMergeInvalidJSON {
+    NSArray *invalidJSON = @[@1];
+    
+    NSError *error = nil;
+    [GRTJSONSerialization mergeObjectsForEntityName:@"Character" fromJSONArray:invalidJSON inManagedObjectContext:self.context error:&error];
+    
+    XCTAssertNotNil(error, @"should return an error");
+    XCTAssertEqualObjects(GRTJSONSerializationErrorDomain, error.domain, @"should return a serialization error");
+    XCTAssertEqual(GRTJSONSerializationErrorInvalidJSONObject, error.code, @"should return an invalid JSON error");
+}
+
+- (void)testMergeInvalidToManyRelationship {
+    NSDictionary *invalidBatman = @{
+        @"id": @1699,
+        @"name": @"Batman",
+        @"real_name": @"Bruce Wayne",
+        @"powers": @{                   // This should be a JSON array
+            @"id": @4,
+            @"name": @"Agility"
+        }
+    };
+    
+    NSError *error = nil;
+    [GRTJSONSerialization mergeObjectForEntityName:@"Character" fromJSONDictionary:invalidBatman inManagedObjectContext:self.context error:&error];
+    
+    XCTAssertNotNil(error, @"should return an error");
+    XCTAssertEqualObjects(GRTJSONSerializationErrorDomain, error.domain, @"should return a serialization error");
+    XCTAssertEqual(GRTJSONSerializationErrorInvalidJSONObject, error.code, @"should return an invalid JSON error");
+}
+
+- (void)testMergeInvalidToOneRelationship {
+    NSDictionary *invalidBatman = @{
+        @"id": @1699,
+        @"name": @"Batman",
+        @"real_name": @"Bruce Wayne",
+        @"publisher": @"DC"             // This should be a JSON dictionary
+    };
+    
+    NSError *error = nil;
+    [GRTJSONSerialization mergeObjectForEntityName:@"Character" fromJSONDictionary:invalidBatman inManagedObjectContext:self.context error:&error];
+    
+    XCTAssertNotNil(error, @"should return an error");
+    XCTAssertEqualObjects(GRTJSONSerializationErrorDomain, error.domain, @"should return a serialization error");
+    XCTAssertEqual(GRTJSONSerializationErrorInvalidJSONObject, error.code, @"should return an invalid JSON error");
+}
+
+- (void)testMergeWithoutIdentityAttribute {
+    NSEntityDescription *powerEntity = self.store.managedObjectModel.entitiesByName[@"Power"];
+    powerEntity.userInfo = @{}; // Remove the identity attribute name from the entity
+    
+    NSDictionary *batman = @{
+        @"id": @1699,
+        @"name": @"Batman",
+        @"real_name": @"Bruce Wayne",
+        @"powers": @[
+            @{
+                @"id": @4,
+                @"name": @"Agility"
+            }
+        ]
+    };
+    
+    XCTAssertThrows([GRTJSONSerialization mergeObjectForEntityName:@"Character" fromJSONDictionary:batman inManagedObjectContext:self.context error:NULL], @"merge should assert when the identity attribute is not specified");
+}
+
+- (void)testMergeWithNoIdentityAttributeJSONKeyPath {
+    NSEntityDescription *powerEntity = self.store.managedObjectModel.entitiesByName[@"Power"];
+    NSAttributeDescription *identityAttribute = [powerEntity grt_identityAttribute];
+    identityAttribute.userInfo = @{
+        @"JSONKeyPath": @"null"
+    };
+    
+    NSDictionary *batman = @{
+        @"id": @1699,
+        @"name": @"Batman",
+        @"real_name": @"Bruce Wayne",
+        @"powers": @[
+            @{
+                @"id": @4,
+                @"name": @"Agility"
+            }
+        ]
+    };
+    
+    XCTAssertThrows([GRTJSONSerialization mergeObjectForEntityName:@"Character" fromJSONDictionary:batman inManagedObjectContext:self.context error:NULL], @"merge should assert when the identity attribute doesn't have a JSON key path");
 }
 
 @end
