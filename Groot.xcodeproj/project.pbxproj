@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		994B4FE9196FF05D007D4F63 /* GRTValueTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = 994B4FE7196FF05D007D4F63 /* GRTValueTransformer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		994B4FEA196FF05D007D4F63 /* GRTValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 994B4FE8196FF05D007D4F63 /* GRTValueTransformer.m */; };
+		994B4FEC196FF6F8007D4F63 /* GRTValueTransformerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 994B4FEB196FF6F8007D4F63 /* GRTValueTransformerTests.m */; };
 		99591DC319658DB400027DB5 /* GRTManagedStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 99591DC119658DB400027DB5 /* GRTManagedStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		99591DC419658DB400027DB5 /* GRTManagedStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 99591DC219658DB400027DB5 /* GRTManagedStore.m */; };
 		99591DC71965922900027DB5 /* GRTJSONSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 99591DC51965922900027DB5 /* GRTJSONSerialization.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -54,6 +57,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		994B4FE7196FF05D007D4F63 /* GRTValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTValueTransformer.h; sourceTree = "<group>"; };
+		994B4FE8196FF05D007D4F63 /* GRTValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTValueTransformer.m; sourceTree = "<group>"; };
+		994B4FEB196FF6F8007D4F63 /* GRTValueTransformerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTValueTransformerTests.m; sourceTree = "<group>"; };
 		99591DC119658DB400027DB5 /* GRTManagedStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTManagedStore.h; sourceTree = "<group>"; };
 		99591DC219658DB400027DB5 /* GRTManagedStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTManagedStore.m; sourceTree = "<group>"; };
 		99591DC51965922900027DB5 /* GRTJSONSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTJSONSerialization.h; sourceTree = "<group>"; };
@@ -156,6 +162,8 @@
 				99591DC219658DB400027DB5 /* GRTManagedStore.m */,
 				99591DC51965922900027DB5 /* GRTJSONSerialization.h */,
 				99591DC61965922900027DB5 /* GRTJSONSerialization.m */,
+				994B4FE7196FF05D007D4F63 /* GRTValueTransformer.h */,
+				994B4FE8196FF05D007D4F63 /* GRTValueTransformer.m */,
 				99591DCF1965A17200027DB5 /* Private */,
 				99EB2D8C19644636008FC282 /* Supporting Files */,
 			);
@@ -177,6 +185,7 @@
 				998B2E7E196D803700063F75 /* GRTModels.h */,
 				998B2E7F196D803700063F75 /* GRTModels.m */,
 				99591DC91965934F00027DB5 /* GRTJSONSerializationTests.m */,
+				994B4FEB196FF6F8007D4F63 /* GRTValueTransformerTests.m */,
 				99EB2DA019644636008FC282 /* Supporting Files */,
 			);
 			path = GrootTests;
@@ -198,6 +207,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				994B4FE9196FF05D007D4F63 /* GRTValueTransformer.h in Headers */,
 				99C1C773196EA7CA004778CE /* NSDictionary+Groot.h in Headers */,
 				996DF56C1965777E00F9DB74 /* Groot.h in Headers */,
 				99591DC71965922900027DB5 /* GRTJSONSerialization.h in Headers */,
@@ -296,6 +306,7 @@
 				99591DD31965A17200027DB5 /* NSAttributeDescription+Groot.m in Sources */,
 				99591DC419658DB400027DB5 /* GRTManagedStore.m in Sources */,
 				99C1C774196EA7CA004778CE /* NSDictionary+Groot.m in Sources */,
+				994B4FEA196FF05D007D4F63 /* GRTValueTransformer.m in Sources */,
 				99591DC81965922900027DB5 /* GRTJSONSerialization.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -305,6 +316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				99591DCA1965934F00027DB5 /* GRTJSONSerializationTests.m in Sources */,
+				994B4FEC196FF6F8007D4F63 /* GRTValueTransformerTests.m in Sources */,
 				998B2E73196D6B6A00063F75 /* Model.xcdatamodeld in Sources */,
 				998B2E80196D803700063F75 /* GRTModels.m in Sources */,
 			);
