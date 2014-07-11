@@ -84,6 +84,52 @@
     XCTAssertEqualObjects(@"DC Comics", batman.publisher.name, @"should serialize to-one relationships");
 }
 
+- (void)testInsertInvalidJSON {
+    NSArray *invalidJSON = @[@1];
+    
+    NSError *error = nil;
+    [GRTJSONSerialization insertObjectsForEntityName:@"Character" fromJSONArray:invalidJSON inManagedObjectContext:self.context error:&error];
+    
+    XCTAssertNotNil(error, @"should return an error");
+    XCTAssertEqualObjects(GRTJSONSerializationErrorDomain, error.domain, @"should return a serialization error");
+    XCTAssertEqual(GRTJSONSerializationErrorInvalidJSONObject, error.code, @"should return an invalid JSON error");
+}
+
+- (void)testInsertInvalidToManyRelationship {
+    NSDictionary *invalidBatman = @{
+        @"id": @1699,
+        @"name": @"Batman",
+        @"real_name": @"Bruce Wayne",
+        @"powers": @{                   // This should be a JSON array
+            @"id": @4,
+            @"name": @"Agility"
+        }
+    };
+    
+    NSError *error = nil;
+    [GRTJSONSerialization insertObjectForEntityName:@"Character" fromJSONDictionary:invalidBatman inManagedObjectContext:self.context error:&error];
+    
+    XCTAssertNotNil(error, @"should return an error");
+    XCTAssertEqualObjects(GRTJSONSerializationErrorDomain, error.domain, @"should return a serialization error");
+    XCTAssertEqual(GRTJSONSerializationErrorInvalidJSONObject, error.code, @"should return an invalid JSON error");
+}
+
+- (void)testInsertInvalidToOneRelationship {
+    NSDictionary *invalidBatman = @{
+        @"id": @1699,
+        @"name": @"Batman",
+        @"real_name": @"Bruce Wayne",
+        @"publisher": @"DC"             // This should be a JSON dictionary
+    };
+    
+    NSError *error = nil;
+    [GRTJSONSerialization insertObjectForEntityName:@"Character" fromJSONDictionary:invalidBatman inManagedObjectContext:self.context error:&error];
+    
+    XCTAssertNotNil(error, @"should return an error");
+    XCTAssertEqualObjects(GRTJSONSerializationErrorDomain, error.domain, @"should return a serialization error");
+    XCTAssertEqual(GRTJSONSerializationErrorInvalidJSONObject, error.code, @"should return an invalid JSON error");
+}
+
 - (void)testMergeObject {
     NSDictionary *batmanJSON = @{
         @"id": @1699,

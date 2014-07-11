@@ -63,7 +63,7 @@ static BOOL GRTIsNullKeyPath(NSString *keyPath) {
             }
             
             if (![dictionary isKindOfClass:NSDictionary.class]) {
-                NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Cannot serialize %@. Expected a JSON dictionary.", @""), dictionary];
+                NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Cannot serialize value %@. Expected a JSON dictionary.", @""), dictionary];
                 NSDictionary *userInfo = @{
                     NSLocalizedDescriptionKey: message
                 };
@@ -144,7 +144,7 @@ static BOOL GRTIsNullKeyPath(NSString *keyPath) {
             }
             
             if (![dictionary isKindOfClass:NSDictionary.class]) {
-                NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Cannot serialize %@. Expected a JSON dictionary.", @""), dictionary];
+                NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Cannot serialize value %@. Expected a JSON dictionary.", @""), dictionary];
                 NSDictionary *userInfo = @{
                     NSLocalizedDescriptionKey: message
                 };
@@ -250,7 +250,7 @@ static BOOL GRTIsNullKeyPath(NSString *keyPath) {
         if ([relationship isToMany]) {
             if (![value isKindOfClass:[NSArray class]]) {
                 if (error) {
-                    NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Cannot serialize %@ into a to-many relationship. Expected a JSON array.", @""), [relationship grt_JSONKeyPath]];
+                    NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Cannot serialize '%@' into a to-many relationship. Expected a JSON array.", @""), [relationship grt_JSONKeyPath]];
                     NSDictionary *userInfo = @{
                         NSLocalizedDescriptionKey: message
                     };
@@ -269,7 +269,7 @@ static BOOL GRTIsNullKeyPath(NSString *keyPath) {
         } else {
             if (![value isKindOfClass:[NSDictionary class]]) {
                 if (error) {
-                    NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Cannot serialize %@ into a to-one relationship. Expected a JSON dictionary.", @""), [relationship grt_JSONKeyPath]];
+                    NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Cannot serialize '%@' into a to-one relationship. Expected a JSON dictionary.", @""), [relationship grt_JSONKeyPath]];
                     NSDictionary *userInfo = @{
                         NSLocalizedDescriptionKey: message
                     };
