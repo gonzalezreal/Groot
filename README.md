@@ -14,28 +14,61 @@ pod 'Groot'
 If you don't have CocoaPods installed or integrated into your project, you can learn how to do so [here](http://cocoapods.org).
 
 ## Usage
-Consider the following Core Data model for a superhero database:
+Suppose we would like to convert the JSON returned by a Comic Database web service into our own model objects. The JSON could look something like this:
+
+```json
+[
+    {
+        "id": "1699",
+        "name": "Batman",
+        "powers": [
+            {
+                "id": "4",
+                "name": "Agility"
+            },
+            {
+                "id": "9",
+                "name": "Insanely Rich"
+            }
+        ],
+        "publisher": {
+            "id": "10",
+            "name": "DC Comics"
+        },
+        "real_name": "Bruce Wayne"
+    },
+	...
+]
+```
+
+We could model this in Core Data using 3 entities: Character, Power and Publisher.
 
 ![Model](https://raw.githubusercontent.com/gonzalezreal/Groot/master/Images/sample-model.jpg)
 
-Using Groot we could insert JSON data with a simple method call:
+Note that we don't need to name our attributes as in the JSON. The serialization process can be customized by adding certain information to the user dictionary provided in Core Data *entities*, *attributes* and *relationships*.
+
+For instance, we can specify that the `identifier` attribute will be mapped from the `id` JSON key path, and that its value will be transformed using an `NSValueTransformer` named *GRTTestTransfomer*.
+
+![Property User Info](https://raw.githubusercontent.com/gonzalezreal/Groot/master/Images/property-userInfo.jpg)
+
+Now we can easily convert JSON data and insert the corresponding managed objects with a simple method call:
 
 ```objc
 NSDictionary *batmanJSON = @{
-	@"id": @1699,
+	@"id": @"1699",
 	@"name": @"Batman",
 	@"real_name": @"Bruce Wayne",
 	@"powers": @[
 	@{
-		@"id": @4,
+		@"id": @"4",
 		@"name": @"Agility"
 	},
 	@{
-		@"id": @9,
+		@"id": @"9",
 		@"name": @"Insanely Rich"
 	}],
 	@"publisher": @{
-		@"id": @10,
+		@"id": @"10",
 		@"name": @"DC Comics"
 	}
 };
@@ -47,21 +80,21 @@ NSManagedObject *batman = [GRTJSONSerialization insertObjectForEntityName:@"Char
 														            error:&error];
 ```
 
-The serialization process can be customized by adding certain information to the user dictionary available for Core Data *entities*, *attributes* and *relationships*.
+### Merging data
 
-You can specify how an attribute or a relationship is mapped to JSON using the `JSONKeyPath` option. If this option is not present, then the attribute name will be used. If `JSONKeyPath` is associated with the string `null`, then the attribute or relationship will not participate in JSON serialization.
+When inserting data, Groot does not check if the serialized managed objects already exist and simply treats them as new.
 
-![Property User Info](https://raw.githubusercontent.com/gonzalezreal/Groot/master/Images/property-userInfo.jpg)
-
-### Merge
-
-Groot provides methods to merge (that is, create or update) managed objects from JSON representations. To use the merge methods, you need to specify an identity attribute on each *entity*, using the `identityAttribute` option.
+If instead, you would like to merge (that is, create or update) the serialized managed objects, then you need to tell Groot how to uniquely identify your model objects. You can do that by associating the `identityAttribute` key with the name of an attribute in the *entity* user info dictionary.
 
 ![Entity User Info](https://raw.githubusercontent.com/gonzalezreal/Groot/master/Images/entity-userInfo.jpg)
 
+In our sample, all of our models are identified by the `identifier` attribute.
+
+Now we can update the Batman character we just inserted in the previous snippet:
+
 ```objc
 NSDictionary *updateJSON = @{
-	@"id": @1699,
+	@"id": @"1699",
 	@"real_name": @"Guille Gonzalez"
 }
 
@@ -72,9 +105,11 @@ NSManagedObject *batman = [GRTJSONSerialization mergeObjectForEntityName:@"Chara
 														           error:NULL];
 ```
 
-### Convert a NSManagedObject into a JSON representation
+If you want to merge a JSON array, its better to call `mergeObjectsForEntityName:fromJSONArray:inManagedObjectContext:error:`. This method will perform a single fetch per entity regardless of the number of objects in the JSON array.
 
-You can convert managed objects into its JSON representation by using `JSONDictionaryFromManagedObject:` or `JSONArrayFromManagedObjects:`.
+### Back to JSON
+
+You can convert managed objects into their JSON representations by using `JSONDictionaryFromManagedObject:` or `JSONArrayFromManagedObjects:`.
 
 ```objc
 NSDictionary *JSONDictionary = [GRTJSONSerialization JSONDictionaryFromManagedObject:someManagedObject];
