@@ -21,8 +21,7 @@
 // THE SOFTWARE.
 
 #import "NSAttributeDescription+Groot.h"
-
-static NSString * const GRTJSONTransformerNameKey = @"JSONTransformerName";
+#import "GRTConstants.h"
 
 @implementation NSAttributeDescription (Groot)
 

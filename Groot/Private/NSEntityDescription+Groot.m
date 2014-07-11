@@ -21,8 +21,7 @@
 // THE SOFTWARE.
 
 #import "NSEntityDescription+Groot.h"
-
-static NSString * const GRTIdentityAttributeKey = @"identityAttribute";
+#import "GRTConstants.h"
 
 @implementation NSEntityDescription (Groot)
 

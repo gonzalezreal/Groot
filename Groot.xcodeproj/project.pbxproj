@@ -10,6 +10,8 @@
 		994B4FE9196FF05D007D4F63 /* GRTValueTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = 994B4FE7196FF05D007D4F63 /* GRTValueTransformer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		994B4FEA196FF05D007D4F63 /* GRTValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 994B4FE8196FF05D007D4F63 /* GRTValueTransformer.m */; };
 		994B4FEC196FF6F8007D4F63 /* GRTValueTransformerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 994B4FEB196FF6F8007D4F63 /* GRTValueTransformerTests.m */; };
+		994B4FF31970143D007D4F63 /* GRTConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 994B4FF11970143D007D4F63 /* GRTConstants.h */; };
+		994B4FF41970143D007D4F63 /* GRTConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 994B4FF21970143D007D4F63 /* GRTConstants.m */; };
 		99591DC319658DB400027DB5 /* GRTManagedStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 99591DC119658DB400027DB5 /* GRTManagedStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		99591DC419658DB400027DB5 /* GRTManagedStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 99591DC219658DB400027DB5 /* GRTManagedStore.m */; };
 		99591DC71965922900027DB5 /* GRTJSONSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 99591DC51965922900027DB5 /* GRTJSONSerialization.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -60,6 +62,8 @@
 		994B4FE7196FF05D007D4F63 /* GRTValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTValueTransformer.h; sourceTree = "<group>"; };
 		994B4FE8196FF05D007D4F63 /* GRTValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTValueTransformer.m; sourceTree = "<group>"; };
 		994B4FEB196FF6F8007D4F63 /* GRTValueTransformerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTValueTransformerTests.m; sourceTree = "<group>"; };
+		994B4FF11970143D007D4F63 /* GRTConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTConstants.h; sourceTree = "<group>"; };
+		994B4FF21970143D007D4F63 /* GRTConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTConstants.m; sourceTree = "<group>"; };
 		99591DC119658DB400027DB5 /* GRTManagedStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTManagedStore.h; sourceTree = "<group>"; };
 		99591DC219658DB400027DB5 /* GRTManagedStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTManagedStore.m; sourceTree = "<group>"; };
 		99591DC51965922900027DB5 /* GRTJSONSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTJSONSerialization.h; sourceTree = "<group>"; };
@@ -158,6 +162,8 @@
 			isa = PBXGroup;
 			children = (
 				99EB2D8E19644636008FC282 /* Groot.h */,
+				994B4FF11970143D007D4F63 /* GRTConstants.h */,
+				994B4FF21970143D007D4F63 /* GRTConstants.m */,
 				99591DC119658DB400027DB5 /* GRTManagedStore.h */,
 				99591DC219658DB400027DB5 /* GRTManagedStore.m */,
 				99591DC51965922900027DB5 /* GRTJSONSerialization.h */,
@@ -208,6 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				994B4FE9196FF05D007D4F63 /* GRTValueTransformer.h in Headers */,
+				994B4FF31970143D007D4F63 /* GRTConstants.h in Headers */,
 				99C1C773196EA7CA004778CE /* NSDictionary+Groot.h in Headers */,
 				996DF56C1965777E00F9DB74 /* Groot.h in Headers */,
 				99591DC71965922900027DB5 /* GRTJSONSerialization.h in Headers */,
@@ -304,6 +311,7 @@
 				99C1C770196E6467004778CE /* NSEntityDescription+Groot.m in Sources */,
 				99591DD71965A29500027DB5 /* NSPropertyDescription+Groot.m in Sources */,
 				99591DD31965A17200027DB5 /* NSAttributeDescription+Groot.m in Sources */,
+				994B4FF41970143D007D4F63 /* GRTConstants.m in Sources */,
 				99591DC419658DB400027DB5 /* GRTManagedStore.m in Sources */,
 				99C1C774196EA7CA004778CE /* NSDictionary+Groot.m in Sources */,
 				994B4FEA196FF05D007D4F63 /* GRTValueTransformer.m in Sources */,
