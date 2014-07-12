@@ -120,4 +120,4 @@ NSDictionary *JSONDictionary = [GRTJSONSerialization JSONDictionaryFromManagedOb
 [@gonzalezreal](https://twitter.com/gonzalezreal)
 
 ## License
-Overcoat is available under the MIT license. See [LICENSE](https://github.com/gonzalezreal/Groot/blob/master/LICENSE).
+Groot is available under the MIT license. See [LICENSE](https://github.com/gonzalezreal/Groot/blob/master/LICENSE).
