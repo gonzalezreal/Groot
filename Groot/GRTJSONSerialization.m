@@ -218,8 +218,6 @@ const NSInteger GRTJSONSerializationErrorInvalidJSONObject = 0xcaca;
                 return;
             }
             
-            NSLog(@"%@.%@", managedObject.entity.name, name);
-            
             id value = [managedObject valueForKey:name];
             
             if ([property isKindOfClass:NSAttributeDescription.class]) {
