@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Groot"
-  s.version      = "0.1"
+  s.version      = "0.2"
   s.summary      = "From JSON to Core Data and back."
 
   s.description  = <<-DESC
@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '6.0'
   s.osx.deployment_target = '10.8'
 
-  s.source       = { :git => "https://github.com/gonzalezreal/Groot.git", :tag => "0.1" }
+  s.source       = { :git => "https://github.com/gonzalezreal/Groot.git", :tag => s.version.to_s }
 
   s.source_files  = "Groot/**/*.{h,m}"
   s.private_header_files = "Groot/Private/*.h"
