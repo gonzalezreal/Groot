@@ -27,8 +27,8 @@
 
 - (NSAttributeDescription *)grt_identityAttribute {
 	
-	NSString * identityAttribute = nil;
-	NSEntityDescription * entityDescription = self;
+	NSString *identityAttribute = nil;
+	NSEntityDescription *entityDescription = self;
 	
 	while (entityDescription && !identityAttribute) {
 		identityAttribute = entityDescription.userInfo[GRTIdentityAttributeKey];
