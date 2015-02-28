@@ -25,5 +25,5 @@
 @interface NSPropertyDescription (Groot)
 
 - (NSString *)grt_JSONKeyPath;
-
+- (BOOL) grt_identityAttributeRelated;
 @end

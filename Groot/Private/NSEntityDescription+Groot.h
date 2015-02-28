@@ -25,5 +25,5 @@
 @interface NSEntityDescription (Groot)
 
 - (NSAttributeDescription *)grt_identityAttribute;
-
+- (NSDictionary *) grt_dictionaryWithIdentityAttributeValue:(id)value;
 @end

@@ -24,4 +24,5 @@
 
 NSString * const GRTJSONKeyPathKey = @"JSONKeyPath";
 NSString * const GRTJSONTransformerNameKey = @"JSONTransformerName";
+NSString * const GRTIdentityAttributeRelatedKey = @"identityAttributeRelated";
 NSString * const GRTIdentityAttributeKey = @"identityAttribute";
