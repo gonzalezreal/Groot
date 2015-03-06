@@ -7,235 +7,198 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		994B4FE9196FF05D007D4F63 /* GRTValueTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = 994B4FE7196FF05D007D4F63 /* GRTValueTransformer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		994B4FEA196FF05D007D4F63 /* GRTValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 994B4FE8196FF05D007D4F63 /* GRTValueTransformer.m */; };
-		994B4FEC196FF6F8007D4F63 /* GRTValueTransformerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 994B4FEB196FF6F8007D4F63 /* GRTValueTransformerTests.m */; };
-		994B4FF31970143D007D4F63 /* GRTConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 994B4FF11970143D007D4F63 /* GRTConstants.h */; };
-		994B4FF41970143D007D4F63 /* GRTConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 994B4FF21970143D007D4F63 /* GRTConstants.m */; };
-		99591DC319658DB400027DB5 /* GRTManagedStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 99591DC119658DB400027DB5 /* GRTManagedStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		99591DC419658DB400027DB5 /* GRTManagedStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 99591DC219658DB400027DB5 /* GRTManagedStore.m */; };
-		99591DC71965922900027DB5 /* GRTJSONSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 99591DC51965922900027DB5 /* GRTJSONSerialization.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		99591DC81965922900027DB5 /* GRTJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 99591DC61965922900027DB5 /* GRTJSONSerialization.m */; };
-		99591DCA1965934F00027DB5 /* GRTJSONSerializationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 99591DC91965934F00027DB5 /* GRTJSONSerializationTests.m */; };
-		99591DD21965A17200027DB5 /* NSAttributeDescription+Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = 99591DD01965A17200027DB5 /* NSAttributeDescription+Groot.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		99591DD31965A17200027DB5 /* NSAttributeDescription+Groot.m in Sources */ = {isa = PBXBuildFile; fileRef = 99591DD11965A17200027DB5 /* NSAttributeDescription+Groot.m */; };
-		99591DD61965A29500027DB5 /* NSPropertyDescription+Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = 99591DD41965A29500027DB5 /* NSPropertyDescription+Groot.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		99591DD71965A29500027DB5 /* NSPropertyDescription+Groot.m in Sources */ = {isa = PBXBuildFile; fileRef = 99591DD51965A29500027DB5 /* NSPropertyDescription+Groot.m */; };
-		996DF56C1965777E00F9DB74 /* Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = 99EB2D8E19644636008FC282 /* Groot.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		998B2E73196D6B6A00063F75 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 998B2E71196D6B6A00063F75 /* Model.xcdatamodeld */; };
-		998B2E80196D803700063F75 /* GRTModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 998B2E7F196D803700063F75 /* GRTModels.m */; };
-		99C1C76F196E6467004778CE /* NSEntityDescription+Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = 99C1C76D196E6467004778CE /* NSEntityDescription+Groot.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		99C1C770196E6467004778CE /* NSEntityDescription+Groot.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C1C76E196E6467004778CE /* NSEntityDescription+Groot.m */; };
-		99C1C773196EA7CA004778CE /* NSDictionary+Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = 99C1C771196EA7CA004778CE /* NSDictionary+Groot.h */; };
-		99C1C774196EA7CA004778CE /* NSDictionary+Groot.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C1C772196EA7CA004778CE /* NSDictionary+Groot.m */; };
-		99EB2D8A19644636008FC282 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EB2D8919644636008FC282 /* Foundation.framework */; };
-		99EB2D9819644636008FC282 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EB2D9719644636008FC282 /* XCTest.framework */; };
-		99EB2D9919644636008FC282 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EB2D8919644636008FC282 /* Foundation.framework */; };
-		99EB2D9B19644636008FC282 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EB2D9A19644636008FC282 /* UIKit.framework */; };
-		99EB2D9E19644636008FC282 /* libGroot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EB2D8619644636008FC282 /* libGroot.a */; };
-		99EB2DA419644636008FC282 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 99EB2DA219644636008FC282 /* InfoPlist.strings */; };
+		B4DC1AF21AA9CA5E00F67403 /* Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B4DC1AF11AA9CA5E00F67403 /* Groot.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B4DC1AF81AA9CA5E00F67403 /* Groot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4DC1AEC1AA9CA5E00F67403 /* Groot.framework */; };
+		B4DC1B191AA9CAC200F67403 /* GRTConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = B4DC1B081AA9CAC200F67403 /* GRTConstants.h */; };
+		B4DC1B1A1AA9CAC200F67403 /* GRTConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B091AA9CAC200F67403 /* GRTConstants.m */; };
+		B4DC1B1B1AA9CAC200F67403 /* GRTJSONSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = B4DC1B0A1AA9CAC200F67403 /* GRTJSONSerialization.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B4DC1B1C1AA9CAC200F67403 /* GRTJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B0B1AA9CAC200F67403 /* GRTJSONSerialization.m */; };
+		B4DC1B1D1AA9CAC200F67403 /* GRTManagedStore.h in Headers */ = {isa = PBXBuildFile; fileRef = B4DC1B0C1AA9CAC200F67403 /* GRTManagedStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B4DC1B1E1AA9CAC200F67403 /* GRTManagedStore.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B0D1AA9CAC200F67403 /* GRTManagedStore.m */; };
+		B4DC1B1F1AA9CAC200F67403 /* GRTValueTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = B4DC1B0E1AA9CAC200F67403 /* GRTValueTransformer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B4DC1B201AA9CAC200F67403 /* GRTValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B0F1AA9CAC200F67403 /* GRTValueTransformer.m */; };
+		B4DC1B211AA9CAC200F67403 /* NSAttributeDescription+Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B4DC1B111AA9CAC200F67403 /* NSAttributeDescription+Groot.h */; };
+		B4DC1B221AA9CAC200F67403 /* NSAttributeDescription+Groot.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B121AA9CAC200F67403 /* NSAttributeDescription+Groot.m */; };
+		B4DC1B231AA9CAC200F67403 /* NSDictionary+Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B4DC1B131AA9CAC200F67403 /* NSDictionary+Groot.h */; };
+		B4DC1B241AA9CAC200F67403 /* NSDictionary+Groot.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B141AA9CAC200F67403 /* NSDictionary+Groot.m */; };
+		B4DC1B251AA9CAC200F67403 /* NSEntityDescription+Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B4DC1B151AA9CAC200F67403 /* NSEntityDescription+Groot.h */; };
+		B4DC1B261AA9CAC200F67403 /* NSEntityDescription+Groot.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B161AA9CAC200F67403 /* NSEntityDescription+Groot.m */; };
+		B4DC1B271AA9CAC200F67403 /* NSPropertyDescription+Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B4DC1B171AA9CAC200F67403 /* NSPropertyDescription+Groot.h */; };
+		B4DC1B281AA9CAC200F67403 /* NSPropertyDescription+Groot.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B181AA9CAC200F67403 /* NSPropertyDescription+Groot.m */; };
+		B4DC1B2F1AA9CBAD00F67403 /* GRTJSONSerializationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B291AA9CBAD00F67403 /* GRTJSONSerializationTests.m */; };
+		B4DC1B301AA9CBAD00F67403 /* GRTModels.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B2B1AA9CBAD00F67403 /* GRTModels.m */; };
+		B4DC1B311AA9CBAD00F67403 /* GRTValueTransformerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B2C1AA9CBAD00F67403 /* GRTValueTransformerTests.m */; };
+		B4DC1B321AA9CBAD00F67403 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B2D1AA9CBAD00F67403 /* Model.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		99EB2D9C19644636008FC282 /* PBXContainerItemProxy */ = {
+		B4DC1AF91AA9CA5E00F67403 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 99EB2D7E19644636008FC282 /* Project object */;
+			containerPortal = B4DC1AE31AA9CA5E00F67403 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 99EB2D8519644636008FC282;
+			remoteGlobalIDString = B4DC1AEB1AA9CA5E00F67403;
 			remoteInfo = Groot;
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		99EB2D8419644636008FC282 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		994B4FE7196FF05D007D4F63 /* GRTValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTValueTransformer.h; sourceTree = "<group>"; };
-		994B4FE8196FF05D007D4F63 /* GRTValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTValueTransformer.m; sourceTree = "<group>"; };
-		994B4FEB196FF6F8007D4F63 /* GRTValueTransformerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTValueTransformerTests.m; sourceTree = "<group>"; };
-		994B4FF11970143D007D4F63 /* GRTConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTConstants.h; sourceTree = "<group>"; };
-		994B4FF21970143D007D4F63 /* GRTConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTConstants.m; sourceTree = "<group>"; };
-		99591DC119658DB400027DB5 /* GRTManagedStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTManagedStore.h; sourceTree = "<group>"; };
-		99591DC219658DB400027DB5 /* GRTManagedStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTManagedStore.m; sourceTree = "<group>"; };
-		99591DC51965922900027DB5 /* GRTJSONSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTJSONSerialization.h; sourceTree = "<group>"; };
-		99591DC61965922900027DB5 /* GRTJSONSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTJSONSerialization.m; sourceTree = "<group>"; };
-		99591DC91965934F00027DB5 /* GRTJSONSerializationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTJSONSerializationTests.m; sourceTree = "<group>"; };
-		99591DD01965A17200027DB5 /* NSAttributeDescription+Groot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributeDescription+Groot.h"; sourceTree = "<group>"; };
-		99591DD11965A17200027DB5 /* NSAttributeDescription+Groot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributeDescription+Groot.m"; sourceTree = "<group>"; };
-		99591DD41965A29500027DB5 /* NSPropertyDescription+Groot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPropertyDescription+Groot.h"; sourceTree = "<group>"; };
-		99591DD51965A29500027DB5 /* NSPropertyDescription+Groot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSPropertyDescription+Groot.m"; sourceTree = "<group>"; };
-		998B2E72196D6B6A00063F75 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		998B2E7E196D803700063F75 /* GRTModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTModels.h; sourceTree = "<group>"; };
-		998B2E7F196D803700063F75 /* GRTModels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTModels.m; sourceTree = "<group>"; };
-		99C1C76D196E6467004778CE /* NSEntityDescription+Groot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSEntityDescription+Groot.h"; sourceTree = "<group>"; };
-		99C1C76E196E6467004778CE /* NSEntityDescription+Groot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSEntityDescription+Groot.m"; sourceTree = "<group>"; };
-		99C1C771196EA7CA004778CE /* NSDictionary+Groot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Groot.h"; sourceTree = "<group>"; };
-		99C1C772196EA7CA004778CE /* NSDictionary+Groot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Groot.m"; sourceTree = "<group>"; };
-		99EB2D8619644636008FC282 /* libGroot.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGroot.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		99EB2D8919644636008FC282 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		99EB2D8D19644636008FC282 /* Groot-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Groot-Prefix.pch"; sourceTree = "<group>"; };
-		99EB2D8E19644636008FC282 /* Groot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Groot.h; sourceTree = "<group>"; };
-		99EB2D9619644636008FC282 /* GrootTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GrootTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		99EB2D9719644636008FC282 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		99EB2D9A19644636008FC282 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		99EB2DA119644636008FC282 /* GrootTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GrootTests-Info.plist"; sourceTree = "<group>"; };
-		99EB2DA319644636008FC282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B4DC1AEC1AA9CA5E00F67403 /* Groot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Groot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4DC1AF01AA9CA5E00F67403 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B4DC1AF11AA9CA5E00F67403 /* Groot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Groot.h; sourceTree = "<group>"; };
+		B4DC1AF71AA9CA5E00F67403 /* GrootTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GrootTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4DC1AFD1AA9CA5E00F67403 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B4DC1B081AA9CAC200F67403 /* GRTConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTConstants.h; sourceTree = "<group>"; };
+		B4DC1B091AA9CAC200F67403 /* GRTConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTConstants.m; sourceTree = "<group>"; };
+		B4DC1B0A1AA9CAC200F67403 /* GRTJSONSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTJSONSerialization.h; sourceTree = "<group>"; };
+		B4DC1B0B1AA9CAC200F67403 /* GRTJSONSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTJSONSerialization.m; sourceTree = "<group>"; };
+		B4DC1B0C1AA9CAC200F67403 /* GRTManagedStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTManagedStore.h; sourceTree = "<group>"; };
+		B4DC1B0D1AA9CAC200F67403 /* GRTManagedStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTManagedStore.m; sourceTree = "<group>"; };
+		B4DC1B0E1AA9CAC200F67403 /* GRTValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTValueTransformer.h; sourceTree = "<group>"; };
+		B4DC1B0F1AA9CAC200F67403 /* GRTValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTValueTransformer.m; sourceTree = "<group>"; };
+		B4DC1B111AA9CAC200F67403 /* NSAttributeDescription+Groot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributeDescription+Groot.h"; sourceTree = "<group>"; };
+		B4DC1B121AA9CAC200F67403 /* NSAttributeDescription+Groot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributeDescription+Groot.m"; sourceTree = "<group>"; };
+		B4DC1B131AA9CAC200F67403 /* NSDictionary+Groot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Groot.h"; sourceTree = "<group>"; };
+		B4DC1B141AA9CAC200F67403 /* NSDictionary+Groot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Groot.m"; sourceTree = "<group>"; };
+		B4DC1B151AA9CAC200F67403 /* NSEntityDescription+Groot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSEntityDescription+Groot.h"; sourceTree = "<group>"; };
+		B4DC1B161AA9CAC200F67403 /* NSEntityDescription+Groot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSEntityDescription+Groot.m"; sourceTree = "<group>"; };
+		B4DC1B171AA9CAC200F67403 /* NSPropertyDescription+Groot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPropertyDescription+Groot.h"; sourceTree = "<group>"; };
+		B4DC1B181AA9CAC200F67403 /* NSPropertyDescription+Groot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSPropertyDescription+Groot.m"; sourceTree = "<group>"; };
+		B4DC1B291AA9CBAD00F67403 /* GRTJSONSerializationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTJSONSerializationTests.m; sourceTree = "<group>"; };
+		B4DC1B2A1AA9CBAD00F67403 /* GRTModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTModels.h; sourceTree = "<group>"; };
+		B4DC1B2B1AA9CBAD00F67403 /* GRTModels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTModels.m; sourceTree = "<group>"; };
+		B4DC1B2C1AA9CBAD00F67403 /* GRTValueTransformerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTValueTransformerTests.m; sourceTree = "<group>"; };
+		B4DC1B2E1AA9CBAD00F67403 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		99EB2D8319644636008FC282 /* Frameworks */ = {
+		B4DC1AE81AA9CA5E00F67403 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99EB2D8A19644636008FC282 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		99EB2D9319644636008FC282 /* Frameworks */ = {
+		B4DC1AF41AA9CA5E00F67403 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99EB2D9819644636008FC282 /* XCTest.framework in Frameworks */,
-				99EB2D9B19644636008FC282 /* UIKit.framework in Frameworks */,
-				99EB2D9919644636008FC282 /* Foundation.framework in Frameworks */,
-				99EB2D9E19644636008FC282 /* libGroot.a in Frameworks */,
+				B4DC1AF81AA9CA5E00F67403 /* Groot.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		99591DCF1965A17200027DB5 /* Private */ = {
+		B4DC1AE21AA9CA5E00F67403 = {
 			isa = PBXGroup;
 			children = (
-				99591DD41965A29500027DB5 /* NSPropertyDescription+Groot.h */,
-				99591DD51965A29500027DB5 /* NSPropertyDescription+Groot.m */,
-				99591DD01965A17200027DB5 /* NSAttributeDescription+Groot.h */,
-				99591DD11965A17200027DB5 /* NSAttributeDescription+Groot.m */,
-				99C1C76D196E6467004778CE /* NSEntityDescription+Groot.h */,
-				99C1C76E196E6467004778CE /* NSEntityDescription+Groot.m */,
-				99C1C771196EA7CA004778CE /* NSDictionary+Groot.h */,
-				99C1C772196EA7CA004778CE /* NSDictionary+Groot.m */,
-			);
-			path = Private;
-			sourceTree = "<group>";
-		};
-		99EB2D7D19644636008FC282 = {
-			isa = PBXGroup;
-			children = (
-				99EB2D8B19644636008FC282 /* Groot */,
-				99EB2D9F19644636008FC282 /* GrootTests */,
-				99EB2D8819644636008FC282 /* Frameworks */,
-				99EB2D8719644636008FC282 /* Products */,
+				B4DC1AEE1AA9CA5E00F67403 /* Groot */,
+				B4DC1AFB1AA9CA5E00F67403 /* GrootTests */,
+				B4DC1AED1AA9CA5E00F67403 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		99EB2D8719644636008FC282 /* Products */ = {
+		B4DC1AED1AA9CA5E00F67403 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				99EB2D8619644636008FC282 /* libGroot.a */,
-				99EB2D9619644636008FC282 /* GrootTests.xctest */,
+				B4DC1AEC1AA9CA5E00F67403 /* Groot.framework */,
+				B4DC1AF71AA9CA5E00F67403 /* GrootTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		99EB2D8819644636008FC282 /* Frameworks */ = {
+		B4DC1AEE1AA9CA5E00F67403 /* Groot */ = {
 			isa = PBXGroup;
 			children = (
-				99EB2D8919644636008FC282 /* Foundation.framework */,
-				99EB2D9719644636008FC282 /* XCTest.framework */,
-				99EB2D9A19644636008FC282 /* UIKit.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		99EB2D8B19644636008FC282 /* Groot */ = {
-			isa = PBXGroup;
-			children = (
-				99EB2D8E19644636008FC282 /* Groot.h */,
-				994B4FF11970143D007D4F63 /* GRTConstants.h */,
-				994B4FF21970143D007D4F63 /* GRTConstants.m */,
-				99591DC119658DB400027DB5 /* GRTManagedStore.h */,
-				99591DC219658DB400027DB5 /* GRTManagedStore.m */,
-				99591DC51965922900027DB5 /* GRTJSONSerialization.h */,
-				99591DC61965922900027DB5 /* GRTJSONSerialization.m */,
-				994B4FE7196FF05D007D4F63 /* GRTValueTransformer.h */,
-				994B4FE8196FF05D007D4F63 /* GRTValueTransformer.m */,
-				99591DCF1965A17200027DB5 /* Private */,
-				99EB2D8C19644636008FC282 /* Supporting Files */,
+				B4DC1AF11AA9CA5E00F67403 /* Groot.h */,
+				B4DC1B081AA9CAC200F67403 /* GRTConstants.h */,
+				B4DC1B091AA9CAC200F67403 /* GRTConstants.m */,
+				B4DC1B0A1AA9CAC200F67403 /* GRTJSONSerialization.h */,
+				B4DC1B0B1AA9CAC200F67403 /* GRTJSONSerialization.m */,
+				B4DC1B0C1AA9CAC200F67403 /* GRTManagedStore.h */,
+				B4DC1B0D1AA9CAC200F67403 /* GRTManagedStore.m */,
+				B4DC1B0E1AA9CAC200F67403 /* GRTValueTransformer.h */,
+				B4DC1B0F1AA9CAC200F67403 /* GRTValueTransformer.m */,
+				B4DC1B101AA9CAC200F67403 /* Private */,
+				B4DC1AEF1AA9CA5E00F67403 /* Supporting Files */,
 			);
 			path = Groot;
 			sourceTree = "<group>";
 		};
-		99EB2D8C19644636008FC282 /* Supporting Files */ = {
+		B4DC1AEF1AA9CA5E00F67403 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				99EB2D8D19644636008FC282 /* Groot-Prefix.pch */,
+				B4DC1AF01AA9CA5E00F67403 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		99EB2D9F19644636008FC282 /* GrootTests */ = {
+		B4DC1AFB1AA9CA5E00F67403 /* GrootTests */ = {
 			isa = PBXGroup;
 			children = (
-				998B2E71196D6B6A00063F75 /* Model.xcdatamodeld */,
-				998B2E7E196D803700063F75 /* GRTModels.h */,
-				998B2E7F196D803700063F75 /* GRTModels.m */,
-				99591DC91965934F00027DB5 /* GRTJSONSerializationTests.m */,
-				994B4FEB196FF6F8007D4F63 /* GRTValueTransformerTests.m */,
-				99EB2DA019644636008FC282 /* Supporting Files */,
+				B4DC1B291AA9CBAD00F67403 /* GRTJSONSerializationTests.m */,
+				B4DC1B2A1AA9CBAD00F67403 /* GRTModels.h */,
+				B4DC1B2B1AA9CBAD00F67403 /* GRTModels.m */,
+				B4DC1B2C1AA9CBAD00F67403 /* GRTValueTransformerTests.m */,
+				B4DC1B2D1AA9CBAD00F67403 /* Model.xcdatamodeld */,
+				B4DC1AFC1AA9CA5E00F67403 /* Supporting Files */,
 			);
 			path = GrootTests;
 			sourceTree = "<group>";
 		};
-		99EB2DA019644636008FC282 /* Supporting Files */ = {
+		B4DC1AFC1AA9CA5E00F67403 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				99EB2DA119644636008FC282 /* GrootTests-Info.plist */,
-				99EB2DA219644636008FC282 /* InfoPlist.strings */,
+				B4DC1AFD1AA9CA5E00F67403 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B4DC1B101AA9CAC200F67403 /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				B4DC1B111AA9CAC200F67403 /* NSAttributeDescription+Groot.h */,
+				B4DC1B121AA9CAC200F67403 /* NSAttributeDescription+Groot.m */,
+				B4DC1B131AA9CAC200F67403 /* NSDictionary+Groot.h */,
+				B4DC1B141AA9CAC200F67403 /* NSDictionary+Groot.m */,
+				B4DC1B151AA9CAC200F67403 /* NSEntityDescription+Groot.h */,
+				B4DC1B161AA9CAC200F67403 /* NSEntityDescription+Groot.m */,
+				B4DC1B171AA9CAC200F67403 /* NSPropertyDescription+Groot.h */,
+				B4DC1B181AA9CAC200F67403 /* NSPropertyDescription+Groot.m */,
+			);
+			path = Private;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		996DF56B1965775000F9DB74 /* Headers */ = {
+		B4DC1AE91AA9CA5E00F67403 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				994B4FE9196FF05D007D4F63 /* GRTValueTransformer.h in Headers */,
-				994B4FF31970143D007D4F63 /* GRTConstants.h in Headers */,
-				99C1C773196EA7CA004778CE /* NSDictionary+Groot.h in Headers */,
-				996DF56C1965777E00F9DB74 /* Groot.h in Headers */,
-				99591DC71965922900027DB5 /* GRTJSONSerialization.h in Headers */,
-				99591DC319658DB400027DB5 /* GRTManagedStore.h in Headers */,
-				99C1C76F196E6467004778CE /* NSEntityDescription+Groot.h in Headers */,
-				99591DD21965A17200027DB5 /* NSAttributeDescription+Groot.h in Headers */,
-				99591DD61965A29500027DB5 /* NSPropertyDescription+Groot.h in Headers */,
+				B4DC1B231AA9CAC200F67403 /* NSDictionary+Groot.h in Headers */,
+				B4DC1B251AA9CAC200F67403 /* NSEntityDescription+Groot.h in Headers */,
+				B4DC1B1F1AA9CAC200F67403 /* GRTValueTransformer.h in Headers */,
+				B4DC1B191AA9CAC200F67403 /* GRTConstants.h in Headers */,
+				B4DC1B271AA9CAC200F67403 /* NSPropertyDescription+Groot.h in Headers */,
+				B4DC1AF21AA9CA5E00F67403 /* Groot.h in Headers */,
+				B4DC1B1D1AA9CAC200F67403 /* GRTManagedStore.h in Headers */,
+				B4DC1B1B1AA9CAC200F67403 /* GRTJSONSerialization.h in Headers */,
+				B4DC1B211AA9CAC200F67403 /* NSAttributeDescription+Groot.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		99EB2D8519644636008FC282 /* Groot */ = {
+		B4DC1AEB1AA9CA5E00F67403 /* Groot */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 99EB2DA919644636008FC282 /* Build configuration list for PBXNativeTarget "Groot" */;
+			buildConfigurationList = B4DC1B021AA9CA5E00F67403 /* Build configuration list for PBXNativeTarget "Groot" */;
 			buildPhases = (
-				99EB2D8219644636008FC282 /* Sources */,
-				99EB2D8319644636008FC282 /* Frameworks */,
-				996DF56B1965775000F9DB74 /* Headers */,
-				99EB2D8419644636008FC282 /* CopyFiles */,
+				B4DC1AE71AA9CA5E00F67403 /* Sources */,
+				B4DC1AE81AA9CA5E00F67403 /* Frameworks */,
+				B4DC1AE91AA9CA5E00F67403 /* Headers */,
+				B4DC1AEA1AA9CA5E00F67403 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -243,116 +206,118 @@
 			);
 			name = Groot;
 			productName = Groot;
-			productReference = 99EB2D8619644636008FC282 /* libGroot.a */;
-			productType = "com.apple.product-type.library.static";
+			productReference = B4DC1AEC1AA9CA5E00F67403 /* Groot.framework */;
+			productType = "com.apple.product-type.framework";
 		};
-		99EB2D9519644636008FC282 /* GrootTests */ = {
+		B4DC1AF61AA9CA5E00F67403 /* GrootTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 99EB2DAC19644636008FC282 /* Build configuration list for PBXNativeTarget "GrootTests" */;
+			buildConfigurationList = B4DC1B051AA9CA5E00F67403 /* Build configuration list for PBXNativeTarget "GrootTests" */;
 			buildPhases = (
-				99EB2D9219644636008FC282 /* Sources */,
-				99EB2D9319644636008FC282 /* Frameworks */,
-				99EB2D9419644636008FC282 /* Resources */,
+				B4DC1AF31AA9CA5E00F67403 /* Sources */,
+				B4DC1AF41AA9CA5E00F67403 /* Frameworks */,
+				B4DC1AF51AA9CA5E00F67403 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				99EB2D9D19644636008FC282 /* PBXTargetDependency */,
+				B4DC1AFA1AA9CA5E00F67403 /* PBXTargetDependency */,
 			);
 			name = GrootTests;
 			productName = GrootTests;
-			productReference = 99EB2D9619644636008FC282 /* GrootTests.xctest */;
+			productReference = B4DC1AF71AA9CA5E00F67403 /* GrootTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		99EB2D7E19644636008FC282 /* Project object */ = {
+		B4DC1AE31AA9CA5E00F67403 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = GRT;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Guillermo Gonzalez";
+				TargetAttributes = {
+					B4DC1AEB1AA9CA5E00F67403 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					B4DC1AF61AA9CA5E00F67403 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
 			};
-			buildConfigurationList = 99EB2D8119644636008FC282 /* Build configuration list for PBXProject "Groot" */;
+			buildConfigurationList = B4DC1AE61AA9CA5E00F67403 /* Build configuration list for PBXProject "Groot" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 99EB2D7D19644636008FC282;
-			productRefGroup = 99EB2D8719644636008FC282 /* Products */;
+			mainGroup = B4DC1AE21AA9CA5E00F67403;
+			productRefGroup = B4DC1AED1AA9CA5E00F67403 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				99EB2D8519644636008FC282 /* Groot */,
-				99EB2D9519644636008FC282 /* GrootTests */,
+				B4DC1AEB1AA9CA5E00F67403 /* Groot */,
+				B4DC1AF61AA9CA5E00F67403 /* GrootTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		99EB2D9419644636008FC282 /* Resources */ = {
+		B4DC1AEA1AA9CA5E00F67403 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99EB2DA419644636008FC282 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B4DC1AF51AA9CA5E00F67403 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		99EB2D8219644636008FC282 /* Sources */ = {
+		B4DC1AE71AA9CA5E00F67403 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99C1C770196E6467004778CE /* NSEntityDescription+Groot.m in Sources */,
-				99591DD71965A29500027DB5 /* NSPropertyDescription+Groot.m in Sources */,
-				99591DD31965A17200027DB5 /* NSAttributeDescription+Groot.m in Sources */,
-				994B4FF41970143D007D4F63 /* GRTConstants.m in Sources */,
-				99591DC419658DB400027DB5 /* GRTManagedStore.m in Sources */,
-				99C1C774196EA7CA004778CE /* NSDictionary+Groot.m in Sources */,
-				994B4FEA196FF05D007D4F63 /* GRTValueTransformer.m in Sources */,
-				99591DC81965922900027DB5 /* GRTJSONSerialization.m in Sources */,
+				B4DC1B281AA9CAC200F67403 /* NSPropertyDescription+Groot.m in Sources */,
+				B4DC1B261AA9CAC200F67403 /* NSEntityDescription+Groot.m in Sources */,
+				B4DC1B1C1AA9CAC200F67403 /* GRTJSONSerialization.m in Sources */,
+				B4DC1B221AA9CAC200F67403 /* NSAttributeDescription+Groot.m in Sources */,
+				B4DC1B201AA9CAC200F67403 /* GRTValueTransformer.m in Sources */,
+				B4DC1B1A1AA9CAC200F67403 /* GRTConstants.m in Sources */,
+				B4DC1B241AA9CAC200F67403 /* NSDictionary+Groot.m in Sources */,
+				B4DC1B1E1AA9CAC200F67403 /* GRTManagedStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		99EB2D9219644636008FC282 /* Sources */ = {
+		B4DC1AF31AA9CA5E00F67403 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99591DCA1965934F00027DB5 /* GRTJSONSerializationTests.m in Sources */,
-				994B4FEC196FF6F8007D4F63 /* GRTValueTransformerTests.m in Sources */,
-				998B2E73196D6B6A00063F75 /* Model.xcdatamodeld in Sources */,
-				998B2E80196D803700063F75 /* GRTModels.m in Sources */,
+				B4DC1B2F1AA9CBAD00F67403 /* GRTJSONSerializationTests.m in Sources */,
+				B4DC1B311AA9CBAD00F67403 /* GRTValueTransformerTests.m in Sources */,
+				B4DC1B321AA9CBAD00F67403 /* Model.xcdatamodeld in Sources */,
+				B4DC1B301AA9CBAD00F67403 /* GRTModels.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		99EB2D9D19644636008FC282 /* PBXTargetDependency */ = {
+		B4DC1AFA1AA9CA5E00F67403 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 99EB2D8519644636008FC282 /* Groot */;
-			targetProxy = 99EB2D9C19644636008FC282 /* PBXContainerItemProxy */;
+			target = B4DC1AEB1AA9CA5E00F67403 /* Groot */;
+			targetProxy = B4DC1AF91AA9CA5E00F67403 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		99EB2DA219644636008FC282 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				99EB2DA319644636008FC282 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
-		99EB2DA719644636008FC282 /* Debug */ = {
+		B4DC1B001AA9CA5E00F67403 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -367,8 +332,12 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -383,13 +352,17 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		99EB2DA819644636008FC282 /* Release */ = {
+		B4DC1B011AA9CA5E00F67403 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -404,9 +377,13 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -414,128 +391,120 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		99EB2DAA19644636008FC282 /* Debug */ = {
+		B4DC1B031AA9CA5E00F67403 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DSTROOT = /tmp/Groot.dst;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Groot/Groot-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Groot/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		99EB2DAB19644636008FC282 /* Release */ = {
+		B4DC1B041AA9CA5E00F67403 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DSTROOT = /tmp/Groot.dst;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Groot/Groot-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Groot/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
-		99EB2DAD19644636008FC282 /* Debug */ = {
+		B4DC1B061AA9CA5E00F67403 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Groot/Groot-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "GrootTests/GrootTests-Info.plist";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					XCTest,
-					"-ObjC",
-				);
+				INFOPLIST_FILE = GrootTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
 		};
-		99EB2DAE19644636008FC282 /* Release */ = {
+		B4DC1B071AA9CA5E00F67403 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Groot/Groot-Prefix.pch";
-				INFOPLIST_FILE = "GrootTests/GrootTests-Info.plist";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					XCTest,
-					"-ObjC",
-				);
+				INFOPLIST_FILE = GrootTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		99EB2D8119644636008FC282 /* Build configuration list for PBXProject "Groot" */ = {
+		B4DC1AE61AA9CA5E00F67403 /* Build configuration list for PBXProject "Groot" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				99EB2DA719644636008FC282 /* Debug */,
-				99EB2DA819644636008FC282 /* Release */,
+				B4DC1B001AA9CA5E00F67403 /* Debug */,
+				B4DC1B011AA9CA5E00F67403 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		99EB2DA919644636008FC282 /* Build configuration list for PBXNativeTarget "Groot" */ = {
+		B4DC1B021AA9CA5E00F67403 /* Build configuration list for PBXNativeTarget "Groot" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				99EB2DAA19644636008FC282 /* Debug */,
-				99EB2DAB19644636008FC282 /* Release */,
+				B4DC1B031AA9CA5E00F67403 /* Debug */,
+				B4DC1B041AA9CA5E00F67403 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
-		99EB2DAC19644636008FC282 /* Build configuration list for PBXNativeTarget "GrootTests" */ = {
+		B4DC1B051AA9CA5E00F67403 /* Build configuration list for PBXNativeTarget "GrootTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				99EB2DAD19644636008FC282 /* Debug */,
-				99EB2DAE19644636008FC282 /* Release */,
+				B4DC1B061AA9CA5E00F67403 /* Debug */,
+				B4DC1B071AA9CA5E00F67403 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		998B2E71196D6B6A00063F75 /* Model.xcdatamodeld */ = {
+		B4DC1B2D1AA9CBAD00F67403 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				998B2E72196D6B6A00063F75 /* Model.xcdatamodel */,
+				B4DC1B2E1AA9CBAD00F67403 /* Model.xcdatamodel */,
 			);
-			currentVersion = 998B2E72196D6B6A00063F75 /* Model.xcdatamodel */;
+			currentVersion = B4DC1B2E1AA9CBAD00F67403 /* Model.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
 /* End XCVersionGroup section */
 	};
-	rootObject = 99EB2D7E19644636008FC282 /* Project object */;
+	rootObject = B4DC1AE31AA9CA5E00F67403 /* Project object */;
 }
