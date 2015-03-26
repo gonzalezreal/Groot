@@ -50,6 +50,12 @@ private class ReversibleValueTransformer: ValueTransformer {
 }
 
 public extension NSValueTransformer {
+    /**
+     Registers a value transformer with a given name and transform function.
+    
+     :param: name The name of the transformer.
+     :param: transform The function that performs the transformation.
+     */
     class func setValueTransformerWithName<T, U>(name: String, transform: (T) -> (U?)) {
         let transformer = ValueTransformer { value in
             if let v = value as? T {
@@ -64,6 +70,13 @@ public extension NSValueTransformer {
         self.setValueTransformer(transformer, forName: name)
     }
     
+    /**
+     Registers a reversible value transformer with a given name and transform functions.
+    
+     :param: name The name of the transformer.
+     :param: transform The function that performs the forward transformation.
+     :param: reverseTransform The function that performs the reverse transformation.
+     */
     class func setValueTransformerWithName<T, U>(name: String, transform: (T) -> (U?), reverseTransform: (U) -> (T?)) {
         let transformer = ReversibleValueTransformer(transform: { value in
             if let v = value as? T {
