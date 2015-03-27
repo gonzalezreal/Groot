@@ -11,6 +11,17 @@
 		B4164E751AC2EFCD00D5CA93 /* Groot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4164E691AC2EFCD00D5CA93 /* Groot.framework */; };
 		B4164E861AC2F00900D5CA93 /* ValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4164E851AC2F00900D5CA93 /* ValueTransformer.swift */; };
 		B4164E881AC301A700D5CA93 /* ValueTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4164E871AC301A700D5CA93 /* ValueTransformerTests.swift */; };
+		B46205EE1ACC3C1300E0FB32 /* NSError+Groot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46205ED1ACC3C1300E0FB32 /* NSError+Groot.swift */; };
+		B46205F01ACC3CC200E0FB32 /* NSPropertyDescription+Groot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46205EF1ACC3CC200E0FB32 /* NSPropertyDescription+Groot.swift */; };
+		B46205F31ACC3DE300E0FB32 /* NSAttributeDescription+Groot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46205F21ACC3DE300E0FB32 /* NSAttributeDescription+Groot.swift */; };
+		B46205F51ACC3F1E00E0FB32 /* NSManagedObject+Groot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46205F41ACC3F1E00E0FB32 /* NSManagedObject+Groot.swift */; };
+		B46205F71ACC400500E0FB32 /* NSEntityDescription+Groot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46205F61ACC400500E0FB32 /* NSEntityDescription+Groot.swift */; };
+		B48A1FA61AC5436900C4EC78 /* ManagedStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48A1FA51AC5436900C4EC78 /* ManagedStoreTests.swift */; };
+		B48A1FA81AC54CE500C4EC78 /* Model.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = B48A1FA71AC54CE500C4EC78 /* Model.xcdatamodel */; };
+		B48A1FAA1AC5541200C4EC78 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48A1FA91AC5541200C4EC78 /* Models.swift */; };
+		B48A1FB41AC5959500C4EC78 /* Groot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48A1FB31AC5959500C4EC78 /* Groot.swift */; };
+		B48A1FB61AC5A1F700C4EC78 /* GrootTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48A1FB51AC5A1F700C4EC78 /* GrootTests.swift */; };
+		B49C49081AC3FC3700E54F9F /* ManagedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49C49071AC3FC3700E54F9F /* ManagedStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +42,17 @@
 		B4164E7A1AC2EFCD00D5CA93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B4164E851AC2F00900D5CA93 /* ValueTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueTransformer.swift; sourceTree = "<group>"; };
 		B4164E871AC301A700D5CA93 /* ValueTransformerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueTransformerTests.swift; sourceTree = "<group>"; };
+		B46205ED1ACC3C1300E0FB32 /* NSError+Groot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+Groot.swift"; sourceTree = "<group>"; };
+		B46205EF1ACC3CC200E0FB32 /* NSPropertyDescription+Groot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSPropertyDescription+Groot.swift"; sourceTree = "<group>"; };
+		B46205F21ACC3DE300E0FB32 /* NSAttributeDescription+Groot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSAttributeDescription+Groot.swift"; sourceTree = "<group>"; };
+		B46205F41ACC3F1E00E0FB32 /* NSManagedObject+Groot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Groot.swift"; sourceTree = "<group>"; };
+		B46205F61ACC400500E0FB32 /* NSEntityDescription+Groot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSEntityDescription+Groot.swift"; sourceTree = "<group>"; };
+		B48A1FA51AC5436900C4EC78 /* ManagedStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedStoreTests.swift; sourceTree = "<group>"; };
+		B48A1FA71AC54CE500C4EC78 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		B48A1FA91AC5541200C4EC78 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		B48A1FB31AC5959500C4EC78 /* Groot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Groot.swift; sourceTree = "<group>"; };
+		B48A1FB51AC5A1F700C4EC78 /* GrootTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrootTests.swift; sourceTree = "<group>"; };
+		B49C49071AC3FC3700E54F9F /* ManagedStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +97,9 @@
 			children = (
 				B4164E6E1AC2EFCD00D5CA93 /* Groot.h */,
 				B4164E851AC2F00900D5CA93 /* ValueTransformer.swift */,
+				B49C49071AC3FC3700E54F9F /* ManagedStore.swift */,
+				B48A1FB31AC5959500C4EC78 /* Groot.swift */,
+				B46205F11ACC3D1D00E0FB32 /* Helpers */,
 				B4164E6C1AC2EFCD00D5CA93 /* Supporting Files */,
 			);
 			path = Groot;
@@ -92,6 +117,10 @@
 			isa = PBXGroup;
 			children = (
 				B4164E871AC301A700D5CA93 /* ValueTransformerTests.swift */,
+				B48A1FA51AC5436900C4EC78 /* ManagedStoreTests.swift */,
+				B48A1FB51AC5A1F700C4EC78 /* GrootTests.swift */,
+				B48A1FA91AC5541200C4EC78 /* Models.swift */,
+				B48A1FA71AC54CE500C4EC78 /* Model.xcdatamodel */,
 				B4164E791AC2EFCD00D5CA93 /* Supporting Files */,
 			);
 			path = GrootTests;
@@ -103,6 +132,18 @@
 				B4164E7A1AC2EFCD00D5CA93 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B46205F11ACC3D1D00E0FB32 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				B46205ED1ACC3C1300E0FB32 /* NSError+Groot.swift */,
+				B46205EF1ACC3CC200E0FB32 /* NSPropertyDescription+Groot.swift */,
+				B46205F21ACC3DE300E0FB32 /* NSAttributeDescription+Groot.swift */,
+				B46205F41ACC3F1E00E0FB32 /* NSManagedObject+Groot.swift */,
+				B46205F61ACC400500E0FB32 /* NSEntityDescription+Groot.swift */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,7 +203,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0630;
-				ORGANIZATIONNAME = "Guille González";
+				ORGANIZATIONNAME = "Guille Gonzalez";
 				TargetAttributes = {
 					B4164E681AC2EFCD00D5CA93 = {
 						CreatedOnToolsVersion = 6.3;
@@ -213,6 +254,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4164E861AC2F00900D5CA93 /* ValueTransformer.swift in Sources */,
+				B48A1FB41AC5959500C4EC78 /* Groot.swift in Sources */,
+				B46205F71ACC400500E0FB32 /* NSEntityDescription+Groot.swift in Sources */,
+				B49C49081AC3FC3700E54F9F /* ManagedStore.swift in Sources */,
+				B46205EE1ACC3C1300E0FB32 /* NSError+Groot.swift in Sources */,
+				B46205F31ACC3DE300E0FB32 /* NSAttributeDescription+Groot.swift in Sources */,
+				B46205F01ACC3CC200E0FB32 /* NSPropertyDescription+Groot.swift in Sources */,
+				B46205F51ACC3F1E00E0FB32 /* NSManagedObject+Groot.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,7 +268,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B48A1FA81AC54CE500C4EC78 /* Model.xcdatamodel in Sources */,
 				B4164E881AC301A700D5CA93 /* ValueTransformerTests.swift in Sources */,
+				B48A1FA61AC5436900C4EC78 /* ManagedStoreTests.swift in Sources */,
+				B48A1FB61AC5A1F700C4EC78 /* GrootTests.swift in Sources */,
+				B48A1FAA1AC5541200C4EC78 /* Models.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +458,7 @@
 				B4164E811AC2EFCD00D5CA93 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B4164E821AC2EFCD00D5CA93 /* Build configuration list for PBXNativeTarget "GrootTests" */ = {
 			isa = XCConfigurationList;
@@ -414,6 +467,7 @@
 				B4164E841AC2EFCD00D5CA93 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

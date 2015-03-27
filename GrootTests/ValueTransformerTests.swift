@@ -2,8 +2,8 @@
 //  ValueTransformerTests.swift
 //  Groot
 //
-//  Created by Guille Gonzalez on 25/03/15.
-//  Copyright (c) 2015 Guille González. All rights reserved.
+//  Created by Guille Gonzalez on 28/03/15.
+//  Copyright (c) 2015 Guille Gonzalez. All rights reserved.
 //
 
 import XCTest
