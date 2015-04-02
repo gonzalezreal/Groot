@@ -10,25 +10,19 @@ import CoreData
 
 extension NSManagedObject {
     /// Returns the entity for this managed object in a given context.
-    internal class func entityInManagedObjectContext(context: NSManagedObjectContext, error outError: NSErrorPointer) -> NSEntityDescription? {
+    internal class func entityInManagedObjectContext(context: NSManagedObjectContext) -> NSEntityDescription {
         let className = NSStringFromClass(self)
+        let model = context.persistentStoreCoordinator!.managedObjectModel
+        let entities = model.entities as! [NSEntityDescription]
         
-        if let model = context.persistentStoreCoordinator?.managedObjectModel {
-            let entities = model.entities as! [NSEntityDescription]
-            
-            for entity in entities {
-                if entity.managedObjectClassName == className {
-                    return entity
-                }
+        for entity in entities {
+            if entity.managedObjectClassName == className {
+                return entity
             }
         }
         
-        if outError != nil {
-            let description = String(format: NSLocalizedString("Could not find the entity for %@.", comment: "Groot"), className)
-            outError.memory = NSError(code: .EntityNotFound, localizedDescription: description)
-        }
-        
-        return nil
+        assert(false, "Could not locate the entity for \(className).")
+        return NSEntityDescription()
     }
     
     /// Sets an attribute on the receiver from a given JSON object.
@@ -108,5 +102,87 @@ extension NSManagedObject {
                 setValue(value, forKey: relationship.name)
             }
         }
+    }
+    
+    /// Returns a JSON representation of the receiver
+    internal func toJSONObject(inout #processingRelationships: Set<NSRelationshipDescription>) -> JSONObject {
+        var dictionary = NSMutableDictionary()
+        
+        if let context = self.managedObjectContext,
+               propertiesByName = self.entity.propertiesByName as? [String: NSPropertyDescription]
+        {
+            context.performBlockAndWait {
+                for (name, property) in propertiesByName {
+                    if !property.JSONSerializable {
+                        continue
+                    }
+                    
+                    let keyPath = property.JSONKeyPath!
+                    var value: AnyObject? = self.valueForKey(name)
+                    
+                    if value == nil {
+                        value = NSNull()
+                    } else {
+                        switch property {
+                        case let attribute as NSAttributeDescription:
+                            if let transformer = attribute.JSONTransformer {
+                                if transformer.dynamicType.allowsReverseTransformation() {
+                                    value = transformer.reverseTransformedValue(value)
+                                }
+                            }
+                            
+                        case let relationship as NSRelationshipDescription:
+                            if let inverseRelationship = relationship.inverseRelationship {
+                                if processingRelationships.contains(inverseRelationship) {
+                                    // Skip if the inverse relationship is being serialized
+                                    return;
+                                }
+                            }
+                            
+                            processingRelationships.insert(relationship)
+                            
+                            if relationship.toMany {
+                                var managedObjects: [NSManagedObject] = []
+                                
+                                switch value {
+                                case let orderedSet as NSOrderedSet:
+                                    managedObjects = orderedSet.array as! [NSManagedObject]
+                                case let set as NSSet:
+                                    managedObjects = set.allObjects as! [NSManagedObject]
+                                default:
+                                    break
+                                }
+                                
+                                value = managedObjects.map { $0.toJSONObject(processingRelationships: &processingRelationships) }
+                            } else {
+                                value = (value as? NSManagedObject)?.toJSONObject(processingRelationships: &processingRelationships)
+                            }
+                            
+                        default:
+                            break
+                        }
+                    }
+                    
+                    var components = keyPath.componentsSeparatedByString(".")
+                    components.removeLast()
+                    
+                    if components.count > 0 {
+                        // Create a dictionary for each key path component
+                        var tmpDictionary = dictionary
+                        for component in components {
+                            if tmpDictionary[component] == nil {
+                                tmpDictionary[component] = NSMutableDictionary()
+                            }
+                            
+                            tmpDictionary = tmpDictionary[component] as! NSMutableDictionary
+                        }
+                    }
+                    
+                    dictionary.setValue(value, forKeyPath: keyPath)
+                }
+            }
+        }
+        
+        return dictionary.copy() as! JSONObject
     }
 }

@@ -266,4 +266,69 @@ class GrootTests: XCTestCase {
         XCTAssertEqual(Groot.errorDomain, error!.domain, "should return a Groot error")
         XCTAssertEqual(Groot.Error.IdentityNotFound.rawValue, error!.code, "should return an identity not found error")
     }
+    
+    func testSerializationToJSON() {
+        var DCComics = Publisher.insertInManagedObjectContext(context!)
+        DCComics.identifier = 10
+        DCComics.name = "DC Comics"
+        
+        var agility = Power.insertInManagedObjectContext(context!)
+        agility.identifier = 4
+        agility.name = "Agility"
+        
+        var wealth = Power.insertInManagedObjectContext(context!)
+        wealth.identifier = 9
+        wealth.name = "Insanely Rich"
+        
+        var batman = Character.insertInManagedObjectContext(context!)
+        batman.identifier = 1699
+        batman.name = "Batman"
+        batman.realName = "Bruce Wayne"
+        batman.powers = NSOrderedSet(array: [agility, wealth])
+        batman.publisher = DCComics
+        
+        let batmanJSON = batman.toJSONObject() as NSDictionary
+        let expectedJSON: NSDictionary = [
+            "id": "1699",
+            "name": "Batman",
+            "real_name": "Bruce Wayne",
+            "powers": [
+                [
+                    "id": "4",
+                    "name": "Agility"
+                ],
+                [
+                    "id": "9",
+                    "name": "Insanely Rich"
+                ]
+            ],
+            "publisher": [
+                "id": "10",
+                "name": "DC Comics"
+            ]
+        ]
+        
+        XCTAssertEqual(expectedJSON, batmanJSON)
+    }
+    
+    func testSerializationToJSONWithNestedObjects() {
+        let entity = store!.managedObjectModel.entitiesByName["Character"] as! NSEntityDescription
+        let realNameAttribute = entity.attributesByName["realName"] as! NSAttributeDescription
+        realNameAttribute.userInfo = [
+            JSONKeyPathKey: "name.real_name"
+        ]
+        let nameAttribute = entity.attributesByName["name"] as! NSAttributeDescription
+        nameAttribute.userInfo = [
+            JSONKeyPathKey: "name.name"
+        ]
+        
+        let batman = Character.insertInManagedObjectContext(context!)
+        batman.name = "Batman"
+        batman.realName = "Bruce Wayne"
+        
+        let batmanJSON = batman.toJSONObject() as NSDictionary
+        
+        XCTAssertEqual("Batman", batmanJSON.valueForKeyPath("name.name") as! String)
+        XCTAssertEqual("Bruce Wayne", batmanJSON.valueForKeyPath("name.real_name") as! String)
+    }
 }
