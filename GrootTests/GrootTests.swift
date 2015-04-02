@@ -239,4 +239,31 @@ class GrootTests: XCTestCase {
         
         XCTAssert(batmanRich === ironManRich, "should properly merge relationships")
     }
+    
+    func testMergeWithoutIdentityAttribute() {
+        let entities = self.store!.managedObjectModel.entitiesByName as! [String: NSEntityDescription]
+        let powerEntity = entities["Power"]!
+        powerEntity.userInfo = [:] // Remove the identity attribute name from the entity
+        
+        let batmanJSON: JSONObject = [
+            "name": "Batman",
+            "real_name": "Bruce Wayne",
+            "id": "1699",
+            "powers": [
+                [
+                    "id": "4",
+                    "name": "Agility"
+                ]
+            ]
+        ]
+        
+        var error: NSError? = nil
+        let batman = Character.fromJSONObject(batmanJSON, inContext: context!, mergeChanges: true, error: &error)
+        
+        XCTAssertNil(batman)
+        XCTAssertNotNil(error)
+        
+        XCTAssertEqual(Groot.errorDomain, error!.domain, "should return a Groot error")
+        XCTAssertEqual(Groot.Error.IdentityNotFound.rawValue, error!.code, "should return an identity not found error")
+    }
 }
