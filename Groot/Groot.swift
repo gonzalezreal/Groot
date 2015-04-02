@@ -29,6 +29,22 @@ public func importJSONArray<T: NSManagedObject>(array: JSONArray, inContext cont
     return nil
 }
 
+/// Creates an array of managed objects by importing the given JSON data.
+public func importJSONData<T: NSManagedObject>(data: NSData, inContext context: NSManagedObjectContext, #mergeChanges: Bool, error outError: NSErrorPointer) -> [T]? {
+    if let parsedJSON: AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(0), error: outError) {
+        switch (parsedJSON) {
+        case let object as JSONObject:
+            return importJSONArray([object], inContext: context, mergeChanges: mergeChanges, error: outError)
+        case let array as JSONArray:
+            return importJSONArray(array, inContext: context, mergeChanges: mergeChanges, error: outError)
+        default:
+            break
+        }
+    }
+    
+    return nil
+}
+
 extension NSManagedObject {
     /// Creates an instance of the receiver by importing the given JSON object.
     public class func fromJSONObject(object: JSONObject, inContext context: NSManagedObjectContext, mergeChanges: Bool, error outError: NSErrorPointer) -> Self? {
