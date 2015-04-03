@@ -1,0 +1,15 @@
+[
+    {
+        "id": "1701",
+        "name": "Spiderman",
+		"_comment": "Should return a validation error when merging"
+    },
+    {
+        "id": "1699",
+        "real_name": "Bruce Wayne"
+    },
+    {
+        "id": "1700",
+        "real_name": "Clark Kent"
+    }
+]

@@ -7,12 +7,12 @@
                 <entry key="JSONTransformerName" value="GrootTests.Transformer"/>
             </userInfo>
         </attribute>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES">
+        <attribute name="name" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="name"/>
             </userInfo>
         </attribute>
-        <attribute name="realName" optional="YES" attributeType="String" syncable="YES">
+        <attribute name="realName" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="real_name"/>
             </userInfo>
@@ -38,7 +38,7 @@
                 <entry key="JSONTransformerName" value="GrootTests.Transformer"/>
             </userInfo>
         </attribute>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES">
+        <attribute name="name" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="name"/>
             </userInfo>
@@ -55,7 +55,7 @@
                 <entry key="JSONTransformerName" value="GrootTests.Transformer"/>
             </userInfo>
         </attribute>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES">
+        <attribute name="name" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="name"/>
             </userInfo>
@@ -66,8 +66,8 @@
         </userInfo>
     </entity>
     <elements>
-        <element name="Character" positionX="-317" positionY="-180" width="128" height="120"/>
-        <element name="Power" positionX="-119" positionY="-115" width="128" height="90"/>
-        <element name="Publisher" positionX="-524" positionY="-9" width="128" height="90"/>
+        <element name="Character" positionX="-317" positionY="-180" width="128" height="118"/>
+        <element name="Power" positionX="-119" positionY="-115" width="128" height="88"/>
+        <element name="Publisher" positionX="-524" positionY="-9" width="128" height="88"/>
     </elements>
 </model>

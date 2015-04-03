@@ -10,6 +10,14 @@ import XCTest
 import CoreData
 import Groot
 
+extension NSData {
+    internal convenience init?(resource: String) {
+        let bundle = NSBundle(forClass: Character.self)
+        let path = bundle.pathForResource(resource.stringByDeletingPathExtension, ofType: resource.pathExtension)
+        self.init(contentsOfFile: path!)
+    }
+}
+
 class GrootTests: XCTestCase {
     var store: ManagedStore?
     var context: NSManagedObjectContext?
@@ -72,28 +80,28 @@ class GrootTests: XCTestCase {
         if let batman = Character.fromJSONObject(batmanJSON, inContext: context!, mergeChanges: false, error: &error) {
             XCTAssertNil(error, "shouldn't return an error")
             XCTAssertEqual(1699, batman.identifier, "should serialize attributes")
-            XCTAssertEqual("Batman", batman.name!, "should serialize attributes")
-            XCTAssertEqual("Bruce Wayne", batman.realName!, "should serialize attributes")
+            XCTAssertEqual("Batman", batman.name, "should serialize attributes")
+            XCTAssertEqual("Bruce Wayne", batman.realName, "should serialize attributes")
             
             XCTAssertEqual(2, batman.powers!.count, "should serialize to-many relationships")
             
             if let agility = batman.powers?[0] as? Power {
                 XCTAssertEqual(4, agility.identifier, "should serialize to-many relationships")
-                XCTAssertEqual("Agility", agility.name!, "should serialize to-many relationships")
+                XCTAssertEqual("Agility", agility.name, "should serialize to-many relationships")
             } else {
                 XCTFail("should serialize to-many relationships")
             }
             
             if let wealth = batman.powers?[1] as? Power {
                 XCTAssertEqual(9, wealth.identifier, "should serialize to-many relationships")
-                XCTAssertEqual("Insanely Rich", wealth.name!, "should serialize to-many relationships")
+                XCTAssertEqual("Insanely Rich", wealth.name, "should serialize to-many relationships")
             } else {
                 XCTFail("should serialize to-many relationships")
             }
             
             if let publisher = batman.publisher {
                 XCTAssertEqual(10, publisher.identifier, "should serialize to-one relationships")
-                XCTAssertEqual("DC Comics", publisher.name!, "should serialize to-one relationships")
+                XCTAssertEqual("DC Comics", publisher.name, "should serialize to-one relationships")
             } else {
                 XCTFail("should serialize to-one relationships: \(batman)")
             }
@@ -144,7 +152,7 @@ class GrootTests: XCTestCase {
     func testMergeObject() {
         let batmanJSON: JSONObject = [
             "name": "Batman",
-            "real_name": "Bruce Wayne",
+            "real_name": "Guille Gonzalez",
             "id": "1699",
             "powers": [
                 [
@@ -172,7 +180,7 @@ class GrootTests: XCTestCase {
         let updateJSON: JSONArray = [
             [
                 "id": "1699",
-                "real_name": NSNull(),  // Should reset Batman real name
+                "real_name": "Bruce Wayne",  // Should update Batman real name
                 "publisher" : [
                     "id": "10",
                     "name": "DC Comics"   // Should update the publisher name
@@ -204,40 +212,61 @@ class GrootTests: XCTestCase {
         
         let updatedBatman = characters![0]
         
-        XCTAssertEqual("Batman", updatedBatman.name!)
+        XCTAssertEqual("Batman", updatedBatman.name)
         XCTAssertEqual(1699, updatedBatman.identifier)
-        XCTAssertNil(updatedBatman.realName, "should update explicit null values")
+        XCTAssertEqual("Bruce Wayne", updatedBatman.realName)
         
         let agility = updatedBatman.powers![0] as! Power
         
         XCTAssertEqual(4, agility.identifier)
-        XCTAssertEqual("Agility", agility.name!)
+        XCTAssertEqual("Agility", agility.name)
         
         let batmanRich = updatedBatman.powers![1] as! Power
         
         XCTAssertEqual(9, batmanRich.identifier, "should serialize to-many relationships")
-        XCTAssertEqual("Filthy Rich", batmanRich.name!, "should serialize to-many relationships")
+        XCTAssertEqual("Filthy Rich", batmanRich.name, "should serialize to-many relationships")
         
         XCTAssertEqual(10, updatedBatman.publisher!.identifier);
-        XCTAssertEqual("DC Comics", updatedBatman.publisher!.name!)
+        XCTAssertEqual("DC Comics", updatedBatman.publisher!.name)
         
         let ironMan = characters![1]
         
-        XCTAssertEqual("Iron Man", ironMan.name!)
+        XCTAssertEqual("Iron Man", ironMan.name)
         XCTAssertEqual(1455, ironMan.identifier)
-        XCTAssertEqual("Tony Stark", ironMan.realName!, "should serialize attributes")
+        XCTAssertEqual("Tony Stark", ironMan.realName, "should serialize attributes")
         
         let powerSuit = ironMan.powers![0] as! Power
         
         XCTAssertEqual(31, powerSuit.identifier)
-        XCTAssertEqual("Power Suit", powerSuit.name!)
+        XCTAssertEqual("Power Suit", powerSuit.name)
         
         let ironManRich = ironMan.powers![1] as! Power
         
         XCTAssertEqual(9, ironManRich.identifier)
-        XCTAssertEqual("Filthy Rich", ironManRich.name!)
+        XCTAssertEqual("Filthy Rich", ironManRich.name)
         
         XCTAssert(batmanRich === ironManRich, "should properly merge relationships")
+    }
+    
+    func testMergeObjectValidation() {
+        // See https://github.com/gonzalezreal/Groot/issues/2
+        
+        if let data = NSData(resource: "characters.json") {
+            var error: NSError? = nil
+            let characters: [Character]? = importJSONData(data, inContext: context!, mergeChanges: false, error: &error)
+            XCTAssertNil(error)
+            
+            if let updatedData = NSData(resource: "characters_update.json") {
+                let updatedCharacters: [Character]? = importJSONData(updatedData, inContext: context!, mergeChanges: true, error: &error)
+                XCTAssertNotNil(error, "should return a validation error")
+                XCTAssertEqual(NSCocoaErrorDomain, error!.domain, "should return a validation error")
+                XCTAssertEqual(NSValidationMissingMandatoryPropertyError, error!.code, "should return a validation error")
+            } else {
+                XCTFail("Resource not found")
+            }
+        } else {
+            XCTFail("Resource not found")
+        }
     }
     
     func testMergeWithoutIdentityAttribute() {

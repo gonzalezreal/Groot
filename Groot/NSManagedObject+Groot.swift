@@ -29,7 +29,6 @@ extension NSManagedObject {
     internal func setAttribute(attribute: NSAttributeDescription, fromJSONObject object: JSONObject, mergeChanges: Bool, error outError: NSErrorPointer) {
         
         var value: AnyObject? = nil
-        var shouldSetValue = true
         
         if let rawValue: AnyObject = attribute.rawValueInJSONObject(object) {
             switch rawValue {
@@ -44,13 +43,15 @@ extension NSManagedObject {
             }
         }
         else if mergeChanges {
-            shouldSetValue = false
+            // Just validate the current value
+            value = valueForKey(attribute.name)
+            validateValue(&value, forKey: attribute.name, error: outError)
+            
+            return
         }
         
-        if shouldSetValue {
-            if validateValue(&value, forKey: attribute.name, error: outError) {
-                setValue(value, forKey: attribute.name)
-            }
+        if validateValue(&value, forKey: attribute.name, error: outError) {
+            setValue(value, forKey: attribute.name)
         }
     }
     
@@ -58,7 +59,6 @@ extension NSManagedObject {
     internal func setRelationship(relationship: NSRelationshipDescription, fromJSONObject object: JSONObject, mergeChanges: Bool, error outError: NSErrorPointer) {
         
         var value: AnyObject? = nil
-        var shouldSetValue = true
         
         if let rawValue: AnyObject = relationship.rawValueInJSONObject(object),
             destinationEntity = relationship.destinationEntity
@@ -94,13 +94,15 @@ extension NSManagedObject {
             }
         }
         else if mergeChanges {
-            shouldSetValue = false
+            // Just validate the current value
+            value = valueForKey(relationship.name)
+            validateValue(&value, forKey: relationship.name, error: outError)
+            
+            return
         }
         
-        if shouldSetValue {
-            if validateValue(&value, forKey: relationship.name, error: outError) {
-                setValue(value, forKey: relationship.name)
-            }
+        if validateValue(&value, forKey: relationship.name, error: outError) {
+            setValue(value, forKey: relationship.name)
         }
     }
     
