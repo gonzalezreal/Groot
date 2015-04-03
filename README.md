@@ -2,7 +2,7 @@
 With Groot you can convert JSON dictionaries and arrays to and from Core Data managed objects.
 
 ## Requirements
-Groot supports OS X 10.8+ and iOS 6.0+.
+Groot supports OS X 10.9+ and iOS 8.0+.
 
 ## Installation
 ### Cocoapods
@@ -28,7 +28,7 @@ Then run `$ carthage update`.
 Follow the instructions in [Carthage’s README](https://github.com/Carthage/Carthage#adding-frameworks-to-an-application]) to add the framework to your project.
 
 ## Usage
-Suppose we would like to convert the JSON returned by a Comic Database web service into our own model objects. The JSON could look something like this:
+Suppose you would like to convert the JSON returned by a Comic Database web service into your own model objects. The JSON could look something like this:
 
 ```json
 [
@@ -51,48 +51,97 @@ Suppose we would like to convert the JSON returned by a Comic Database web servi
         },
         "real_name": "Bruce Wayne"
     },
-	...
 ]
 ```
 
-We could model this in Core Data using 3 entities: Character, Power and Publisher.
+You could model this in Core Data using 3 entities: Character, Power and Publisher.
 
-![Model](https://raw.githubusercontent.com/gonzalezreal/Groot/master/Images/sample-model.jpg)
+<img src="https://cloud.githubusercontent.com/assets/373190/6988401/5346423a-da51-11e4-8bf1-a41da3a7372f.png" alt="Model" width=600 height=334/>
 
-Note that we don't need to name our attributes as in the JSON. The serialization process can be customized by adding certain information to the user dictionary provided in Core Data *entities*, *attributes* and *relationships*.
+Next you need to specify how attributes and relationships should be mapped from the JSON. For this you can use the **user dictionary** provided in Core Data *entities*, *attributes* and *relationships*.
 
-For instance, we can specify that the `identifier` attribute will be mapped from the `id` JSON key path, and that its value will be transformed using an `NSValueTransformer` named *GRTTestTransfomer*.
+Note that you must explicitly specify every attribute or relationship that should be mapped. Any attribute or relationship omitted will not be considered for JSON serialization or deserialization.
 
-![Property User Info](https://raw.githubusercontent.com/gonzalezreal/Groot/master/Images/property-userInfo.jpg)
+To specify how an attribute or a relationship is mapped to JSON, use the `JSONKeyPath` key. Optionally you can use `JSONTransformerName` to specify the name of the value transformer that will be used to convert the JSON value for an attribute. If the specified transformer is reversible, it will also be used to convert the attribute value back to JSON.
 
-Now we can easily convert JSON data and insert the corresponding managed objects with a simple method call:
+For instance, you can specify that the `identifier` attribute will be mapped from the `id` JSON key path, and that its value will be transformed using an `NSValueTransformer` named `GrootTests.Transformer`
 
-```objc
-NSDictionary *batmanJSON = @{
-	@"id": @"1699",
-	@"name": @"Batman",
-	@"real_name": @"Bruce Wayne",
-	@"powers": @[
-	@{
-		@"id": @"4",
-		@"name": @"Agility"
-	},
-	@{
-		@"id": @"9",
-		@"name": @"Insanely Rich"
-	}],
-	@"publisher": @{
-		@"id": @"10",
-		@"name": @"DC Comics"
-	}
-};
+<img src="https://cloud.githubusercontent.com/assets/373190/6988412/78b00006-da51-11e4-908a-de40c99141e8.png" alt="Property User Info" width=260 height=338/>
 
-NSError *error = nil;
-NSManagedObject *batman = [GRTJSONSerialization insertObjectForEntityName:@"Character"
-													   fromJSONDictionary:batmanJSON
-												   inManagedObjectContext:context
-														            error:&error];
+### Installing a `NSValueTransformer`
+
+The `identifier` attribute requires a `NSValuedTransformer` that transforms the string identifiers in the JSON to integer values. Fortunately, **Groot** provides an easy and safe way to create and install named `NSValueTransformer`s:
+
+```swift
+func toInt(value: String) -> Int? {
+    return value.toInt()
+}
+
+func toString(value: Int) -> String? {
+    return "\(value)"
+}
+
+NSValueTransformer.setValueTransformerWithName("GrootTests.Transformer",
+	transform: toInt, reverseTransform: toString)
 ```
+
+### Setting up a Core Data stack
+
+The `ManagedStore` class lets you easily create and manage a Core Data stack. The following code creates a Core Data stack that will persist its data in the application `Library/Caches` directory:
+
+```swift
+var error: NSError? = nil
+
+if let store = ManagedStore.storeWithCacheName("characters.db", error: &error) {
+    let context = store.contextWithConcurrencyType(.MainQueueConcurrencyType)
+    
+    // Use the context...
+}
+```
+
+### Importing JSON data
+
+There are several options to import JSON into our Core Data model.
+
+You can import raw JSON data coming from an external source:
+
+```swift
+func importJSON(data: NSData) {
+    var error: NSError? = nil
+    let characters: [Character]? = Groot.importJSONData(data,
+        inContext: context, mergeChanges: false, error: &error)
+    ...
+}
+```
+
+Import a JSON dictionary:
+
+```swift
+let batmanJSON: JSONObject = [
+    "name": "Batman",
+    "real_name": "Bruce Wayne",
+    "id": "1699",
+    "powers": [
+        [
+            "id": "4",
+            "name": "Agility"
+        ],
+        [
+            "id": "9",
+            "name": "Insanely Rich"
+        ]
+    ],
+    "publisher": [
+        "id": "10",
+        "name": "DC Comics"
+    ]
+]
+
+let batman = Character.fromJSONObject(batmanJSON,
+        inContext: context, mergeChanges: false, error: &error)
+```
+
+For more importing options check [Groot.swift](https://github.com/gonzalezreal/Groot/blob/swift/Groot/Groot.swift) and [NSEntityDescription+Groot.swift](https://github.com/gonzalezreal/Groot/blob/swift/Groot/NSEntityDescription%2BGroot.swift#L71)
 
 ### Merging data
 
@@ -100,33 +149,28 @@ When inserting data, Groot does not check if the serialized managed objects alre
 
 If instead, you would like to merge (that is, create or update) the serialized managed objects, then you need to tell Groot how to uniquely identify your model objects. You can do that by associating the `identityAttribute` key with the name of an attribute in the *entity* user info dictionary.
 
-![Entity User Info](https://raw.githubusercontent.com/gonzalezreal/Groot/master/Images/entity-userInfo.jpg)
+<img src="https://cloud.githubusercontent.com/assets/373190/6988420/897c09e8-da51-11e4-986f-afedc9134b77.png" alt="Property User Info" width=257 height=311/>
 
-In our sample, all of our models are identified by the `identifier` attribute.
+In this sample, all of the models are identified by the `identifier` attribute.
 
-Now we can update the Batman character we just inserted in the previous snippet:
+To update the character we just inserted before we just need to set `mergeChanges:` to `true`:
 
-```objc
-NSDictionary *updateJSON = @{
-	@"id": @"1699",
-	@"real_name": @"Guille Gonzalez"
-}
+```swift
+let batmanJSON: JSONObject = [
+    "name": "Batman",
+    "real_name": "Guille Gonzalez",
+    "id": "1699",
+    "powers": NSNull()
+]
 
-// This will return the previously created managed object
-NSManagedObject *batman = [GRTJSONSerialization mergeObjectForEntityName:@"Character"
-													  fromJSONDictionary:batmanJSON
-												  inManagedObjectContext:context
-														           error:NULL];
+let batman = Character.fromJSONObject(batmanJSON,
+        inContext: context, mergeChanges: true, error: &error)
 ```
-
-If you want to merge a JSON array, its better to call `mergeObjectsForEntityName:fromJSONArray:inManagedObjectContext:error:`. This method will perform a single fetch per entity regardless of the number of objects in the JSON array.
 
 ### Back to JSON
 
-You can convert managed objects into their JSON representations by using `JSONDictionaryFromManagedObject:` or `JSONArrayFromManagedObjects:`.
-
-```objc
-NSDictionary *JSONDictionary = [GRTJSONSerialization JSONDictionaryFromManagedObject:someManagedObject];
+```swift
+let batmanJSON = batman.toJSONObject()
 ```
 
 ## Contact
