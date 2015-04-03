@@ -174,9 +174,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		B4164E681AC2EFCD00D5CA93 /* Groot */ = {
+		B4164E681AC2EFCD00D5CA93 /* Groot-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B4164E7F1AC2EFCD00D5CA93 /* Build configuration list for PBXNativeTarget "Groot" */;
+			buildConfigurationList = B4164E7F1AC2EFCD00D5CA93 /* Build configuration list for PBXNativeTarget "Groot-iOS" */;
 			buildPhases = (
 				B4164E641AC2EFCD00D5CA93 /* Sources */,
 				B4164E651AC2EFCD00D5CA93 /* Frameworks */,
@@ -187,7 +187,7 @@
 			);
 			dependencies = (
 			);
-			name = Groot;
+			name = "Groot-iOS";
 			productName = Groot;
 			productReference = B4164E691AC2EFCD00D5CA93 /* Groot.framework */;
 			productType = "com.apple.product-type.framework";
@@ -239,7 +239,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B4164E681AC2EFCD00D5CA93 /* Groot */,
+				B4164E681AC2EFCD00D5CA93 /* Groot-iOS */,
 				B4164E731AC2EFCD00D5CA93 /* GrootTests */,
 			);
 		};
@@ -297,7 +297,7 @@
 /* Begin PBXTargetDependency section */
 		B4164E771AC2EFCD00D5CA93 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B4164E681AC2EFCD00D5CA93 /* Groot */;
+			target = B4164E681AC2EFCD00D5CA93 /* Groot-iOS */;
 			targetProxy = B4164E761AC2EFCD00D5CA93 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -340,7 +340,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -382,7 +382,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -403,7 +403,7 @@
 				INFOPLIST_FILE = Groot/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Groot;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -420,7 +420,7 @@
 				INFOPLIST_FILE = Groot/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Groot;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -467,7 +467,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B4164E7F1AC2EFCD00D5CA93 /* Build configuration list for PBXNativeTarget "Groot" */ = {
+		B4164E7F1AC2EFCD00D5CA93 /* Build configuration list for PBXNativeTarget "Groot-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B4164E801AC2EFCD00D5CA93 /* Debug */,
