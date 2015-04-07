@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B473D3851ACF20F9006A4DD2"
-               BuildableName = "Groot-Mac.framework"
+               BuildableName = "Groot.framework"
                BlueprintName = "Groot-Mac"
                ReferencedContainer = "container:Groot.xcodeproj">
             </BuildableReference>
@@ -29,7 +29,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B473D38F1ACF20F9006A4DD2"
-               BuildableName = "Groot-MacTests.xctest"
+               BuildableName = "GrootTests.xctest"
                BlueprintName = "Groot-MacTests"
                ReferencedContainer = "container:Groot.xcodeproj">
             </BuildableReference>
@@ -47,7 +47,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B473D38F1ACF20F9006A4DD2"
-               BuildableName = "Groot-MacTests.xctest"
+               BuildableName = "GrootTests.xctest"
                BlueprintName = "Groot-MacTests"
                ReferencedContainer = "container:Groot.xcodeproj">
             </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B473D3851ACF20F9006A4DD2"
-            BuildableName = "Groot-Mac.framework"
+            BuildableName = "Groot.framework"
             BlueprintName = "Groot-Mac"
             ReferencedContainer = "container:Groot.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B473D3851ACF20F9006A4DD2"
-            BuildableName = "Groot-Mac.framework"
+            BuildableName = "Groot.framework"
             BlueprintName = "Groot-Mac"
             ReferencedContainer = "container:Groot.xcodeproj">
          </BuildableReference>
@@ -94,7 +94,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B473D3851ACF20F9006A4DD2"
-            BuildableName = "Groot-Mac.framework"
+            BuildableName = "Groot.framework"
             BlueprintName = "Groot-Mac"
             ReferencedContainer = "container:Groot.xcodeproj">
          </BuildableReference>

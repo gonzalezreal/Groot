@@ -29,7 +29,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B4164E731AC2EFCD00D5CA93"
-               BuildableName = "Groot-iOSTests.xctest"
+               BuildableName = "GrootTests.xctest"
                BlueprintName = "Groot-iOSTests"
                ReferencedContainer = "container:Groot.xcodeproj">
             </BuildableReference>
@@ -47,7 +47,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B4164E731AC2EFCD00D5CA93"
-               BuildableName = "Groot-iOSTests.xctest"
+               BuildableName = "GrootTests.xctest"
                BlueprintName = "Groot-iOSTests"
                ReferencedContainer = "container:Groot.xcodeproj">
             </BuildableReference>
