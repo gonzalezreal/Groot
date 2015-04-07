@@ -21,20 +21,16 @@ extension NSEntityDescription {
             entity = entity?.superentity
         }
         
-        if let name = attributeName {
-            return attributesByName[name] as? NSAttributeDescription
+        return flatMap(attributeName) {
+            attributesByName[$0] as? NSAttributeDescription
         }
-        
-        return nil
     }
     
     /// Returns the identifier value in a given JSON object
     internal func identifierInJSONObject(object: JSONObject) -> AnyObject? {
-        if let attribute = identityAttribute {
-            return attribute.valueInJSONObject(object)
+        return flatMap(identityAttribute) {
+            return $0.valueInJSONObject(object)
         }
-        
-        return nil
     }
     
     /// Returns the existing objects in a given context. Requires an identity attribute.

@@ -24,11 +24,9 @@ extension NSPropertyDescription {
     
     /// Returns the untransformed raw value for this property in a given JSON object
     internal func rawValueInJSONObject(object: JSONObject) -> AnyObject? {
-        if let keyPath = JSONKeyPath {
-            return (object as NSDictionary).valueForKeyPath(keyPath)
+        return flatMap(JSONKeyPath) {
+            (object as NSDictionary).valueForKeyPath($0)
         }
-        
-        return nil
     }
 }
 

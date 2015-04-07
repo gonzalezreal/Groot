@@ -61,11 +61,9 @@ public final class ManagedStore {
      :return: The newly-created store or `nil` if an error occurs.
      */
     public class func temporaryStore(error outError: NSErrorPointer) -> ManagedStore? {
-        if let model = NSManagedObjectModel.mergedModelFromBundles(nil) {
-            return temporaryStoreWithModel(model, error: outError)
+        return flatMap(NSManagedObjectModel.mergedModelFromBundles(nil)) {
+            temporaryStoreWithModel($0, error: outError)
         }
-        
-        return nil
     }
     
     /**
@@ -80,11 +78,9 @@ public final class ManagedStore {
     public class func temporaryStoreWithModel(model: NSManagedObjectModel, error outError: NSErrorPointer) -> ManagedStore? {
         let path = NSTemporaryDirectory().stringByAppendingPathComponent(NSUUID().UUIDString)
         
-        if let fileURL = NSURL(fileURLWithPath: path) {
-            return ManagedStore(URL: fileURL, model: model, error: outError)
+        return flatMap(NSURL(fileURLWithPath: path)) {
+            ManagedStore(URL: $0, model: model, error: outError)
         }
-        
-        return nil
     }
     
     /**
@@ -97,11 +93,9 @@ public final class ManagedStore {
      :return: The newly-created store or `nil` if an error occurs.
      */
     public class func storeWithCacheName(cacheName: String, error outError: NSErrorPointer) -> ManagedStore? {
-        if let model = NSManagedObjectModel.mergedModelFromBundles(nil) {
-            return storeWithCacheName(cacheName, model: model, error: outError)
+        return flatMap(NSManagedObjectModel.mergedModelFromBundles(nil)) {
+            storeWithCacheName(cacheName, model: $0, error: outError)
         }
-        
-        return nil
     }
     
     /**
@@ -115,11 +109,9 @@ public final class ManagedStore {
      :return: The newly-created store or `nil` if an error occurs.
      */
     public class func storeWithCacheName(cacheName: String, model: NSManagedObjectModel, error outError: NSErrorPointer) -> ManagedStore? {
-        if let URL = cachesDirectoryURL(error: outError) {
-            return ManagedStore(URL: URL.URLByAppendingPathComponent(cacheName), model: model, error: outError)
+        return flatMap(cachesDirectoryURL(error: outError)) {
+            ManagedStore(URL: $0.URLByAppendingPathComponent(cacheName), model: model, error: outError)
         }
-        
-        return nil;
     }
     
     /**

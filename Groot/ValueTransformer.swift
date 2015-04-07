@@ -58,13 +58,9 @@ public extension NSValueTransformer {
      */
     class func setValueTransformerWithName<T, U>(name: String, transform: (T) -> (U?)) {
         let transformer = ValueTransformer { value in
-            if let v = value as? T {
-                if let r: AnyObject? = transform(v) as? AnyObject? {
-                    return r
-                }
+            return flatMap(value as? T) {
+                transform($0) as? AnyObject
             }
-            
-            return nil
         }
         
         self.setValueTransformer(transformer, forName: name)
@@ -79,21 +75,13 @@ public extension NSValueTransformer {
      */
     class func setValueTransformerWithName<T, U>(name: String, transform: (T) -> (U?), reverseTransform: (U) -> (T?)) {
         let transformer = ReversibleValueTransformer(transform: { value in
-            if let v = value as? T {
-                if let r: AnyObject? = transform(v) as? AnyObject? {
-                    return r
-                }
+            return flatMap(value as? T) {
+                transform($0) as? AnyObject
             }
-            
-            return nil
         }, reverseTransform: { value in
-            if let v = value as? U {
-                if let r: AnyObject? = reverseTransform(v) as? AnyObject? {
-                    return r
-                }
+            return flatMap(value as? U) {
+                reverseTransform($0) as? AnyObject
             }
-            
-            return nil
         })
         
         self.setValueTransformer(transformer, forName: name)
