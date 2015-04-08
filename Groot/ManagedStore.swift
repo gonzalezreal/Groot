@@ -61,7 +61,7 @@ public final class ManagedStore {
      :return: The newly-created store or `nil` if an error occurs.
      */
     public class func temporaryStore(error outError: NSErrorPointer) -> ManagedStore? {
-        return flatMap(NSManagedObjectModel.mergedModelFromBundles(nil)) {
+        return (NSManagedObjectModel.mergedModelFromBundles(nil)).flatMap {
             temporaryStoreWithModel($0, error: outError)
         }
     }
@@ -78,7 +78,7 @@ public final class ManagedStore {
     public class func temporaryStoreWithModel(model: NSManagedObjectModel, error outError: NSErrorPointer) -> ManagedStore? {
         let path = NSTemporaryDirectory().stringByAppendingPathComponent(NSUUID().UUIDString)
         
-        return flatMap(NSURL(fileURLWithPath: path)) {
+        return (NSURL(fileURLWithPath: path)).flatMap {
             ManagedStore(URL: $0, model: model, error: outError)
         }
     }
@@ -93,7 +93,7 @@ public final class ManagedStore {
      :return: The newly-created store or `nil` if an error occurs.
      */
     public class func storeWithCacheName(cacheName: String, error outError: NSErrorPointer) -> ManagedStore? {
-        return flatMap(NSManagedObjectModel.mergedModelFromBundles(nil)) {
+        return (NSManagedObjectModel.mergedModelFromBundles(nil)).flatMap {
             storeWithCacheName(cacheName, model: $0, error: outError)
         }
     }
@@ -109,7 +109,7 @@ public final class ManagedStore {
      :return: The newly-created store or `nil` if an error occurs.
      */
     public class func storeWithCacheName(cacheName: String, model: NSManagedObjectModel, error outError: NSErrorPointer) -> ManagedStore? {
-        return flatMap(cachesDirectoryURL(error: outError)) {
+        return (cachesDirectoryURL(error: outError)).flatMap {
             ManagedStore(URL: $0.URLByAppendingPathComponent(cacheName), model: model, error: outError)
         }
     }

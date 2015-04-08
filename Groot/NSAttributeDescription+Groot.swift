@@ -14,7 +14,7 @@ extension NSAttributeDescription {
     
     /// The value transformer for this attribute.
     internal var JSONTransformer: NSValueTransformer? {
-        return flatMap(userInfo?[Groot.JSONTransformerNameKey] as? String) {
+        return (userInfo?[Groot.JSONTransformerNameKey] as? String).flatMap {
             NSValueTransformer(forName: $0)
         }
     }

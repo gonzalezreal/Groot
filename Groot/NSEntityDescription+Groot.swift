@@ -21,14 +21,14 @@ extension NSEntityDescription {
             entity = entity?.superentity
         }
         
-        return flatMap(attributeName) {
+        return attributeName.flatMap {
             attributesByName[$0] as? NSAttributeDescription
         }
     }
     
     /// Returns the identifier value in a given JSON object
     internal func identifierInJSONObject(object: JSONObject) -> AnyObject? {
-        return flatMap(identityAttribute) {
+        return identityAttribute.flatMap {
             return $0.valueInJSONObject(object)
         }
     }
