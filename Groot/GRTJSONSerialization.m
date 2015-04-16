@@ -352,7 +352,7 @@ const NSInteger GRTJSONSerializationErrorInvalidJSONObject = 0xcaca;
             }
 			
 			if (identityAttributeRelated) {
-				NSMutableArray * convertedValues = [NSMutableArray array];
+				NSMutableArray *convertedValues = [NSMutableArray array];
 				
 				for (id aValue in value) {
 					[convertedValues addObject:[relationship.destinationEntity grt_dictionaryWithIdentityAttributeValue:aValue]];
