@@ -237,11 +237,27 @@ const NSInteger GRTJSONSerializationErrorInvalidJSONObject = 0xcaca;
                 
                 [processingRelationships addObject:relationship];
                 
+                BOOL isIdentityAttributeRelated = [relationship grt_identityAttributeRelated];
+                
                 if ([relationship isToMany]) {
                     NSArray *objects = [value isKindOfClass:NSOrderedSet.class] ? [value array] : [value allObjects];
-                    value = [self JSONArrayFromManagedObjects:objects processingRelationships:processingRelationships];
-                } else {
-                    value = [self JSONDictionaryFromManagedObject:value processingRelationships:processingRelationships];
+                    
+                    if (isIdentityAttributeRelated) {
+                        value = [objects valueForKey:[[relationship.destinationEntity grt_identityAttribute] name]];
+                    }
+                    
+                    else {
+                       value = [self JSONArrayFromManagedObjects:objects processingRelationships:processingRelationships];
+                    }
+                }
+                else {
+                    if (isIdentityAttributeRelated) {
+                        value = [value valueForKey:[[relationship.destinationEntity grt_identityAttribute] name]];
+                    }
+                    
+                    else {
+                       value = [self JSONDictionaryFromManagedObject:value processingRelationships:processingRelationships];
+                    }
                 }
             }
             
@@ -333,7 +349,7 @@ const NSInteger GRTJSONSerializationErrorInvalidJSONObject = 0xcaca;
     if (value != nil) {
         NSString *entityName = relationship.destinationEntity.name;
         NSManagedObjectContext *context = managedObject.managedObjectContext;
-		BOOL identityAttributeRelated = [relationship grt_identityAttributeRelated];
+		BOOL isIdentityAttributeRelated = [relationship grt_identityAttributeRelated];
 		
         NSError *tmpError = nil;
         
@@ -351,7 +367,7 @@ const NSInteger GRTJSONSerializationErrorInvalidJSONObject = 0xcaca;
                 return NO;
             }
 			
-			if (identityAttributeRelated) {
+			if (isIdentityAttributeRelated) {
 				NSMutableArray *convertedValues = [NSMutableArray array];
 				
 				for (id aValue in value) {
@@ -367,7 +383,7 @@ const NSInteger GRTJSONSerializationErrorInvalidJSONObject = 0xcaca;
             
             value = [relationship isOrdered] ? [NSOrderedSet orderedSetWithArray:objects] : [NSSet setWithArray:objects];
         } else {
-			if (identityAttributeRelated) {
+			if (isIdentityAttributeRelated) {
 				value = [relationship.destinationEntity grt_dictionaryWithIdentityAttributeValue:value];
 			}
 			

@@ -39,8 +39,7 @@
     [super tearDown];
 }
 
-- (void) testMergeObjectsToOneRelationshipIdentityRelated
-{
+- (void) testMergeObjectsWithToOneRelationshipIdentityAttributeRelated {
     NSDictionary *batmanJSON = @{
                                  @"id": @"1",
                                  @"name": @"Batman",
@@ -53,16 +52,16 @@
                                                                        error:nil];
     
     NSArray *publishersJSONArray = @[
-                                @{
-                                    @"id" : @"1",
-                                    @"name": @"Marvel"
-                                    },
-                                
-                                @{
-                                    @"id" : @"2",
-                                    @"name": @"DC"
-                                    }
-                                ];
+                                     @{
+                                         @"id" : @"1",
+                                         @"name": @"Marvel"
+                                         },
+                                     
+                                     @{
+                                         @"id" : @"2",
+                                         @"name": @"DC"
+                                         }
+                                     ];
     
     [GRTJSONSerialization mergeObjectsForEntityName:@"Publisher"
                                       fromJSONArray:publishersJSONArray
@@ -72,8 +71,7 @@
     XCTAssertEqualObjects([batman valueForKeyPath:@"publisher.name"], @"Marvel", @"should serialize relationship");
 }
 
-- (void) testMergeObjectsToManyRelationshipIdentityRelated
-{
+- (void) testMergeObjectsWithToManyRelationshipIdentityAttributeRelated {
     NSDictionary *marvelJSON = @{
                                  @"id" : @"1",
                                  @"name": @"Marvel",
@@ -86,23 +84,23 @@
                                                                        error:nil];
     
     NSArray *charactersJSONArray = @[
-                                @{
-                                    @"id": @"1",
-                                    @"name": @"Batman",
-                                    },
-                                @{
-                                    @"id": @"2",
-                                    @"name": @"Superman",
-                                    },
-                                @{
-                                    @"id": @"3",
-                                    @"name": @"Spiderman",
-                                    },
-                                @{
-                                    @"id": @"4",
-                                    @"name": @"Hulk",
-                                    }
-                                ];
+                                     @{
+                                         @"id": @"1",
+                                         @"name": @"Batman",
+                                         },
+                                     @{
+                                         @"id": @"2",
+                                         @"name": @"Superman",
+                                         },
+                                     @{
+                                         @"id": @"3",
+                                         @"name": @"Spiderman",
+                                         },
+                                     @{
+                                         @"id": @"4",
+                                         @"name": @"Hulk",
+                                         }
+                                     ];
     
     [GRTJSONSerialization mergeObjectsForEntityName:@"Character"
                                       fromJSONArray:charactersJSONArray
@@ -116,4 +114,55 @@
     XCTAssertEqualObjects(names, expectedSet, @"should serialize relationship");
 }
 
+- (void)testJSONDictionaryFromManagedObjectWithToOneRelationshipIdentityAttributeRelated {
+    
+    NSManagedObject *marvel = [NSEntityDescription insertNewObjectForEntityForName:@"Publisher"
+                                                            inManagedObjectContext:self.context];
+    [marvel setValue:@"1" forKey:@"identifier"];
+    [marvel setValue:@"Marvel" forKey:@"name"];
+    
+    NSManagedObject *batman = [NSEntityDescription insertNewObjectForEntityForName:@"Character"
+                                                            inManagedObjectContext:self.context];
+    [batman setValue:@"1" forKey:@"identifier"];
+    [batman setValue:@"Batman" forKey:@"name"];
+    [batman setValue:marvel forKey:@"publisher"];
+    
+    NSDictionary *batmanJSON = [GRTJSONSerialization JSONDictionaryFromManagedObject:batman];
+    
+    NSDictionary *expectedDictionary = @{
+                                         @"id": @"1",
+                                         @"name": @"Batman",
+                                         @"publisher": @"1"
+                                         };
+    
+    XCTAssertEqualObjects(batmanJSON, expectedDictionary, @"should serialize relationship");
+    
+}
+
+- (void)testJSONDictionaryFromManagedObjectWithToManyRelationshipIdentityAttributeRelated {
+    
+    NSManagedObject *marvel = [NSEntityDescription insertNewObjectForEntityForName:@"Publisher"
+                                                            inManagedObjectContext:self.context];
+    [marvel setValue:@"1" forKey:@"identifier"];
+    [marvel setValue:@"Marvel" forKey:@"name"];
+    
+    NSManagedObject *batman = [NSEntityDescription insertNewObjectForEntityForName:@"Character"
+                                                            inManagedObjectContext:self.context];
+    [batman setValue:@"1" forKey:@"identifier"];
+    [batman setValue:@"Batman" forKey:@"name"];
+    [batman setValue:marvel forKey:@"publisher"];
+    
+    NSManagedObject *superman = [NSEntityDescription insertNewObjectForEntityForName:@"Character"
+                                                            inManagedObjectContext:self.context];
+    [superman setValue:@"2" forKey:@"identifier"];
+    [superman setValue:@"Superman" forKey:@"name"];
+    [superman setValue:marvel forKey:@"publisher"];
+    
+    NSDictionary *marvelJSON = [GRTJSONSerialization JSONDictionaryFromManagedObject:marvel];
+    NSSet *characterIds = [NSSet setWithArray:[marvelJSON valueForKey:@"characters"]];
+    NSSet *expectedSet = [NSSet setWithArray:@[@"1", @"2"]];
+    
+    XCTAssertEqualObjects(characterIds, expectedSet, @"should serialize relationship");
+    
+}
 @end
