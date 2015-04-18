@@ -121,7 +121,7 @@ NSManagedObject *batman = [GRTJSONSerialization mergeObjectForEntityName:@"Chara
 
 If you want to merge a JSON array, its better to call `mergeObjectsForEntityName:fromJSONArray:inManagedObjectContext:error:`. This method will perform a single fetch per entity regardless of the number of objects in the JSON array.
 
-### Identity attribute relationship
+### Identity attribute relationships
 
 If your JSON has the relationships by referencing the identity attribute instead of by nesting JSONs, you can take advantage of the `identityAttributeRelated` attribute. For example, if your JSON `NSDictionary` is:
 
