@@ -39,4 +39,8 @@ static BOOL GRTIsNullKeyPath(NSString *keyPath) {
     return JSONKeyPath ? : self.name;
 }
 
+- (BOOL) grt_identityAttributeRelated
+{
+	return [self.userInfo[GRTIdentityAttributeRelatedKey] boolValue];
+}
 @end

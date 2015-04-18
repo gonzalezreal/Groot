@@ -24,4 +24,5 @@
 
 extern NSString * const GRTJSONKeyPathKey;
 extern NSString * const GRTJSONTransformerNameKey;
+extern NSString * const GRTIdentityAttributeRelatedKey ;
 extern NSString * const GRTIdentityAttributeKey;

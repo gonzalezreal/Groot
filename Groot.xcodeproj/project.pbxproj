@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3256938B1AE061B400ABE9C5 /* IdentityRelatedModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 325693891AE061B400ABE9C5 /* IdentityRelatedModel.xcdatamodeld */; };
+		3256938D1AE061D700ABE9C5 /* GRTIdentityRelatedSerializationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3256938C1AE061D700ABE9C5 /* GRTIdentityRelatedSerializationTests.m */; };
 		B4DC1AF21AA9CA5E00F67403 /* Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B4DC1AF11AA9CA5E00F67403 /* Groot.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B4DC1AF81AA9CA5E00F67403 /* Groot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4DC1AEC1AA9CA5E00F67403 /* Groot.framework */; };
 		B4DC1B191AA9CAC200F67403 /* GRTConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = B4DC1B081AA9CAC200F67403 /* GRTConstants.h */; };
@@ -42,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3256938A1AE061B400ABE9C5 /* IdentityRelatedModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IdentityRelatedModel.xcdatamodel; sourceTree = "<group>"; };
+		3256938C1AE061D700ABE9C5 /* GRTIdentityRelatedSerializationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTIdentityRelatedSerializationTests.m; sourceTree = "<group>"; };
 		B4DC1AEC1AA9CA5E00F67403 /* Groot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Groot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4DC1AF01AA9CA5E00F67403 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B4DC1AF11AA9CA5E00F67403 /* Groot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Groot.h; sourceTree = "<group>"; };
@@ -141,6 +145,8 @@
 				B4DC1B2B1AA9CBAD00F67403 /* GRTModels.m */,
 				B4DC1B2C1AA9CBAD00F67403 /* GRTValueTransformerTests.m */,
 				B4DC1B2D1AA9CBAD00F67403 /* Model.xcdatamodeld */,
+				3256938C1AE061D700ABE9C5 /* GRTIdentityRelatedSerializationTests.m */,
+				325693891AE061B400ABE9C5 /* IdentityRelatedModel.xcdatamodeld */,
 				B4DC1AFC1AA9CA5E00F67403 /* Supporting Files */,
 			);
 			path = GrootTests;
@@ -301,7 +307,9 @@
 			files = (
 				B4DC1B2F1AA9CBAD00F67403 /* GRTJSONSerializationTests.m in Sources */,
 				B4DC1B311AA9CBAD00F67403 /* GRTValueTransformerTests.m in Sources */,
+				3256938D1AE061D700ABE9C5 /* GRTIdentityRelatedSerializationTests.m in Sources */,
 				B4DC1B321AA9CBAD00F67403 /* Model.xcdatamodeld in Sources */,
+				3256938B1AE061B400ABE9C5 /* IdentityRelatedModel.xcdatamodeld in Sources */,
 				B4DC1B301AA9CBAD00F67403 /* GRTModels.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -482,6 +490,7 @@
 				B4DC1B041AA9CA5E00F67403 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B4DC1B051AA9CA5E00F67403 /* Build configuration list for PBXNativeTarget "GrootTests" */ = {
 			isa = XCConfigurationList;
@@ -490,10 +499,21 @@
 				B4DC1B071AA9CA5E00F67403 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		325693891AE061B400ABE9C5 /* IdentityRelatedModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3256938A1AE061B400ABE9C5 /* IdentityRelatedModel.xcdatamodel */,
+			);
+			currentVersion = 3256938A1AE061B400ABE9C5 /* IdentityRelatedModel.xcdatamodel */;
+			path = IdentityRelatedModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		B4DC1B2D1AA9CBAD00F67403 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (

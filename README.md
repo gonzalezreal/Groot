@@ -121,6 +121,28 @@ NSManagedObject *batman = [GRTJSONSerialization mergeObjectForEntityName:@"Chara
 
 If you want to merge a JSON array, its better to call `mergeObjectsForEntityName:fromJSONArray:inManagedObjectContext:error:`. This method will perform a single fetch per entity regardless of the number of objects in the JSON array.
 
+### Identity attribute relationships
+
+If your JSON has the relationships by referencing the identity attribute instead of by nesting JSONs, you can take advantage of the `identityAttributeRelated` attribute. For example, if your JSON `NSDictionary` is:
+
+
+```objc
+NSDictionary *batman = @{
+      @"id": @"1",
+      @"name": @"Batman",
+      @"publisher": @"1"
+      }
+````
+
+you may not want Groot to serialize this dictionary by setting 1 to the `Publisher` relationship, but by assigning it with the `Publisher` object which has 1 as its `identityAttribute` value. You accomplish that by associating the identityAttribute key with `true` (or any other positive boolean value) in the entity user info dictionary:
+
+![Entity User Info](https://raw.githubusercontent.com/ManueGE/Groot/identity_attribute_related/Images/identity_attribute_related.jpg)
+
+This way, Groot will search in the publisher entity for a entry with the given identity attribute. If it is found, it will assign this entry as the `Publisher` object of the `Character`; if it doesn't Groot will create a placeholder `Publisher` entry with this value for the identity attribute. This placeholder object would be filled eventually if the new data is provided.
+
+**Note:** To make this feature works, you must always to use the merge methods instead of the insert ones.
+
+
 ### Back to JSON
 
 You can convert managed objects into their JSON representations by using `JSONDictionaryFromManagedObject:` or `JSONArrayFromManagedObjects:`.

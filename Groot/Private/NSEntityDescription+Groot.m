@@ -21,6 +21,7 @@
 // THE SOFTWARE.
 
 #import "NSEntityDescription+Groot.h"
+#import "NSPropertyDescription+Groot.h"
 #import "GRTConstants.h"
 
 @implementation NSEntityDescription (Groot)
@@ -40,6 +41,11 @@
 	}
 	
 	return nil;
+}
+
+- (NSDictionary *)grt_dictionaryWithIdentityAttributeValue:(id)value
+{
+	return @{[[self grt_identityAttribute] grt_JSONKeyPath] : value};
 }
 
 @end

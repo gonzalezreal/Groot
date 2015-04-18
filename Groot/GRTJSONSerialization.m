@@ -237,11 +237,27 @@ const NSInteger GRTJSONSerializationErrorInvalidJSONObject = 0xcaca;
                 
                 [processingRelationships addObject:relationship];
                 
+                BOOL isIdentityAttributeRelated = [relationship grt_identityAttributeRelated];
+                
                 if ([relationship isToMany]) {
                     NSArray *objects = [value isKindOfClass:NSOrderedSet.class] ? [value array] : [value allObjects];
-                    value = [self JSONArrayFromManagedObjects:objects processingRelationships:processingRelationships];
-                } else {
-                    value = [self JSONDictionaryFromManagedObject:value processingRelationships:processingRelationships];
+                    
+                    if (isIdentityAttributeRelated) {
+                        value = [objects valueForKey:[[relationship.destinationEntity grt_identityAttribute] name]];
+                    }
+                    
+                    else {
+                       value = [self JSONArrayFromManagedObjects:objects processingRelationships:processingRelationships];
+                    }
+                }
+                else {
+                    if (isIdentityAttributeRelated) {
+                        value = [value valueForKey:[[relationship.destinationEntity grt_identityAttribute] name]];
+                    }
+                    
+                    else {
+                       value = [self JSONDictionaryFromManagedObject:value processingRelationships:processingRelationships];
+                    }
                 }
             }
             
@@ -283,7 +299,7 @@ const NSInteger GRTJSONSerializationErrorInvalidJSONObject = 0xcaca;
 
 + (BOOL)serializeAttribute:(NSAttributeDescription *)attribute fromJSONDictionary:(NSDictionary *)JSONDictionary inManagedObject:(NSManagedObject *)managedObject merge:(BOOL)merge error:(NSError *__autoreleasing *)error {
     NSString *keyPath = [attribute grt_JSONKeyPath];
-    
+	
     if (keyPath == nil) {
         return YES;
     }
@@ -315,7 +331,7 @@ const NSInteger GRTJSONSerializationErrorInvalidJSONObject = 0xcaca;
 
 + (BOOL)serializeRelationship:(NSRelationshipDescription *)relationship fromJSONDictionary:(NSDictionary *)JSONDictionary inManagedObject:(NSManagedObject *)managedObject merge:(BOOL)merge error:(NSError *__autoreleasing *)error {
     NSString *keyPath = [relationship grt_JSONKeyPath];
-    
+	
     if (keyPath == nil) {
         return YES;
     }
@@ -333,6 +349,8 @@ const NSInteger GRTJSONSerializationErrorInvalidJSONObject = 0xcaca;
     if (value != nil) {
         NSString *entityName = relationship.destinationEntity.name;
         NSManagedObjectContext *context = managedObject.managedObjectContext;
+		BOOL isIdentityAttributeRelated = [relationship grt_identityAttributeRelated];
+		
         NSError *tmpError = nil;
         
         if ([relationship isToMany]) {
@@ -348,6 +366,16 @@ const NSInteger GRTJSONSerializationErrorInvalidJSONObject = 0xcaca;
                 
                 return NO;
             }
+			
+			if (isIdentityAttributeRelated) {
+				NSMutableArray *convertedValues = [NSMutableArray array];
+				
+				for (id aValue in value) {
+					[convertedValues addObject:[relationship.destinationEntity grt_dictionaryWithIdentityAttributeValue:aValue]];
+				}
+				
+				value = convertedValues.copy;
+			}
             
             NSArray *objects = merge
                 ? [self mergeObjectsForEntityName:entityName fromJSONArray:value inManagedObjectContext:context error:&tmpError]
@@ -355,6 +383,10 @@ const NSInteger GRTJSONSerializationErrorInvalidJSONObject = 0xcaca;
             
             value = [relationship isOrdered] ? [NSOrderedSet orderedSetWithArray:objects] : [NSSet setWithArray:objects];
         } else {
+			if (isIdentityAttributeRelated) {
+				value = [relationship.destinationEntity grt_dictionaryWithIdentityAttributeValue:value];
+			}
+			
             if (![value isKindOfClass:[NSDictionary class]]) {
                 if (error) {
                     NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Cannot serialize '%@' into a to-one relationship. Expected a JSON dictionary.", @""), [relationship grt_JSONKeyPath]];
