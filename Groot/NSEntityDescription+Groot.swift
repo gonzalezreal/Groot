@@ -62,6 +62,19 @@ extension NSEntityDescription {
         
         return nil
     }
+	
+	/// Returns a JSON dictionary for a instance of this entity with the identity attribute key as key and the given value as value
+	internal func dictionaryWithIdentityAttributeValue(value: AnyObject) -> JSONObject {
+		
+		let identityAttributeKey = self.identityAttribute?.JSONKeyPath
+		
+		if let identityAttributeKey = identityAttributeKey {
+			return [identityAttributeKey: value]
+		}
+		
+		assert(false, "An identity attribute related was set with the entity \(name) but it doesn't define an identityAttribute");
+		
+	}
     
     /// Creates a managed object for this entity by importing the given JSON object.
     public func importJSONObject(object: JSONObject, inContext context: NSManagedObjectContext, mergeChanges: Bool, error outError: NSErrorPointer) -> AnyObject? {

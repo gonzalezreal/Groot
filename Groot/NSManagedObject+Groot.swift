@@ -59,24 +59,48 @@ extension NSManagedObject {
     internal func setRelationship(relationship: NSRelationshipDescription, fromJSONObject object: JSONObject, mergeChanges: Bool, error outError: NSErrorPointer) {
         
         var value: AnyObject? = nil
-        
+		
         if let rawValue: AnyObject = relationship.rawValueInJSONObject(object),
             destinationEntity = relationship.destinationEntity
         {
             var error: NSError? = nil
-            
-            switch rawValue {
+			
+			var modifiedRawValue: AnyObject = rawValue
+			if relationship.isIdentityAttributeRelated {
+				
+				if (relationship.toMany &&
+					rawValue as? JSONArray != nil) {
+					
+					let array = rawValue as! JSONArray
+					
+					var convertedArray = [] as JSONArray
+					for aValue in array {
+						let dictionary = destinationEntity.dictionaryWithIdentityAttributeValue(aValue)
+						convertedArray.append(dictionary)
+					}
+					
+					modifiedRawValue = convertedArray
+				}
+				
+				else {
+					modifiedRawValue = destinationEntity.dictionaryWithIdentityAttributeValue(rawValue)
+				}
+			}
+  
+            switch modifiedRawValue {
                 
             case let object as JSONObject where !relationship.toMany:
+				
                 if let managedObject: AnyObject = destinationEntity.importJSONObject(object, inContext: managedObjectContext!, mergeChanges: mergeChanges, error: &error) {
                     value = managedObject
                 }
                 
             case let array as JSONArray where relationship.toMany:
+				
                 if let managedObjects = destinationEntity.importJSONArray(array, inContext: managedObjectContext!, mergeChanges: mergeChanges, error: &error) {
                     value = relationship.ordered ? NSOrderedSet(array: managedObjects) : NSSet(array: managedObjects)
                 }
-                
+			
             case is NSNull:
                 break
                 

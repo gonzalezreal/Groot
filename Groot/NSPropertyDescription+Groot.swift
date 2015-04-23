@@ -9,6 +9,7 @@
 import CoreData
 
 public let JSONKeyPathKey = "JSONKeyPath"
+public let identityAttributeRelatedKey = "identityAttributeRelated"
 
 extension NSPropertyDescription {
     
@@ -28,5 +29,14 @@ extension NSPropertyDescription {
             (object as NSDictionary).valueForKeyPath($0)
         }
     }
+	
+	/// Return `true` if the propery is identity attribute related. 
+	internal var isIdentityAttributeRelated: Bool {
+		if let identityAttributeRelated = userInfo?[Groot.identityAttributeRelatedKey] as? String {
+			return true
+		}
+		
+		return false
+	}
 }
 

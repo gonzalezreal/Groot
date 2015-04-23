@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		72E44A2B1AE96D030044FF05 /* IdentityAttributeRelatedTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E44A2A1AE96D030044FF05 /* IdentityAttributeRelatedTest.swift */; };
+		72E44A2C1AE9701B0044FF05 /* IdentityRelatedModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 72E44A261AE96CB40044FF05 /* IdentityRelatedModel.xcdatamodeld */; };
+		72E44A2D1AE9701B0044FF05 /* IdentityRelatedModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 72E44A261AE96CB40044FF05 /* IdentityRelatedModel.xcdatamodeld */; };
+		72E44A321AE971CD0044FF05 /* IdentityAttributteRelatedModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E44A2F1AE971620044FF05 /* IdentityAttributteRelatedModels.swift */; };
 		B4164E6F1AC2EFCD00D5CA93 /* Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B4164E6E1AC2EFCD00D5CA93 /* Groot.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B4164E751AC2EFCD00D5CA93 /* Groot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4164E691AC2EFCD00D5CA93 /* Groot.framework */; };
 		B4164E861AC2F00900D5CA93 /* ValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4164E851AC2F00900D5CA93 /* ValueTransformer.swift */; };
@@ -61,6 +65,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		72E44A271AE96CB40044FF05 /* IdentityRelatedModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IdentityRelatedModel.xcdatamodel; sourceTree = "<group>"; };
+		72E44A2A1AE96D030044FF05 /* IdentityAttributeRelatedTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityAttributeRelatedTest.swift; sourceTree = "<group>"; };
+		72E44A2F1AE971620044FF05 /* IdentityAttributteRelatedModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityAttributteRelatedModels.swift; sourceTree = "<group>"; };
 		B4164E691AC2EFCD00D5CA93 /* Groot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Groot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4164E6D1AC2EFCD00D5CA93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B4164E6E1AC2EFCD00D5CA93 /* Groot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Groot.h; sourceTree = "<group>"; };
@@ -167,7 +174,10 @@
 				B48A1FA51AC5436900C4EC78 /* ManagedStoreTests.swift */,
 				B48A1FB51AC5A1F700C4EC78 /* GrootTests.swift */,
 				B48A1FA91AC5541200C4EC78 /* Models.swift */,
+				72E44A2F1AE971620044FF05 /* IdentityAttributteRelatedModels.swift */,
+				72E44A2A1AE96D030044FF05 /* IdentityAttributeRelatedTest.swift */,
 				B48A1FA71AC54CE500C4EC78 /* Model.xcdatamodel */,
+				72E44A261AE96CB40044FF05 /* IdentityRelatedModel.xcdatamodeld */,
 				B475526D1ACECFDD002B0C90 /* JSON */,
 				B4164E791AC2EFCD00D5CA93 /* Supporting Files */,
 			);
@@ -399,7 +409,10 @@
 				B4164E881AC301A700D5CA93 /* ValueTransformerTests.swift in Sources */,
 				B48A1FA61AC5436900C4EC78 /* ManagedStoreTests.swift in Sources */,
 				B48A1FB61AC5A1F700C4EC78 /* GrootTests.swift in Sources */,
+				72E44A2C1AE9701B0044FF05 /* IdentityRelatedModel.xcdatamodeld in Sources */,
+				72E44A2B1AE96D030044FF05 /* IdentityAttributeRelatedTest.swift in Sources */,
 				B48A1FAA1AC5541200C4EC78 /* Models.swift in Sources */,
+				72E44A321AE971CD0044FF05 /* IdentityAttributteRelatedModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +440,7 @@
 				B473D3AA1ACF22CC006A4DD2 /* GrootTests.swift in Sources */,
 				B473D3A91ACF22C8006A4DD2 /* ManagedStoreTests.swift in Sources */,
 				B473D3AB1ACF22D0006A4DD2 /* Models.swift in Sources */,
+				72E44A2D1AE9701B0044FF05 /* IdentityRelatedModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -715,6 +729,7 @@
 				B473D39B1ACF20F9006A4DD2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B473D39C1ACF20F9006A4DD2 /* Build configuration list for PBXNativeTarget "Groot-MacTests" */ = {
 			isa = XCConfigurationList;
@@ -723,8 +738,22 @@
 				B473D39E1ACF20F9006A4DD2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		72E44A261AE96CB40044FF05 /* IdentityRelatedModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				72E44A271AE96CB40044FF05 /* IdentityRelatedModel.xcdatamodel */,
+			);
+			currentVersion = 72E44A271AE96CB40044FF05 /* IdentityRelatedModel.xcdatamodel */;
+			path = IdentityRelatedModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B4164E601AC2EFCD00D5CA93 /* Project object */;
 }
