@@ -104,4 +104,45 @@ class IdentityAttributeRelatedTest: XCTestCase {
 		XCTAssertEqual(expectedSet, receivedSet, "should serialize relationship")
 	}
 	
+	func testJSONDictionaryFromManagedObjectWithToOneRelationshipIdentityAttributeRelated() {
+		
+		let dc = NSEntityDescription.insertNewObjectForEntityForName("IARPublisher", inManagedObjectContext: context!) as! IARPublisher
+		dc.identifier = "1"
+		dc.name = "DC"
+		
+		let batman = NSEntityDescription.insertNewObjectForEntityForName("IARCharacter", inManagedObjectContext: context!) as! IARCharacter
+		batman.name = "Batman"
+		batman.identifier = "1"
+		batman.publisher = dc
+		
+		let batmanJSON = batman.toJSONObject() as JSONObject
+		
+		XCTAssertEqual(batmanJSON["publisher"] as! String, "1", "should create right JSON")
+		
+	}
+	
+	func testJSONDictionaryFromManagedObjectWithToManyRelationshipIdentityAttributeRelated() {
+		
+		let dc = NSEntityDescription.insertNewObjectForEntityForName("IARPublisher", inManagedObjectContext: context!) as! IARPublisher
+		dc.identifier = "1"
+		dc.name = "DC"
+		
+		let batman = NSEntityDescription.insertNewObjectForEntityForName("IARCharacter", inManagedObjectContext: context!) as! IARCharacter
+		batman.name = "Batman"
+		batman.identifier = "1"
+		batman.publisher = dc
+		
+		let superman = NSEntityDescription.insertNewObjectForEntityForName("IARCharacter", inManagedObjectContext: context!) as! IARCharacter
+		superman.name = "Superman"
+		superman.identifier = "2"
+		superman.publisher = dc
+		
+		let dcJSON = dc.toJSONObject() as JSONObject
+		let actualSet = Set(dcJSON["characters"] as! [String])
+		let expectedSet = Set(["1", "2"])
+		
+		XCTAssertEqual(actualSet, expectedSet, "should create right JSON")
+		
+	}
+	
 }
