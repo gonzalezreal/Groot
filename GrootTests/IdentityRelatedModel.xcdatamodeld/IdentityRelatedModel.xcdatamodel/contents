@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D131" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="IARCharacter" representedClassName="GrootTests.IARCharacter" syncable="YES">
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="id"/>
+            </userInfo>
+        </attribute>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="name"/>
+            </userInfo>
+        </attribute>
+        <relationship name="publisher" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IARPublisher" inverseName="characters" inverseEntity="IARPublisher" syncable="YES">
+            <userInfo>
+                <entry key="identityAttributeRelated" value="true"/>
+                <entry key="JSONKeyPath" value="publisher"/>
+            </userInfo>
+        </relationship>
+        <userInfo>
+            <entry key="identityAttribute" value="identifier"/>
+        </userInfo>
+    </entity>
+    <entity name="IARPublisher" representedClassName="GrootTests.IARPublisher" syncable="YES">
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="id"/>
+            </userInfo>
+        </attribute>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="name"/>
+            </userInfo>
+        </attribute>
+        <relationship name="characters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="IARCharacter" inverseName="publisher" inverseEntity="IARCharacter" syncable="YES">
+            <userInfo>
+                <entry key="identityAttributeRelated" value="true"/>
+                <entry key="JSONKeyPath" value="characters"/>
+            </userInfo>
+        </relationship>
+        <userInfo>
+            <entry key="identityAttribute" value="identifier"/>
+        </userInfo>
+    </entity>
+    <elements>
+        <element name="IARCharacter" positionX="-54" positionY="-36" width="128" height="90"/>
+        <element name="IARPublisher" positionX="153" positionY="54" width="128" height="90"/>
+    </elements>
+</model>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0610"
+   LastUpgradeVersion = "0630"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B4DC1AEB1AA9CA5E00F67403"
+               BlueprintIdentifier = "B4164E681AC2EFCD00D5CA93"
                BuildableName = "Groot.framework"
-               BlueprintName = "Groot"
+               BlueprintName = "Groot-iOS"
                ReferencedContainer = "container:Groot.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,9 +28,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B4DC1AF61AA9CA5E00F67403"
+               BlueprintIdentifier = "B4164E731AC2EFCD00D5CA93"
                BuildableName = "GrootTests.xctest"
-               BlueprintName = "GrootTests"
+               BlueprintName = "Groot-iOSTests"
                ReferencedContainer = "container:Groot.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,9 +46,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B4DC1AF61AA9CA5E00F67403"
+               BlueprintIdentifier = "B4164E731AC2EFCD00D5CA93"
                BuildableName = "GrootTests.xctest"
-               BlueprintName = "GrootTests"
+               BlueprintName = "Groot-iOSTests"
                ReferencedContainer = "container:Groot.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -56,9 +56,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B4DC1AEB1AA9CA5E00F67403"
+            BlueprintIdentifier = "B4164E681AC2EFCD00D5CA93"
             BuildableName = "Groot.framework"
-            BlueprintName = "Groot"
+            BlueprintName = "Groot-iOS"
             ReferencedContainer = "container:Groot.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -75,9 +75,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B4DC1AEB1AA9CA5E00F67403"
+            BlueprintIdentifier = "B4164E681AC2EFCD00D5CA93"
             BuildableName = "Groot.framework"
-            BlueprintName = "Groot"
+            BlueprintName = "Groot-iOS"
             ReferencedContainer = "container:Groot.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -93,9 +93,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B4DC1AEB1AA9CA5E00F67403"
+            BlueprintIdentifier = "B4164E681AC2EFCD00D5CA93"
             BuildableName = "Groot.framework"
-            BlueprintName = "Groot"
+            BlueprintName = "Groot-iOS"
             ReferencedContainer = "container:Groot.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7541.6" systemVersion="14C1514" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Character" representedClassName="GrootTests.Character" syncable="YES">
+        <attribute name="identifier" attributeType="Integer 32" defaultValueString="0" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="id"/>
+                <entry key="JSONTransformerName" value="GrootTests.Transformer"/>
+            </userInfo>
+        </attribute>
+        <attribute name="name" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="name"/>
+            </userInfo>
+        </attribute>
+        <attribute name="realName" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="real_name"/>
+            </userInfo>
+        </attribute>
+        <relationship name="powers" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Power" inverseName="characters" inverseEntity="Power" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="powers"/>
+            </userInfo>
+        </relationship>
+        <relationship name="publisher" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Publisher" inverseName="characters" inverseEntity="Publisher" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="publisher"/>
+            </userInfo>
+        </relationship>
+        <userInfo>
+            <entry key="identityAttribute" value="identifier"/>
+        </userInfo>
+    </entity>
+    <entity name="Power" representedClassName="GrootTests.Power" syncable="YES">
+        <attribute name="identifier" attributeType="Integer 32" defaultValueString="0" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="id"/>
+                <entry key="JSONTransformerName" value="GrootTests.Transformer"/>
+            </userInfo>
+        </attribute>
+        <attribute name="name" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="name"/>
+            </userInfo>
+        </attribute>
+        <relationship name="characters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Character" inverseName="powers" inverseEntity="Character" syncable="YES"/>
+        <userInfo>
+            <entry key="identityAttribute" value="identifier"/>
+        </userInfo>
+    </entity>
+    <entity name="Publisher" representedClassName="GrootTests.Publisher" syncable="YES">
+        <attribute name="identifier" attributeType="Integer 32" defaultValueString="0" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="id"/>
+                <entry key="JSONTransformerName" value="GrootTests.Transformer"/>
+            </userInfo>
+        </attribute>
+        <attribute name="name" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="name"/>
+            </userInfo>
+        </attribute>
+        <relationship name="characters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Character" inverseName="publisher" inverseEntity="Character" syncable="YES"/>
+        <userInfo>
+            <entry key="identityAttribute" value="identifier"/>
+        </userInfo>
+    </entity>
+    <elements>
+        <element name="Character" positionX="-317" positionY="-180" width="128" height="118"/>
+        <element name="Power" positionX="-119" positionY="-115" width="128" height="88"/>
+        <element name="Publisher" positionX="-524" positionY="-9" width="128" height="88"/>
+    </elements>
+</model>
