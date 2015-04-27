@@ -182,21 +182,14 @@ extension NSManagedObject {
                                 }
 								
 								if identityAttributeRelated {
-									
 									let name = relationship.destinationEntity?.identityAttribute?.name
-									
 									if let name = name {
 										value = managedObjects.map { $0.valueForKey(name)! }
-				
 									}
-										
 									else {
 										assert(false, "An identity attribute related was set with the entity \(name) but it doesn't define an identityAttribute");
 									}
-									
-									
 								}
-								
 								else {
 									value = managedObjects.map { $0.toJSONObject(processingRelationships: &processingRelationships) }
 								}
@@ -205,16 +198,13 @@ extension NSManagedObject {
 								
 								if identityAttributeRelated {
 									let name = relationship.destinationEntity?.identityAttribute?.name
-									
 									if let name = name {
 										value = (value as? NSManagedObject)?.valueForKey(name)
 									}
-									
 									else {
 										assert(false, "An identity attribute related was set with the entity \(name) but it doesn't define an identityAttribute");
 									}
 								}
-								
 								else {
 									value = (value as? NSManagedObject)?.toJSONObject(processingRelationships: &processingRelationships)
 								}
