@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import <Groot/Groot.h>
+#import "GRTValueTransformer.h"
 
 @interface GRTValueTransformerTests : XCTestCase
 
@@ -16,7 +16,7 @@
 @implementation GRTValueTransformerTests
 
 - (void)testTransformerWithBlock {
-    GRTValueTransformer *transformer = [GRTValueTransformer transformerWithBlock:^id(NSNumber *value) {
+    GRTValueTransformer *transformer = [[GRTValueTransformer alloc] initWithBlock:^id(NSNumber *value) {
         return [value stringValue];
     }];
     
@@ -24,22 +24,8 @@
     XCTAssertEqualObjects(@"42", [transformer transformedValue:@42], @"should call the transform block");
 }
 
-- (void)testReversibleTransformerWithBlock {
-    GRTValueTransformer *transformer = [GRTValueTransformer reversibleTransformerWithBlock:^id(id value) {
-        if ([value isKindOfClass:NSNumber.class]) {
-            return [value stringValue];
-        } else {
-            return @([value integerValue]);
-        }
-    }];
-    
-    XCTAssertTrue([transformer.class allowsReverseTransformation], @"should allow reverse transformation");
-    XCTAssertEqualObjects(@"42", [transformer transformedValue:@42], @"should call the transform block");
-    XCTAssertEqualObjects(@42, [transformer reverseTransformedValue:@"42"], @"should call the transform block");
-}
-
 - (void)testReversibleTransformerWithForwardAndReverseBlock {
-    GRTValueTransformer *transformer = [GRTValueTransformer reversibleTransformerWithForwardBlock:^id(NSNumber *value) {
+    GRTReversibleValueTransformer *transformer = [[GRTReversibleValueTransformer alloc] initWithForwardBlock:^id(NSNumber *value) {
         return [value stringValue];
     } reverseBlock:^id(NSString *value) {
         return @([value integerValue]);

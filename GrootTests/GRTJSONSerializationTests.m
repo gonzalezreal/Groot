@@ -31,17 +31,15 @@
     self.context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     self.context.persistentStoreCoordinator = self.store.persistentStoreCoordinator;
     
-    NSValueTransformer *transformer = [GRTValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *value) {
+    [NSValueTransformer grt_setValueTransformerWithName:@"GRTTestTransformer" transformBlock:^id(NSString *value) {
         if (value) {
             return @([value integerValue]);
         }
         
         return nil;
-    } reverseBlock:^id(NSNumber *value) {
+    } reverseTransformBlock:^id(NSNumber *value) {
         return [value stringValue];
     }];
-    
-    [NSValueTransformer setValueTransformer:transformer forName:@"GRTTestTransformer"];
 }
 
 - (void)tearDown {
