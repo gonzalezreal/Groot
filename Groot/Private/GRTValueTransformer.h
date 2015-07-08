@@ -1,6 +1,6 @@
-// Groot.h
-//
-// Copyright (c) 2014 Guillermo Gonzalez
+// GRTValueTransformer.h
+// 
+// Copyright (c) 2014-2015 Guillermo Gonzalez
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -8,10 +8,10 @@
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-//
+// 
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-//
+// 
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -20,14 +20,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-//! Project version number for Groot.
-FOUNDATION_EXPORT double GrootVersionNumber;
+typedef __nullable id (^GRTValueTransformerBlock)(__nonnull id value);
 
-//! Project version string for Groot.
-FOUNDATION_EXPORT const unsigned char GrootVersionString[];
+@interface GRTValueTransformer : NSValueTransformer
 
-#import <Groot/GRTManagedStore.h>
-#import <Groot/NSValueTransformer+Groot.h>
-#import <Groot/GRTJSONSerialization.h>
+- (nonnull instancetype)initWithBlock:(nonnull GRTValueTransformerBlock)block;
+
+@end
+
+@interface GRTReversibleValueTransformer : GRTValueTransformer
+
+- (nonnull instancetype)initWithForwardBlock:(nonnull GRTValueTransformerBlock)forwardBlock
+                                reverseBlock:(nonnull GRTValueTransformerBlock)reverseBlock;
+
+@end

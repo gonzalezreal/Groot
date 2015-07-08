@@ -1,8 +1,6 @@
 // GRTValueTransformer.m
 // 
-// Copyright (c) 2014 Guillermo Gonzalez
-//
-// Based on Mantle's MTLValueTransformer, MIT licensed.
+// Copyright (c) 2014-2015 Guillermo Gonzalez
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,82 +22,74 @@
 
 #import "GRTValueTransformer.h"
 
-#pragma mark - GRTReversibleValueTransformer
-
-@interface GRTReversibleValueTransformer : GRTValueTransformer
-@end
-
 #pragma mark - GRTValueTransformer
 
 @interface GRTValueTransformer ()
 
-@property (copy, nonatomic, readonly) GRTValueTransformerBlock forwardBlock;
-@property (copy, nonatomic, readonly) GRTValueTransformerBlock reverseBlock;
-
-- (id)initWithForwardBlock:(GRTValueTransformerBlock)forwardBlock reverseBlock:(GRTValueTransformerBlock)reverseBlock;
+@property (copy, nonatomic, nonnull) GRTValueTransformerBlock transformBlock;
 
 @end
 
 @implementation GRTValueTransformer
 
-+ (instancetype)transformerWithBlock:(GRTValueTransformerBlock)block {
-    return [[self alloc] initWithForwardBlock:block reverseBlock:nil];
-}
-
-+ (instancetype)reversibleTransformerWithBlock:(GRTValueTransformerBlock)block {
-    return [self reversibleTransformerWithForwardBlock:block reverseBlock:block];
-}
-
-+ (instancetype)reversibleTransformerWithForwardBlock:(GRTValueTransformerBlock)forwardBlock reverseBlock:(GRTValueTransformerBlock)reverseBlock {
-    return [[GRTReversibleValueTransformer alloc] initWithForwardBlock:forwardBlock reverseBlock:reverseBlock];
-}
-
-- (id)initWithForwardBlock:(GRTValueTransformerBlock)forwardBlock reverseBlock:(GRTValueTransformerBlock)reverseBlock {
-    NSParameterAssert(forwardBlock);
-    
+- (nonnull instancetype)initWithBlock:(nonnull GRTValueTransformerBlock)block {
     self = [super init];
-    
     if (self) {
-        _forwardBlock = [forwardBlock copy];
-        _reverseBlock = [reverseBlock copy];
+        self.transformBlock = block;
     }
-    
     return self;
 }
 
 #pragma mark - NSValueTransformer
 
 + (BOOL)allowsReverseTransformation {
-	return NO;
+    return NO;
 }
 
 + (Class)transformedValueClass {
-	return NSObject.class;
+    return NSObject.class;
 }
 
 - (id)transformedValue:(id)value {
-	return self.forwardBlock(value);
+    if (value != nil) {
+        return self.transformBlock(value);
+    }
+    return nil;
 }
 
 @end
 
 #pragma mark - GRTReversibleValueTransformer
 
+@interface GRTReversibleValueTransformer ()
+
+@property (copy, nonatomic, nonnull) GRTValueTransformerBlock reverseTransformBlock;
+
+@end
+
 @implementation GRTReversibleValueTransformer
 
-- (id)initWithForwardBlock:(GRTValueTransformerBlock)forwardBlock reverseBlock:(GRTValueTransformerBlock)reverseBlock {
-    NSParameterAssert(reverseBlock);
-    return [super initWithForwardBlock:forwardBlock reverseBlock:reverseBlock];
+- (nonnull instancetype)initWithForwardBlock:(nonnull GRTValueTransformerBlock)forwardBlock
+                                reverseBlock:(nonnull GRTValueTransformerBlock)reverseBlock
+{
+    self = [super initWithBlock:forwardBlock];
+    if (self) {
+        self.reverseTransformBlock = reverseBlock;
+    }
+    return self;
 }
 
 #pragma mark - NSValueTransformer
 
 + (BOOL)allowsReverseTransformation {
-	return YES;
+    return YES;
 }
 
 - (id)reverseTransformedValue:(id)value {
-	return self.reverseBlock(value);
+    if (value != nil) {
+        return self.reverseTransformBlock(value);
+    }
+    return nil;
 }
 
 @end
