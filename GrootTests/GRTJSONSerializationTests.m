@@ -27,7 +27,7 @@
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
     NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:@[bundle]];
     
-    self.store = [GRTManagedStore managedStoreWithModel:model];
+    self.store = [[GRTManagedStore alloc] initWithModel:model error:nil];
     self.context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     self.context.persistentStoreCoordinator = self.store.persistentStoreCoordinator;
     

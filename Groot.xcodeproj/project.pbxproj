@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B4BB8A0D1B4D17B600EBAADA /* GRTManagedStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B4BB8A0C1B4D17B600EBAADA /* GRTManagedStoreTests.m */; };
 		B4DC1AF21AA9CA5E00F67403 /* Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B4DC1AF11AA9CA5E00F67403 /* Groot.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B4DC1AF81AA9CA5E00F67403 /* Groot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4DC1AEC1AA9CA5E00F67403 /* Groot.framework */; };
 		B4DC1B191AA9CAC200F67403 /* GRTConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = B4DC1B081AA9CAC200F67403 /* GRTConstants.h */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B4BB8A0C1B4D17B600EBAADA /* GRTManagedStoreTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTManagedStoreTests.m; sourceTree = "<group>"; };
 		B4DC1AEC1AA9CA5E00F67403 /* Groot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Groot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4DC1AF01AA9CA5E00F67403 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B4DC1AF11AA9CA5E00F67403 /* Groot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Groot.h; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 		B4DC1AFB1AA9CA5E00F67403 /* GrootTests */ = {
 			isa = PBXGroup;
 			children = (
+				B4BB8A0C1B4D17B600EBAADA /* GRTManagedStoreTests.m */,
 				B4DC1B291AA9CBAD00F67403 /* GRTJSONSerializationTests.m */,
 				B4DC1B2A1AA9CBAD00F67403 /* GRTModels.h */,
 				B4DC1B2B1AA9CBAD00F67403 /* GRTModels.m */,
@@ -303,6 +306,7 @@
 				B4DC1B311AA9CBAD00F67403 /* GRTValueTransformerTests.m in Sources */,
 				B4DC1B321AA9CBAD00F67403 /* Model.xcdatamodeld in Sources */,
 				B4DC1B301AA9CBAD00F67403 /* GRTModels.m in Sources */,
+				B4BB8A0D1B4D17B600EBAADA /* GRTManagedStoreTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,6 +486,7 @@
 				B4DC1B041AA9CA5E00F67403 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B4DC1B051AA9CA5E00F67403 /* Build configuration list for PBXNativeTarget "GrootTests" */ = {
 			isa = XCConfigurationList;
@@ -490,6 +495,7 @@
 				B4DC1B071AA9CA5E00F67403 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

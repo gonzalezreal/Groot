@@ -12,27 +12,32 @@
 
 @interface GRTCharacter : NSManagedObject
 
-@property (nonatomic, retain) NSNumber *identifier;
-@property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSString *realName;
-@property (nonatomic, retain) NSDate *birthday;
-@property (nonatomic, retain) NSOrderedSet *powers;
-@property (nonatomic, retain) GRTPublisher *publisher;
-
-@end
-
-@interface GRTPower : NSManagedObject
-
-@property (nonatomic, retain) NSNumber *identifier;
-@property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSSet *characters;
+@property (nonatomic, retain, nonnull) NSNumber *identifier;
+@property (nonatomic, retain, nonnull) NSString *name;
+@property (nonatomic, retain, nonnull) NSString *realName;
+@property (nonatomic, retain, nullable) NSOrderedSet *powers;
+@property (nonatomic, retain, nullable) GRTPublisher *publisher;
 
 @end
 
 @interface GRTPublisher : NSManagedObject
 
-@property (nonatomic, retain) NSNumber *identifier;
-@property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSSet *characters;
+@property (nonatomic, retain, nonnull) NSNumber *identifier;
+@property (nonatomic, retain, nonnull) NSString *name;
+@property (nonatomic, retain, nullable) NSSet *characters;
+
+@end
+
+@interface GRTPower : NSManagedObject
+
+@property (nonatomic, retain, nonnull) NSNumber *identifier;
+@property (nonatomic, retain, nonnull) NSString *name;
+@property (nonatomic, retain, nullable) NSSet *characters;
+
+@end
+
+@interface NSManagedObjectModel (GrootTests)
+
++ (nonnull instancetype)grt_testModel;
 
 @end
