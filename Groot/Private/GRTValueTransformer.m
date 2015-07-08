@@ -51,7 +51,10 @@
 }
 
 - (id)transformedValue:(id)value {
-    return self.transformBlock(value);
+    if (value != nil) {
+        return self.transformBlock(value);
+    }
+    return nil;
 }
 
 @end
@@ -83,7 +86,10 @@
 }
 
 - (id)reverseTransformedValue:(id)value {
-    return self.reverseTransformBlock(value);
+    if (value != nil) {
+        return self.reverseTransformBlock(value);
+    }
+    return nil;
 }
 
 @end
