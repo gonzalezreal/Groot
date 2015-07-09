@@ -1,6 +1,6 @@
-// Groot.h
+// GRTError.h
 //
-// Copyright (c) 2014 Guillermo Gonzalez
+// Copyright (c) 2014-2015 Guillermo Gonzalez
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,15 +20,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-//! Project version number for Groot.
-FOUNDATION_EXPORT double GrootVersionNumber;
+extern NSString * const GRTErrorDomain;
 
-//! Project version string for Groot.
-FOUNDATION_EXPORT const unsigned char GrootVersionString[];
-
-#import <Groot/GRTError.h>
-#import <Groot/GRTManagedStore.h>
-#import <Groot/NSValueTransformer+Groot.h>
-#import <Groot/GRTJSONSerialization.h>
+typedef NS_ENUM(NSInteger, GRTError) {
+    GRTErrorInvalidJSONObject,
+    GRTErrorIdentityNotFound
+};
