@@ -22,6 +22,4 @@
 
 #import "GRTConstants.h"
 
-NSString * const GRTJSONKeyPathKey = @"JSONKeyPath";
-NSString * const GRTJSONTransformerNameKey = @"JSONTransformerName";
 NSString * const GRTIdentityAttributeKey = @"identityAttribute";

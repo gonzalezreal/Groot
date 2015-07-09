@@ -175,14 +175,14 @@
 			children = (
 				B4E72F5A1B4DB8EF00B9EA77 /* GRTValueTransformer.h */,
 				B4E72F5B1B4DB8EF00B9EA77 /* GRTValueTransformer.m */,
+				B4DC1B171AA9CAC200F67403 /* NSPropertyDescription+Groot.h */,
+				B4DC1B181AA9CAC200F67403 /* NSPropertyDescription+Groot.m */,
 				B4DC1B111AA9CAC200F67403 /* NSAttributeDescription+Groot.h */,
 				B4DC1B121AA9CAC200F67403 /* NSAttributeDescription+Groot.m */,
 				B4DC1B131AA9CAC200F67403 /* NSDictionary+Groot.h */,
 				B4DC1B141AA9CAC200F67403 /* NSDictionary+Groot.m */,
 				B4DC1B151AA9CAC200F67403 /* NSEntityDescription+Groot.h */,
 				B4DC1B161AA9CAC200F67403 /* NSEntityDescription+Groot.m */,
-				B4DC1B171AA9CAC200F67403 /* NSPropertyDescription+Groot.h */,
-				B4DC1B181AA9CAC200F67403 /* NSPropertyDescription+Groot.m */,
 			);
 			path = Private;
 			sourceTree = "<group>";

@@ -1,6 +1,6 @@
 // NSAttributeDescription+Groot.h
 //
-// Copyright (c) 2014 Guillermo Gonzalez
+// Copyright (c) 2014-2015 Guillermo Gonzalez
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,8 +22,25 @@
 
 #import <CoreData/CoreData.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NSAttributeDescription (Groot)
 
-- (NSValueTransformer *)grt_JSONTransformer;
+/**
+ The value transformer for this attribute.
+ */
+- (nullable NSValueTransformer *)grt_JSONTransformer;
+
+/**
+ Returns the value for this attribute in a given JSON object.
+ */
+- (nullable id)grt_valueInJSONObject:(NSDictionary *)object;
+
+/**
+ Returns all the values for this attribute in a given JSON array.
+ */
+- (NSArray *)grt_valuesInJSONArray:(NSArray *)array;
 
 @end
+
+NS_ASSUME_NONNULL_END

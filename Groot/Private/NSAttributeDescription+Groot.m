@@ -1,6 +1,6 @@
 // NSAttributeDescription+Groot.m
 //
-// Copyright (c) 2014 Guillermo Gonzalez
+// Copyright (c) 2014-2015 Guillermo Gonzalez
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,13 +21,49 @@
 // THE SOFTWARE.
 
 #import "NSAttributeDescription+Groot.h"
-#import "GRTConstants.h"
+#import "NSPropertyDescription+Groot.h"
 
 @implementation NSAttributeDescription (Groot)
 
-- (NSValueTransformer *)grt_JSONTransformer {
-    NSString *name = self.userInfo[GRTJSONTransformerNameKey];
-    return name ? [NSValueTransformer valueTransformerForName:name] : nil;
+- (nullable NSValueTransformer *)grt_JSONTransformer {
+    NSString *name = self.userInfo[@"JSONTransformerName"];
+    return name != nil ? [NSValueTransformer valueTransformerForName:name] : nil;
+}
+
+- (nullable id)grt_valueInJSONObject:(NSDictionary * __nonnull)object {
+    id value = [self grt_rawValueInJSONObject:object];
+    
+    if (value != nil) {
+        if (value == [NSNull null]) {
+            return nil;
+        }
+        
+        NSValueTransformer *transformer = [self grt_JSONTransformer];
+        
+        if (transformer != nil) {
+            return [transformer transformedValue:value];
+        }
+        
+        return value;
+    }
+    
+    return nil;
+}
+
+- (NSArray * __nonnull)grt_valuesInJSONArray:(NSArray * __nonnull)array {
+    NSMutableArray *values = [NSMutableArray arrayWithCapacity:array.count];
+    
+    for (NSDictionary *object in array) {
+        if ([object isKindOfClass:[NSDictionary class]]) {
+            id value = [self grt_valueInJSONObject:object];
+            
+            if (value != nil) {
+                [values addObject:value];
+            }
+        }
+    }
+    
+    return values;
 }
 
 @end
