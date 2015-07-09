@@ -22,17 +22,19 @@
 
 #import "GRTValueTransformer.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - GRTValueTransformer
 
 @interface GRTValueTransformer ()
 
-@property (copy, nonatomic, nonnull) GRTValueTransformerBlock transformBlock;
+@property (copy, nonatomic) __nullable id (^transformBlock)(id);
 
 @end
 
 @implementation GRTValueTransformer
 
-- (nonnull instancetype)initWithBlock:(nonnull GRTValueTransformerBlock)block {
+- (instancetype)initWithBlock:(__nullable id (^)(id value))block {
     self = [super init];
     if (self) {
         self.transformBlock = block;
@@ -63,14 +65,14 @@
 
 @interface GRTReversibleValueTransformer ()
 
-@property (copy, nonatomic, nonnull) GRTValueTransformerBlock reverseTransformBlock;
+@property (copy, nonatomic) __nullable id (^reverseTransformBlock)(id);
 
 @end
 
 @implementation GRTReversibleValueTransformer
 
-- (nonnull instancetype)initWithForwardBlock:(nonnull GRTValueTransformerBlock)forwardBlock
-                                reverseBlock:(nonnull GRTValueTransformerBlock)reverseBlock
+- (instancetype)initWithForwardBlock:(__nullable id (^)(id value))forwardBlock
+                        reverseBlock:(__nullable id (^)(id value))reverseBlock
 {
     self = [super initWithBlock:forwardBlock];
     if (self) {
@@ -93,3 +95,5 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

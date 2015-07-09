@@ -22,6 +22,8 @@
 
 #import "GRTManagedStore.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 static NSURL *GRTCachesDirectoryURL(NSError **outError) {
     NSError *error = nil;
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -49,17 +51,17 @@ static NSURL *GRTCachesDirectoryURL(NSError **outError) {
 
 @implementation GRTManagedStore
 
-- (NSManagedObjectModel * __nonnull)managedObjectModel {
+- (NSManagedObjectModel *)managedObjectModel {
     return self.persistentStoreCoordinator.managedObjectModel;
 }
 
-- (NSURL * __nonnull)URL {
+- (NSURL *)URL {
     NSPersistentStore *store = self.persistentStoreCoordinator.persistentStores[0];
     return store.URL;
 }
 
 - (nullable instancetype)initWithURL:(nullable NSURL *)URL
-                               model:(nonnull NSManagedObjectModel *)managedObjectModel
+                               model:(NSManagedObjectModel *)managedObjectModel
                                error:(NSError *__autoreleasing  __nullable * __nullable)outError
 {
     self = [super init];
@@ -89,8 +91,8 @@ static NSURL *GRTCachesDirectoryURL(NSError **outError) {
     return self;
 }
 
-- (nullable instancetype)initWithCacheName:(nonnull NSString *)cacheName
-                                     model:(nonnull NSManagedObjectModel *)managedObjectModel
+- (nullable instancetype)initWithCacheName:(NSString *)cacheName
+                                     model:(NSManagedObjectModel *)managedObjectModel
                                      error:(NSError *__autoreleasing  __nullable * __nullable)outError
 {
     NSError *error = nil;
@@ -105,19 +107,19 @@ static NSURL *GRTCachesDirectoryURL(NSError **outError) {
     return [self initWithURL:storeURL model:managedObjectModel error:outError];
 }
 
-- (nullable instancetype)initWithModel:(nonnull NSManagedObjectModel *)managedObjectModel error:(NSError *__autoreleasing  __nullable * __nullable)outError {
+- (nullable instancetype)initWithModel:(NSManagedObjectModel *)managedObjectModel error:(NSError *__autoreleasing  __nullable * __nullable)outError {
     return [self initWithURL:nil model:managedObjectModel error:outError];
 }
 
-+ (nullable instancetype)storeWithURL:(nonnull NSURL *)URL error:(NSError *__autoreleasing  __nullable * __nullable)outError {
++ (nullable instancetype)storeWithURL:(NSURL *)URL error:(NSError *__autoreleasing  __nullable * __nullable)outError {
     return [[self alloc] initWithURL:URL model:[NSManagedObjectModel mergedModelFromBundles:nil] error:outError];
 }
 
-+ (nullable instancetype)storeWithCacheName:(nonnull NSString *)cacheName error:(NSError *__autoreleasing  __nullable * __nullable)outError {
++ (nullable instancetype)storeWithCacheName:(NSString *)cacheName error:(NSError *__autoreleasing  __nullable * __nullable)outError {
     return [[self alloc] initWithCacheName:cacheName model:[NSManagedObjectModel mergedModelFromBundles:nil] error:outError];
 }
 
-- (nonnull NSManagedObjectContext *)contextWithConcurrencyType:(NSManagedObjectContextConcurrencyType)concurrencyType {
+- (NSManagedObjectContext *)contextWithConcurrencyType:(NSManagedObjectContextConcurrencyType)concurrencyType {
     NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:concurrencyType];
     context.persistentStoreCoordinator = self.persistentStoreCoordinator;
     
@@ -125,3 +127,5 @@ static NSURL *GRTCachesDirectoryURL(NSError **outError) {
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

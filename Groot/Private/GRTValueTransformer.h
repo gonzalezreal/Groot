@@ -22,17 +22,19 @@
 
 #import <Foundation/Foundation.h>
 
-typedef __nullable id (^GRTValueTransformerBlock)(__nonnull id value);
+NS_ASSUME_NONNULL_BEGIN
 
 @interface GRTValueTransformer : NSValueTransformer
 
-- (nonnull instancetype)initWithBlock:(nonnull GRTValueTransformerBlock)block;
+- (instancetype)initWithBlock:(__nullable id (^)(id value))block;
 
 @end
 
 @interface GRTReversibleValueTransformer : GRTValueTransformer
 
-- (nonnull instancetype)initWithForwardBlock:(nonnull GRTValueTransformerBlock)forwardBlock
-                                reverseBlock:(nonnull GRTValueTransformerBlock)reverseBlock;
+- (instancetype)initWithForwardBlock:(__nullable id (^)(id value))forwardBlock
+                        reverseBlock:(__nullable id (^)(id value))reverseBlock;
 
 @end
+
+NS_ASSUME_NONNULL_END

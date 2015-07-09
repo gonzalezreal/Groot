@@ -22,7 +22,9 @@
 
 #import <Foundation/Foundation.h>
 
-typedef __nullable id (^GRTTransformBlock)(__nonnull id value);
+NS_ASSUME_NONNULL_BEGIN
+
+typedef __nullable id (^GRTTransformBlock)(id value);
 
 @interface NSValueTransformer (Groot)
 
@@ -32,8 +34,8 @@ typedef __nullable id (^GRTTransformBlock)(__nonnull id value);
  @param name The name of the transformer.
  @param transformBlock The block that performs the transformation.
  */
-+ (void)grt_setValueTransformerWithName:(nonnull NSString *)name
-                         transformBlock:(nonnull GRTTransformBlock)transformBlock;
++ (void)grt_setValueTransformerWithName:(NSString *)name
+                         transformBlock:(__nullable id (^)(id value))transformBlock;
 
 /**
  Registers a reversible value transformer with a given name and transform blocks.
@@ -42,8 +44,10 @@ typedef __nullable id (^GRTTransformBlock)(__nonnull id value);
  @param transformBlock The block that performs the forward transformation.
  @param reverseTransformBlock The block that performs the reverse transformation.
  */
-+ (void)grt_setValueTransformerWithName:(nonnull NSString *)name
-                         transformBlock:(nonnull GRTTransformBlock)transformBlock
-                  reverseTransformBlock:(nonnull GRTTransformBlock)reverseTransformBlock;
++ (void)grt_setValueTransformerWithName:(NSString *)name
+                         transformBlock:(__nullable id (^)(id value))transformBlock
+                  reverseTransformBlock:(__nullable id (^)(id value))reverseTransformBlock;
 
 @end
+
+NS_ASSUME_NONNULL_END
