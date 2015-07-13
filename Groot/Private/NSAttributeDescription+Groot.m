@@ -30,8 +30,8 @@
     return name != nil ? [NSValueTransformer valueTransformerForName:name] : nil;
 }
 
-- (nullable id)grt_valueInJSONObject:(NSDictionary * __nonnull)object {
-    id value = [self grt_rawValueInJSONObject:object];
+- (nullable id)grt_valueInJSONDictionary:(NSDictionary * __nonnull)dictionary {
+    id value = [self grt_rawValueInJSONDictionary:dictionary];
     
     if (value != nil) {
         if (value == [NSNull null]) {
@@ -55,7 +55,7 @@
     
     for (NSDictionary *object in array) {
         if ([object isKindOfClass:[NSDictionary class]]) {
-            id value = [self grt_valueInJSONObject:object];
+            id value = [self grt_valueInJSONDictionary:object];
             
             if (value != nil) {
                 [values addObject:value];

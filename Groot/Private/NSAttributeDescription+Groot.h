@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Returns the value for this attribute in a given JSON object.
  */
-- (nullable id)grt_valueInJSONObject:(NSDictionary *)object;
+- (nullable id)grt_valueInJSONDictionary:(NSDictionary *)dictionary;
 
 /**
  Returns all the values for this attribute in a given JSON array.

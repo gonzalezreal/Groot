@@ -32,11 +32,11 @@
     return [self grt_JSONKeyPath] != nil;
 }
 
-- (nullable id)grt_rawValueInJSONObject:(NSDictionary * __nonnull)object {
+- (nullable id)grt_rawValueInJSONDictionary:(NSDictionary * __nonnull)dictionary {
     NSString *keyPath = [self grt_JSONKeyPath];
     
     if (keyPath != nil) {
-        return [object valueForKeyPath:keyPath];
+        return [dictionary valueForKeyPath:keyPath];
     }
     
     return nil;

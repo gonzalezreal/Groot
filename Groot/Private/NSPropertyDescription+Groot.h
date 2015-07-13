@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Returns the untransformed raw value for this property in a given JSON object.
  */
-- (nullable id)grt_rawValueInJSONObject:(NSDictionary *)object;
+- (nullable id)grt_rawValueInJSONDictionary:(NSDictionary *)object;
 
 @end
 
