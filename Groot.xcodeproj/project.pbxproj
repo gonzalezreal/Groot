@@ -20,8 +20,6 @@
 		B4DC1B1E1AA9CAC200F67403 /* GRTManagedStore.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B0D1AA9CAC200F67403 /* GRTManagedStore.m */; };
 		B4DC1B211AA9CAC200F67403 /* NSAttributeDescription+Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B4DC1B111AA9CAC200F67403 /* NSAttributeDescription+Groot.h */; };
 		B4DC1B221AA9CAC200F67403 /* NSAttributeDescription+Groot.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B121AA9CAC200F67403 /* NSAttributeDescription+Groot.m */; };
-		B4DC1B231AA9CAC200F67403 /* NSDictionary+Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B4DC1B131AA9CAC200F67403 /* NSDictionary+Groot.h */; };
-		B4DC1B241AA9CAC200F67403 /* NSDictionary+Groot.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B141AA9CAC200F67403 /* NSDictionary+Groot.m */; };
 		B4DC1B251AA9CAC200F67403 /* NSEntityDescription+Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B4DC1B151AA9CAC200F67403 /* NSEntityDescription+Groot.h */; };
 		B4DC1B261AA9CAC200F67403 /* NSEntityDescription+Groot.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B161AA9CAC200F67403 /* NSEntityDescription+Groot.m */; };
 		B4DC1B271AA9CAC200F67403 /* NSPropertyDescription+Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B4DC1B171AA9CAC200F67403 /* NSPropertyDescription+Groot.h */; };
@@ -64,8 +62,6 @@
 		B4DC1B0D1AA9CAC200F67403 /* GRTManagedStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTManagedStore.m; sourceTree = "<group>"; };
 		B4DC1B111AA9CAC200F67403 /* NSAttributeDescription+Groot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributeDescription+Groot.h"; sourceTree = "<group>"; };
 		B4DC1B121AA9CAC200F67403 /* NSAttributeDescription+Groot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributeDescription+Groot.m"; sourceTree = "<group>"; };
-		B4DC1B131AA9CAC200F67403 /* NSDictionary+Groot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Groot.h"; sourceTree = "<group>"; };
-		B4DC1B141AA9CAC200F67403 /* NSDictionary+Groot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Groot.m"; sourceTree = "<group>"; };
 		B4DC1B151AA9CAC200F67403 /* NSEntityDescription+Groot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSEntityDescription+Groot.h"; sourceTree = "<group>"; };
 		B4DC1B161AA9CAC200F67403 /* NSEntityDescription+Groot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSEntityDescription+Groot.m"; sourceTree = "<group>"; };
 		B4DC1B171AA9CAC200F67403 /* NSPropertyDescription+Groot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPropertyDescription+Groot.h"; sourceTree = "<group>"; };
@@ -179,8 +175,6 @@
 				B4DC1B181AA9CAC200F67403 /* NSPropertyDescription+Groot.m */,
 				B4DC1B111AA9CAC200F67403 /* NSAttributeDescription+Groot.h */,
 				B4DC1B121AA9CAC200F67403 /* NSAttributeDescription+Groot.m */,
-				B4DC1B131AA9CAC200F67403 /* NSDictionary+Groot.h */,
-				B4DC1B141AA9CAC200F67403 /* NSDictionary+Groot.m */,
 				B4DC1B151AA9CAC200F67403 /* NSEntityDescription+Groot.h */,
 				B4DC1B161AA9CAC200F67403 /* NSEntityDescription+Groot.m */,
 			);
@@ -195,7 +189,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B46200C21B4F07E4003B3B69 /* GRTError.h in Headers */,
-				B4DC1B231AA9CAC200F67403 /* NSDictionary+Groot.h in Headers */,
 				B4E72F641B4DB9B300B9EA77 /* NSValueTransformer+Groot.h in Headers */,
 				B4DC1B251AA9CAC200F67403 /* NSEntityDescription+Groot.h in Headers */,
 				B4DC1B191AA9CAC200F67403 /* GRTConstants.h in Headers */,
@@ -312,7 +305,6 @@
 				B4DC1B221AA9CAC200F67403 /* NSAttributeDescription+Groot.m in Sources */,
 				B4DC1B1A1AA9CAC200F67403 /* GRTConstants.m in Sources */,
 				B4E72F5D1B4DB8EF00B9EA77 /* GRTValueTransformer.m in Sources */,
-				B4DC1B241AA9CAC200F67403 /* NSDictionary+Groot.m in Sources */,
 				B4DC1B1E1AA9CAC200F67403 /* GRTManagedStore.m in Sources */,
 				B46200C31B4F07E4003B3B69 /* GRTError.m in Sources */,
 			);
