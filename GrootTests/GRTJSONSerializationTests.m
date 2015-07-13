@@ -104,8 +104,8 @@
     [GRTJSONSerialization insertObjectsForEntityName:@"Character" fromJSONArray:invalidJSON inManagedObjectContext:self.context error:&error];
     
     XCTAssertNotNil(error, @"should return an error");
-    XCTAssertEqualObjects(GRTJSONSerializationErrorDomain, error.domain, @"should return a serialization error");
-    XCTAssertEqual(GRTJSONSerializationErrorInvalidJSONObject, error.code, @"should return an invalid JSON error");
+    XCTAssertEqualObjects(GRTErrorDomain, error.domain, @"should return a serialization error");
+    XCTAssertEqual(GRTErrorInvalidJSONObject, error.code, @"should return an invalid JSON error");
 }
 
 - (void)testInsertInvalidToManyRelationship {
@@ -123,8 +123,8 @@
     [GRTJSONSerialization insertObjectForEntityName:@"Character" fromJSONDictionary:invalidBatman inManagedObjectContext:self.context error:&error];
     
     XCTAssertNotNil(error, @"should return an error");
-    XCTAssertEqualObjects(GRTJSONSerializationErrorDomain, error.domain, @"should return a serialization error");
-    XCTAssertEqual(GRTJSONSerializationErrorInvalidJSONObject, error.code, @"should return an invalid JSON error");
+    XCTAssertEqualObjects(GRTErrorDomain, error.domain, @"should return a serialization error");
+    XCTAssertEqual(GRTErrorInvalidJSONObject, error.code, @"should return an invalid JSON error");
 }
 
 - (void)testInsertInvalidToOneRelationship {
@@ -139,8 +139,8 @@
     [GRTJSONSerialization insertObjectForEntityName:@"Character" fromJSONDictionary:invalidBatman inManagedObjectContext:self.context error:&error];
     
     XCTAssertNotNil(error, @"should return an error");
-    XCTAssertEqualObjects(GRTJSONSerializationErrorDomain, error.domain, @"should return a serialization error");
-    XCTAssertEqual(GRTJSONSerializationErrorInvalidJSONObject, error.code, @"should return an invalid JSON error");
+    XCTAssertEqualObjects(GRTErrorDomain, error.domain, @"should return a serialization error");
+    XCTAssertEqual(GRTErrorInvalidJSONObject, error.code, @"should return an invalid JSON error");
 }
 
 - (void)testMergeObject {
@@ -264,8 +264,8 @@
     [GRTJSONSerialization mergeObjectsForEntityName:@"Character" fromJSONArray:invalidJSON inManagedObjectContext:self.context error:&error];
     
     XCTAssertNotNil(error, @"should return an error");
-    XCTAssertEqualObjects(GRTJSONSerializationErrorDomain, error.domain, @"should return a serialization error");
-    XCTAssertEqual(GRTJSONSerializationErrorInvalidJSONObject, error.code, @"should return an invalid JSON error");
+    XCTAssertEqualObjects(GRTErrorDomain, error.domain, @"should return a serialization error");
+    XCTAssertEqual(GRTErrorInvalidJSONObject, error.code, @"should return an invalid JSON error");
 }
 
 - (void)testMergeInvalidToManyRelationship {
@@ -283,8 +283,8 @@
     [GRTJSONSerialization mergeObjectForEntityName:@"Character" fromJSONDictionary:invalidBatman inManagedObjectContext:self.context error:&error];
     
     XCTAssertNotNil(error, @"should return an error");
-    XCTAssertEqualObjects(GRTJSONSerializationErrorDomain, error.domain, @"should return a serialization error");
-    XCTAssertEqual(GRTJSONSerializationErrorInvalidJSONObject, error.code, @"should return an invalid JSON error");
+    XCTAssertEqualObjects(GRTErrorDomain, error.domain, @"should return a serialization error");
+    XCTAssertEqual(GRTErrorInvalidJSONObject, error.code, @"should return an invalid JSON error");
 }
 
 - (void)testMergeInvalidToOneRelationship {
@@ -299,8 +299,8 @@
     [GRTJSONSerialization mergeObjectForEntityName:@"Character" fromJSONDictionary:invalidBatman inManagedObjectContext:self.context error:&error];
     
     XCTAssertNotNil(error, @"should return an error");
-    XCTAssertEqualObjects(GRTJSONSerializationErrorDomain, error.domain, @"should return a serialization error");
-    XCTAssertEqual(GRTJSONSerializationErrorInvalidJSONObject, error.code, @"should return an invalid JSON error");
+    XCTAssertEqualObjects(GRTErrorDomain, error.domain, @"should return a serialization error");
+    XCTAssertEqual(GRTErrorInvalidJSONObject, error.code, @"should return an invalid JSON error");
 }
 
 - (void)testMergeWithoutIdentityAttribute {

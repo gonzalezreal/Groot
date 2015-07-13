@@ -1,6 +1,6 @@
 // NSEntityDescription+Groot.m
 //
-// Copyright (c) 2014 Guillermo Gonzalez
+// Copyright (c) 2014-2015 Guillermo Gonzalez
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,25 +21,7 @@
 // THE SOFTWARE.
 
 #import "NSEntityDescription+Groot.h"
-#import "GRTConstants.h"
 
 @implementation NSEntityDescription (Groot)
-
-- (NSAttributeDescription *)grt_identityAttribute {
-	
-	NSString *identityAttribute = nil;
-	NSEntityDescription *entityDescription = self;
-	
-	while (entityDescription && !identityAttribute) {
-		identityAttribute = entityDescription.userInfo[GRTIdentityAttributeKey];
-		entityDescription = entityDescription.superentity;
-	}
-	
-	if (identityAttribute) {
-		return self.attributesByName[identityAttribute];
-	}
-	
-	return nil;
-}
 
 @end

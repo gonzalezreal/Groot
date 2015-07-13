@@ -24,6 +24,4 @@
 
 @interface NSEntityDescription (Groot)
 
-- (NSAttributeDescription *)grt_identityAttribute;
-
 @end
