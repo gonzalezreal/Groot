@@ -94,7 +94,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @return A JSON array.
  */
-+ (NSArray *)JSONArrayFromObjects:(NSManagedObject *)objects;
++ (NSArray *)JSONArrayFromObjects:(NSArray *)objects;
 
 @end
 

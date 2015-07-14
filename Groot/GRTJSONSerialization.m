@@ -22,6 +22,9 @@
 
 #import "GRTJSONSerialization.h"
 
+#import "NSEntityDescription+Groot.h"
+#import "NSManagedObject+Groot.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @implementation GRTJSONSerialization
@@ -29,38 +32,85 @@ NS_ASSUME_NONNULL_BEGIN
 + (nullable NSArray *)objectsWithEntityName:(NSString *)entityName
                                fromJSONData:(NSData *)data
                                   inContext:(NSManagedObjectContext *)context
-                                      error:(NSError * __nullable * __nullable)outError
+                                      error:(NSError *__autoreleasing  __nullable * __nullable)outError
 {
-    // TODO: implement
-    return nil;
+    NSError *error = nil;
+    id parsedJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+    
+    if (error != nil) {
+        if (outError != nil) *outError = error;
+        return nil;
+    }
+    
+    NSArray *array = nil;
+    if ([parsedJSON isKindOfClass:[NSDictionary class]]) {
+        array = @[parsedJSON];
+    } else if ([parsedJSON isKindOfClass:[NSArray class]]) {
+        array = parsedJSON;
+    }
+    
+    NSAssert(array != nil, @"Invalid JSON. The top level object must be an NSArray or an NSDictionary");
+    
+    return [self objectsWithEntityName:entityName fromJSONArray:array inContext:context error:outError];
 }
 
 + (nullable id)objectWithEntityName:(NSString *)entityName
                  fromJSONDictionary:(NSDictionary *)JSONDictionary
                           inContext:(NSManagedObjectContext *)context
-                              error:(NSError * __nullable * __nullable)outError
+                              error:(NSError *__autoreleasing  __nullable * __nullable)outError
 {
-    // TODO: implement
-    return nil;
+    NSError *error = nil;
+    NSEntityDescription *entity = [NSEntityDescription grt_entityForName:entityName inContext:context error:&error];
+    
+    if (error != nil) {
+        if (outError != nil) *outError = error;
+        return nil;
+    }
+    
+    BOOL mergeChanges = [entity grt_hasIdentity];
+    
+    return [entity grt_importJSONDictionary:JSONDictionary
+                                  inContext:context
+                               mergeChanges:mergeChanges
+                                      error:outError];
 }
 
 + (nullable NSArray *)objectsWithEntityName:(NSString *)entityName
                               fromJSONArray:(NSArray *)JSONArray
                                   inContext:(NSManagedObjectContext *)context
-                                      error:(NSError * __nullable * __nullable)outError
+                                      error:(NSError *__autoreleasing  __nullable * __nullable)outError
 {
-    // TODO: implement
-    return nil;
+    NSError *error = nil;
+    NSEntityDescription *entity = [NSEntityDescription grt_entityForName:entityName inContext:context error:&error];
+    
+    if (error != nil) {
+        if (outError != nil) *outError = error;
+        return nil;
+    }
+    
+    BOOL mergeChanges = [entity grt_hasIdentity];
+    
+    return [entity grt_importJSONArray:JSONArray
+                             inContext:context
+                          mergeChanges:mergeChanges
+                                 error:outError];
 }
 
 + (NSDictionary *)JSONDictionaryFromObject:(NSManagedObject *)object {
-    // TODO: implement
-    return nil;
+    // Keeping track of in process relationships avoids infinite recursion when serializing inverse relationships
+    NSMutableSet *relationships = [NSMutableSet set];
+    return [object grt_JSONDictionarySerializingRelationships:relationships];
 }
 
-+ (NSArray *)JSONArrayFromObjects:(NSManagedObject *)objects {
-    // TODO: implement
-    return nil;
++ (NSArray *)JSONArrayFromObjects:(NSArray *)objects {
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:objects.count];
+    
+    for (NSManagedObject *object in objects) {
+        NSDictionary *dictionary = [self JSONDictionaryFromObject:object];
+        [array addObject:dictionary];
+    }
+    
+    return array;
 }
 
 @end

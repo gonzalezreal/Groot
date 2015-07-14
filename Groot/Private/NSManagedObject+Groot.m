@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)grt_setAttribute:(NSAttributeDescription *)attribute
       fromJSONDictionary:(NSDictionary *)dictionary
             mergeChanges:(BOOL)mergeChanges
-                   error:(NSError * __nullable * __nullable)error
+                   error:(NSError *__autoreleasing  __nullable * __nullable)outError
 {
     // TODO: implement
 }
@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)grt_setRelationship:(NSRelationshipDescription *)relationship
          fromJSONDictionary:(NSDictionary *)dictionary
                mergeChanges:(BOOL)mergeChanges
-                      error:(NSError * __nullable * __nullable)error
+                      error:(NSError *__autoreleasing  __nullable * __nullable)outError
 {
     // TODO: implement
 }

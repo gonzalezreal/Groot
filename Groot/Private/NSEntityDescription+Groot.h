@@ -1,6 +1,6 @@
 // NSEntityDescription+Groot.h
 //
-// Copyright (c) 2014 Guillermo Gonzalez
+// Copyright (c) 2014-2015 Guillermo Gonzalez
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,26 @@
 
 #import <CoreData/CoreData.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NSEntityDescription (Groot)
 
++ (nullable NSEntityDescription *)grt_entityForName:(NSString *)entityName
+                                          inContext:(NSManagedObjectContext *)context
+                                              error:(NSError * __nullable * __nullable)error;
+
+- (BOOL)grt_hasIdentity;
+
+- (nullable id)grt_importJSONDictionary:(NSDictionary *)JSONDictionary
+                              inContext:(NSManagedObjectContext *)context
+                           mergeChanges:(BOOL)mergeChanges
+                                  error:(NSError * __nullable * __nullable)error;
+
+- (nullable NSArray *)grt_importJSONArray:(NSArray *)JSONArray
+                                inContext:(NSManagedObjectContext *)context
+                             mergeChanges:(BOOL)mergeChanges
+                                    error:(NSError * __nullable * __nullable)error;
+
 @end
+
+NS_ASSUME_NONNULL_END

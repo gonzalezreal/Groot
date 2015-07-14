@@ -21,7 +21,48 @@
 // THE SOFTWARE.
 
 #import "NSEntityDescription+Groot.h"
+#import "GRTError.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 @implementation NSEntityDescription (Groot)
 
++ (nullable NSEntityDescription *)grt_entityForName:(NSString *)entityName
+                                          inContext:(NSManagedObjectContext *)context
+                                              error:(NSError *__autoreleasing  __nullable * __nullable)error
+{
+    NSEntityDescription *entity = [self entityForName:entityName inManagedObjectContext:context];
+    
+    if (entity == nil && error != nil) {
+        *error = [NSError errorWithDomain:GRTErrorDomain code:GRTErrorEntityNotFound userInfo:nil];
+    }
+    
+    return entity;
+}
+
+- (BOOL)grt_hasIdentity {
+    // TODO: implement
+    return NO;
+}
+
+- (nullable id)grt_importJSONDictionary:(NSDictionary *)JSONDictionary
+                              inContext:(NSManagedObjectContext *)context
+                           mergeChanges:(BOOL)mergeChanges
+                                  error:(NSError *__autoreleasing  __nullable * __nullable)error
+{
+    // TODO: implement
+    return nil;
+}
+
+- (nullable NSArray *)grt_importJSONArray:(NSArray *)JSONArray
+                                inContext:(NSManagedObjectContext *)context
+                             mergeChanges:(BOOL)mergeChanges
+                                    error:(NSError *__autoreleasing  __nullable * __nullable)error
+{
+    // TODO: implement
+    return nil;
+}
+
 @end
+
+NS_ASSUME_NONNULL_END
