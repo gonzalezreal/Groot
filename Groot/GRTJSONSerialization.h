@@ -122,7 +122,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSDictionary *)JSONDictionaryFromManagedObject:(NSManagedObject *)managedObject __attribute__((deprecated("Replaced by -JSONDictionaryFromObject:")));
 
-+ (NSArray *)JSONArrayFromManagedObjects:(NSArray *)managedObjects __attribute__((deprecated("Replaced by -JSONArrayFromManagedObjects:")));
++ (NSArray *)JSONArrayFromManagedObjects:(NSArray *)managedObjects __attribute__((deprecated("Replaced by -JSONArrayFromObjects:")));
 
 @end
 
