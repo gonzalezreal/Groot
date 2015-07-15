@@ -23,21 +23,25 @@
 #import "NSValueTransformer+Groot.h"
 #import "GRTValueTransformer.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @implementation NSValueTransformer (Groot)
 
-+ (void)grt_setValueTransformerWithName:(nonnull NSString *)name
-                         transformBlock:(nonnull GRTTransformBlock)transformBlock
++ (void)grt_setValueTransformerWithName:(NSString *)name
+                         transformBlock:(__nullable id (^)(id value))transformBlock
 {
     GRTValueTransformer *valueTransformer = [[GRTValueTransformer alloc] initWithBlock:transformBlock];
     [self setValueTransformer:valueTransformer forName:name];
 }
 
-+ (void)grt_setValueTransformerWithName:(nonnull NSString *)name
-                         transformBlock:(nonnull GRTTransformBlock)transformBlock
-                  reverseTransformBlock:(nonnull GRTTransformBlock)reverseTransformBlock
++ (void)grt_setValueTransformerWithName:(NSString *)name
+                         transformBlock:(__nullable id (^)(id value))transformBlock
+                  reverseTransformBlock:(__nullable id (^)(id value))reverseTransformBlock
 {
     GRTReversibleValueTransformer *valueTransformer = [[GRTReversibleValueTransformer alloc] initWithForwardBlock:transformBlock reverseBlock:reverseTransformBlock];
     [self setValueTransformer:valueTransformer forName:name];
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

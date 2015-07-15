@@ -22,6 +22,8 @@
 
 #import <CoreData/CoreData.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  Manages a Core Data stack.
  */
@@ -30,17 +32,17 @@
 /**
  The persistent store coordinator.
  */
-@property (strong, nonatomic, readonly, nonnull) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (strong, nonatomic, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 /**
  The managed object model.
  */
-@property (strong, nonatomic, readonly, nonnull) NSManagedObjectModel *managedObjectModel;
+@property (strong, nonatomic, readonly) NSManagedObjectModel *managedObjectModel;
 
 /**
  The URL for this managed store.
  */
-@property (copy, nonatomic, readonly, nonnull) NSURL *URL;
+@property (copy, nonatomic, readonly) NSURL *URL;
 
 /**
  Initializes the receiver with the specified location and managed object model.
@@ -51,7 +53,7 @@
  @param model The managed object model.
  @param error If an error occurs, upon return contains an NSError object that describes the problem.
  */
-- (nullable instancetype)initWithURL:(nullable NSURL *)URL model:(nonnull NSManagedObjectModel *)managedObjectModel error:(NSError * __nullable * __nullable)error NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithURL:(nullable NSURL *)URL model:(NSManagedObjectModel *)managedObjectModel error:(NSError * __nullable * __nullable)error NS_DESIGNATED_INITIALIZER;
 
 /**
  Initializes a managed store that will persist its data in a discardable cache file.
@@ -60,7 +62,7 @@
  @param model The managed object model.
  @param error If an error occurs, upon return contains an NSError object that describes the problem.
  */
-- (nullable instancetype)initWithCacheName:(nonnull NSString *)cacheName model:(nonnull NSManagedObjectModel *)managedObjectModel error:(NSError * __nullable * __nullable)error;
+- (nullable instancetype)initWithCacheName:(NSString *)cacheName model:(NSManagedObjectModel *)managedObjectModel error:(NSError * __nullable * __nullable)error;
 
 /**
  Initializes a managed store that will persist its data in memory.
@@ -68,7 +70,7 @@
  @param model The managed object model.
  @param error If an error occurs, upon return contains an NSError object that describes the problem.
  */
-- (nullable instancetype)initWithModel:(nonnull NSManagedObjectModel *)managedObjectModel error:(NSError * __nullable * __nullable)error;
+- (nullable instancetype)initWithModel:(NSManagedObjectModel *)managedObjectModel error:(NSError * __nullable * __nullable)error;
 
 /**
  Creates and returns a managed store that will persist its data at a given location.
@@ -76,7 +78,7 @@
  @param URL The file location of the store.
  @param error If an error occurs, upon return contains an NSError object that describes the problem.
  */
-+ (nullable instancetype)storeWithURL:(nonnull NSURL *)URL error:(NSError * __nullable * __nullable)error;
++ (nullable instancetype)storeWithURL:(NSURL *)URL error:(NSError * __nullable * __nullable)error;
 
 /**
  Creates and returns a managed store that will persist its data in a discardable cache file.
@@ -84,22 +86,23 @@
  @param cacheName The file name.
  @param error If an error occurs, upon return contains an NSError object that describes the problem.
  */
-+ (nullable instancetype)storeWithCacheName:(nonnull NSString *)cacheName error:(NSError * __nullable * __nullable)error;
++ (nullable instancetype)storeWithCacheName:(NSString *)cacheName error:(NSError * __nullable * __nullable)error;
 
 /**
  Creates and returns a managed object context for this store.
  */
-- (nonnull NSManagedObjectContext *)contextWithConcurrencyType:(NSManagedObjectContextConcurrencyType)concurrencyType;
+- (NSManagedObjectContext *)contextWithConcurrencyType:(NSManagedObjectContextConcurrencyType)concurrencyType;
 
 @end
 
 @interface GRTManagedStore (Deprecated)
 
-+ (nonnull instancetype)managedStoreWithModel:(nullable NSManagedObjectModel *)managedObjectModel __attribute__((deprecated("Replaced by -initWithModel:error:")));
++ (instancetype)managedStoreWithModel:(nullable NSManagedObjectModel *)managedObjectModel __attribute__((deprecated("Replaced by -initWithModel:error:")));
 
-+ (nonnull instancetype)managedStoreWithCacheName:(nonnull NSString *)cacheName __attribute__((deprecated("Replaced by +storeWithCacheName:error:")));
++ (instancetype)managedStoreWithCacheName:(NSString *)cacheName __attribute__((deprecated("Replaced by +storeWithCacheName:error:")));
 
-- (nonnull id)initWithPath:(nullable NSString *)path managedObjectModel:(nullable NSManagedObjectModel *)managedObjectModel  __attribute__((deprecated("Replaced by -initWithURL:model:error:")));
+- (id)initWithPath:(nullable NSString *)path managedObjectModel:(nullable NSManagedObjectModel *)managedObjectModel  __attribute__((deprecated("Replaced by -initWithURL:model:error:")));
 
 @end
 
+NS_ASSUME_NONNULL_END

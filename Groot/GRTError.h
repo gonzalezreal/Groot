@@ -1,6 +1,6 @@
-// NSDictionary+Groot.h
+// GRTError.h
 //
-// Copyright (c) 2014 Guillermo Gonzalez
+// Copyright (c) 2014-2015 Guillermo Gonzalez
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,10 +22,10 @@
 
 #import <Foundation/Foundation.h>
 
-@class NSAttributeDescription;
+extern NSString * const GRTErrorDomain;
 
-@interface NSDictionary (Groot)
-
-- (id)grt_valueForAttribute:(NSAttributeDescription *)attribute;
-
-@end
+typedef NS_ENUM(NSInteger, GRTError) {
+    GRTErrorEntityNotFound,
+    GRTErrorInvalidJSONObject,
+    GRTErrorIdentityNotFound
+};
