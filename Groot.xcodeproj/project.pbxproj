@@ -36,6 +36,7 @@
 		B4E72F651B4DB9B300B9EA77 /* NSValueTransformer+Groot.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E72F631B4DB9B300B9EA77 /* NSValueTransformer+Groot.m */; };
 		B4E72F6D1B4DC4D500B9EA77 /* NSValueTransformer+Groot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E72F6C1B4DC4D500B9EA77 /* NSValueTransformer+Groot.swift */; };
 		B4E72F6F1B4DC7DA00B9EA77 /* NSValueTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E72F6E1B4DC7DA00B9EA77 /* NSValueTransformerTests.swift */; };
+		B4FD30711B569F1A002392F7 /* Groot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FD30701B569F1A002392F7 /* Groot.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		B4E72F631B4DB9B300B9EA77 /* NSValueTransformer+Groot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValueTransformer+Groot.m"; sourceTree = "<group>"; };
 		B4E72F6C1B4DC4D500B9EA77 /* NSValueTransformer+Groot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSValueTransformer+Groot.swift"; sourceTree = "<group>"; };
 		B4E72F6E1B4DC7DA00B9EA77 /* NSValueTransformerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSValueTransformerTests.swift; sourceTree = "<group>"; };
+		B4FD30701B569F1A002392F7 /* Groot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Groot.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				B4DC1AF11AA9CA5E00F67403 /* Groot.h */,
+				B4FD30701B569F1A002392F7 /* Groot.swift */,
 				B46200C01B4F07E4003B3B69 /* GRTError.h */,
 				B46200C11B4F07E4003B3B69 /* GRTError.m */,
 				B4DC1B0A1AA9CAC200F67403 /* GRTJSONSerialization.h */,
@@ -320,6 +323,7 @@
 			files = (
 				B4E72F6D1B4DC4D500B9EA77 /* NSValueTransformer+Groot.swift in Sources */,
 				B4DC1B281AA9CAC200F67403 /* NSPropertyDescription+Groot.m in Sources */,
+				B4FD30711B569F1A002392F7 /* Groot.swift in Sources */,
 				B4DC1B261AA9CAC200F67403 /* NSEntityDescription+Groot.m in Sources */,
 				B4E72F651B4DB9B300B9EA77 /* NSValueTransformer+Groot.m in Sources */,
 				B4DC1B1C1AA9CAC200F67403 /* GRTJSONSerialization.m in Sources */,
