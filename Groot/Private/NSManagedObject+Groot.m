@@ -97,7 +97,7 @@ NS_ASSUME_NONNULL_BEGIN
         }
         else {
             NSString *format = NSLocalizedString(@"Cannot serialize '%@' into relationship '%@.%@'.", @"Groot");
-            NSString *message = [NSString stringWithFormat:format, [relationship grt_JSONKeyPath], relationship.entity.name, relationship.name];
+            NSString *message = [NSString stringWithFormat:format, rawValue, relationship.entity.name, relationship.name];
             error = [NSError errorWithDomain:GRTErrorDomain
                                         code:GRTErrorInvalidJSONObject
                                     userInfo:@{ NSLocalizedDescriptionKey: message }];

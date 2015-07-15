@@ -78,7 +78,10 @@ NS_ASSUME_NONNULL_BEGIN
             if (error != nil) return; // exit the block
         }
         
-        for (NSDictionary *dictionary in array) {
+        for (id obj in array) {
+            if (![obj isKindOfClass:[NSDictionary class]]) continue;
+            
+            NSDictionary *dictionary = obj;
             NSManagedObject *managedObject = nil;
             
             if (mergeChanges) {
