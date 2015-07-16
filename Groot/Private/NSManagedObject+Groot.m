@@ -75,10 +75,11 @@ NS_ASSUME_NONNULL_BEGIN
         NSEntityDescription *destinationEntity = relationship.destinationEntity;
         
         if ([rawValue isKindOfClass:[NSDictionary class]] && !relationship.toMany) {
-            NSManagedObject *managedObject = [destinationEntity grt_importJSONDictionary:rawValue
-                                                                               inContext:self.managedObjectContext
-                                                                            mergeChanges:mergeChanges
-                                                                                   error:&error];
+            NSManagedObject *managedObject = [destinationEntity grt_importJSONArray:@[rawValue]
+                                                                          inContext:self.managedObjectContext
+                                                                       mergeChanges:mergeChanges
+                                                                              error:&error].firstObject;
+            
             if (managedObject != nil) {
                 value = managedObject;
             }

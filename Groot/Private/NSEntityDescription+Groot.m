@@ -48,15 +48,6 @@ NS_ASSUME_NONNULL_BEGIN
     return [self grt_identityAttribute] != nil;
 }
 
-- (nullable id)grt_importJSONDictionary:(NSDictionary *)dictionary
-                              inContext:(NSManagedObjectContext *)context
-                           mergeChanges:(BOOL)mergeChanges
-                                  error:(NSError *__autoreleasing  __nullable * __nullable)outError
-{
-    NSArray *managedObjects = [self grt_importJSONArray:@[dictionary] inContext:context mergeChanges:mergeChanges error:outError];
-    return managedObjects.firstObject;
-}
-
 - (nullable NSArray *)grt_importJSONArray:(NSArray *)array
                                 inContext:(NSManagedObjectContext *)context
                              mergeChanges:(BOOL)mergeChanges

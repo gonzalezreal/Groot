@@ -69,10 +69,10 @@ NS_ASSUME_NONNULL_BEGIN
     
     BOOL mergeChanges = [entity grt_hasIdentity];
     
-    return [entity grt_importJSONDictionary:JSONDictionary
-                                  inContext:context
-                               mergeChanges:mergeChanges
-                                      error:outError];
+    return [entity grt_importJSONArray:@[JSONDictionary]
+                             inContext:context
+                          mergeChanges:mergeChanges
+                                 error:outError].firstObject;
 }
 
 + (nullable NSArray *)objectsWithEntityName:(NSString *)entityName
