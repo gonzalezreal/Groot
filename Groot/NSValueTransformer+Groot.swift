@@ -68,8 +68,11 @@ public extension NSValueTransformer {
      :param: map The function that performs the mapping.
     */
     class func setEntityMapperWithName(name: String, map: ([String: AnyObject]) -> (String?)) {
-        grt_setEntityMapperWithName(name) { dictionary in
-            return (dictionary as? [String: AnyObject]).flatMap(map)
+        grt_setEntityMapperWithName(name) { value in
+            if let dictionary = value as? [String: AnyObject] {
+                return map(dictionary)
+            }
+            return nil
         }
     }
 }

@@ -48,13 +48,15 @@ class NSValueTransformerTests: XCTestCase {
 
     func testEntityMapper() {
         func entityForJSONDictionary(dictionary: [String: AnyObject]) -> String? {
-            let entitiesByType = [
-                "A": "ConcreteA",
-                "B": "ConcreteB"
-            ]
-            
             if let type = dictionary["type"] as? String {
-                return entitiesByType[type]
+                switch type {
+                case "A":
+                    return "ConcreteA"
+                case "B":
+                    return "ConcreteB"
+                default:
+                    return nil
+                }
             }
             return nil
         }
