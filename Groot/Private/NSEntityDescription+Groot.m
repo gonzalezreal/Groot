@@ -140,7 +140,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable id)grt_identifierInJSONDictionary:(NSDictionary *)dictionary {
     NSAttributeDescription *identityAttribute = [self grt_identityAttribute];
     if (identityAttribute != nil) {
-        return [identityAttribute grt_valueInJSONDictionary:dictionary];
+        return [identityAttribute grt_valueForJSONValue:dictionary];
     }
     
     return nil;

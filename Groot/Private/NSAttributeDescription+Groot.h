@@ -32,9 +32,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSValueTransformer *)grt_JSONTransformer;
 
 /**
- Returns the value for this attribute in a given JSON object.
+ Returns the value for this attribute in a given JSON value.
  */
-- (nullable id)grt_valueInJSONDictionary:(NSDictionary *)dictionary;
+- (nullable id)grt_valueForJSONValue:(id)value;
 
 /**
  Returns all the values for this attribute in a given JSON array.
