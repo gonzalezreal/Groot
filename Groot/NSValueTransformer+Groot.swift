@@ -38,11 +38,11 @@ public extension NSValueTransformer {
     }
     
     /**
-    Registers a reversible value transformer with a given name and transform functions.
+     Registers a reversible value transformer with a given name and transform functions.
     
-    :param: name The name of the transformer.
-    :param: transform The function that performs the forward transformation.
-    :param: reverseTransform The function that performs the reverse transformation.
+     :param: name The name of the transformer.
+     :param: transform The function that performs the forward transformation.
+     :param: reverseTransform The function that performs the reverse transformation.
     */
     class func setValueTransformerWithName<T, U>(name: String, transform: (T) -> (U?), reverseTransform: (U) -> (T?)) {
         grt_setValueTransformerWithName(name, transformBlock: { value in
@@ -54,5 +54,22 @@ public extension NSValueTransformer {
                     reverseTransform($0) as? AnyObject
                 }
         })
+    }
+    
+    /**
+     Registers an entity mapper with a given name and map block.
+    
+     An entity mapper maps a JSON dictionary to an entity name.
+    
+     Entity mappers can be associated with abstract core data entities in the user info
+     dictionary by using the `entityMapperName` key.
+    
+     :param: name The name of the mapper.
+     :param: map The function that performs the mapping.
+    */
+    class func setEntityMapperWithName(name: String, map: ([String: AnyObject]) -> (String?)) {
+        grt_setEntityMapperWithName(name) { dictionary in
+            return (dictionary as? [String: AnyObject]).flatMap(map)
+        }
     }
 }

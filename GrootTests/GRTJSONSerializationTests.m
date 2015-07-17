@@ -34,6 +34,15 @@
     } reverseTransformBlock:^id(NSNumber *value) {
         return [value stringValue];
     }];
+    
+    [NSValueTransformer grt_setEntityMapperWithName:@"GrootTests.Abstract" mapBlock:^NSString *(NSDictionary *JSONDictionary) {
+        NSDictionary *entityMapping = @{
+            @"A": @"ConcreteA",
+            @"B": @"ConcreteB"
+        };
+        NSString *type = JSONDictionary[@"type"];
+        return entityMapping[type];
+    }];
 }
 
 - (void)tearDown {

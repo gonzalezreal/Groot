@@ -32,6 +32,141 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation NSManagedObject (Groot)
 
+- (void)grt_importJSONDictionary:(NSDictionary *)dictionary
+                    mergeChanges:(BOOL)mergeChanges
+                           error:(NSError *__autoreleasing  __nullable * __nullable)outError
+{
+    NSError * __block error = nil;
+    NSDictionary *propertiesByName = self.entity.propertiesByName;
+    
+    [propertiesByName enumerateKeysAndObjectsUsingBlock:^(NSString *name, NSPropertyDescription *property, BOOL *stop) {
+        if (![property grt_JSONSerializable]) {
+            return; // continue
+        }
+        
+        if ([property isKindOfClass:[NSAttributeDescription class]]) {
+            NSAttributeDescription *attribute = (NSAttributeDescription *)property;
+            [self grt_setAttribute:attribute fromJSONDictionary:dictionary mergeChanges:mergeChanges error:&error];
+        } else if ([property isKindOfClass:[NSRelationshipDescription class]]) {
+            NSRelationshipDescription *relationship = (NSRelationshipDescription *)property;
+            [self grt_setRelationship:relationship fromJSONDictionary:dictionary mergeChanges:mergeChanges error:&error];
+        }
+        
+        *stop = (error != nil); // break on error
+    }];
+    
+    if (error != nil && outError != nil) {
+        *outError = error;
+    }
+}
+
+- (void)grt_importJSONValue:(id)value error:(NSError *__autoreleasing  __nullable * __nullable)outError {
+    NSAttributeDescription *attribute = [self.entity grt_identityAttribute];
+    
+    if (attribute == nil) {
+        if (outError) {
+            NSString *format = NSLocalizedString(@"%@ has no identity attribute", @"Groot");
+            NSString *message = [NSString stringWithFormat:format, self.entity.name];
+            *outError = [NSError errorWithDomain:GRTErrorDomain
+                                            code:GRTErrorIdentityNotFound
+                                        userInfo:@{ NSLocalizedDescriptionKey: message }];
+        }
+        
+        return;
+    }
+    
+    id identifier = [attribute grt_valueForJSONValue:value];
+    
+    if ([self validateValue:&identifier forKey:attribute.name error:outError]) {
+        [self setValue:identifier forKey:attribute.name];
+    }
+}
+
+- (NSDictionary *)grt_JSONDictionarySerializingRelationships:(NSMutableSet *)serializingRelationships {
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+    
+    NSManagedObjectContext *context = self.managedObjectContext;
+    NSDictionary *propertiesByName = self.entity.propertiesByName;
+    
+    [context performBlockAndWait:^{
+        for (NSString *name in propertiesByName) {
+            NSPropertyDescription *property = propertiesByName[name];
+            
+            if (![property grt_JSONSerializable]) {
+                continue;
+            }
+            
+            NSString *keyPath = [property grt_JSONKeyPath];
+            id value = [self valueForKey:name];
+            
+            if (value == nil) {
+                value = [NSNull null];
+            } else {
+                if ([property isKindOfClass:[NSAttributeDescription class]]) {
+                    NSAttributeDescription *attribute = (NSAttributeDescription *)property;
+                    NSValueTransformer *transformer = [attribute grt_JSONTransformer];
+                    
+                    if (transformer && [[transformer class] allowsReverseTransformation]) {
+                        value = [transformer reverseTransformedValue:value];
+                    }
+                } else if ([property isKindOfClass:[NSRelationshipDescription class]]) {
+                    NSRelationshipDescription *relationship = (NSRelationshipDescription *)property;
+                    NSRelationshipDescription *inverseRelationship = relationship.inverseRelationship;
+                    
+                    if ([serializingRelationships containsObject:inverseRelationship]) {
+                        // Skip if the inverse relationship is being serialized
+                        continue;
+                    }
+                    
+                    [serializingRelationships addObject:relationship];
+                    
+                    if (relationship.toMany) {
+                        NSArray *managedObjects = @[];
+                        if ([value isKindOfClass:[NSOrderedSet class]]) {
+                            NSOrderedSet *set = value;
+                            managedObjects = set.array;
+                        } else if ([value isKindOfClass:[NSSet class]]) {
+                            NSSet *set = value;
+                            managedObjects = set.allObjects;
+                        }
+                        
+                        NSMutableArray *array = [NSMutableArray arrayWithCapacity:managedObjects.count];
+                        for (NSManagedObject *managedObject in managedObjects) {
+                            NSDictionary *dictionary = [managedObject grt_JSONDictionarySerializingRelationships:serializingRelationships];
+                            [array addObject:dictionary];
+                        }
+                        value = array;
+                    } else {
+                        NSManagedObject *managedObject = value;
+                        value = [managedObject grt_JSONDictionarySerializingRelationships:serializingRelationships];
+                    }
+                }
+            }
+            
+            NSMutableArray *components = [[keyPath componentsSeparatedByString:@"."] mutableCopy];
+            [components removeLastObject];
+            
+            if (components.count > 0) {
+                // Create a dictionary for each key path component
+                NSMutableDictionary *tmpDictionary = dictionary;
+                for (NSString *component in components) {
+                    if (tmpDictionary[component] == nil) {
+                        tmpDictionary[component] = [NSMutableDictionary dictionary];
+                    }
+                    
+                    tmpDictionary = tmpDictionary[component];
+                }
+            }
+            
+            [dictionary setValue:value forKeyPath:keyPath];
+        }
+    }];
+    
+    return [dictionary copy];
+}
+
+#pragma mark - Private
+
 - (void)grt_setAttribute:(NSAttributeDescription *)attribute
       fromJSONDictionary:(NSDictionary *)dictionary
             mergeChanges:(BOOL)mergeChanges
@@ -117,89 +252,6 @@ NS_ASSUME_NONNULL_BEGIN
     if ([self validateValue:&value forKey:relationship.name error:outError]) {
         [self setValue:value forKey:relationship.name];
     }
-}
-
-- (NSDictionary *)grt_JSONDictionarySerializingRelationships:(NSMutableSet *)serializingRelationships {
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-    
-    NSManagedObjectContext *context = self.managedObjectContext;
-    NSDictionary *propertiesByName = self.entity.propertiesByName;
-    
-    [context performBlockAndWait:^{
-        for (NSString *name in propertiesByName) {
-            NSPropertyDescription *property = propertiesByName[name];
-            
-            if (![property grt_JSONSerializable]) {
-                continue;
-            }
-            
-            NSString *keyPath = [property grt_JSONKeyPath];
-            id value = [self valueForKey:name];
-            
-            if (value == nil) {
-                value = [NSNull null];
-            } else {
-                if ([property isKindOfClass:[NSAttributeDescription class]]) {
-                    NSAttributeDescription *attribute = (NSAttributeDescription *)property;
-                    NSValueTransformer *transformer = [attribute grt_JSONTransformer];
-                    
-                    if (transformer && [[transformer class] allowsReverseTransformation]) {
-                        value = [transformer reverseTransformedValue:value];
-                    }
-                } else if ([property isKindOfClass:[NSRelationshipDescription class]]) {
-                    NSRelationshipDescription *relationship = (NSRelationshipDescription *)property;
-                    NSRelationshipDescription *inverseRelationship = relationship.inverseRelationship;
-                    
-                    if ([serializingRelationships containsObject:inverseRelationship]) {
-                        // Skip if the inverse relationship is being serialized
-                        continue;
-                    }
-                    
-                    [serializingRelationships addObject:relationship];
-                    
-                    if (relationship.toMany) {
-                        NSArray *managedObjects = @[];
-                        if ([value isKindOfClass:[NSOrderedSet class]]) {
-                            NSOrderedSet *set = value;
-                            managedObjects = set.array;
-                        } else if ([value isKindOfClass:[NSSet class]]) {
-                            NSSet *set = value;
-                            managedObjects = set.allObjects;
-                        }
-                        
-                        NSMutableArray *array = [NSMutableArray arrayWithCapacity:managedObjects.count];
-                        for (NSManagedObject *managedObject in managedObjects) {
-                            NSDictionary *dictionary = [managedObject grt_JSONDictionarySerializingRelationships:serializingRelationships];
-                            [array addObject:dictionary];
-                        }
-                        value = array;
-                    } else {
-                        NSManagedObject *managedObject = value;
-                        value = [managedObject grt_JSONDictionarySerializingRelationships:serializingRelationships];
-                    }
-                }
-            }
-            
-            NSMutableArray *components = [[keyPath componentsSeparatedByString:@"."] mutableCopy];
-            [components removeLastObject];
-            
-            if (components.count > 0) {
-                // Create a dictionary for each key path component
-                NSMutableDictionary *tmpDictionary = dictionary;
-                for (NSString *component in components) {
-                    if (tmpDictionary[component] == nil) {
-                        tmpDictionary[component] = [NSMutableDictionary dictionary];
-                    }
-                    
-                    tmpDictionary = tmpDictionary[component];
-                }
-            }
-            
-            [dictionary setValue:value forKeyPath:keyPath];
-        }
-    }];
-    
-    return [dictionary copy];
 }
 
 @end

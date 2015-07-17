@@ -67,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
         return nil;
     }
     
-    BOOL mergeChanges = [entity grt_hasIdentity];
+    BOOL mergeChanges = [entity grt_identityAttribute] != nil;
     
     return [entity grt_importJSONArray:@[JSONDictionary]
                              inContext:context
@@ -88,7 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
         return nil;
     }
     
-    BOOL mergeChanges = [entity grt_hasIdentity];
+    BOOL mergeChanges = [entity grt_identityAttribute] != nil;
     
     return [entity grt_importJSONArray:JSONArray
                              inContext:context
