@@ -386,6 +386,28 @@
     XCTAssertEqual(NSValidationMissingMandatoryPropertyError, error.code);
 }
 
+- (void)testSerializationWithEntityInheritance {
+    NSData *data = [NSData grt_dataWithContentsOfResource:@"container.json"];
+    XCTAssertNotNil(data, @"container.json not found");
+    
+    NSError *error = nil;
+    NSArray *objects = [GRTJSONSerialization objectsWithEntityName:@"Container" fromJSONData:data inContext:self.context error:&error];
+    XCTAssertNil(error);
+    XCTAssertEqual(1U, objects.count);
+    
+    GRTContainer *container = objects[0];
+    
+    GRTConcreteA *concreteA = container.abstracts[0];
+    XCTAssertEqualObjects(@"ConcreteA", concreteA.entity.name);
+    XCTAssertEqualObjects(@1, concreteA.identifier);
+    XCTAssertEqualObjects(@"this is A", concreteA.foo);
+    
+    GRTConcreteB *concreteB = container.abstracts[1];
+    XCTAssertEqualObjects(@"ConcreteB", concreteB.entity.name);
+    XCTAssertEqualObjects(@2, concreteB.identifier);
+    XCTAssertEqualObjects(@"this is B", concreteB.bar);
+}
+
 - (void)testSerializationToJSON {
     GRTPublisher *dc = [NSEntityDescription insertNewObjectForEntityForName:@"Publisher" inManagedObjectContext:self.context];
     dc.identifier = @10;

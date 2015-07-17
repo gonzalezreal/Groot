@@ -1,0 +1,14 @@
+{
+	"abstracts": [
+		{
+			"id": 1,
+			"type": "A",
+			"foo": "this is A"
+		},
+		{
+			"id": 2,
+			"type": "B",
+			"bar": "this is B"
+		}
+	]
+}
