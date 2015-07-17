@@ -26,15 +26,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSManagedObject (Groot)
 
-- (void)grt_setAttribute:(NSAttributeDescription *)attribute
-      fromJSONDictionary:(NSDictionary *)dictionary
-            mergeChanges:(BOOL)mergeChanges
-                   error:(NSError * __nullable * __nullable)error;
+- (void)grt_importJSONDictionary:(NSDictionary *)dictionary
+                    mergeChanges:(BOOL)mergeChanges
+                           error:(NSError *__autoreleasing  __nullable * __nullable)error;
 
-- (void)grt_setRelationship:(NSRelationshipDescription *)relationship
-         fromJSONDictionary:(NSDictionary *)dictionary
-               mergeChanges:(BOOL)mergeChanges
-                      error:(NSError * __nullable * __nullable)error;
+- (void)grt_importJSONValue:(id)value error:(NSError *__autoreleasing  __nullable * __nullable)error;
 
 - (NSDictionary *)grt_JSONDictionarySerializingRelationships:(NSMutableSet *)serializingRelationships;
 

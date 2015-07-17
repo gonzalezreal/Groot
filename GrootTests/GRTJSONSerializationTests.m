@@ -34,6 +34,15 @@
     } reverseTransformBlock:^id(NSNumber *value) {
         return [value stringValue];
     }];
+    
+    [NSValueTransformer grt_setEntityMapperWithName:@"GrootTests.Abstract" mapBlock:^NSString *(NSDictionary *JSONDictionary) {
+        NSDictionary *entityMapping = @{
+            @"A": @"ConcreteA",
+            @"B": @"ConcreteB"
+        };
+        NSString *type = JSONDictionary[@"type"];
+        return entityMapping[type];
+    }];
 }
 
 - (void)tearDown {
@@ -384,6 +393,39 @@
     XCTAssertNotNil(error);
     XCTAssertEqualObjects(NSCocoaErrorDomain, error.domain);
     XCTAssertEqual(NSValidationMissingMandatoryPropertyError, error.code);
+}
+
+- (void)testSerializationWithEntityInheritance {
+    NSData *data = [NSData grt_dataWithContentsOfResource:@"container.json"];
+    XCTAssertNotNil(data, @"container.json not found");
+    
+    NSError *error = nil;
+    NSArray *objects = [GRTJSONSerialization objectsWithEntityName:@"Container" fromJSONData:data inContext:self.context error:&error];
+    XCTAssertNil(error);
+    XCTAssertEqual(1U, objects.count);
+    
+    GRTContainer *container = objects[0];
+    
+    GRTConcreteA *concreteA = container.abstracts[0];
+    XCTAssertEqualObjects(@"ConcreteA", concreteA.entity.name);
+    XCTAssertEqualObjects(@1, concreteA.identifier);
+    XCTAssertEqualObjects(@"this is A", concreteA.foo);
+    
+    GRTConcreteB *concreteB = container.abstracts[1];
+    XCTAssertEqualObjects(@"ConcreteB", concreteB.entity.name);
+    XCTAssertEqualObjects(@2, concreteB.identifier);
+    XCTAssertEqualObjects(@"this is B", concreteB.bar);
+    
+    NSDictionary *updateConcreteA = @{
+        @"id": @1,
+        @"foo": @"A has been updated"
+    };
+    
+    concreteA = [GRTJSONSerialization objectWithEntityName:@"Abstract" fromJSONDictionary:updateConcreteA inContext:self.context error:&error];
+    XCTAssertNil(error);
+    XCTAssertEqualObjects(@"ConcreteA", concreteA.entity.name);
+    XCTAssertEqualObjects(@1, concreteA.identifier);
+    XCTAssertEqualObjects(@"A has been updated", concreteA.foo);
 }
 
 - (void)testSerializationToJSON {

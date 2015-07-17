@@ -44,8 +44,20 @@ NS_ASSUME_NONNULL_BEGIN
     return entity;
 }
 
-- (BOOL)grt_hasIdentity {
-    return [self grt_identityAttribute] != nil;
+- (nullable NSAttributeDescription *)grt_identityAttribute {
+    NSString *attributeName = nil;
+    NSEntityDescription *entity = self;
+    
+    while (entity != nil && attributeName == nil) {
+        attributeName = entity.userInfo[@"identityAttribute"];
+        entity = [entity superentity];
+    }
+    
+    if (attributeName != nil) {
+        return self.attributesByName[attributeName];
+    }
+    
+    return nil;
 }
 
 - (nullable NSArray *)grt_importJSONArray:(NSArray *)array
@@ -77,9 +89,9 @@ NS_ASSUME_NONNULL_BEGIN
             NSManagedObject *managedObject = [self grt_managedObjectForJSONValue:obj inContext:context existingObjects:existingObjects];
             
             if ([obj isKindOfClass:[NSDictionary class]]) {
-                [self grt_importJSONDictionary:obj inManagedObject:managedObject mergeChanges:mergeChanges error:&error];
+                [managedObject grt_importJSONDictionary:obj mergeChanges:mergeChanges error:&error];
             } else {
-                [self grt_importJSONValue:obj inManagedObject:managedObject error:&error];
+                [managedObject grt_importJSONValue:obj error:&error];
             }
             
             if (error == nil) {
@@ -113,20 +125,24 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Private
 
-- (nullable NSAttributeDescription *)grt_identityAttribute {
-    NSString *attributeName = nil;
-    NSEntityDescription *entity = self;
+- (nullable NSValueTransformer *)grt_entityMapper {
+    NSString *name = self.userInfo[@"entityMapperName"];
     
-    while (entity != nil && attributeName == nil) {
-        attributeName = entity.userInfo[@"identityAttribute"];
-        entity = [entity superentity];
+    if (name == nil) {
+        return nil;
     }
     
-    if (attributeName != nil) {
-        return self.attributesByName[attributeName];
+    return [NSValueTransformer valueTransformerForName:name];
+}
+
+- (NSString *)grt_entityNameForJSONValue:(id)value {
+    NSString *name = nil;
+    
+    if ([value isKindOfClass:[NSDictionary class]]) {
+        name = [[self grt_entityMapper] transformedValue:value];
     }
     
-    return nil;
+    return name ? : self.name;
 }
 
 - (nullable NSDictionary *)grt_existingObjectsWithJSONArray:(NSArray *)array
@@ -185,63 +201,11 @@ NS_ASSUME_NONNULL_BEGIN
     }
     
     if (managedObject == nil) {
-        managedObject = [[self class] insertNewObjectForEntityForName:self.name inManagedObjectContext:context];
+        NSString *entityName = [self grt_entityNameForJSONValue:value];
+        managedObject = [[self class] insertNewObjectForEntityForName:entityName inManagedObjectContext:context];
     }
     
     return managedObject;
-}
-
-- (void)grt_importJSONDictionary:(NSDictionary *)dictionary
-                 inManagedObject:(NSManagedObject *)managedObject
-                    mergeChanges:(BOOL)mergeChanges
-                           error:(NSError *__autoreleasing  __nullable * __nullable)outError
-{
-    NSError * __block error = nil;
-    
-    [self.propertiesByName enumerateKeysAndObjectsUsingBlock:^(NSString *name, NSPropertyDescription *property, BOOL *stop) {
-        if (![property grt_JSONSerializable]) {
-            return; // continue
-        }
-        
-        if ([property isKindOfClass:[NSAttributeDescription class]]) {
-            NSAttributeDescription *attribute = (NSAttributeDescription *)property;
-            [managedObject grt_setAttribute:attribute fromJSONDictionary:dictionary mergeChanges:mergeChanges error:&error];
-        } else if ([property isKindOfClass:[NSPropertyDescription class]]) {
-            NSRelationshipDescription *relationship = (NSRelationshipDescription *)property;
-            [managedObject grt_setRelationship:relationship fromJSONDictionary:dictionary mergeChanges:mergeChanges error:&error];
-        }
-        
-        *stop = (error != nil); // break on error
-    }];
-    
-    if (error != nil && outError != nil) {
-        *outError = error;
-    }
-}
-
-- (void)grt_importJSONValue:(id)value
-            inManagedObject:(NSManagedObject *)managedObject
-                      error:(NSError *__autoreleasing  __nullable * __nullable)outError
-{
-    NSAttributeDescription *attribute = [self grt_identityAttribute];
-    
-    if (attribute == nil) {
-        if (outError) {
-            NSString *format = NSLocalizedString(@"%@ has no identity attribute", @"Groot");
-            NSString *message = [NSString stringWithFormat:format, self.name];
-            *outError = [NSError errorWithDomain:GRTErrorDomain
-                                            code:GRTErrorIdentityNotFound
-                                        userInfo:@{ NSLocalizedDescriptionKey: message }];
-        }
-        
-        return;
-    }
-    
-    id identifier = [attribute grt_valueForJSONValue:value];
-    
-    if ([managedObject validateValue:&identifier forKey:attribute.name error:outError]) {
-        [managedObject setValue:identifier forKey:attribute.name];
-    }
 }
 
 @end

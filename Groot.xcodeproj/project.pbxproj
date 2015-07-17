@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B409C7301B5979E700C47D48 /* container.json in Resources */ = {isa = PBXBuildFile; fileRef = B409C72F1B5979E700C47D48 /* container.json */; };
 		B42A1D931B56600000309637 /* characters.json in Resources */ = {isa = PBXBuildFile; fileRef = B42A1D911B56600000309637 /* characters.json */; };
 		B42A1D941B56600000309637 /* characters_update.json in Resources */ = {isa = PBXBuildFile; fileRef = B42A1D921B56600000309637 /* characters_update.json */; };
 		B42A1D971B56614600309637 /* NSData+Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = B42A1D961B56614600309637 /* NSData+Resource.m */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B409C72F1B5979E700C47D48 /* container.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = container.json; sourceTree = "<group>"; };
 		B42A1D911B56600000309637 /* characters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = characters.json; sourceTree = "<group>"; };
 		B42A1D921B56600000309637 /* characters_update.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = characters_update.json; sourceTree = "<group>"; };
 		B42A1D951B56614600309637 /* NSData+Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Resource.h"; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 			children = (
 				B42A1D911B56600000309637 /* characters.json */,
 				B42A1D921B56600000309637 /* characters_update.json */,
+				B409C72F1B5979E700C47D48 /* container.json */,
 			);
 			path = JSON;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 			files = (
 				B42A1D941B56600000309637 /* characters_update.json in Resources */,
 				B42A1D931B56600000309637 /* characters.json in Resources */,
+				B409C7301B5979E700C47D48 /* container.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

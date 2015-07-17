@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
                                           inContext:(NSManagedObjectContext *)context
                                               error:(NSError * __nullable * __nullable)error;
 
-- (BOOL)grt_hasIdentity;
+- (nullable NSAttributeDescription *)grt_identityAttribute;
 
 - (nullable NSArray *)grt_importJSONArray:(NSArray *)array
                                 inContext:(NSManagedObjectContext *)context

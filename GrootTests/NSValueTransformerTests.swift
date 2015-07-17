@@ -46,4 +46,26 @@ class NSValueTransformerTests: XCTestCase {
         XCTAssertNil(transformer.reverseTransformedValue("not a number"), "should handle unsupported values")
     }
 
+    func testEntityMapper() {
+        func entityForJSONDictionary(dictionary: [String: AnyObject]) -> String? {
+            if let type = dictionary["type"] as? String {
+                switch type {
+                case "A":
+                    return "ConcreteA"
+                case "B":
+                    return "ConcreteB"
+                default:
+                    return nil
+                }
+            }
+            return nil
+        }
+        
+        NSValueTransformer.setEntityMapperWithName("testEntityMapper", map: entityForJSONDictionary)
+        
+        let transformer = NSValueTransformer(forName: "testEntityMapper")!
+        XCTAssertEqual("ConcreteA", transformer.transformedValue(["type": "A"]) as! String, "should call the transform function")
+        XCTAssertEqual("ConcreteB", transformer.transformedValue(["type": "B"]) as! String,  "should call the transform function")
+        XCTAssertNil(transformer.transformedValue(nil), "should handle nil values")
+    }
 }

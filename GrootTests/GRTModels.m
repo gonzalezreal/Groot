@@ -34,6 +34,31 @@
 
 @end
 
+@implementation GRTContainer
+
+@dynamic abstracts;
+
+@end
+
+@implementation GRTAbstract
+
+@dynamic identifier;
+@dynamic container;
+
+@end
+
+@implementation GRTConcreteA
+
+@dynamic foo;
+
+@end
+
+@implementation GRTConcreteB
+
+@dynamic bar;
+
+@end
+
 @implementation NSManagedObjectModel (GrootTests)
 
 + (nonnull instancetype)grt_testModel {

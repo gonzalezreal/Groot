@@ -48,6 +48,20 @@ typedef __nullable id (^GRTTransformBlock)(id value);
                          transformBlock:(__nullable id (^)(id value))transformBlock
                   reverseTransformBlock:(__nullable id (^)(id value))reverseTransformBlock;
 
+/**
+ Registers an entity mapper with a given name and map block.
+ 
+ An entity mapper maps a JSON dictionary to an entity name.
+ 
+ Entity mappers can be associated with abstract core data entities in the user info
+ dictionary by using the `entityMapperName` key.
+ 
+ @param name The name of the mapper.
+ @param mapBlock The block that performs the mapping.
+ */
++ (void)grt_setEntityMapperWithName:(NSString *)name
+                           mapBlock:(NSString * __nullable (^)(NSDictionary *JSONDictionary))mapBlock;
+
 @end
 
 NS_ASSUME_NONNULL_END
