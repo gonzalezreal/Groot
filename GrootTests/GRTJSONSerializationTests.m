@@ -358,6 +358,22 @@
     XCTAssertEqualObjects(@"DC Comics", publisher.name, @"should serialize to-one relationships");
 }
 
+- (void)testSerializationFromIdentifiersFailsWithoutIdentityAttribute {
+    NSEntityDescription *characterEntity = self.store.managedObjectModel.entitiesByName[@"Character"];
+    characterEntity.userInfo = @{}; // Remove the identity attribute name from the entity
+    
+    NSArray *charactersJSON = @[@"1699", @"1455"];
+    
+    NSError *error = nil;
+    NSArray *characters = [GRTJSONSerialization objectsWithEntityName:@"Character" fromJSONArray:charactersJSON inContext:self.context error:&error];
+    
+    XCTAssertNil(characters);
+    XCTAssertNotNil(error);
+    
+    XCTAssertEqualObjects(GRTErrorDomain, error.domain);
+    XCTAssertEqual(GRTErrorIdentityNotFound, error.code, "should return an identity not found error");
+}
+
 - (void)testSerializationToJSON {
     GRTPublisher *dc = [NSEntityDescription insertNewObjectForEntityForName:@"Publisher" inManagedObjectContext:self.context];
     dc.identifier = @10;
