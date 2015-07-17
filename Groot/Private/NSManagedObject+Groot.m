@@ -70,20 +70,12 @@ NS_ASSUME_NONNULL_BEGIN
     id value = nil;
     id rawValue = [relationship grt_rawValueInJSONDictionary:dictionary];
     
-    if (rawValue != nil) {
+    if (rawValue != nil && rawValue != [NSNull null]) {
         NSError *error = nil;
         NSEntityDescription *destinationEntity = relationship.destinationEntity;
+        BOOL isArray = [rawValue isKindOfClass:[NSArray class]];
         
-        if ([rawValue isKindOfClass:[NSDictionary class]] && !relationship.toMany) {
-            NSManagedObject *managedObject = [destinationEntity grt_importJSONDictionary:rawValue
-                                                                               inContext:self.managedObjectContext
-                                                                            mergeChanges:mergeChanges
-                                                                                   error:&error];
-            if (managedObject != nil) {
-                value = managedObject;
-            }
-        }
-        else if ([rawValue isKindOfClass:[NSArray class]] && relationship.toMany) {
+        if (relationship.toMany && isArray) {
             NSArray *managedObjects = [destinationEntity grt_importJSONArray:rawValue
                                                                    inContext:self.managedObjectContext
                                                                 mergeChanges:mergeChanges
@@ -92,8 +84,15 @@ NS_ASSUME_NONNULL_BEGIN
                 value = relationship.ordered ? [NSOrderedSet orderedSetWithArray:managedObjects] : [NSSet setWithArray:managedObjects];
             }
         }
-        else if (rawValue == [NSNull null]) {
-            // Nothing to do
+        else if (!relationship.toMany && !isArray) {
+            NSManagedObject *managedObject = [destinationEntity grt_importJSONArray:@[rawValue]
+                                                                          inContext:self.managedObjectContext
+                                                                       mergeChanges:mergeChanges
+                                                                              error:&error].firstObject;
+            
+            if (managedObject != nil) {
+                value = managedObject;
+            }
         }
         else {
             NSString *format = NSLocalizedString(@"Cannot serialize '%@' into relationship '%@.%@'.", @"Groot");

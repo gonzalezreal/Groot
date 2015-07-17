@@ -30,8 +30,14 @@
     return name != nil ? [NSValueTransformer valueTransformerForName:name] : nil;
 }
 
-- (nullable id)grt_valueInJSONDictionary:(NSDictionary * __nonnull)dictionary {
-    id value = [self grt_rawValueInJSONDictionary:dictionary];
+- (nullable id)grt_valueForJSONValue:(id __nonnull)JSONValue {
+    id value = nil;
+
+    if ([JSONValue isKindOfClass:[NSDictionary class]]) {
+        value = [self grt_rawValueInJSONDictionary:JSONValue];
+    } else if ([JSONValue isKindOfClass:[NSNumber class]] || [JSONValue isKindOfClass:[NSString class]]) {
+        value = JSONValue;
+    }
     
     if (value != nil) {
         if (value == [NSNull null]) {
@@ -53,13 +59,11 @@
 - (NSArray * __nonnull)grt_valuesInJSONArray:(NSArray * __nonnull)array {
     NSMutableArray *values = [NSMutableArray arrayWithCapacity:array.count];
     
-    for (NSDictionary *object in array) {
-        if ([object isKindOfClass:[NSDictionary class]]) {
-            id value = [self grt_valueInJSONDictionary:object];
-            
-            if (value != nil) {
-                [values addObject:value];
-            }
+    for (id object in array) {
+        id value = [self grt_valueForJSONValue:object];
+        
+        if (value != nil) {
+            [values addObject:value];
         }
     }
     
