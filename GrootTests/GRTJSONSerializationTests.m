@@ -415,6 +415,17 @@
     XCTAssertEqualObjects(@"ConcreteB", concreteB.entity.name);
     XCTAssertEqualObjects(@2, concreteB.identifier);
     XCTAssertEqualObjects(@"this is B", concreteB.bar);
+    
+    NSDictionary *updateConcreteA = @{
+        @"id": @1,
+        @"foo": @"A has been updated"
+    };
+    
+    concreteA = [GRTJSONSerialization objectWithEntityName:@"Abstract" fromJSONDictionary:updateConcreteA inContext:self.context error:&error];
+    XCTAssertNil(error);
+    XCTAssertEqualObjects(@"ConcreteA", concreteA.entity.name);
+    XCTAssertEqualObjects(@1, concreteA.identifier);
+    XCTAssertEqualObjects(@"A has been updated", concreteA.foo);
 }
 
 - (void)testSerializationToJSON {
