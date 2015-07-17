@@ -99,7 +99,7 @@
         @"id": @"1699",
         @"name": @"Batman",
         @"real_name": @"Bruce Wayne",
-        @"publisher": @"DC"             // This should be a JSON dictionary
+        @"publisher": @[@"DC"]  // This should be a JSON dictionary
     };
     
     NSError *error = nil;
