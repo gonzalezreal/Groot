@@ -374,6 +374,18 @@
     XCTAssertEqual(GRTErrorIdentityNotFound, error.code, "should return an identity not found error");
 }
 
+- (void)testSerializationFromIdentifiersValidatesValues {
+    NSArray *charactersJSON = @[@"1699", [NSValue valueWithRange:NSMakeRange(0, 0)]];
+    
+    NSError *error = nil;
+    NSArray *characters = [GRTJSONSerialization objectsWithEntityName:@"Character" fromJSONArray:charactersJSON inContext:self.context error:&error];
+    
+    XCTAssertNil(characters);
+    XCTAssertNotNil(error);
+    XCTAssertEqualObjects(NSCocoaErrorDomain, error.domain);
+    XCTAssertEqual(NSValidationMissingMandatoryPropertyError, error.code);
+}
+
 - (void)testSerializationToJSON {
     GRTPublisher *dc = [NSEntityDescription insertNewObjectForEntityForName:@"Publisher" inManagedObjectContext:self.context];
     dc.identifier = @10;
