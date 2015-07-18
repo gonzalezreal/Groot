@@ -7,6 +7,37 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B408736D1B5AB6930063F150 /* Groot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B40873621B5AB6930063F150 /* Groot.framework */; };
+		B408737B1B5AB8350063F150 /* Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B4DC1AF11AA9CA5E00F67403 /* Groot.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B408737C1B5AB83D0063F150 /* Groot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FD30701B569F1A002392F7 /* Groot.swift */; };
+		B408737D1B5AB8470063F150 /* GRTError.h in Headers */ = {isa = PBXBuildFile; fileRef = B46200C01B4F07E4003B3B69 /* GRTError.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B408737E1B5AB8470063F150 /* GRTError.m in Sources */ = {isa = PBXBuildFile; fileRef = B46200C11B4F07E4003B3B69 /* GRTError.m */; };
+		B408737F1B5AB8470063F150 /* GRTJSONSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = B4DC1B0A1AA9CAC200F67403 /* GRTJSONSerialization.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B40873801B5AB8470063F150 /* GRTJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B0B1AA9CAC200F67403 /* GRTJSONSerialization.m */; };
+		B40873811B5AB8470063F150 /* GRTManagedStore.h in Headers */ = {isa = PBXBuildFile; fileRef = B4DC1B0C1AA9CAC200F67403 /* GRTManagedStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B40873821B5AB8470063F150 /* GRTManagedStore.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B0D1AA9CAC200F67403 /* GRTManagedStore.m */; };
+		B40873831B5AB8470063F150 /* NSValueTransformer+Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B4E72F621B4DB9B300B9EA77 /* NSValueTransformer+Groot.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B40873841B5AB8470063F150 /* NSValueTransformer+Groot.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E72F631B4DB9B300B9EA77 /* NSValueTransformer+Groot.m */; };
+		B40873851B5AB8470063F150 /* NSValueTransformer+Groot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E72F6C1B4DC4D500B9EA77 /* NSValueTransformer+Groot.swift */; };
+		B40873861B5AB87F0063F150 /* GRTValueTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = B4E72F5A1B4DB8EF00B9EA77 /* GRTValueTransformer.h */; };
+		B40873871B5AB87F0063F150 /* GRTValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E72F5B1B4DB8EF00B9EA77 /* GRTValueTransformer.m */; };
+		B40873881B5AB87F0063F150 /* NSPropertyDescription+Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B4DC1B171AA9CAC200F67403 /* NSPropertyDescription+Groot.h */; };
+		B40873891B5AB87F0063F150 /* NSPropertyDescription+Groot.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B181AA9CAC200F67403 /* NSPropertyDescription+Groot.m */; };
+		B408738A1B5AB87F0063F150 /* NSAttributeDescription+Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B4DC1B111AA9CAC200F67403 /* NSAttributeDescription+Groot.h */; };
+		B408738B1B5AB87F0063F150 /* NSAttributeDescription+Groot.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B121AA9CAC200F67403 /* NSAttributeDescription+Groot.m */; };
+		B408738C1B5AB87F0063F150 /* NSEntityDescription+Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B4DC1B151AA9CAC200F67403 /* NSEntityDescription+Groot.h */; };
+		B408738D1B5AB87F0063F150 /* NSEntityDescription+Groot.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B161AA9CAC200F67403 /* NSEntityDescription+Groot.m */; };
+		B408738E1B5AB87F0063F150 /* NSManagedObject+Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B475B40E1B53FCE1001F29FE /* NSManagedObject+Groot.h */; };
+		B408738F1B5AB87F0063F150 /* NSManagedObject+Groot.m in Sources */ = {isa = PBXBuildFile; fileRef = B475B40F1B53FCE1001F29FE /* NSManagedObject+Groot.m */; };
+		B40873901B5AB89C0063F150 /* NSValueTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E72F6E1B4DC7DA00B9EA77 /* NSValueTransformerTests.swift */; };
+		B40873911B5AB8A20063F150 /* GRTManagedStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B4BB8A0C1B4D17B600EBAADA /* GRTManagedStoreTests.m */; };
+		B40873921B5AB8A60063F150 /* GRTJSONSerializationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B291AA9CBAD00F67403 /* GRTJSONSerializationTests.m */; };
+		B40873931B5AB8AF0063F150 /* characters.json in Resources */ = {isa = PBXBuildFile; fileRef = B42A1D911B56600000309637 /* characters.json */; };
+		B40873941B5AB8AF0063F150 /* characters_update.json in Resources */ = {isa = PBXBuildFile; fileRef = B42A1D921B56600000309637 /* characters_update.json */; };
+		B40873951B5AB8AF0063F150 /* container.json in Resources */ = {isa = PBXBuildFile; fileRef = B409C72F1B5979E700C47D48 /* container.json */; };
+		B408739A1B5AB8DC0063F150 /* GRTModels.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B2B1AA9CBAD00F67403 /* GRTModels.m */; };
+		B408739B1B5AB8E20063F150 /* NSData+Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = B42A1D961B56614600309637 /* NSData+Resource.m */; };
+		B408739C1B5AB8E80063F150 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B2D1AA9CBAD00F67403 /* Model.xcdatamodeld */; };
 		B409C7301B5979E700C47D48 /* container.json in Resources */ = {isa = PBXBuildFile; fileRef = B409C72F1B5979E700C47D48 /* container.json */; };
 		B42A1D931B56600000309637 /* characters.json in Resources */ = {isa = PBXBuildFile; fileRef = B42A1D911B56600000309637 /* characters.json */; };
 		B42A1D941B56600000309637 /* characters_update.json in Resources */ = {isa = PBXBuildFile; fileRef = B42A1D921B56600000309637 /* characters_update.json */; };
@@ -41,6 +72,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		B408736E1B5AB6930063F150 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4DC1AE31AA9CA5E00F67403 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B40873611B5AB6930063F150;
+			remoteInfo = "Groot-Mac";
+		};
 		B4DC1AF91AA9CA5E00F67403 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B4DC1AE31AA9CA5E00F67403 /* Project object */;
@@ -51,6 +89,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B40873621B5AB6930063F150 /* Groot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Groot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B408736C1B5AB6930063F150 /* GrootTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GrootTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B409C72F1B5979E700C47D48 /* container.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = container.json; sourceTree = "<group>"; };
 		B42A1D911B56600000309637 /* characters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = characters.json; sourceTree = "<group>"; };
 		B42A1D921B56600000309637 /* characters_update.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = characters_update.json; sourceTree = "<group>"; };
@@ -90,6 +130,21 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B408735E1B5AB6930063F150 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B40873691B5AB6930063F150 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B408736D1B5AB6930063F150 /* Groot.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B4DC1AE81AA9CA5E00F67403 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -132,6 +187,8 @@
 			children = (
 				B4DC1AEC1AA9CA5E00F67403 /* Groot.framework */,
 				B4DC1AF71AA9CA5E00F67403 /* GrootTests.xctest */,
+				B40873621B5AB6930063F150 /* Groot.framework */,
+				B408736C1B5AB6930063F150 /* GrootTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -209,6 +266,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		B408735F1B5AB6930063F150 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B408738C1B5AB87F0063F150 /* NSEntityDescription+Groot.h in Headers */,
+				B408737B1B5AB8350063F150 /* Groot.h in Headers */,
+				B40873831B5AB8470063F150 /* NSValueTransformer+Groot.h in Headers */,
+				B408737D1B5AB8470063F150 /* GRTError.h in Headers */,
+				B408738A1B5AB87F0063F150 /* NSAttributeDescription+Groot.h in Headers */,
+				B40873881B5AB87F0063F150 /* NSPropertyDescription+Groot.h in Headers */,
+				B408738E1B5AB87F0063F150 /* NSManagedObject+Groot.h in Headers */,
+				B40873811B5AB8470063F150 /* GRTManagedStore.h in Headers */,
+				B40873861B5AB87F0063F150 /* GRTValueTransformer.h in Headers */,
+				B408737F1B5AB8470063F150 /* GRTJSONSerialization.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B4DC1AE91AA9CA5E00F67403 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -229,6 +303,42 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		B40873611B5AB6930063F150 /* Groot-Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B40873791B5AB6930063F150 /* Build configuration list for PBXNativeTarget "Groot-Mac" */;
+			buildPhases = (
+				B408735D1B5AB6930063F150 /* Sources */,
+				B408735E1B5AB6930063F150 /* Frameworks */,
+				B408735F1B5AB6930063F150 /* Headers */,
+				B40873601B5AB6930063F150 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Groot-Mac";
+			productName = "Groot-Mac";
+			productReference = B40873621B5AB6930063F150 /* Groot.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		B408736B1B5AB6930063F150 /* Groot-MacTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B408737A1B5AB6930063F150 /* Build configuration list for PBXNativeTarget "Groot-MacTests" */;
+			buildPhases = (
+				B40873681B5AB6930063F150 /* Sources */,
+				B40873691B5AB6930063F150 /* Frameworks */,
+				B408736A1B5AB6930063F150 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B408736F1B5AB6930063F150 /* PBXTargetDependency */,
+			);
+			name = "Groot-MacTests";
+			productName = "Groot-MacTests";
+			productReference = B408736C1B5AB6930063F150 /* GrootTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		B4DC1AEB1AA9CA5E00F67403 /* Groot */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B4DC1B021AA9CA5E00F67403 /* Build configuration list for PBXNativeTarget "Groot" */;
@@ -274,6 +384,12 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Guillermo Gonzalez";
 				TargetAttributes = {
+					B40873611B5AB6930063F150 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					B408736B1B5AB6930063F150 = {
+						CreatedOnToolsVersion = 6.4;
+					};
 					B4DC1AEB1AA9CA5E00F67403 = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
@@ -296,11 +412,30 @@
 			targets = (
 				B4DC1AEB1AA9CA5E00F67403 /* Groot */,
 				B4DC1AF61AA9CA5E00F67403 /* GrootTests */,
+				B40873611B5AB6930063F150 /* Groot-Mac */,
+				B408736B1B5AB6930063F150 /* Groot-MacTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B40873601B5AB6930063F150 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B408736A1B5AB6930063F150 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B40873941B5AB8AF0063F150 /* characters_update.json in Resources */,
+				B40873951B5AB8AF0063F150 /* container.json in Resources */,
+				B40873931B5AB8AF0063F150 /* characters.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B4DC1AEA1AA9CA5E00F67403 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -321,6 +456,37 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B408735D1B5AB6930063F150 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B408738D1B5AB87F0063F150 /* NSEntityDescription+Groot.m in Sources */,
+				B40873891B5AB87F0063F150 /* NSPropertyDescription+Groot.m in Sources */,
+				B40873851B5AB8470063F150 /* NSValueTransformer+Groot.swift in Sources */,
+				B40873801B5AB8470063F150 /* GRTJSONSerialization.m in Sources */,
+				B40873841B5AB8470063F150 /* NSValueTransformer+Groot.m in Sources */,
+				B408737E1B5AB8470063F150 /* GRTError.m in Sources */,
+				B408737C1B5AB83D0063F150 /* Groot.swift in Sources */,
+				B408738B1B5AB87F0063F150 /* NSAttributeDescription+Groot.m in Sources */,
+				B40873871B5AB87F0063F150 /* GRTValueTransformer.m in Sources */,
+				B408738F1B5AB87F0063F150 /* NSManagedObject+Groot.m in Sources */,
+				B40873821B5AB8470063F150 /* GRTManagedStore.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B40873681B5AB6930063F150 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B40873901B5AB89C0063F150 /* NSValueTransformerTests.swift in Sources */,
+				B408739B1B5AB8E20063F150 /* NSData+Resource.m in Sources */,
+				B40873921B5AB8A60063F150 /* GRTJSONSerializationTests.m in Sources */,
+				B40873911B5AB8A20063F150 /* GRTManagedStoreTests.m in Sources */,
+				B408739A1B5AB8DC0063F150 /* GRTModels.m in Sources */,
+				B408739C1B5AB8E80063F150 /* Model.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B4DC1AE71AA9CA5E00F67403 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -355,6 +521,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		B408736F1B5AB6930063F150 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B40873611B5AB6930063F150 /* Groot-Mac */;
+			targetProxy = B408736E1B5AB6930063F150 /* PBXContainerItemProxy */;
+		};
 		B4DC1AFA1AA9CA5E00F67403 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B4DC1AEB1AA9CA5E00F67403 /* Groot */;
@@ -363,6 +534,94 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		B40873751B5AB6930063F150 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Groot/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = Groot;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		B40873761B5AB6930063F150 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = Groot/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = Groot;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		B40873771B5AB6930063F150 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = GrootTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = GrootTests;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		B40873781B5AB6930063F150 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = GrootTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = GrootTests;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		B4DC1B001AA9CA5E00F67403 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -518,6 +777,22 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B40873791B5AB6930063F150 /* Build configuration list for PBXNativeTarget "Groot-Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B40873751B5AB6930063F150 /* Debug */,
+				B40873761B5AB6930063F150 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		B408737A1B5AB6930063F150 /* Build configuration list for PBXNativeTarget "Groot-MacTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B40873771B5AB6930063F150 /* Debug */,
+				B40873781B5AB6930063F150 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		B4DC1AE61AA9CA5E00F67403 /* Build configuration list for PBXProject "Groot" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
