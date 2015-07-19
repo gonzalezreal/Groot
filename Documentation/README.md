@@ -1,0 +1,1 @@
+This folder contains extended documentation for using Groot.
