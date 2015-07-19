@@ -52,7 +52,7 @@ Consider the following JSON describing a well-known comic book character:
 {
     "id": "1699",
     "name": "Batman",
-    "real_name": "Bruce Wayne"
+    "real_name": "Bruce Wayne",
     "powers": [
         {
             "id": "4",
