@@ -54,7 +54,7 @@ Consider the `id` key in the previous JSON. Some web APIs send 64-bit integers a
 
 We can declare the `identifier` attribute in both the `Character` and `Publisher` entities as a 64-bit integer to save some storage space.
 
-Then we can add a `JSONTransformerName` entry to the attribute's user info dictionary with the name of the value transformer: `StringToInteger`.
+Then we can add a `JSONTransformerName` entry to each `identifier` attribute's user info dictionary with the name of the value transformer: `StringToInteger`.
 
 Finally we can create the value transformer and give it the name we just used:
 
