@@ -232,7 +232,7 @@ For more serialization options check [GRTJSONSerialization.h](Groot/GRTJSONSeria
 
 ### Entity inheritance
 
-Groot supports entity inheritance via the [entityMapperName](Documentation/Annotations.md#entityMapperName) annotation.
+Groot supports entity inheritance via the [entityMapperName](Documentation/Annotations.md#entitymappername) annotation.
 
 If you are using SQLite as your persistent store, Core Data implements entity inheritance by creating one table for the parent entity and all child entities, with a superset of all their attributes. This can obviously have unintended performance consequences if you have a lot of data in the entities, so use this feature wisely.
 
