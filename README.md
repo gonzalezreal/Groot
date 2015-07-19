@@ -3,7 +3,7 @@
 
 Groot provides a simple way of serializing Core Data object graphs from or into JSON.
 
-Groot uses [annotations](Documents/Annotations.md) in the Core Data model to perform the serialization and provides the following features:
+Groot uses [annotations](Documentation/Annotations.md) in the Core Data model to perform the serialization and provides the following features:
 
 1. Attribute and relationship mapping to JSON key paths.
 2. Value transformation using named `NSValueTransformer` objects.
