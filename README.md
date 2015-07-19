@@ -128,7 +128,107 @@ To preserve the object graph and avoid duplicating information when serializing 
 
 In our example, we should add an `identityAttribute` entry to the `Character`, `Power` and `Publisher` entities user dictionaries with the value `identifier`.
 
+For more information about annotating your model have a look at [Annotations](Documentation/Annotations.md).
+
 ### Serializing from JSON
+
+Now that we have our Core Data model ready we can start adding some data.
+
+```swift
+// Swift
+
+let batmanJSON: JSONObject = [
+    "name": "Batman",
+    "id": "1699",
+    "powers": [
+        [
+            "id": "4",
+            "name": "Agility"
+        ],
+        [
+            "id": "9",
+            "name": "Insanely Rich"
+        ]
+    ],
+    "publisher": [
+        "id": "10",
+        "name": "DC Comics"
+    ]
+]
+
+let batman: Character = objectFromJSONDictionary(batmanJSON,
+        inContext: context, mergeChanges: false, error: &error)
+```
+
+```objc
+// Objective-C
+
+Character *batman = [GRTJSONSerialization objectWithEntityName:@"Character" fromJSONDictionary:batmanJSON inContext:self.context error:&error];
+```
+
+If we want to update the object we just created, Groot can merge the changes for us:
+
+```objc
+// Objective-C
+
+NSDictionary *updateJSON = @{
+    @"id": @"1699",
+    @"real_name": @"Bruce Wayne",
+};
+
+// This will return the previously created managed object
+Character *batman = [GRTJSONSerialization objectWithEntityName:@"Character" fromJSONDictionary:updateJSON inContext:self.context error:&error];
+```
+
+#### Serializing relationships from identifiers
+
+Suppose that our API does not return full objects for the relationships but only the identifiers.
+
+We don't need to change our model to support this situation:
+
+```objc
+// Objective-C
+
+NSDictionary *batmanJSON = @{
+    @"name": @"Batman",
+    @"real_name": @"Bruce Wayne",
+    @"id": @"1699",
+    @"powers": @[@"4", @"9"],
+    @"publisher": @"10"
+};
+
+Character *batman = [GRTJSONSerialization objectWithEntityName:@"Character" fromJSONDictionary:batmanJSON inContext:self.context error:&error];
+```
+
+The above code creates a full `Character` object and the corresponding relationships pointing to `Power` and `Publisher` objects that just have the identifier attribute populated.
+
+We can import powers and publisher from different JSON objects and Groot will merge them nicely:
+
+```objc
+// Objective-C
+
+NSArray *powersJSON = @[
+    @{
+        @"id": @"4",
+        @"name": @"Agility"
+    },
+    @{
+        @"id": @"9",
+        @"name": @"Insanely Rich"
+    }
+];
+
+[GRTJSONSerialization objectsWithEntityName:@"Power" fromJSONArray:powersJSON inContext:self.context error:&error];
+
+NSDictionary *publisherJSON = @{
+    @"id": @"10",
+    @"name": @"DC Comics"
+};
+
+[GRTJSONSerialization objectWithEntityName:@"Publisher" fromJSONDictionary:publisherJSON inContext:self.context error:&error];
+```
+
+For more serialization options check [GRTJSONSerialization.h](Groot/GRTJSONSerialization.h) and [Groot.swift](Groot/Groot.swift).
 
 ### Entity inheritance
 
