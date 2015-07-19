@@ -80,4 +80,12 @@ If we were not interested in serializing characters back into JSON we could omit
 
 ### `identityAttribute`
 
+Use this key to specify the name of the attribute that uniquely identifies instances of an entity.
+
+In our example, we should add an `identityAttribute` entry to both the `Character` and `Publisher` entities user dictionaries with the value `identifier`.
+
+Specifying the `identityAttribute` in an entity is essential to preserve the object graph and avoid duplicate information when serializing from JSON.
+
+Note that specifying multiple attributes for this annotation is not currently supported.
+
 ### `entityMapperName`
