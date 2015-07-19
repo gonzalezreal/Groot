@@ -77,7 +77,7 @@ We could translate this into a Core Data model using three entities: `Character`
 
 ### Mapping attributes and relationships
 
-Groot relies on the presence of certain key-value pairs in the user info dictionary associated with entities, attributes and relationships to serialize managed objects from or into JSON. These key-value pairs are often referred in the documentation as **annotations**.
+Groot relies on the presence of certain key-value pairs in the user info dictionary associated with entities, attributes and relationships to serialize managed objects from or into JSON. These key-value pairs are often referred in the documentation as [annotations](Documentation/Annotations.md).
 
 In our example, we should add a `JSONKeyPath` in the user info dictionary of each attribute and relationship specifying the corresponding key path in the JSON:
 
@@ -231,6 +231,10 @@ NSDictionary *publisherJSON = @{
 For more serialization options check [GRTJSONSerialization.h](Groot/GRTJSONSerialization.h) and [Groot.swift](Groot/Groot.swift).
 
 ### Entity inheritance
+
+Groot supports entity inheritance via the [entityMapperName](Documentation/Annotations.md#entityMapperName) annotation.
+
+If you are using SQLite as your persistent store, Core Data implements entity inheritance by creating one table for the parent entity and all child entities, with a superset of all their attributes. This can obviously have unintended performance consequences if you have a lot of data in the entities, so use this feature wisely.
 
 ### Serializing to JSON
 
