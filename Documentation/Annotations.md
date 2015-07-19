@@ -48,6 +48,32 @@ Note that if we were only interested in the publisher's name, we could drop the 
 
 ### `JSONTransformerName`
 
+With this key you can specify the name of a value transformer that will be used to transform values when serializing from or into JSON.
+
+Consider the `id` key in the previous JSON. Some web APIs send 64-bit integers as strings to support languages that have trouble consuming large integers.
+
+We can declare the `identifier` attribute in both the `Character` and `Publisher` entities as a 64-bit integer to save some storage space.
+
+Then we can add a `JSONTransformerName` entry to the attribute's user info dictionary with the name of the value transformer: `StringToInteger`.
+
+Finally we can create the value transformer and give it the name we just used:
+
+```objc
+[NSValueTransformer grt_setValueTransformerWithName:@"StringToInteger" transformBlock:^id(NSString *value) {
+    return @([value integerValue]);
+} reverseTransformBlock:^id(NSNumber *value) {
+    return [value stringValue];
+}];
+```
+
+If you don't need to serialize managed objects back into JSON, you don't need to specify a reverse transformation:
+
+```objc
+[NSValueTransformer grt_setValueTransformerWithName:@"StringToInteger" transformBlock:^id(NSString *value) {
+    return @([value integerValue]);
+}];
+```
+
 ## Entity annotations
 
 ### `identityAttribute`
