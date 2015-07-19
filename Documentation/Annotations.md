@@ -89,3 +89,43 @@ Specifying the `identityAttribute` in an entity is essential to preserve the obj
 Note that specifying multiple attributes for this annotation is not currently supported.
 
 ### `entityMapperName`
+
+If your model uses entity inheritance, use this key in the base entity to specify an entity mapper name.
+
+An entity mapper is used to determine which sub-entity is used when deserializing an object from JSON.
+
+For example, consider the following JSON:
+
+```json
+{
+	"messages": [
+		{
+			"id": 1,
+			"type": "text",
+			"text": "Hello there!"
+		},
+		{
+			"id": 2,
+			"type": "picture",
+			"image_url": "http://example.com/risitas.jpg"
+		}
+	]
+}
+```
+
+We could model this in Core Data using an abstract base entity `Message` and two concrete sub-entities `TextMessage` and `PictureMessage`.
+
+Then we need to add an `entityMapperName` entry to the `Message` entity's user info dictionary: `MessageMapper`.
+
+Finally we create the entity mapper and give it the name we just used:
+
+```objc
+[NSValueTransformer grt_setEntityMapperWithName:@"MessageMapper" mapBlock:^NSString *(NSDictionary *JSONDictionary) {
+    NSDictionary *entityMapping = @{
+        @"text": @"TextMessage",
+        @"picture": @"PictureMessage"
+    };
+    NSString *type = JSONDictionary[@"type"];
+    return entityMapping[type];
+}];
+```
