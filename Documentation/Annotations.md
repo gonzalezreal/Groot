@@ -52,11 +52,13 @@ With this key you can specify the name of a value transformer that will be used 
 
 Consider the `id` key in the previous JSON. Some web APIs send 64-bit integers as strings to support languages that have trouble consuming large integers.
 
-We can declare the `identifier` attribute in both the `Character` and `Publisher` entities as a 64-bit integer to save some storage space.
+We should store identifier values as integers instead of strings to save space.
 
-Then we can add a `JSONTransformerName` entry to each `identifier` attribute's user info dictionary with the name of the value transformer: `StringToInteger`.
+First we need to change the `identifier` attribute's type to `Integer 64` in both the `Character` and `Publisher` entities.
 
-Finally we can create the value transformer and give it the name we just used:
+Then we add a `JSONTransformerName` entry to each `identifier` attribute's user info dictionary with the name of the value transformer: `StringToInteger`.
+
+Finally we create the value transformer and give it the name we just used:
 
 ```objc
 [NSValueTransformer grt_setValueTransformerWithName:@"StringToInteger" transformBlock:^id(NSString *value) {
@@ -66,7 +68,7 @@ Finally we can create the value transformer and give it the name we just used:
 }];
 ```
 
-If you don't need to serialize managed objects back into JSON, you don't need to specify a reverse transformation:
+If we were not interested in serializing characters back into JSON we could omit the reverse transformation:
 
 ```objc
 [NSValueTransformer grt_setValueTransformerWithName:@"StringToInteger" transformBlock:^id(NSString *value) {
