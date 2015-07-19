@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
                    DESC
 
   s.homepage     = "https://github.com/gonzalezreal/Groot"
-  s.license      = { :type => "MIT", :file => "LICENSE" }
+  s.license      = { :type => "MIT", :file => "LICENSE.md" }
   
   s.author             = { "Guillermo Gonzalez" => "gonzalezreal@icloud.com" }
   s.social_media_url   = "https://twitter.com/gonzalezreal"
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   s.default_subspec = "Swift"
   
   s.subspec "Swift" do |ss|
-    ss.ios.deployment_target = "7.0"
+    ss.ios.deployment_target = "8.0"
     ss.osx.deployment_target = "10.9"
     
     ss.source_files  = "Groot/**/*.{swift,h,m}"
