@@ -3,12 +3,12 @@
 
 Groot provides a simple way of serializing Core Data object graphs from or into JSON.
 
-Groot uses the [annotations](#annotating-your-model) defined in the Core Data model to perform the serialization and provides the following features:
+Groot uses [annotations](Documents/Annotations.md) in the Core Data model to perform the serialization and provides the following features:
 
 1. Attribute and relationship mapping to JSON key paths.
-2. [Value transformation](#value-transformers) using named `NSValueTransformer` objects.
-3. [Automatic merging](#automatic-merging)
-4. Support for [Entity inheritance](#entity-inheritance-support)
+2. Value transformation using named `NSValueTransformer` objects.
+3. Object graph preservation.
+4. Support for entity inheritance
 
 ## Installing Groot
 
@@ -44,21 +44,95 @@ Follow the instructions in [Carthage’s README](https://github.com/Carthage/Car
 
 You may need to set **Embedded Content Contains Swift Code** to **YES** in the build settings for targets that only contain Objective-C code.
 
-## Annotating your model
+## Getting started
 
-An exhaustive list of user info keys and values.
-Reassure the reader that it works both ways.
-How to ignore a property.
+Consider the following JSON describing a well-known comic book character:
 
-## Value transformers
+```json
+{
+    "id": "1699",
+    "name": "Batman",
+    "real_name": "Bruce Wayne"
+    "powers": [
+        {
+            "id": "4",
+            "name": "Agility"
+        },
+        {
+            "id": "9",
+            "name": "Insanely Rich"
+        }
+    ],
+    "publisher": {
+        "id": "10",
+        "name": "DC Comics"
+    }
+}
+```
 
-## Serializing from JSON
+We could translate this into a Core Data model using three entities: `Character`, `Power` and `Publisher`.
 
-## Automatic merging
+<img src="https://cloud.githubusercontent.com/assets/373190/6988401/5346423a-da51-11e4-8bf1-a41da3a7372f.png" alt="Model" width=600 height=334/>
 
-## Entity inheritance
 
-## Serializing to JSON
+### Mapping attributes and relationships
+
+Groot relies on the presence of certain key-value pairs in the user info dictionary associated with entities, attributes and relationships to serialize managed objects from or into JSON. These key-value pairs are often referred in the documentation as **annotations**.
+
+In our example, we should add a `JSONKeyPath` in the user info dictionary of each attribute and relationship specifying the corresponding key path in the JSON:
+
+* `id` for the `identifier` attribute,
+* `name` for the `name` attribute,
+* `real_name` for the `realName` attribute,
+* `powers` for the `powers` relationship,
+* `publisher` for the `publisher` relationship,
+* etc.
+
+Attributes and relationships that don't have a `JSONKeyPath` entry are **not considered** for JSON serialization or deserialization.
+
+### Value transformers
+
+When we created the model we decided to use `Integer 64` for our `identifier` attributes. The problem is that, for compatibility reasons, the JSON uses strings for `id` values.
+
+We can add a `JSONTransformerName` entry to each `identifier` attribute's user info dictionary specifying the name of a value transformer that converts strings to numbers.
+
+Groot provides a simple way for creating and registering named value transformers:
+
+```swift
+// Swift
+
+func toString(value: Int) -> String? {
+    return "\(value)"
+}
+
+func toInt(value: String) -> Int? {
+    return value.toInt()
+}
+
+NSValueTransformer.setValueTransformerWithName("StringToInteger", transform: toString, reverseTransform: toInt)
+```
+
+```objc
+// Objective-C
+
+[NSValueTransformer grt_setValueTransformerWithName:@"StringToInteger" transformBlock:^id(NSString *value) {
+    return @([value integerValue]);
+} reverseTransformBlock:^id(NSNumber *value) {
+    return [value stringValue];
+}];
+```
+
+### Object graph preservation
+
+To preserve the object graph and avoid duplicating information when serializing managed objects from JSON, Groot needs to know how to uniquely identify your model objects.
+
+In our example, we should add an `identityAttribute` entry to the `Character`, `Power` and `Publisher` entities user dictionaries with the value `identifier`.
+
+### Serializing from JSON
+
+### Entity inheritance
+
+### Serializing to JSON
 
 ## Contact
 
