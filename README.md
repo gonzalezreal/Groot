@@ -228,7 +228,7 @@ NSDictionary *publisherJSON = @{
 [GRTJSONSerialization objectWithEntityName:@"Publisher" fromJSONDictionary:publisherJSON inContext:self.context error:&error];
 ```
 
-For more serialization options check [GRTJSONSerialization.h](Groot/GRTJSONSerialization.h) and [Groot.swift](Groot/Groot.swift).
+For more serialization methods check [GRTJSONSerialization.h](Groot/GRTJSONSerialization.h) and [Groot.swift](Groot/Groot.swift).
 
 ### Entity inheritance
 
@@ -237,6 +237,22 @@ Groot supports entity inheritance via the [entityMapperName](Documentation/Annot
 If you are using SQLite as your persistent store, Core Data implements entity inheritance by creating one table for the parent entity and all child entities, with a superset of all their attributes. This can obviously have unintended performance consequences if you have a lot of data in the entities, so use this feature wisely.
 
 ### Serializing to JSON
+
+Groot provides methods to serialize managed objects back to JSON:
+
+```swift
+// Swift
+
+let JSONDictionary = JSONDictionaryFromObject(batman)
+```
+
+```objc
+// Objective-C
+
+NSDictionary *JSONDictionary = [GRTJSONSerialization JSONDictionaryFromObject:batman];
+```
+
+For more serialization methods check [GRTJSONSerialization.h](Groot/GRTJSONSerialization.h) and [Groot.swift](Groot/Groot.swift).
 
 ## Contact
 
