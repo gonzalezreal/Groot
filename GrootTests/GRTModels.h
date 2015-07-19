@@ -8,6 +8,8 @@
 
 #import <CoreData/CoreData.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class GRTPower, GRTPublisher;
 
 @interface GRTCharacter : NSManagedObject
@@ -15,17 +17,8 @@
 @property (nonatomic, retain) NSNumber *identifier;
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString *realName;
-@property (nonatomic, retain) NSDate *birthday;
-@property (nonatomic, retain) NSOrderedSet *powers;
-@property (nonatomic, retain) GRTPublisher *publisher;
-
-@end
-
-@interface GRTPower : NSManagedObject
-
-@property (nonatomic, retain) NSNumber *identifier;
-@property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSSet *characters;
+@property (nonatomic, retain, nullable) NSOrderedSet *powers;
+@property (nonatomic, retain, nullable) GRTPublisher *publisher;
 
 @end
 
@@ -33,6 +26,47 @@
 
 @property (nonatomic, retain) NSNumber *identifier;
 @property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSSet *characters;
+@property (nonatomic, retain, nullable) NSSet *characters;
 
 @end
+
+@interface GRTPower : NSManagedObject
+
+@property (nonatomic, retain) NSNumber *identifier;
+@property (nonatomic, retain) NSString *name;
+@property (nonatomic, retain, nullable) NSSet *characters;
+
+@end
+
+@interface GRTContainer : NSManagedObject
+
+@property (nonatomic, retain, nullable) NSOrderedSet *abstracts;
+
+@end
+
+@interface GRTAbstract : NSManagedObject
+
+@property (nonatomic, retain) NSNumber *identifier;
+@property (nonatomic, retain, nullable) GRTContainer *container;
+
+@end
+
+@interface GRTConcreteA : GRTAbstract
+
+@property (nonatomic, retain) NSString *foo;
+
+@end
+
+@interface GRTConcreteB : GRTAbstract
+
+@property (nonatomic, retain) NSString *bar;
+
+@end
+
+@interface NSManagedObjectModel (GrootTests)
+
++ (nonnull instancetype)grt_testModel;
+
+@end
+
+NS_ASSUME_NONNULL_END

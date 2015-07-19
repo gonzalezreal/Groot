@@ -1,53 +1,110 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Character" representedClassName="GRTCharacter" syncable="YES">
-        <attribute name="identifier" optional="YES" attributeType="Integer 32" syncable="YES">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Abstract" representedClassName="GRTAbstract" isAbstract="YES" syncable="YES">
+        <attribute name="identifier" attributeType="Integer 32" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="id"/>
-                <entry key="JSONTransformerName" value="GRTTestTransformer"/>
             </userInfo>
         </attribute>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="realName" optional="YES" attributeType="String" syncable="YES">
+        <relationship name="container" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Container" inverseName="abstracts" inverseEntity="Container" syncable="YES"/>
+        <userInfo>
+            <entry key="entityMapperName" value="GrootTests.Abstract"/>
+            <entry key="identityAttribute" value="identifier"/>
+        </userInfo>
+    </entity>
+    <entity name="Character" representedClassName="GRTCharacter" syncable="YES">
+        <attribute name="identifier" attributeType="Integer 32" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="id"/>
+                <entry key="JSONTransformerName" value="GrootTests.Transformer"/>
+            </userInfo>
+        </attribute>
+        <attribute name="name" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="name"/>
+            </userInfo>
+        </attribute>
+        <attribute name="realName" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="real_name"/>
             </userInfo>
         </attribute>
-        <relationship name="powers" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Power" inverseName="characters" inverseEntity="Power" syncable="YES"/>
-        <relationship name="publisher" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Publisher" inverseName="characters" inverseEntity="Publisher" syncable="YES"/>
+        <relationship name="powers" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Power" inverseName="characters" inverseEntity="Power" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="powers"/>
+            </userInfo>
+        </relationship>
+        <relationship name="publisher" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Publisher" inverseName="characters" inverseEntity="Publisher" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="publisher"/>
+            </userInfo>
+        </relationship>
         <userInfo>
             <entry key="identityAttribute" value="identifier"/>
         </userInfo>
     </entity>
-    <entity name="Power" representedClassName="GRTPower" syncable="YES">
-        <attribute name="identifier" optional="YES" attributeType="Integer 32" syncable="YES">
+    <entity name="ConcreteA" representedClassName="GRTConcreteA" parentEntity="Abstract" syncable="YES">
+        <attribute name="foo" attributeType="String" syncable="YES">
             <userInfo>
-                <entry key="JSONKeyPath" value="id"/>
-                <entry key="JSONTransformerName" value="GRTTestTransformer"/>
+                <entry key="JSONKeyPath" value="foo"/>
             </userInfo>
         </attribute>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="ConcreteB" representedClassName="GRTConcreteB" parentEntity="Abstract" syncable="YES">
+        <attribute name="bar" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="bar"/>
+            </userInfo>
+        </attribute>
+    </entity>
+    <entity name="Container" representedClassName="GRTContainer" syncable="YES">
+        <relationship name="abstracts" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Abstract" inverseName="container" inverseEntity="Abstract" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="abstracts"/>
+            </userInfo>
+        </relationship>
+    </entity>
+    <entity name="Power" representedClassName="GRTPower" syncable="YES">
+        <attribute name="identifier" attributeType="Integer 32" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="id"/>
+                <entry key="JSONTransformerName" value="GrootTests.Transformer"/>
+            </userInfo>
+        </attribute>
+        <attribute name="name" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="name"/>
+            </userInfo>
+        </attribute>
         <relationship name="characters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Character" inverseName="powers" inverseEntity="Character" syncable="YES"/>
         <userInfo>
             <entry key="identityAttribute" value="identifier"/>
         </userInfo>
     </entity>
     <entity name="Publisher" representedClassName="GRTPublisher" syncable="YES">
-        <attribute name="identifier" optional="YES" attributeType="Integer 32" syncable="YES">
+        <attribute name="identifier" attributeType="Integer 32" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="id"/>
-                <entry key="JSONTransformerName" value="GRTTestTransformer"/>
+                <entry key="JSONTransformerName" value="GrootTests.Transformer"/>
             </userInfo>
         </attribute>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="name"/>
+            </userInfo>
+        </attribute>
         <relationship name="characters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Character" inverseName="publisher" inverseEntity="Character" syncable="YES"/>
         <userInfo>
             <entry key="identityAttribute" value="identifier"/>
         </userInfo>
     </entity>
     <elements>
-        <element name="Character" positionX="-317" positionY="-180" width="128" height="118"/>
-        <element name="Power" positionX="-119" positionY="-115" width="128" height="88"/>
-        <element name="Publisher" positionX="-524" positionY="-9" width="128" height="88"/>
+        <element name="Abstract" positionX="-1053" positionY="-4365" width="128" height="75"/>
+        <element name="Character" positionX="-1037" positionY="-4653" width="128" height="118"/>
+        <element name="ConcreteA" positionX="-1053" positionY="-4248" width="128" height="58"/>
+        <element name="ConcreteB" positionX="-846" positionY="-4356" width="128" height="58"/>
+        <element name="Container" positionX="-1242" positionY="-4392" width="128" height="58"/>
+        <element name="Power" positionX="-839" positionY="-4552" width="128" height="88"/>
+        <element name="Publisher" positionX="-1242" positionY="-4527" width="128" height="88"/>
     </elements>
 </model>

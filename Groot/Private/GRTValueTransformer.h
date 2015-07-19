@@ -1,6 +1,6 @@
-// GRTConstants.h
+// GRTValueTransformer.h
 // 
-// Copyright (c) 2014 Guillermo Gonzalez
+// Copyright (c) 2014-2015 Guillermo Gonzalez
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,19 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString * const GRTJSONKeyPathKey;
-extern NSString * const GRTJSONTransformerNameKey;
-extern NSString * const GRTIdentityAttributeKey;
+NS_ASSUME_NONNULL_BEGIN
+
+@interface GRTValueTransformer : NSValueTransformer
+
+- (instancetype)initWithBlock:(__nullable id (^)(id value))block;
+
+@end
+
+@interface GRTReversibleValueTransformer : GRTValueTransformer
+
+- (instancetype)initWithForwardBlock:(__nullable id (^)(id value))forwardBlock
+                        reverseBlock:(__nullable id (^)(id value))reverseBlock;
+
+@end
+
+NS_ASSUME_NONNULL_END

@@ -1,6 +1,6 @@
-// NSDictionary+Groot.h
+// NSManagedObject+Groot.h
 //
-// Copyright (c) 2014 Guillermo Gonzalez
+// Copyright (c) 2015 Guillermo Gonzalez
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,12 +20,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
-@class NSAttributeDescription;
+NS_ASSUME_NONNULL_BEGIN
 
-@interface NSDictionary (Groot)
+@interface NSManagedObject (Groot)
 
-- (id)grt_valueForAttribute:(NSAttributeDescription *)attribute;
+- (void)grt_importJSONDictionary:(NSDictionary *)dictionary
+                    mergeChanges:(BOOL)mergeChanges
+                           error:(NSError *__autoreleasing  __nullable * __nullable)error;
+
+- (void)grt_importJSONValue:(id)value error:(NSError *__autoreleasing  __nullable * __nullable)error;
+
+- (NSDictionary *)grt_JSONDictionarySerializingRelationships:(NSMutableSet *)serializingRelationships;
 
 @end
+
+NS_ASSUME_NONNULL_END

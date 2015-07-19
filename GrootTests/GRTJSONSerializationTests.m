@@ -9,8 +9,8 @@
 #import <XCTest/XCTest.h>
 #import <Groot/Groot.h>
 
+#import "NSData+Resource.h"
 #import "GRTModels.h"
-#import "NSEntityDescription+Groot.h"
 
 @interface GRTJSONSerializationTests : XCTestCase
 
@@ -24,29 +24,32 @@
 - (void)setUp {
     [super setUp];
     
-    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:@[bundle]];
+    self.store = [[GRTManagedStore alloc] initWithModel:[NSManagedObjectModel grt_testModel] error:nil];
+    XCTAssertNotNil(self.store);
     
-    self.store = [GRTManagedStore managedStoreWithModel:model];
-    self.context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    self.context.persistentStoreCoordinator = self.store.persistentStoreCoordinator;
+    self.context = [self.store contextWithConcurrencyType:NSMainQueueConcurrencyType];
     
-    NSValueTransformer *transformer = [GRTValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *value) {
-        if (value) {
-            return @([value integerValue]);
-        }
-        
-        return nil;
-    } reverseBlock:^id(NSNumber *value) {
+    [NSValueTransformer grt_setValueTransformerWithName:@"GrootTests.Transformer" transformBlock:^id(NSString *value) {
+        return @([value integerValue]);
+    } reverseTransformBlock:^id(NSNumber *value) {
         return [value stringValue];
     }];
     
-    [NSValueTransformer setValueTransformer:transformer forName:@"GRTTestTransformer"];
+    [NSValueTransformer grt_setEntityMapperWithName:@"GrootTests.Abstract" mapBlock:^NSString *(NSDictionary *JSONDictionary) {
+        NSDictionary *entityMapping = @{
+            @"A": @"ConcreteA",
+            @"B": @"ConcreteB"
+        };
+        NSString *type = JSONDictionary[@"type"];
+        return entityMapping[type];
+    }];
 }
 
 - (void)tearDown {
     self.store = nil;
-    [NSValueTransformer setValueTransformer:nil forName:@"GRTTestTransformer"];
+    self.context = nil;
+    
+    [NSValueTransformer setValueTransformer:nil forName:@"GrootTests.Transformer"];
     
     [super tearDown];
 }
@@ -74,59 +77,30 @@
     };
     
     NSError *error = nil;
-    GRTCharacter *batman = [GRTJSONSerialization insertObjectForEntityName:@"Character" fromJSONDictionary:batmanJSON inManagedObjectContext:self.context error:&error];
+    GRTCharacter *batman = [GRTJSONSerialization objectWithEntityName:@"Character" fromJSONDictionary:batmanJSON inContext:self.context error:&error];
     XCTAssertNil(error, @"shouldn't return an error");
     
-    XCTAssertEqualObjects(@"Character", batman.entity.name, @"should serialize to the right entity");
-    
-    XCTAssertEqualObjects(@"Batman", batman.name, @"should serialize attributes");
     XCTAssertEqualObjects(@1699, batman.identifier, @"should serialize attributes");
+    XCTAssertEqualObjects(@"Batman", batman.name, @"should serialize attributes");
     XCTAssertEqualObjects(@"Bruce Wayne", batman.realName, @"should serialize attributes");
     
-    GRTPower *power = batman.powers[0];
+    XCTAssertEqual(2U, batman.powers.count, "should serialize to-many relationships");
     
-    XCTAssertEqualObjects(@"Power", power.entity.name, @"should serialize to-many relationships");
-    XCTAssertEqualObjects(@4, power.identifier, @"should serialize to-many relationships");
-    XCTAssertEqualObjects(@"Agility", power.name, @"should serialize to-many relationships");
+    GRTPower *agility = batman.powers[0];
     
-    power = batman.powers[1];
+    XCTAssertEqualObjects(@4, agility.identifier, @"should serialize to-many relationships");
+    XCTAssertEqualObjects(@"Agility", agility.name, @"should serialize to-many relationships");
     
-    XCTAssertEqualObjects(@9, power.identifier, @"should serialize to-many relationships");
-    XCTAssertEqualObjects(@"Insanely Rich", power.name, @"should serialize to-many relationships");
+    GRTPower *wealth = batman.powers[1];
     
-    XCTAssertEqualObjects(@"Publisher", batman.publisher.entity.name, @"should serialize to-one relationships");
-    XCTAssertEqualObjects(@10, batman.publisher.identifier, @"should serialize to-one relationships");
-    XCTAssertEqualObjects(@"DC Comics", batman.publisher.name, @"should serialize to-one relationships");
-}
-
-- (void)testInsertInvalidJSON {
-    NSArray *invalidJSON = @[@1];
+    XCTAssertEqualObjects(@9, wealth.identifier, @"should serialize to-many relationships");
+    XCTAssertEqualObjects(@"Insanely Rich", wealth.name, @"should serialize to-many relationships");
     
-    NSError *error = nil;
-    [GRTJSONSerialization insertObjectsForEntityName:@"Character" fromJSONArray:invalidJSON inManagedObjectContext:self.context error:&error];
+    GRTPublisher *publisher = batman.publisher;
     
-    XCTAssertNotNil(error, @"should return an error");
-    XCTAssertEqualObjects(GRTJSONSerializationErrorDomain, error.domain, @"should return a serialization error");
-    XCTAssertEqual(GRTJSONSerializationErrorInvalidJSONObject, error.code, @"should return an invalid JSON error");
-}
-
-- (void)testInsertInvalidToManyRelationship {
-    NSDictionary *invalidBatman = @{
-        @"id": @"1699",
-        @"name": @"Batman",
-        @"real_name": @"Bruce Wayne",
-        @"powers": @{                   // This should be a JSON array
-            @"id": @"4",
-            @"name": @"Agility"
-        }
-    };
-    
-    NSError *error = nil;
-    [GRTJSONSerialization insertObjectForEntityName:@"Character" fromJSONDictionary:invalidBatman inManagedObjectContext:self.context error:&error];
-    
-    XCTAssertNotNil(error, @"should return an error");
-    XCTAssertEqualObjects(GRTJSONSerializationErrorDomain, error.domain, @"should return a serialization error");
-    XCTAssertEqual(GRTJSONSerializationErrorInvalidJSONObject, error.code, @"should return an invalid JSON error");
+    XCTAssertNotNil(publisher, @"should serialize to-one relationships");
+    XCTAssertEqualObjects(@10, publisher.identifier, @"should serialize to-one relationships");
+    XCTAssertEqualObjects(@"DC Comics", publisher.name, @"should serialize to-one relationships");
 }
 
 - (void)testInsertInvalidToOneRelationship {
@@ -134,22 +108,43 @@
         @"id": @"1699",
         @"name": @"Batman",
         @"real_name": @"Bruce Wayne",
-        @"publisher": @"DC"             // This should be a JSON dictionary
+        @"publisher": @[@"DC"]  // This should be a JSON dictionary
     };
     
     NSError *error = nil;
-    [GRTJSONSerialization insertObjectForEntityName:@"Character" fromJSONDictionary:invalidBatman inManagedObjectContext:self.context error:&error];
+    GRTCharacter *batman = [GRTJSONSerialization objectWithEntityName:@"Character" fromJSONDictionary:invalidBatman inContext:self.context error:&error];
     
+    XCTAssertNil(batman, @"should return nil on error");
     XCTAssertNotNil(error, @"should return an error");
-    XCTAssertEqualObjects(GRTJSONSerializationErrorDomain, error.domain, @"should return a serialization error");
-    XCTAssertEqual(GRTJSONSerializationErrorInvalidJSONObject, error.code, @"should return an invalid JSON error");
+    XCTAssertEqualObjects(GRTErrorDomain, error.domain, @"should return a serialization error");
+    XCTAssertEqual(GRTErrorInvalidJSONObject, error.code, @"should return an invalid JSON error");
+}
+
+- (void)testInsertInvalidToManyRelationship {
+    NSDictionary *invalidBatman = @{
+        @"id": @"1699",
+        @"name": @"Batman",
+        @"real_name": @"Bruce Wayne",
+        @"powers": @{   // This should be a JSON array
+            @"id": @"4",
+            @"name": @"Agility"
+        }
+    };
+    
+    NSError *error = nil;
+    GRTCharacter *batman = [GRTJSONSerialization objectWithEntityName:@"Character" fromJSONDictionary:invalidBatman inContext:self.context error:&error];
+    
+    XCTAssertNil(batman, @"should return nil on error");
+    XCTAssertNotNil(error, @"should return an error");
+    XCTAssertEqualObjects(GRTErrorDomain, error.domain, @"should return a serialization error");
+    XCTAssertEqual(GRTErrorInvalidJSONObject, error.code, @"should return an invalid JSON error");
 }
 
 - (void)testMergeObject {
     NSDictionary *batmanJSON = @{
         @"id": @"1699",
         @"name": @"Batman",
-        @"real_name": @"Bruce Wayne",
+        @"real_name": @"Guille Gonzalez",
         @"powers": @[
             @{
                 @"id": @"4",
@@ -168,13 +163,14 @@
     };
     
     NSError *error = nil;
-    [GRTJSONSerialization mergeObjectForEntityName:@"Character" fromJSONDictionary:batmanJSON inManagedObjectContext:self.context error:&error];
-    XCTAssertNil(error, @"shouldn't return an error");
+    
+    [GRTJSONSerialization objectWithEntityName:@"Character" fromJSONDictionary:batmanJSON inContext:self.context error:&error];
+    XCTAssertNil(error);
     
     NSArray *updateJSON = @[
         @{
             @"id": @"1699",
-            @"real_name": NSNull.null,  // Should reset Batman real name
+            @"real_name": @"Bruce Wayne",  // Should update real name
             @"publisher" : @{
                 @"id": @"10",
                 @"name": @"DC Comics"   // Should update the publisher name
@@ -197,29 +193,27 @@
         }
     ];
     
-    [GRTJSONSerialization mergeObjectsForEntityName:@"Character" fromJSONArray:updateJSON inManagedObjectContext:self.context error:&error];
-    XCTAssertNil(error, @"shouldn't return an error");
+    [GRTJSONSerialization objectsWithEntityName:@"Character" fromJSONArray:updateJSON inContext:self.context error:&error];
+    XCTAssertNil(error);
     
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES];
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Character"];
     fetchRequest.sortDescriptors = @[sortDescriptor];
     
     NSArray *characters = [self.context executeFetchRequest:fetchRequest error:NULL];
-    
     XCTAssertEqual(2U, characters.count, @"there should be 2 characters");
     
     GRTCharacter *ironMan = characters[0];
     
-    XCTAssertEqualObjects(@"Character", ironMan.entity.name, @"should serialize to the right entity");
     XCTAssertEqualObjects(@"Iron Man", ironMan.name, @"should serialize attributes");
     XCTAssertEqualObjects(@1455, ironMan.identifier, @"should serialize attributes");
     XCTAssertEqualObjects(@"Tony Stark", ironMan.realName, @"should serialize attributes");
     
     GRTPower *powerSuit = ironMan.powers[0];
     
-    XCTAssertEqualObjects(@"Power", powerSuit.entity.name, @"should serialize to-many relationships");
     XCTAssertEqualObjects(@31, powerSuit.identifier, @"should serialize to-many relationships");
     XCTAssertEqualObjects(@"Power Suit", powerSuit.name, @"should serialize to-many relationships");
+    
     
     GRTPower *ironManRich = ironMan.powers[1];
     
@@ -228,17 +222,15 @@
     
     GRTCharacter *batman = characters[1];
     
-    XCTAssertEqualObjects(@"Character", batman.entity.name, @"should serialize to the right entity");
     XCTAssertEqualObjects(@"Batman", batman.name, @"should serialize attributes");
     XCTAssertEqualObjects(@1699, batman.identifier, @"should serialize attributes");
-    XCTAssertNil(batman.realName, @"should update explicit null values");
+    XCTAssertEqualObjects(@"Bruce Wayne", batman.realName, @"should serialize attributes");
     
     GRTPower *agility = batman.powers[0];
     
-    XCTAssertEqualObjects(@"Power", agility.entity.name, @"should serialize to-many relationships");
     XCTAssertEqualObjects(@4, agility.identifier, @"should serialize to-many relationships");
     XCTAssertEqualObjects(@"Agility", agility.name, @"should serialize to-many relationships");
-    
+        
     GRTPower *batmanRich = batman.powers[1];
     
     XCTAssertEqualObjects(@9, batmanRich.identifier, @"should serialize to-many relationships");
@@ -246,7 +238,6 @@
     
     XCTAssertEqualObjects(batmanRich, ironManRich, @"should merge relationships properly");
     
-    XCTAssertEqualObjects(@"Publisher", batman.publisher.entity.name, @"should serialize to-one relationships");
     XCTAssertEqualObjects(@10, batman.publisher.identifier, @"should serialize to-one relationships");
     XCTAssertEqualObjects(@"DC Comics", batman.publisher.name, @"should serialize to-one relationships");
     
@@ -259,57 +250,30 @@
     XCTAssertEqual(1U, publisherCount, @"there should be 1 publisher objects");
 }
 
-- (void)testMergeInvalidJSON {
-    NSArray *invalidJSON = @[@1];
+- (void)testValidationDuringMerge {
+    // See https://github.com/gonzalezreal/Groot/issues/2
+    
+    NSData *data = [NSData grt_dataWithContentsOfResource:@"characters.json"];
+    XCTAssertNotNil(data, @"characters.json not found");
     
     NSError *error = nil;
-    [GRTJSONSerialization mergeObjectsForEntityName:@"Character" fromJSONArray:invalidJSON inManagedObjectContext:self.context error:&error];
+    [GRTJSONSerialization objectsWithEntityName:@"Character" fromJSONData:data inContext:self.context error:&error];
+    XCTAssertNil(error);
     
-    XCTAssertNotNil(error, @"should return an error");
-    XCTAssertEqualObjects(GRTJSONSerializationErrorDomain, error.domain, @"should return a serialization error");
-    XCTAssertEqual(GRTJSONSerializationErrorInvalidJSONObject, error.code, @"should return an invalid JSON error");
+    NSData *updatedData = [NSData grt_dataWithContentsOfResource:@"characters_update.json"];
+    XCTAssertNotNil(updatedData, @"characters_update.json not found");
+    
+    [GRTJSONSerialization objectsWithEntityName:@"Character" fromJSONData:updatedData inContext:self.context error:&error];
+    XCTAssertNotNil(error, "should return an error");
+    XCTAssertEqualObjects(NSCocoaErrorDomain, error.domain, "should return a validation error");
+    XCTAssertEqual(NSValidationMissingMandatoryPropertyError, error.code, "should return a validation error");
 }
 
-- (void)testMergeInvalidToManyRelationship {
-    NSDictionary *invalidBatman = @{
-        @"id": @"1699",
-        @"name": @"Batman",
-        @"real_name": @"Bruce Wayne",
-        @"powers": @{                   // This should be a JSON array
-            @"id": @"4",
-            @"name": @"Agility"
-        }
-    };
-    
-    NSError *error = nil;
-    [GRTJSONSerialization mergeObjectForEntityName:@"Character" fromJSONDictionary:invalidBatman inManagedObjectContext:self.context error:&error];
-    
-    XCTAssertNotNil(error, @"should return an error");
-    XCTAssertEqualObjects(GRTJSONSerializationErrorDomain, error.domain, @"should return a serialization error");
-    XCTAssertEqual(GRTJSONSerializationErrorInvalidJSONObject, error.code, @"should return an invalid JSON error");
-}
-
-- (void)testMergeInvalidToOneRelationship {
-    NSDictionary *invalidBatman = @{
-        @"id": @"1699",
-        @"name": @"Batman",
-        @"real_name": @"Bruce Wayne",
-        @"publisher": @"DC"             // This should be a JSON dictionary
-    };
-    
-    NSError *error = nil;
-    [GRTJSONSerialization mergeObjectForEntityName:@"Character" fromJSONDictionary:invalidBatman inManagedObjectContext:self.context error:&error];
-    
-    XCTAssertNotNil(error, @"should return an error");
-    XCTAssertEqualObjects(GRTJSONSerializationErrorDomain, error.domain, @"should return a serialization error");
-    XCTAssertEqual(GRTJSONSerializationErrorInvalidJSONObject, error.code, @"should return an invalid JSON error");
-}
-
-- (void)testMergeWithoutIdentityAttribute {
+- (void)testMissingIdentityAttribute {
     NSEntityDescription *powerEntity = self.store.managedObjectModel.entitiesByName[@"Power"];
     powerEntity.userInfo = @{}; // Remove the identity attribute name from the entity
     
-    NSDictionary *batman = @{
+    NSDictionary *dictionary = @{
         @"id": @"1699",
         @"name": @"Batman",
         @"real_name": @"Bruce Wayne",
@@ -321,32 +285,150 @@
         ]
     };
     
-    XCTAssertThrows([GRTJSONSerialization mergeObjectForEntityName:@"Character" fromJSONDictionary:batman inManagedObjectContext:self.context error:NULL], @"merge should assert when the identity attribute is not specified");
+    NSError *error = nil;
+    GRTCharacter *batman = [GRTJSONSerialization objectWithEntityName:@"Character" fromJSONDictionary:dictionary inContext:self.context error:&error];
+    
+    XCTAssertNil(batman);
+    XCTAssertNotNil(error);
+    
+    XCTAssertEqualObjects(GRTErrorDomain, error.domain);
+    XCTAssertEqual(GRTErrorIdentityNotFound, error.code, "should return an identity not found error");
 }
 
-- (void)testMergeWithNoIdentityAttributeJSONKeyPath {
-    NSEntityDescription *powerEntity = self.store.managedObjectModel.entitiesByName[@"Power"];
-    NSAttributeDescription *identityAttribute = [powerEntity grt_identityAttribute];
-    identityAttribute.userInfo = @{
-        @"JSONKeyPath": @"null"
-    };
+- (void)testSerializationFromIdentifiers {
+    NSArray *charactersJSON = @[@"1699", @"1455"];
     
-    NSDictionary *batman = @{
-        @"id": @"1699",
+    NSError *error = nil;
+    NSArray *characters = [GRTJSONSerialization objectsWithEntityName:@"Character" fromJSONArray:charactersJSON inContext:self.context error:&error];
+    XCTAssertNil(error, @"shouldn't return an error");
+    
+    XCTAssertEqual(2U, characters.count);
+    
+    GRTCharacter *character = characters[0];
+    XCTAssertEqualObjects(@"Character", character.entity.name);
+    XCTAssertEqualObjects(@1699, character.identifier);
+    
+    character = characters[1];
+    XCTAssertEqualObjects(@"Character", character.entity.name);
+    XCTAssertEqualObjects(@1455, character.identifier);
+}
+
+- (void)testRelationshipSerializationFromIdentifiers {
+    NSDictionary *batmanJSON = @{
         @"name": @"Batman",
         @"real_name": @"Bruce Wayne",
-        @"powers": @[
-            @{
-                @"id": @"4",
-                @"name": @"Agility"
-            }
-        ]
+        @"id": @"1699",
+        @"powers": @[@"4", NSNull.null, @"9"],
+        @"publisher": @"10"
     };
     
-    XCTAssertThrows([GRTJSONSerialization mergeObjectForEntityName:@"Character" fromJSONDictionary:batman inManagedObjectContext:self.context error:NULL], @"merge should assert when the identity attribute doesn't have a JSON key path");
+    NSArray *powersJSON = @[
+        @{
+            @"id": @"4",
+            @"name": @"Agility"
+        },
+        @{
+            @"id": @"9",
+            @"name": @"Insanely Rich"
+        }
+    ];
+    
+    NSDictionary *publisherJSON = @{
+        @"id": @"10",
+        @"name": @"DC Comics"
+    };
+    
+    NSError *error = nil;
+    GRTCharacter *batman = [GRTJSONSerialization objectWithEntityName:@"Character" fromJSONDictionary:batmanJSON inContext:self.context error:&error];
+    XCTAssertNil(error, @"shouldn't return an error");
+    
+    [GRTJSONSerialization objectsWithEntityName:@"Power" fromJSONArray:powersJSON inContext:self.context error:&error];
+    XCTAssertNil(error, @"shouldn't return an error");
+    
+    [GRTJSONSerialization objectWithEntityName:@"Publisher" fromJSONDictionary:publisherJSON inContext:self.context error:&error];
+    XCTAssertNil(error, @"shouldn't return an error");
+    
+    XCTAssertEqual(2U, batman.powers.count, "should serialize to-many relationships");
+    
+    GRTPower *agility = batman.powers[0];
+    
+    XCTAssertEqualObjects(@4, agility.identifier, @"should serialize to-many relationships");
+    XCTAssertEqualObjects(@"Agility", agility.name, @"should serialize to-many relationships");
+    
+    GRTPower *wealth = batman.powers[1];
+    
+    XCTAssertEqualObjects(@9, wealth.identifier, @"should serialize to-many relationships");
+    XCTAssertEqualObjects(@"Insanely Rich", wealth.name, @"should serialize to-many relationships");
+    
+    GRTPublisher *publisher = batman.publisher;
+    
+    XCTAssertNotNil(publisher, @"should serialize to-one relationships");
+    XCTAssertEqualObjects(@10, publisher.identifier, @"should serialize to-one relationships");
+    XCTAssertEqualObjects(@"DC Comics", publisher.name, @"should serialize to-one relationships");
 }
 
-- (void)testJSONDictionaryFromManagedObject {
+- (void)testSerializationFromIdentifiersFailsWithoutIdentityAttribute {
+    NSEntityDescription *characterEntity = self.store.managedObjectModel.entitiesByName[@"Character"];
+    characterEntity.userInfo = @{}; // Remove the identity attribute name from the entity
+    
+    NSArray *charactersJSON = @[@"1699", @"1455"];
+    
+    NSError *error = nil;
+    NSArray *characters = [GRTJSONSerialization objectsWithEntityName:@"Character" fromJSONArray:charactersJSON inContext:self.context error:&error];
+    
+    XCTAssertNil(characters);
+    XCTAssertNotNil(error);
+    
+    XCTAssertEqualObjects(GRTErrorDomain, error.domain);
+    XCTAssertEqual(GRTErrorIdentityNotFound, error.code, "should return an identity not found error");
+}
+
+- (void)testSerializationFromIdentifiersValidatesValues {
+    NSArray *charactersJSON = @[@"1699", [NSValue valueWithRange:NSMakeRange(0, 0)]];
+    
+    NSError *error = nil;
+    NSArray *characters = [GRTJSONSerialization objectsWithEntityName:@"Character" fromJSONArray:charactersJSON inContext:self.context error:&error];
+    
+    XCTAssertNil(characters);
+    XCTAssertNotNil(error);
+    XCTAssertEqualObjects(NSCocoaErrorDomain, error.domain);
+    XCTAssertEqual(NSValidationMissingMandatoryPropertyError, error.code);
+}
+
+- (void)testSerializationWithEntityInheritance {
+    NSData *data = [NSData grt_dataWithContentsOfResource:@"container.json"];
+    XCTAssertNotNil(data, @"container.json not found");
+    
+    NSError *error = nil;
+    NSArray *objects = [GRTJSONSerialization objectsWithEntityName:@"Container" fromJSONData:data inContext:self.context error:&error];
+    XCTAssertNil(error);
+    XCTAssertEqual(1U, objects.count);
+    
+    GRTContainer *container = objects[0];
+    
+    GRTConcreteA *concreteA = container.abstracts[0];
+    XCTAssertEqualObjects(@"ConcreteA", concreteA.entity.name);
+    XCTAssertEqualObjects(@1, concreteA.identifier);
+    XCTAssertEqualObjects(@"this is A", concreteA.foo);
+    
+    GRTConcreteB *concreteB = container.abstracts[1];
+    XCTAssertEqualObjects(@"ConcreteB", concreteB.entity.name);
+    XCTAssertEqualObjects(@2, concreteB.identifier);
+    XCTAssertEqualObjects(@"this is B", concreteB.bar);
+    
+    NSDictionary *updateConcreteA = @{
+        @"id": @1,
+        @"foo": @"A has been updated"
+    };
+    
+    concreteA = [GRTJSONSerialization objectWithEntityName:@"Abstract" fromJSONDictionary:updateConcreteA inContext:self.context error:&error];
+    XCTAssertNil(error);
+    XCTAssertEqualObjects(@"ConcreteA", concreteA.entity.name);
+    XCTAssertEqualObjects(@1, concreteA.identifier);
+    XCTAssertEqualObjects(@"A has been updated", concreteA.foo);
+}
+
+- (void)testSerializationToJSON {
     GRTPublisher *dc = [NSEntityDescription insertNewObjectForEntityForName:@"Publisher" inManagedObjectContext:self.context];
     dc.identifier = @10;
     dc.name = @"DC Comics";
@@ -366,13 +448,17 @@
     batman.powers = [[NSOrderedSet alloc] initWithArray:@[agility, wealth]];
     batman.publisher = dc;
     
-    NSDictionary *JSONDictionary = [GRTJSONSerialization JSONDictionaryFromManagedObject:batman];
+    GRTCharacter *ironMan = [NSEntityDescription insertNewObjectForEntityForName:@"Character" inManagedObjectContext:self.context];
+    ironMan.name = @"Iron Man";
     
-    NSDictionary *expectedDictionary = @{
-        @"id": @"1699",
-        @"name": @"Batman",
-        @"real_name": @"Bruce Wayne",
-        @"powers": @[
+    NSArray *JSONArray = [GRTJSONSerialization JSONArrayFromObjects:@[batman, ironMan]];
+    
+    NSArray *expectedArray = @[
+        @{
+            @"id": @"1699",
+            @"name": @"Batman",
+            @"real_name": @"Bruce Wayne",
+            @"powers": @[
             @{
                 @"id": @"4",
                 @"name": @"Agility"
@@ -381,73 +467,11 @@
                 @"id": @"9",
                 @"name": @"Insanely Rich"
             }
-        ],
-        @"publisher": @{
-            @"id": @"10",
-            @"name": @"DC Comics"
-        }
-    };
-    
-    XCTAssertEqualObjects(expectedDictionary, JSONDictionary, @"should serialize an initialized managed object to JSON dictionary");
-}
-
-- (void)testJSONDictionaryFromEmptyManagedObject {
-    GRTCharacter *batman = [NSEntityDescription insertNewObjectForEntityForName:@"Character" inManagedObjectContext:self.context];
-    NSDictionary *JSONDictionary = [GRTJSONSerialization JSONDictionaryFromManagedObject:batman];
-    
-    NSDictionary *expectedDictionary = @{
-        @"id": NSNull.null,
-        @"name": NSNull.null,
-        @"real_name": NSNull.null,
-        @"powers": @[],
-        @"publisher": NSNull.null
-    };
-    
-    XCTAssertEqualObjects(expectedDictionary, JSONDictionary, @"should serialize an uninitialized managed object to JSON dictionary");
-}
-
-- (void)testJSONDictionaryFromManagedObjectWithNestedDictionaries {
-    NSEntityDescription *entity = self.store.managedObjectModel.entitiesByName[@"Character"];
-    NSAttributeDescription *realNameAttribute = entity.attributesByName[@"realName"];
-    
-    realNameAttribute.userInfo = @{
-        @"JSONKeyPath": @"real_name.name"
-    };
-    
-    GRTCharacter *batman = [NSEntityDescription insertNewObjectForEntityForName:@"Character" inManagedObjectContext:self.context];
-    batman.realName = @"Bruce Wayne";
-    
-    NSDictionary *JSONDictionary = [GRTJSONSerialization JSONDictionaryFromManagedObject:batman];
-    
-    NSDictionary *expectedDictionary = @{
-        @"id": NSNull.null,
-        @"name": NSNull.null,
-        @"real_name": @{
-                @"name": @"Bruce Wayne"
-        },
-        @"powers": @[],
-        @"publisher": NSNull.null
-    };
-    
-    XCTAssertEqualObjects(expectedDictionary, JSONDictionary, @"should serialize attributes with complex JSON key paths");
-}
-
-- (void)testJSONArrayFromManagedObjects {
-    GRTCharacter *batman = [NSEntityDescription insertNewObjectForEntityForName:@"Character" inManagedObjectContext:self.context];
-    batman.name = @"Batman";
-    
-    GRTCharacter *ironMan = [NSEntityDescription insertNewObjectForEntityForName:@"Character" inManagedObjectContext:self.context];
-    ironMan.name = @"Iron Man";
-    
-    NSArray *JSONArray = [GRTJSONSerialization JSONArrayFromManagedObjects:@[batman, ironMan]];
-    
-    NSArray *expectedArray = @[
-        @{
-            @"id": NSNull.null,
-            @"name": @"Batman",
-            @"real_name": NSNull.null,
-            @"powers": @[],
-            @"publisher": NSNull.null
+            ],
+            @"publisher": @{
+                @"id": @"10",
+                @"name": @"DC Comics"
+            }
         },
         @{
             @"id": NSNull.null,
@@ -456,9 +480,39 @@
             @"powers": @[],
             @"publisher": NSNull.null
         }
-    ];
+	];
     
     XCTAssertEqualObjects(expectedArray, JSONArray, @"should serialize managed objects to JSON array");
+}
+
+- (void)testSerializationToJSONWithNestedDictionaries {
+    NSEntityDescription *entity = self.store.managedObjectModel.entitiesByName[@"Character"];
+    NSAttributeDescription *realNameAttribute = entity.attributesByName[@"realName"];
+    
+    realNameAttribute.userInfo = @{
+        @"JSONKeyPath": @"real_name.foo.bar.name"
+    };
+    
+    GRTCharacter *batman = [NSEntityDescription insertNewObjectForEntityForName:@"Character" inManagedObjectContext:self.context];
+    batman.realName = @"Bruce Wayne";
+    
+    NSDictionary *JSONDictionary = [GRTJSONSerialization JSONDictionaryFromObject:batman];
+    
+    NSDictionary *expectedDictionary = @{
+        @"id": NSNull.null,
+        @"name": NSNull.null,
+        @"real_name": @{
+                @"foo": @{
+                        @"bar": @{
+                            @"name": @"Bruce Wayne"
+                        }
+                }
+        },
+        @"powers": @[],
+        @"publisher": NSNull.null
+    };
+    
+    XCTAssertEqualObjects(expectedDictionary, JSONDictionary, @"should serialize attributes with complex JSON key paths");
 }
 
 @end

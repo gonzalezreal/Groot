@@ -1,4 +1,4 @@
-// NSPropertyDescription+Groot.h
+// NSValueTransformer+Groot.h
 //
 // Copyright (c) 2014-2015 Guillermo Gonzalez
 //
@@ -20,26 +20,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <CoreData/CoreData.h>
+#import "NSValueTransformer+Groot.h"
+#import "GRTValueTransformer.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSPropertyDescription (Groot)
+@implementation NSValueTransformer (Groot)
 
-/**
- The JSON key path.
- */
-- (nullable NSString *)grt_JSONKeyPath;
++ (void)grt_setValueTransformerWithName:(NSString *)name
+                         transformBlock:(__nullable id (^)(id value))transformBlock
+{
+    GRTValueTransformer *valueTransformer = [[GRTValueTransformer alloc] initWithBlock:transformBlock];
+    [self setValueTransformer:valueTransformer forName:name];
+}
 
-/**
- Returns `true` if this property should participate in the JSON serialization process.
- */
-- (BOOL)grt_JSONSerializable;
++ (void)grt_setValueTransformerWithName:(NSString *)name
+                         transformBlock:(__nullable id (^)(id value))transformBlock
+                  reverseTransformBlock:(__nullable id (^)(id value))reverseTransformBlock
+{
+    GRTReversibleValueTransformer *valueTransformer = [[GRTReversibleValueTransformer alloc] initWithForwardBlock:transformBlock reverseBlock:reverseTransformBlock];
+    [self setValueTransformer:valueTransformer forName:name];
+}
 
-/**
- Returns the untransformed raw value for this property in a given JSON object.
- */
-- (nullable id)grt_rawValueInJSONDictionary:(NSDictionary *)object;
++ (void)grt_setEntityMapperWithName:(NSString *)name
+                           mapBlock:(NSString * __nullable (^)(NSDictionary *JSONDictionary))mapBlock
+{
+    return [self grt_setValueTransformerWithName:name transformBlock:mapBlock];
+}
 
 @end
 

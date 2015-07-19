@@ -1,6 +1,6 @@
-// NSDictionary+Groot.m
+// GRTError.m
 //
-// Copyright (c) 2014 Guillermo Gonzalez
+// Copyright (c) 2014-2015 Guillermo Gonzalez
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,27 +20,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "NSDictionary+Groot.h"
-#import "NSPropertyDescription+Groot.h"
-#import "NSAttributeDescription+Groot.h"
+#import "GRTError.h"
 
-@implementation NSDictionary (Groot)
-
-- (id)grt_valueForAttribute:(NSAttributeDescription *)attribute {
-    id value = [self valueForKeyPath:[attribute grt_JSONKeyPath]];
-    
-    if ([value isEqual:NSNull.null]) {
-        value = nil;
-    }
-    
-    if (value != nil) {
-        NSValueTransformer *transformer = [attribute grt_JSONTransformer];
-        if (transformer) {
-            value = [transformer transformedValue:value];
-        }
-    }
-    
-    return value;
-}
-
-@end
+NSString * const GRTErrorDomain = @"com.groot.error";

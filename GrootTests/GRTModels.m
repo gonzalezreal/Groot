@@ -13,7 +13,6 @@
 @dynamic identifier;
 @dynamic name;
 @dynamic realName;
-@dynamic birthday;
 @dynamic powers;
 @dynamic publisher;
 
@@ -32,5 +31,39 @@
 @dynamic identifier;
 @dynamic name;
 @dynamic characters;
+
+@end
+
+@implementation GRTContainer
+
+@dynamic abstracts;
+
+@end
+
+@implementation GRTAbstract
+
+@dynamic identifier;
+@dynamic container;
+
+@end
+
+@implementation GRTConcreteA
+
+@dynamic foo;
+
+@end
+
+@implementation GRTConcreteB
+
+@dynamic bar;
+
+@end
+
+@implementation NSManagedObjectModel (GrootTests)
+
++ (nonnull instancetype)grt_testModel {
+    NSBundle *bundle = [NSBundle bundleForClass:[GRTCharacter class]];
+    return [NSManagedObjectModel mergedModelFromBundles:@[bundle]];
+}
 
 @end
