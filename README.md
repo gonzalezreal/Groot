@@ -17,6 +17,7 @@ Groot uses [annotations](Documentation/Annotations.md) in the Core Data model to
 Add the following to your `Podfile`:
 
 ``` ruby
+use_frameworks!
 pod ‘Groot’
 ```
 
