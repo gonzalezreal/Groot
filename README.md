@@ -157,14 +157,16 @@ let batmanJSON: JSONObject = [
     ]
 ]
 
-let batman: Character = objectFromJSONDictionary(batmanJSON,
-        inContext: context, mergeChanges: false, error: &error)
+let batman: Character = objectFromJSONDictionary(batmanJSON, inContext: context, error: &error)
 ```
 
 ```objc
 // Objective-C
 
-Character *batman = [GRTJSONSerialization objectWithEntityName:@"Character" fromJSONDictionary:batmanJSON inContext:self.context error:&error];
+Character *batman = [GRTJSONSerialization objectWithEntityName:@"Character"
+                                            fromJSONDictionary:batmanJSON
+                                                     inContext:self.context
+                                                         error:&error];
 ```
 
 If we want to update the object we just created, Groot can merge the changes for us:
@@ -178,7 +180,10 @@ NSDictionary *updateJSON = @{
 };
 
 // This will return the previously created managed object
-Character *batman = [GRTJSONSerialization objectWithEntityName:@"Character" fromJSONDictionary:updateJSON inContext:self.context error:&error];
+Character *batman = [GRTJSONSerialization objectWithEntityName:@"Character"
+                                            fromJSONDictionary:updateJSON
+                                                     inContext:self.context
+                                                         error:&error];
 ```
 
 #### Serializing relationships from identifiers
@@ -198,7 +203,10 @@ NSDictionary *batmanJSON = @{
     @"publisher": @"10"
 };
 
-Character *batman = [GRTJSONSerialization objectWithEntityName:@"Character" fromJSONDictionary:batmanJSON inContext:self.context error:&error];
+Character *batman = [GRTJSONSerialization objectWithEntityName:@"Character"
+                                            fromJSONDictionary:batmanJSON
+                                                     inContext:self.context
+                                                         error:&error];
 ```
 
 The above code creates a full `Character` object and the corresponding relationships pointing to `Power` and `Publisher` objects that just have the identifier attribute populated.
@@ -219,14 +227,20 @@ NSArray *powersJSON = @[
     }
 ];
 
-[GRTJSONSerialization objectsWithEntityName:@"Power" fromJSONArray:powersJSON inContext:self.context error:&error];
+[GRTJSONSerialization objectsWithEntityName:@"Power"
+                              fromJSONArray:powersJSON
+                                  inContext:self.context
+                                      error:&error];
 
 NSDictionary *publisherJSON = @{
     @"id": @"10",
     @"name": @"DC Comics"
 };
 
-[GRTJSONSerialization objectWithEntityName:@"Publisher" fromJSONDictionary:publisherJSON inContext:self.context error:&error];
+[GRTJSONSerialization objectWithEntityName:@"Publisher"
+                        fromJSONDictionary:publisherJSON
+                                 inContext:self.context
+                                     error:&error];
 ```
 
 For more serialization methods check [GRTJSONSerialization.h](Groot/GRTJSONSerialization.h) and [Groot.swift](Groot/Groot.swift).
