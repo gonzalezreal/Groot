@@ -1,5 +1,5 @@
 # Groot
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) ![CocoaPods compatible](https://img.shields.io/cocoapods/v/Groot.svg)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 Groot provides a simple way of serializing Core Data object graphs from or into JSON.
 
