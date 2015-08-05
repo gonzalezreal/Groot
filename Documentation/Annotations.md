@@ -129,3 +129,28 @@ Finally we create the entity mapper and give it the name we just used:
     return entityMapping[type];
 }];
 ```
+
+### `JSONDictionaryTransformerName`
+
+This is an optional key you can specify at entity level that contains the name of a value transformer that will be used to transform the JSON dictionaries before serializing them to the target entity.
+
+Think about it as an optional preprocessing step for your JSON.
+
+Consider the situation in which we need to support both legacy and current JSON specs for one of the entities in the model. We could add a `JSONDictionaryTransformerName` entry and create the corresponding dictionary transformer:
+
+```objc
+[NSValueTransformer grt_setDictionaryTransformerWithName:@“MyTransformer”
+										  transformBlock:^NSDictionary *(NSDictionary *JSONDictionary) {
+											  id legacyIdentifier = JSONDictionary[@“legacy_id”];
+											  if (legacyIdentifier != nil) {
+												  NSMutableDictionary *dictionary = [JSONDictionary mutableCopy];
+												  dictionary[@“id”] = legacyIdentifier;
+												  
+												  return dictionary;
+											  }
+											  
+											  return JSONDictionary;
+										  }];
+```
+
+This will ‘upgrade’ our legacy JSON objects to the new version which is the one that correctly maps to our entity.
