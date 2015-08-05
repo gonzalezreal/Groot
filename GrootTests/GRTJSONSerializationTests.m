@@ -43,6 +43,13 @@
         NSString *type = JSONDictionary[@"type"];
         return entityMapping[type];
     }];
+    
+    [NSValueTransformer grt_setDictionaryTransformerWithName:@"GrootTests.DictionaryTransformer" transformBlock:^NSDictionary *(NSDictionary *JSONDictionary) {
+        NSMutableDictionary *transformedDictionary = [JSONDictionary mutableCopy];
+        transformedDictionary[@"id"] = JSONDictionary[@"legacy_id"];
+        
+        return transformedDictionary;
+    }];
 }
 
 - (void)tearDown {
@@ -426,6 +433,27 @@
     XCTAssertEqualObjects(@"ConcreteA", concreteA.entity.name);
     XCTAssertEqualObjects(@1, concreteA.identifier);
     XCTAssertEqualObjects(@"A has been updated", concreteA.foo);
+}
+
+- (void)testSerializationWithDictionaryTransformer {
+    NSEntityDescription *characterEntity = self.store.managedObjectModel.entitiesByName[@"Character"];
+    
+    NSMutableDictionary *userInfo = [characterEntity.userInfo mutableCopy];
+    userInfo[@"JSONDictionaryTransformerName"] = @"GrootTests.DictionaryTransformer";
+    characterEntity.userInfo = userInfo;
+    
+    NSDictionary *batmanJSON = @{
+        @"name": @"Batman",
+        @"real_name": @"Bruce Wayne",
+        @"legacy_id": @"1699",
+    };
+    
+    NSError *error = nil;
+    GRTCharacter *batman = [GRTJSONSerialization objectWithEntityName:@"Character" fromJSONDictionary:batmanJSON inContext:self.context error:&error];
+    XCTAssertNil(error);
+    XCTAssertEqualObjects(@1699, batman.identifier, @"should serialize attributes");
+    XCTAssertEqualObjects(@"Batman", batman.name, @"should serialize attributes");
+    XCTAssertEqualObjects(@"Bruce Wayne", batman.realName, @"should serialize attributes");
 }
 
 - (void)testSerializationToJSON {

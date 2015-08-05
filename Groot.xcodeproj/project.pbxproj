@@ -42,6 +42,9 @@
 		B42A1D931B56600000309637 /* characters.json in Resources */ = {isa = PBXBuildFile; fileRef = B42A1D911B56600000309637 /* characters.json */; };
 		B42A1D941B56600000309637 /* characters_update.json in Resources */ = {isa = PBXBuildFile; fileRef = B42A1D921B56600000309637 /* characters_update.json */; };
 		B42A1D971B56614600309637 /* NSData+Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = B42A1D961B56614600309637 /* NSData+Resource.m */; };
+		B44B7F5A1B7240FD00490641 /* NSArray+DictionaryTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = B44B7F581B7240FD00490641 /* NSArray+DictionaryTransformer.h */; };
+		B44B7F5B1B7240FD00490641 /* NSArray+DictionaryTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = B44B7F591B7240FD00490641 /* NSArray+DictionaryTransformer.m */; };
+		B44B7F5C1B72441D00490641 /* NSArray+DictionaryTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = B44B7F581B7240FD00490641 /* NSArray+DictionaryTransformer.h */; };
 		B46200C21B4F07E4003B3B69 /* GRTError.h in Headers */ = {isa = PBXBuildFile; fileRef = B46200C01B4F07E4003B3B69 /* GRTError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B46200C31B4F07E4003B3B69 /* GRTError.m in Sources */ = {isa = PBXBuildFile; fileRef = B46200C11B4F07E4003B3B69 /* GRTError.m */; };
 		B475B4101B53FCE1001F29FE /* NSManagedObject+Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B475B40E1B53FCE1001F29FE /* NSManagedObject+Groot.h */; };
@@ -96,6 +99,8 @@
 		B42A1D921B56600000309637 /* characters_update.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = characters_update.json; sourceTree = "<group>"; };
 		B42A1D951B56614600309637 /* NSData+Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Resource.h"; sourceTree = "<group>"; };
 		B42A1D961B56614600309637 /* NSData+Resource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Resource.m"; sourceTree = "<group>"; };
+		B44B7F581B7240FD00490641 /* NSArray+DictionaryTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+DictionaryTransformer.h"; sourceTree = "<group>"; };
+		B44B7F591B7240FD00490641 /* NSArray+DictionaryTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+DictionaryTransformer.m"; sourceTree = "<group>"; };
 		B46200C01B4F07E4003B3B69 /* GRTError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTError.h; sourceTree = "<group>"; };
 		B46200C11B4F07E4003B3B69 /* GRTError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTError.m; sourceTree = "<group>"; };
 		B475B40E1B53FCE1001F29FE /* NSManagedObject+Groot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+Groot.h"; sourceTree = "<group>"; };
@@ -259,6 +264,8 @@
 				B4DC1B161AA9CAC200F67403 /* NSEntityDescription+Groot.m */,
 				B475B40E1B53FCE1001F29FE /* NSManagedObject+Groot.h */,
 				B475B40F1B53FCE1001F29FE /* NSManagedObject+Groot.m */,
+				B44B7F581B7240FD00490641 /* NSArray+DictionaryTransformer.h */,
+				B44B7F591B7240FD00490641 /* NSArray+DictionaryTransformer.m */,
 			);
 			path = Private;
 			sourceTree = "<group>";
@@ -276,6 +283,7 @@
 				B408737D1B5AB8470063F150 /* GRTError.h in Headers */,
 				B408738A1B5AB87F0063F150 /* NSAttributeDescription+Groot.h in Headers */,
 				B40873881B5AB87F0063F150 /* NSPropertyDescription+Groot.h in Headers */,
+				B44B7F5C1B72441D00490641 /* NSArray+DictionaryTransformer.h in Headers */,
 				B408738E1B5AB87F0063F150 /* NSManagedObject+Groot.h in Headers */,
 				B40873811B5AB8470063F150 /* GRTManagedStore.h in Headers */,
 				B40873861B5AB87F0063F150 /* GRTValueTransformer.h in Headers */,
@@ -293,6 +301,7 @@
 				B4DC1B271AA9CAC200F67403 /* NSPropertyDescription+Groot.h in Headers */,
 				B4DC1AF21AA9CA5E00F67403 /* Groot.h in Headers */,
 				B4DC1B1D1AA9CAC200F67403 /* GRTManagedStore.h in Headers */,
+				B44B7F5A1B7240FD00490641 /* NSArray+DictionaryTransformer.h in Headers */,
 				B4DC1B1B1AA9CAC200F67403 /* GRTJSONSerialization.h in Headers */,
 				B475B4101B53FCE1001F29FE /* NSManagedObject+Groot.h in Headers */,
 				B4E72F5C1B4DB8EF00B9EA77 /* GRTValueTransformer.h in Headers */,
@@ -493,6 +502,7 @@
 			files = (
 				B4E72F6D1B4DC4D500B9EA77 /* NSValueTransformer+Groot.swift in Sources */,
 				B4DC1B281AA9CAC200F67403 /* NSPropertyDescription+Groot.m in Sources */,
+				B44B7F5B1B7240FD00490641 /* NSArray+DictionaryTransformer.m in Sources */,
 				B4FD30711B569F1A002392F7 /* Groot.swift in Sources */,
 				B4DC1B261AA9CAC200F67403 /* NSEntityDescription+Groot.m in Sources */,
 				B4E72F651B4DB9B300B9EA77 /* NSValueTransformer+Groot.m in Sources */,
@@ -784,6 +794,7 @@
 				B40873761B5AB6930063F150 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B408737A1B5AB6930063F150 /* Build configuration list for PBXNativeTarget "Groot-MacTests" */ = {
 			isa = XCConfigurationList;
@@ -792,6 +803,7 @@
 				B40873781B5AB6930063F150 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B4DC1AE61AA9CA5E00F67403 /* Build configuration list for PBXProject "Groot" */ = {
 			isa = XCConfigurationList;

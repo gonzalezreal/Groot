@@ -24,6 +24,7 @@
 #import "NSPropertyDescription+Groot.h"
 #import "NSAttributeDescription+Groot.h"
 #import "NSManagedObject+Groot.h"
+#import "NSArray+DictionaryTransformer.h"
 
 #import "GRTError.h"
 
@@ -74,14 +75,21 @@ NS_ASSUME_NONNULL_BEGIN
     }
     
     [context performBlockAndWait:^{
+        NSArray *transformedArray = array;
+        NSValueTransformer *dictionaryTransformer = [self grt_dictionaryTransformer];
+        
+        if (dictionaryTransformer != nil) {
+            transformedArray = [array grt_arrayByApplyingDictionaryTransformer:dictionaryTransformer];
+        }
+        
         NSDictionary *existingObjects = nil;
         
         if (mergeChanges) {
-            existingObjects = [self grt_existingObjectsWithJSONArray:array inContext:context error:&error];
+            existingObjects = [self grt_existingObjectsWithJSONArray:transformedArray inContext:context error:&error];
             if (error != nil) return; // exit the block
         }
         
-        for (id obj in array) {
+        for (id obj in transformedArray) {
             if (obj == [NSNull null]) {
                 continue;
             }
@@ -127,6 +135,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable NSValueTransformer *)grt_entityMapper {
     NSString *name = self.userInfo[@"entityMapperName"];
+    
+    if (name == nil) {
+        return nil;
+    }
+    
+    return [NSValueTransformer valueTransformerForName:name];
+}
+
+- (nullable NSValueTransformer *)grt_dictionaryTransformer {
+    NSString *name = self.userInfo[@"JSONDictionaryTransformerName"];
     
     if (name == nil) {
         return nil;

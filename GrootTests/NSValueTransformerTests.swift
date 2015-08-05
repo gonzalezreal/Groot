@@ -45,6 +45,27 @@ class NSValueTransformerTests: XCTestCase {
         XCTAssertNil(transformer.reverseTransformedValue(nil), "should handle nil values")
         XCTAssertNil(transformer.reverseTransformedValue("not a number"), "should handle unsupported values")
     }
+    
+    func testDictionaryTransformer() {
+        func preprocessJSONDictionary(dictionary: [String: AnyObject]) -> [String: AnyObject]? {
+            var transformedDictionary = dictionary
+            transformedDictionary["transformed"] = true
+            
+            return transformedDictionary
+        }
+        
+        NSValueTransformer.setDictionaryTransformerWithName("testDictionaryTransformer", transform: preprocessJSONDictionary)
+        
+        let transformer = NSValueTransformer(forName: "testDictionaryTransformer")!
+        let transformedDictionary = transformer.transformedValue(["foo": "bar"]) as! [String: AnyObject]
+        if let transformed = transformedDictionary["transformed"] as? Bool {
+            XCTAssertTrue(transformed, "should call the transform function")
+        } else {
+            XCTFail("Didn't execute the transform function")
+        }
+        
+        XCTAssertNil(transformer.transformedValue(nil), "should handle nil values")
+    }
 
     func testEntityMapper() {
         func entityForJSONDictionary(dictionary: [String: AnyObject]) -> String? {

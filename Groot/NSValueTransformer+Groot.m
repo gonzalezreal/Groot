@@ -42,6 +42,12 @@ NS_ASSUME_NONNULL_BEGIN
     [self setValueTransformer:valueTransformer forName:name];
 }
 
++ (void)grt_setDictionaryTransformerWithName:(NSString *)name
+                              transformBlock:(NSDictionary * __nullable (^)(NSDictionary *value))transformBlock
+{
+    return [self grt_setValueTransformerWithName:name transformBlock:transformBlock];
+}
+
 + (void)grt_setEntityMapperWithName:(NSString *)name
                            mapBlock:(NSString * __nullable (^)(NSDictionary *JSONDictionary))mapBlock
 {

@@ -22,14 +22,14 @@
 
 import Foundation
 
-public extension NSValueTransformer {
+extension NSValueTransformer {
     /**
      Registers a value transformer with a given name and transform function.
     
      :param: name The name of the transformer.
      :param: transform The function that performs the transformation.
     */
-    class func setValueTransformerWithName<T, U>(name: String, transform: (T) -> (U?)) {
+    public class func setValueTransformerWithName<T, U>(name: String, transform: (T) -> (U?)) {
         grt_setValueTransformerWithName(name) { value in
             (value as? T).flatMap {
                 transform($0) as? AnyObject
@@ -44,7 +44,7 @@ public extension NSValueTransformer {
      :param: transform The function that performs the forward transformation.
      :param: reverseTransform The function that performs the reverse transformation.
     */
-    class func setValueTransformerWithName<T, U>(name: String, transform: (T) -> (U?), reverseTransform: (U) -> (T?)) {
+    public class func setValueTransformerWithName<T, U>(name: String, transform: (T) -> (U?), reverseTransform: (U) -> (T?)) {
         grt_setValueTransformerWithName(name, transformBlock: { value in
             return (value as? T).flatMap {
                 transform($0) as? AnyObject
@@ -54,6 +54,24 @@ public extension NSValueTransformer {
                     reverseTransform($0) as? AnyObject
                 }
         })
+    }
+    
+    /**
+     Registers a dictionary transformer with a given name and transform function.
+ 
+     Dictionary transformers can be associated with Core Data entities in the user info
+     dictionary by using the `JSONDictionaryTransformerName` key.
+ 
+     :param: name The name of the transformer.
+     :param: transform The function that performs the transformation.
+    */
+    public class func setDictionaryTransformerWithName(name: String, transform: ([String: AnyObject]) -> ([String: AnyObject]?)) {
+        grt_setDictionaryTransformerWithName(name) { value in
+            if let dictionary = value as? [String: AnyObject] {
+                return transform(dictionary)
+            }
+            return nil
+        }
     }
     
     /**
@@ -67,7 +85,7 @@ public extension NSValueTransformer {
      :param: name The name of the mapper.
      :param: map The function that performs the mapping.
     */
-    class func setEntityMapperWithName(name: String, map: ([String: AnyObject]) -> (String?)) {
+    public class func setEntityMapperWithName(name: String, map: ([String: AnyObject]) -> (String?)) {
         grt_setEntityMapperWithName(name) { value in
             if let dictionary = value as? [String: AnyObject] {
                 return map(dictionary)
