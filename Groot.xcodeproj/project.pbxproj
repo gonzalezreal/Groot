@@ -45,6 +45,7 @@
 		B44B7F5A1B7240FD00490641 /* NSArray+DictionaryTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = B44B7F581B7240FD00490641 /* NSArray+DictionaryTransformer.h */; };
 		B44B7F5B1B7240FD00490641 /* NSArray+DictionaryTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = B44B7F591B7240FD00490641 /* NSArray+DictionaryTransformer.m */; };
 		B44B7F5C1B72441D00490641 /* NSArray+DictionaryTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = B44B7F581B7240FD00490641 /* NSArray+DictionaryTransformer.h */; };
+		B44B7F5D1B7299B800490641 /* NSArray+DictionaryTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = B44B7F591B7240FD00490641 /* NSArray+DictionaryTransformer.m */; };
 		B46200C21B4F07E4003B3B69 /* GRTError.h in Headers */ = {isa = PBXBuildFile; fileRef = B46200C01B4F07E4003B3B69 /* GRTError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B46200C31B4F07E4003B3B69 /* GRTError.m in Sources */ = {isa = PBXBuildFile; fileRef = B46200C11B4F07E4003B3B69 /* GRTError.m */; };
 		B475B4101B53FCE1001F29FE /* NSManagedObject+Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B475B40E1B53FCE1001F29FE /* NSManagedObject+Groot.h */; };
@@ -471,6 +472,7 @@
 			files = (
 				B408738D1B5AB87F0063F150 /* NSEntityDescription+Groot.m in Sources */,
 				B40873891B5AB87F0063F150 /* NSPropertyDescription+Groot.m in Sources */,
+				B44B7F5D1B7299B800490641 /* NSArray+DictionaryTransformer.m in Sources */,
 				B40873851B5AB8470063F150 /* NSValueTransformer+Groot.swift in Sources */,
 				B40873801B5AB8470063F150 /* GRTJSONSerialization.m in Sources */,
 				B40873841B5AB8470063F150 /* NSValueTransformer+Groot.m in Sources */,
