@@ -44,8 +44,7 @@ extension NSManagedObject {
             }
         }
         
-        assert(false, "Could not locate the entity for \(className).")
-        return NSEntityDescription()
+        fatalError("Could not locate the entity for \(className).")
     }
 }
 
