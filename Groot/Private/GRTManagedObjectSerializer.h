@@ -1,4 +1,4 @@
-// NSArray+DictionaryTransformer.h
+// GRTManagedObjectSerializer.h
 //
 // Copyright (c) 2014-2015 Guillermo Gonzalez
 //
@@ -20,13 +20,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSArray (DictionaryTransformer)
+@interface GRTManagedObjectSerializer : NSObject
 
-- (NSArray *)grt_arrayByApplyingDictionaryTransformer:(NSValueTransformer *)valueTransformer;
+- (instancetype)initWithEntity:(NSEntityDescription *)entity;
+
+- (nullable NSArray *)serializeJSONArray:(NSArray *)array
+                               inContext:(NSManagedObjectContext *)context
+                                   error:(NSError * __nullable * __nullable)error;
 
 @end
 

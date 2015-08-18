@@ -21,6 +21,7 @@
 // THE SOFTWARE.
 
 #import "GRTJSONSerialization.h"
+#import "GRTManagedObjectSerializer.h"
 
 #import "NSEntityDescription+Groot.h"
 #import "NSManagedObject+Groot.h"
@@ -67,12 +68,11 @@ NS_ASSUME_NONNULL_BEGIN
         return nil;
     }
     
-    BOOL mergeChanges = [entity grt_identityAttribute] != nil;
+    GRTManagedObjectSerializer *serializer = [[GRTManagedObjectSerializer alloc] initWithEntity:entity];
     
-    return [entity grt_importJSONArray:@[JSONDictionary]
-                             inContext:context
-                          mergeChanges:mergeChanges
-                                 error:outError].firstObject;
+    return [serializer serializeJSONArray:@[JSONDictionary]
+                                inContext:context
+                                    error:outError].firstObject;
 }
 
 + (nullable NSArray *)objectsWithEntityName:(NSString *)entityName
@@ -88,12 +88,11 @@ NS_ASSUME_NONNULL_BEGIN
         return nil;
     }
     
-    BOOL mergeChanges = [entity grt_identityAttribute] != nil;
+    GRTManagedObjectSerializer *serializer = [[GRTManagedObjectSerializer alloc] initWithEntity:entity];
     
-    return [entity grt_importJSONArray:JSONArray
-                             inContext:context
-                          mergeChanges:mergeChanges
-                                 error:outError];
+    return [serializer serializeJSONArray:JSONArray
+                                inContext:context
+                                    error:outError];
 }
 
 + (NSDictionary *)JSONDictionaryFromObject:(NSManagedObject *)object {

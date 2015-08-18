@@ -22,6 +22,7 @@
 
 #import "NSManagedObject+Groot.h"
 
+#import "GRTManagedObjectSerializer.h"
 #import "GRTError.h"
 
 #import "NSPropertyDescription+Groot.h"
@@ -32,9 +33,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation NSManagedObject (Groot)
 
-- (void)grt_importJSONDictionary:(NSDictionary *)dictionary
-                    mergeChanges:(BOOL)mergeChanges
-                           error:(NSError *__autoreleasing  __nullable * __nullable)outError
+- (void)grt_serializeJSONDictionary:(NSDictionary *)dictionary
+                       mergeChanges:(BOOL)mergeChanges
+                              error:(NSError *__autoreleasing  __nullable * __nullable)outError
 {
     NSError * __block error = nil;
     NSDictionary *propertiesByName = self.entity.propertiesByName;
@@ -60,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
     }
 }
 
-- (void)grt_importJSONValue:(id)value error:(NSError *__autoreleasing  __nullable * __nullable)outError {
+- (void)grt_serializeJSONValue:(id)value error:(NSError *__autoreleasing  __nullable * __nullable)outError {
     NSAttributeDescription *attribute = [self.entity grt_identityAttribute];
     
     if (attribute == nil) {
@@ -206,24 +207,25 @@ NS_ASSUME_NONNULL_BEGIN
     id rawValue = [relationship grt_rawValueInJSONDictionary:dictionary];
     
     if (rawValue != nil && rawValue != [NSNull null]) {
-        NSError *error = nil;
         NSEntityDescription *destinationEntity = relationship.destinationEntity;
+        GRTManagedObjectSerializer *serializer = [[GRTManagedObjectSerializer alloc] initWithEntity:destinationEntity];
+        
         BOOL isArray = [rawValue isKindOfClass:[NSArray class]];
+        NSError *error = nil;
         
         if (relationship.toMany && isArray) {
-            NSArray *managedObjects = [destinationEntity grt_importJSONArray:rawValue
-                                                                   inContext:self.managedObjectContext
-                                                                mergeChanges:mergeChanges
-                                                                       error:&error];
+            NSArray *managedObjects = [serializer serializeJSONArray:rawValue
+                                                           inContext:self.managedObjectContext
+                                                               error:&error];
+            
             if (managedObjects != nil) {
                 value = relationship.ordered ? [NSOrderedSet orderedSetWithArray:managedObjects] : [NSSet setWithArray:managedObjects];
             }
         }
         else if (!relationship.toMany && !isArray) {
-            NSManagedObject *managedObject = [destinationEntity grt_importJSONArray:@[rawValue]
-                                                                          inContext:self.managedObjectContext
-                                                                       mergeChanges:mergeChanges
-                                                                              error:&error].firstObject;
+            NSManagedObject *managedObject = [serializer serializeJSONArray:@[rawValue]
+                                                                  inContext:self.managedObjectContext
+                                                                      error:&error].firstObject;
             
             if (managedObject != nil) {
                 value = managedObject;

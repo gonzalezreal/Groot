@@ -1,4 +1,4 @@
-// NSArray+DictionaryTransformer.h
+// GRTSerializationStrategy.h
 //
 // Copyright (c) 2014-2015 Guillermo Gonzalez
 //
@@ -20,14 +20,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSArray (DictionaryTransformer)
+@protocol GRTSerializationStrategy <NSObject>
 
-- (NSArray *)grt_arrayByApplyingDictionaryTransformer:(NSValueTransformer *)valueTransformer;
+@property (strong, nonatomic, readonly) NSEntityDescription *entity;
+
+- (NSArray *)serializeJSONArray:(NSArray *)array
+                      inContext:(NSManagedObjectContext *)context
+                          error:(NSError * __nullable * __nullable)error;
 
 @end
+
+extern id<GRTSerializationStrategy> GRTSerializationStrategyForEntity(NSEntityDescription *entity);
 
 NS_ASSUME_NONNULL_END

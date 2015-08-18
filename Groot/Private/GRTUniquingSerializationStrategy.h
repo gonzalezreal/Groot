@@ -1,4 +1,4 @@
-// NSArray+DictionaryTransformer.h
+// GRTUniquingSerializationStrategy.h
 //
 // Copyright (c) 2014-2015 Guillermo Gonzalez
 //
@@ -20,13 +20,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+#import "GRTSerializationStrategy.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSArray (DictionaryTransformer)
+@interface GRTUniquingSerializationStrategy : NSObject<GRTSerializationStrategy>
 
-- (NSArray *)grt_arrayByApplyingDictionaryTransformer:(NSValueTransformer *)valueTransformer;
+- (instancetype)initWithEntity:(NSEntityDescription *)entity;
 
 @end
 

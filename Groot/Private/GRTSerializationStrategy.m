@@ -1,4 +1,4 @@
-// NSArray+DictionaryTransformer.h
+// GRTSerializationStrategy.m
 //
 // Copyright (c) 2014-2015 Guillermo Gonzalez
 //
@@ -22,12 +22,15 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
+#import "GRTInsertSerializationStrategy.h"
+#import "GRTUniquingSerializationStrategy.h"
 
-@interface NSArray (DictionaryTransformer)
+#import "NSEntityDescription+Groot.h"
 
-- (NSArray *)grt_arrayByApplyingDictionaryTransformer:(NSValueTransformer *)valueTransformer;
-
-@end
-
-NS_ASSUME_NONNULL_END
+id<GRTSerializationStrategy> GRTSerializationStrategyForEntity(NSEntityDescription *entity) {
+    if ([entity grt_identityAttribute] != nil) {
+        return [[GRTUniquingSerializationStrategy alloc] initWithEntity:entity];
+    }
+    
+    return [[GRTInsertSerializationStrategy alloc] initWithEntity:entity];
+}

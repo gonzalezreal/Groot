@@ -61,74 +61,24 @@ NS_ASSUME_NONNULL_BEGIN
     return nil;
 }
 
-- (nullable NSArray *)grt_importJSONArray:(NSArray *)array
-                                inContext:(NSManagedObjectContext *)context
-                             mergeChanges:(BOOL)mergeChanges
-                                    error:(NSError *__autoreleasing  __nullable * __nullable)outError
-{
-    NSMutableArray * __block managedObjects = [NSMutableArray array];
-    NSError * __block error = nil;
+- (nullable NSValueTransformer *)grt_dictionaryTransformer {
+    NSString *name = self.userInfo[@"JSONDictionaryTransformerName"];
     
-    if (array.count == 0) {
-        // Return early and avoid further processing
-        return managedObjects;
+    if (name == nil) {
+        return nil;
     }
     
-    [context performBlockAndWait:^{
-        NSArray *transformedArray = array;
-        NSValueTransformer *dictionaryTransformer = [self grt_dictionaryTransformer];
-        
-        if (dictionaryTransformer != nil) {
-            transformedArray = [array grt_arrayByApplyingDictionaryTransformer:dictionaryTransformer];
-        }
-        
-        NSDictionary *existingObjects = nil;
-        
-        if (mergeChanges) {
-            existingObjects = [self grt_existingObjectsWithJSONArray:transformedArray inContext:context error:&error];
-            if (error != nil) return; // exit the block
-        }
-        
-        for (id obj in transformedArray) {
-            if (obj == [NSNull null]) {
-                continue;
-            }
-            
-            NSManagedObject *managedObject = [self grt_managedObjectForJSONValue:obj inContext:context existingObjects:existingObjects];
-            
-            if ([obj isKindOfClass:[NSDictionary class]]) {
-                [managedObject grt_importJSONDictionary:obj mergeChanges:mergeChanges error:&error];
-            } else {
-                [managedObject grt_importJSONValue:obj error:&error];
-            }
-            
-            if (error == nil) {
-                [managedObjects addObject:managedObject];
-            } else {
-                [context deleteObject:managedObject];
-                return; // exit the block
-            }
-        }
-    }];
+    return [NSValueTransformer valueTransformerForName:name];
+}
+
+- (NSString *)grt_subentityNameForJSONValue:(id)value {
+    NSString *name = nil;
     
-    if (error != nil) {
-        // Delete any objects we have created when there's an error
-        if (managedObjects.count > 0) {
-            [context performBlockAndWait:^{
-                for (NSManagedObject *object in managedObjects) {
-                    [context deleteObject:object];
-                }
-            }];
-        }
-        
-        if (outError != nil) {
-            *outError = error;
-        }
-        
-        managedObjects = nil;
+    if ([value isKindOfClass:[NSDictionary class]]) {
+        name = [[self grt_entityMapper] transformedValue:value];
     }
     
-    return managedObjects;
+    return name ? : self.name;
 }
 
 #pragma mark - Private
@@ -141,89 +91,6 @@ NS_ASSUME_NONNULL_BEGIN
     }
     
     return [NSValueTransformer valueTransformerForName:name];
-}
-
-- (nullable NSValueTransformer *)grt_dictionaryTransformer {
-    NSString *name = self.userInfo[@"JSONDictionaryTransformerName"];
-    
-    if (name == nil) {
-        return nil;
-    }
-    
-    return [NSValueTransformer valueTransformerForName:name];
-}
-
-- (NSString *)grt_entityNameForJSONValue:(id)value {
-    NSString *name = nil;
-    
-    if ([value isKindOfClass:[NSDictionary class]]) {
-        name = [[self grt_entityMapper] transformedValue:value];
-    }
-    
-    return name ? : self.name;
-}
-
-- (nullable NSDictionary *)grt_existingObjectsWithJSONArray:(NSArray *)array
-                                                  inContext:(NSManagedObjectContext *)context
-                                                      error:(NSError *__autoreleasing  __nullable * __nullable)outError
-{
-    NSAttributeDescription *attribute = [self grt_identityAttribute];
-    
-    if (attribute == nil) {
-        if (outError) {
-            NSString *format = NSLocalizedString(@"%@ has no identity attribute", @"Groot");
-            NSString *message = [NSString stringWithFormat:format, self.name];
-            *outError = [NSError errorWithDomain:GRTErrorDomain
-                                            code:GRTErrorIdentityNotFound
-                                        userInfo:@{ NSLocalizedDescriptionKey: message }];
-        }
-        
-        return nil;
-    }
-    
-    NSArray *identifiers = [attribute grt_valuesInJSONArray:array];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    fetchRequest.entity = self;
-    fetchRequest.returnsObjectsAsFaults = NO;
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"%K IN %@", attribute.name, identifiers];
-    
-    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:outError];
-    
-    if (fetchedObjects != nil) {
-        NSMutableDictionary *objects = [NSMutableDictionary dictionaryWithCapacity:fetchedObjects.count];
-        
-        for (NSManagedObject *object in fetchedObjects) {
-            id identifier = [object valueForKey:attribute.name];
-            if (identifier != nil) {
-                objects[identifier] = object;
-            }
-        }
-        return objects;
-    }
-    
-    return nil;
-}
-
-- (NSManagedObject *)grt_managedObjectForJSONValue:(id)value
-                                         inContext:(NSManagedObjectContext *)context
-                                   existingObjects:(nullable NSDictionary *)existingObjects
-{
-    NSManagedObject *managedObject = nil;
-    
-    if (existingObjects) {
-        NSAttributeDescription *identityAttribute = [self grt_identityAttribute];
-        id identifier = [identityAttribute grt_valueForJSONValue:value];
-        if (identifier != nil) {
-            managedObject = existingObjects[identifier];
-        }
-    }
-    
-    if (managedObject == nil) {
-        NSString *entityName = [self grt_entityNameForJSONValue:value];
-        managedObject = [[self class] insertNewObjectForEntityForName:entityName inManagedObjectContext:context];
-    }
-    
-    return managedObject;
 }
 
 @end

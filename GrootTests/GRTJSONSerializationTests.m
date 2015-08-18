@@ -276,32 +276,6 @@
     XCTAssertEqual(NSValidationMissingMandatoryPropertyError, error.code, "should return a validation error");
 }
 
-- (void)testMissingIdentityAttribute {
-    NSEntityDescription *powerEntity = self.store.managedObjectModel.entitiesByName[@"Power"];
-    powerEntity.userInfo = @{}; // Remove the identity attribute name from the entity
-    
-    NSDictionary *dictionary = @{
-        @"id": @"1699",
-        @"name": @"Batman",
-        @"real_name": @"Bruce Wayne",
-        @"powers": @[
-            @{
-                @"id": @"4",
-                @"name": @"Agility"
-            }
-        ]
-    };
-    
-    NSError *error = nil;
-    GRTCharacter *batman = [GRTJSONSerialization objectWithEntityName:@"Character" fromJSONDictionary:dictionary inContext:self.context error:&error];
-    
-    XCTAssertNil(batman);
-    XCTAssertNotNil(error);
-    
-    XCTAssertEqualObjects(GRTErrorDomain, error.domain);
-    XCTAssertEqual(GRTErrorIdentityNotFound, error.code, "should return an identity not found error");
-}
-
 - (void)testSerializationFromIdentifiers {
     NSArray *charactersJSON = @[@"1699", @"1455"];
     
@@ -387,7 +361,7 @@
     XCTAssertNotNil(error);
     
     XCTAssertEqualObjects(GRTErrorDomain, error.domain);
-    XCTAssertEqual(GRTErrorIdentityNotFound, error.code, "should return an identity not found error");
+    XCTAssertEqual(GRTErrorInvalidJSONObject, error.code, "should return an identity not found error");
 }
 
 - (void)testSerializationFromIdentifiersValidatesValues {

@@ -50,6 +50,16 @@
 		B46200C31B4F07E4003B3B69 /* GRTError.m in Sources */ = {isa = PBXBuildFile; fileRef = B46200C11B4F07E4003B3B69 /* GRTError.m */; };
 		B475B4101B53FCE1001F29FE /* NSManagedObject+Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B475B40E1B53FCE1001F29FE /* NSManagedObject+Groot.h */; };
 		B475B4111B53FCE1001F29FE /* NSManagedObject+Groot.m in Sources */ = {isa = PBXBuildFile; fileRef = B475B40F1B53FCE1001F29FE /* NSManagedObject+Groot.m */; };
+		B4944D121B83303B00EA2D29 /* GRTInsertSerializationStrategy.h in Headers */ = {isa = PBXBuildFile; fileRef = B4944D101B83303B00EA2D29 /* GRTInsertSerializationStrategy.h */; };
+		B4944D131B83303B00EA2D29 /* GRTInsertSerializationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = B4944D111B83303B00EA2D29 /* GRTInsertSerializationStrategy.m */; };
+		B4944D141B83305300EA2D29 /* GRTInsertSerializationStrategy.h in Headers */ = {isa = PBXBuildFile; fileRef = B4944D101B83303B00EA2D29 /* GRTInsertSerializationStrategy.h */; };
+		B4944D151B83305600EA2D29 /* GRTInsertSerializationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = B4944D111B83303B00EA2D29 /* GRTInsertSerializationStrategy.m */; };
+		B4944D181B83320000EA2D29 /* GRTUniquingSerializationStrategy.h in Headers */ = {isa = PBXBuildFile; fileRef = B4944D161B83320000EA2D29 /* GRTUniquingSerializationStrategy.h */; };
+		B4944D191B83320000EA2D29 /* GRTUniquingSerializationStrategy.h in Headers */ = {isa = PBXBuildFile; fileRef = B4944D161B83320000EA2D29 /* GRTUniquingSerializationStrategy.h */; };
+		B4944D1A1B83320000EA2D29 /* GRTUniquingSerializationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = B4944D171B83320000EA2D29 /* GRTUniquingSerializationStrategy.m */; };
+		B4944D1B1B83320000EA2D29 /* GRTUniquingSerializationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = B4944D171B83320000EA2D29 /* GRTUniquingSerializationStrategy.m */; };
+		B4944D1D1B83355C00EA2D29 /* GRTSerializationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = B4944D1C1B83355C00EA2D29 /* GRTSerializationStrategy.m */; };
+		B4944D1E1B83355C00EA2D29 /* GRTSerializationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = B4944D1C1B83355C00EA2D29 /* GRTSerializationStrategy.m */; };
 		B4BB8A0D1B4D17B600EBAADA /* GRTManagedStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B4BB8A0C1B4D17B600EBAADA /* GRTManagedStoreTests.m */; };
 		B4DC1AF21AA9CA5E00F67403 /* Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B4DC1AF11AA9CA5E00F67403 /* Groot.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B4DC1AF81AA9CA5E00F67403 /* Groot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4DC1AEC1AA9CA5E00F67403 /* Groot.framework */; };
@@ -66,6 +76,12 @@
 		B4DC1B2F1AA9CBAD00F67403 /* GRTJSONSerializationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B291AA9CBAD00F67403 /* GRTJSONSerializationTests.m */; };
 		B4DC1B301AA9CBAD00F67403 /* GRTModels.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B2B1AA9CBAD00F67403 /* GRTModels.m */; };
 		B4DC1B321AA9CBAD00F67403 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B2D1AA9CBAD00F67403 /* Model.xcdatamodeld */; };
+		B4E314F91B832BD500A80489 /* GRTManagedObjectSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = B4E314F71B832BD500A80489 /* GRTManagedObjectSerializer.h */; };
+		B4E314FA1B832BD500A80489 /* GRTManagedObjectSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = B4E314F71B832BD500A80489 /* GRTManagedObjectSerializer.h */; };
+		B4E314FB1B832BD500A80489 /* GRTManagedObjectSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E314F81B832BD500A80489 /* GRTManagedObjectSerializer.m */; };
+		B4E314FC1B832BD500A80489 /* GRTManagedObjectSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E314F81B832BD500A80489 /* GRTManagedObjectSerializer.m */; };
+		B4E314FD1B832EF900A80489 /* GRTSerializationStrategy.h in Headers */ = {isa = PBXBuildFile; fileRef = B4E314EE1B83233600A80489 /* GRTSerializationStrategy.h */; };
+		B4E314FE1B832EFA00A80489 /* GRTSerializationStrategy.h in Headers */ = {isa = PBXBuildFile; fileRef = B4E314EE1B83233600A80489 /* GRTSerializationStrategy.h */; };
 		B4E72F5C1B4DB8EF00B9EA77 /* GRTValueTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = B4E72F5A1B4DB8EF00B9EA77 /* GRTValueTransformer.h */; };
 		B4E72F5D1B4DB8EF00B9EA77 /* GRTValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E72F5B1B4DB8EF00B9EA77 /* GRTValueTransformer.m */; };
 		B4E72F641B4DB9B300B9EA77 /* NSValueTransformer+Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B4E72F621B4DB9B300B9EA77 /* NSValueTransformer+Groot.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -106,6 +122,11 @@
 		B46200C11B4F07E4003B3B69 /* GRTError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTError.m; sourceTree = "<group>"; };
 		B475B40E1B53FCE1001F29FE /* NSManagedObject+Groot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+Groot.h"; sourceTree = "<group>"; };
 		B475B40F1B53FCE1001F29FE /* NSManagedObject+Groot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+Groot.m"; sourceTree = "<group>"; };
+		B4944D101B83303B00EA2D29 /* GRTInsertSerializationStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTInsertSerializationStrategy.h; sourceTree = "<group>"; };
+		B4944D111B83303B00EA2D29 /* GRTInsertSerializationStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTInsertSerializationStrategy.m; sourceTree = "<group>"; };
+		B4944D161B83320000EA2D29 /* GRTUniquingSerializationStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTUniquingSerializationStrategy.h; sourceTree = "<group>"; };
+		B4944D171B83320000EA2D29 /* GRTUniquingSerializationStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTUniquingSerializationStrategy.m; sourceTree = "<group>"; };
+		B4944D1C1B83355C00EA2D29 /* GRTSerializationStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTSerializationStrategy.m; sourceTree = "<group>"; };
 		B4BB8A0C1B4D17B600EBAADA /* GRTManagedStoreTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTManagedStoreTests.m; sourceTree = "<group>"; };
 		B4DC1AEC1AA9CA5E00F67403 /* Groot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Groot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4DC1AF01AA9CA5E00F67403 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -126,6 +147,9 @@
 		B4DC1B2A1AA9CBAD00F67403 /* GRTModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTModels.h; sourceTree = "<group>"; };
 		B4DC1B2B1AA9CBAD00F67403 /* GRTModels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTModels.m; sourceTree = "<group>"; };
 		B4DC1B2E1AA9CBAD00F67403 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		B4E314EE1B83233600A80489 /* GRTSerializationStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTSerializationStrategy.h; sourceTree = "<group>"; };
+		B4E314F71B832BD500A80489 /* GRTManagedObjectSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTManagedObjectSerializer.h; sourceTree = "<group>"; };
+		B4E314F81B832BD500A80489 /* GRTManagedObjectSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTManagedObjectSerializer.m; sourceTree = "<group>"; };
 		B4E72F5A1B4DB8EF00B9EA77 /* GRTValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTValueTransformer.h; sourceTree = "<group>"; };
 		B4E72F5B1B4DB8EF00B9EA77 /* GRTValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTValueTransformer.m; sourceTree = "<group>"; };
 		B4E72F621B4DB9B300B9EA77 /* NSValueTransformer+Groot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValueTransformer+Groot.h"; sourceTree = "<group>"; };
@@ -177,6 +201,25 @@
 				B409C72F1B5979E700C47D48 /* container.json */,
 			);
 			path = JSON;
+			sourceTree = "<group>";
+		};
+		B4944D1F1B83779E00EA2D29 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				B4E72F5A1B4DB8EF00B9EA77 /* GRTValueTransformer.h */,
+				B4E72F5B1B4DB8EF00B9EA77 /* GRTValueTransformer.m */,
+				B4DC1B171AA9CAC200F67403 /* NSPropertyDescription+Groot.h */,
+				B4DC1B181AA9CAC200F67403 /* NSPropertyDescription+Groot.m */,
+				B4DC1B111AA9CAC200F67403 /* NSAttributeDescription+Groot.h */,
+				B4DC1B121AA9CAC200F67403 /* NSAttributeDescription+Groot.m */,
+				B4DC1B151AA9CAC200F67403 /* NSEntityDescription+Groot.h */,
+				B4DC1B161AA9CAC200F67403 /* NSEntityDescription+Groot.m */,
+				B475B40E1B53FCE1001F29FE /* NSManagedObject+Groot.h */,
+				B475B40F1B53FCE1001F29FE /* NSManagedObject+Groot.m */,
+				B44B7F581B7240FD00490641 /* NSArray+DictionaryTransformer.h */,
+				B44B7F591B7240FD00490641 /* NSArray+DictionaryTransformer.m */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 		B4DC1AE21AA9CA5E00F67403 = {
@@ -255,20 +298,25 @@
 		B4DC1B101AA9CAC200F67403 /* Private */ = {
 			isa = PBXGroup;
 			children = (
-				B4E72F5A1B4DB8EF00B9EA77 /* GRTValueTransformer.h */,
-				B4E72F5B1B4DB8EF00B9EA77 /* GRTValueTransformer.m */,
-				B4DC1B171AA9CAC200F67403 /* NSPropertyDescription+Groot.h */,
-				B4DC1B181AA9CAC200F67403 /* NSPropertyDescription+Groot.m */,
-				B4DC1B111AA9CAC200F67403 /* NSAttributeDescription+Groot.h */,
-				B4DC1B121AA9CAC200F67403 /* NSAttributeDescription+Groot.m */,
-				B4DC1B151AA9CAC200F67403 /* NSEntityDescription+Groot.h */,
-				B4DC1B161AA9CAC200F67403 /* NSEntityDescription+Groot.m */,
-				B475B40E1B53FCE1001F29FE /* NSManagedObject+Groot.h */,
-				B475B40F1B53FCE1001F29FE /* NSManagedObject+Groot.m */,
-				B44B7F581B7240FD00490641 /* NSArray+DictionaryTransformer.h */,
-				B44B7F591B7240FD00490641 /* NSArray+DictionaryTransformer.m */,
+				B4944D1F1B83779E00EA2D29 /* Helpers */,
+				B4E314ED1B8322EE00A80489 /* Serialization */,
 			);
 			path = Private;
+			sourceTree = "<group>";
+		};
+		B4E314ED1B8322EE00A80489 /* Serialization */ = {
+			isa = PBXGroup;
+			children = (
+				B4E314F71B832BD500A80489 /* GRTManagedObjectSerializer.h */,
+				B4E314F81B832BD500A80489 /* GRTManagedObjectSerializer.m */,
+				B4E314EE1B83233600A80489 /* GRTSerializationStrategy.h */,
+				B4944D1C1B83355C00EA2D29 /* GRTSerializationStrategy.m */,
+				B4944D101B83303B00EA2D29 /* GRTInsertSerializationStrategy.h */,
+				B4944D111B83303B00EA2D29 /* GRTInsertSerializationStrategy.m */,
+				B4944D161B83320000EA2D29 /* GRTUniquingSerializationStrategy.h */,
+				B4944D171B83320000EA2D29 /* GRTUniquingSerializationStrategy.m */,
+			);
+			name = Serialization;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,12 +327,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				B408738C1B5AB87F0063F150 /* NSEntityDescription+Groot.h in Headers */,
+				B4E314FD1B832EF900A80489 /* GRTSerializationStrategy.h in Headers */,
 				B408737B1B5AB8350063F150 /* Groot.h in Headers */,
 				B40873831B5AB8470063F150 /* NSValueTransformer+Groot.h in Headers */,
 				B408737D1B5AB8470063F150 /* GRTError.h in Headers */,
 				B408738A1B5AB87F0063F150 /* NSAttributeDescription+Groot.h in Headers */,
 				B40873881B5AB87F0063F150 /* NSPropertyDescription+Groot.h in Headers */,
+				B4944D191B83320000EA2D29 /* GRTUniquingSerializationStrategy.h in Headers */,
 				B44B7F5C1B72441D00490641 /* NSArray+DictionaryTransformer.h in Headers */,
+				B4944D141B83305300EA2D29 /* GRTInsertSerializationStrategy.h in Headers */,
+				B4E314FA1B832BD500A80489 /* GRTManagedObjectSerializer.h in Headers */,
 				B408738E1B5AB87F0063F150 /* NSManagedObject+Groot.h in Headers */,
 				B40873811B5AB8470063F150 /* GRTManagedStore.h in Headers */,
 				B40873861B5AB87F0063F150 /* GRTValueTransformer.h in Headers */,
@@ -297,12 +349,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				B46200C21B4F07E4003B3B69 /* GRTError.h in Headers */,
+				B4E314FE1B832EFA00A80489 /* GRTSerializationStrategy.h in Headers */,
 				B4E72F641B4DB9B300B9EA77 /* NSValueTransformer+Groot.h in Headers */,
 				B4DC1B251AA9CAC200F67403 /* NSEntityDescription+Groot.h in Headers */,
 				B4DC1B271AA9CAC200F67403 /* NSPropertyDescription+Groot.h in Headers */,
 				B4DC1AF21AA9CA5E00F67403 /* Groot.h in Headers */,
 				B4DC1B1D1AA9CAC200F67403 /* GRTManagedStore.h in Headers */,
+				B4944D181B83320000EA2D29 /* GRTUniquingSerializationStrategy.h in Headers */,
 				B44B7F5A1B7240FD00490641 /* NSArray+DictionaryTransformer.h in Headers */,
+				B4944D121B83303B00EA2D29 /* GRTInsertSerializationStrategy.h in Headers */,
+				B4E314F91B832BD500A80489 /* GRTManagedObjectSerializer.h in Headers */,
 				B4DC1B1B1AA9CAC200F67403 /* GRTJSONSerialization.h in Headers */,
 				B475B4101B53FCE1001F29FE /* NSManagedObject+Groot.h in Headers */,
 				B4E72F5C1B4DB8EF00B9EA77 /* GRTValueTransformer.h in Headers */,
@@ -472,14 +528,18 @@
 			files = (
 				B408738D1B5AB87F0063F150 /* NSEntityDescription+Groot.m in Sources */,
 				B40873891B5AB87F0063F150 /* NSPropertyDescription+Groot.m in Sources */,
+				B4944D1B1B83320000EA2D29 /* GRTUniquingSerializationStrategy.m in Sources */,
+				B4944D1E1B83355C00EA2D29 /* GRTSerializationStrategy.m in Sources */,
 				B44B7F5D1B7299B800490641 /* NSArray+DictionaryTransformer.m in Sources */,
 				B40873851B5AB8470063F150 /* NSValueTransformer+Groot.swift in Sources */,
+				B4944D151B83305600EA2D29 /* GRTInsertSerializationStrategy.m in Sources */,
 				B40873801B5AB8470063F150 /* GRTJSONSerialization.m in Sources */,
 				B40873841B5AB8470063F150 /* NSValueTransformer+Groot.m in Sources */,
 				B408737E1B5AB8470063F150 /* GRTError.m in Sources */,
 				B408737C1B5AB83D0063F150 /* Groot.swift in Sources */,
 				B408738B1B5AB87F0063F150 /* NSAttributeDescription+Groot.m in Sources */,
 				B40873871B5AB87F0063F150 /* GRTValueTransformer.m in Sources */,
+				B4E314FC1B832BD500A80489 /* GRTManagedObjectSerializer.m in Sources */,
 				B408738F1B5AB87F0063F150 /* NSManagedObject+Groot.m in Sources */,
 				B40873821B5AB8470063F150 /* GRTManagedStore.m in Sources */,
 			);
@@ -504,14 +564,18 @@
 			files = (
 				B4E72F6D1B4DC4D500B9EA77 /* NSValueTransformer+Groot.swift in Sources */,
 				B4DC1B281AA9CAC200F67403 /* NSPropertyDescription+Groot.m in Sources */,
+				B4944D1A1B83320000EA2D29 /* GRTUniquingSerializationStrategy.m in Sources */,
+				B4944D1D1B83355C00EA2D29 /* GRTSerializationStrategy.m in Sources */,
 				B44B7F5B1B7240FD00490641 /* NSArray+DictionaryTransformer.m in Sources */,
 				B4FD30711B569F1A002392F7 /* Groot.swift in Sources */,
+				B4944D131B83303B00EA2D29 /* GRTInsertSerializationStrategy.m in Sources */,
 				B4DC1B261AA9CAC200F67403 /* NSEntityDescription+Groot.m in Sources */,
 				B4E72F651B4DB9B300B9EA77 /* NSValueTransformer+Groot.m in Sources */,
 				B4DC1B1C1AA9CAC200F67403 /* GRTJSONSerialization.m in Sources */,
 				B4DC1B221AA9CAC200F67403 /* NSAttributeDescription+Groot.m in Sources */,
 				B4E72F5D1B4DB8EF00B9EA77 /* GRTValueTransformer.m in Sources */,
 				B4DC1B1E1AA9CAC200F67403 /* GRTManagedStore.m in Sources */,
+				B4E314FB1B832BD500A80489 /* GRTManagedObjectSerializer.m in Sources */,
 				B475B4111B53FCE1001F29FE /* NSManagedObject+Groot.m in Sources */,
 				B46200C31B4F07E4003B3B69 /* GRTError.m in Sources */,
 			);
