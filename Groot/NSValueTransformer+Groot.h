@@ -49,11 +49,23 @@ typedef __nullable id (^GRTTransformBlock)(id value);
                   reverseTransformBlock:(__nullable id (^)(id value))reverseTransformBlock;
 
 /**
+ Registers a dictionary transformer with a given name and transform block.
+ 
+ Dictionary transformers can be associated with Core Data entities in the user info
+ dictionary by using the `JSONDictionaryTransformerName` key.
+ 
+ @param name The name of the transformer.
+ @param transformBlock The block that performs the transformation.
+ */
++ (void)grt_setDictionaryTransformerWithName:(NSString *)name
+                              transformBlock:(NSDictionary * __nullable (^)(NSDictionary *value))transformBlock;
+
+/**
  Registers an entity mapper with a given name and map block.
  
  An entity mapper maps a JSON dictionary to an entity name.
  
- Entity mappers can be associated with abstract core data entities in the user info
+ Entity mappers can be associated with abstract Core Data entities in the user info
  dictionary by using the `entityMapperName` key.
  
  @param name The name of the mapper.
