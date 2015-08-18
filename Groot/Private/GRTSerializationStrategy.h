@@ -1,6 +1,6 @@
-// NSManagedObject+Groot.h
+// GRTSerializationStrategy.h
 //
-// Copyright (c) 2015 Guillermo Gonzalez
+// Copyright (c) 2014-2015 Guillermo Gonzalez
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,16 +24,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSManagedObject (Groot)
+@protocol GRTSerializationStrategy <NSObject>
 
-- (void)grt_serializeJSONDictionary:(NSDictionary *)dictionary
-                       mergeChanges:(BOOL)mergeChanges
-                              error:(NSError *__autoreleasing  __nullable * __nullable)error;
+@property (strong, nonatomic, readonly) NSEntityDescription *entity;
 
-- (void)grt_serializeJSONValue:(id)value error:(NSError *__autoreleasing  __nullable * __nullable)error;
-
-- (NSDictionary *)grt_JSONDictionarySerializingRelationships:(NSMutableSet *)serializingRelationships;
+- (NSArray *)serializeJSONArray:(NSArray *)array
+                      inContext:(NSManagedObjectContext *)context
+                          error:(NSError * __nullable * __nullable)error;
 
 @end
+
+extern id<GRTSerializationStrategy> GRTSerializationStrategyForEntity(NSEntityDescription *entity);
 
 NS_ASSUME_NONNULL_END

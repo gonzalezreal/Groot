@@ -1,6 +1,6 @@
-// NSManagedObject+Groot.h
+// GRTSerializationStrategy.m
 //
-// Copyright (c) 2015 Guillermo Gonzalez
+// Copyright (c) 2014-2015 Guillermo Gonzalez
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,20 +20,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <CoreData/CoreData.h>
+#import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
+#import "GRTInsertSerializationStrategy.h"
+#import "GRTUniquingSerializationStrategy.h"
 
-@interface NSManagedObject (Groot)
+#import "NSEntityDescription+Groot.h"
 
-- (void)grt_serializeJSONDictionary:(NSDictionary *)dictionary
-                       mergeChanges:(BOOL)mergeChanges
-                              error:(NSError *__autoreleasing  __nullable * __nullable)error;
-
-- (void)grt_serializeJSONValue:(id)value error:(NSError *__autoreleasing  __nullable * __nullable)error;
-
-- (NSDictionary *)grt_JSONDictionarySerializingRelationships:(NSMutableSet *)serializingRelationships;
-
-@end
-
-NS_ASSUME_NONNULL_END
+id<GRTSerializationStrategy> GRTSerializationStrategyForEntity(NSEntityDescription *entity) {
+    if ([entity grt_identityAttribute] != nil) {
+        return [[GRTUniquingSerializationStrategy alloc] initWithEntity:entity];
+    }
+    
+    return [[GRTInsertSerializationStrategy alloc] initWithEntity:entity];
+}

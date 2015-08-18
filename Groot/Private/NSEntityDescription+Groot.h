@@ -32,10 +32,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable NSAttributeDescription *)grt_identityAttribute;
 
-- (nullable NSArray *)grt_importJSONArray:(NSArray *)array
-                                inContext:(NSManagedObjectContext *)context
-                             mergeChanges:(BOOL)mergeChanges
-                                    error:(NSError * __nullable * __nullable)error;
+- (nullable NSValueTransformer *)grt_dictionaryTransformer;
+
+- (NSString *)grt_subentityNameForJSONValue:(id)value;
 
 @end
 
