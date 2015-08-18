@@ -203,6 +203,25 @@
 			path = JSON;
 			sourceTree = "<group>";
 		};
+		B4944D1F1B83779E00EA2D29 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				B4E72F5A1B4DB8EF00B9EA77 /* GRTValueTransformer.h */,
+				B4E72F5B1B4DB8EF00B9EA77 /* GRTValueTransformer.m */,
+				B4DC1B171AA9CAC200F67403 /* NSPropertyDescription+Groot.h */,
+				B4DC1B181AA9CAC200F67403 /* NSPropertyDescription+Groot.m */,
+				B4DC1B111AA9CAC200F67403 /* NSAttributeDescription+Groot.h */,
+				B4DC1B121AA9CAC200F67403 /* NSAttributeDescription+Groot.m */,
+				B4DC1B151AA9CAC200F67403 /* NSEntityDescription+Groot.h */,
+				B4DC1B161AA9CAC200F67403 /* NSEntityDescription+Groot.m */,
+				B475B40E1B53FCE1001F29FE /* NSManagedObject+Groot.h */,
+				B475B40F1B53FCE1001F29FE /* NSManagedObject+Groot.m */,
+				B44B7F581B7240FD00490641 /* NSArray+DictionaryTransformer.h */,
+				B44B7F591B7240FD00490641 /* NSArray+DictionaryTransformer.m */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		B4DC1AE21AA9CA5E00F67403 = {
 			isa = PBXGroup;
 			children = (
@@ -279,19 +298,8 @@
 		B4DC1B101AA9CAC200F67403 /* Private */ = {
 			isa = PBXGroup;
 			children = (
+				B4944D1F1B83779E00EA2D29 /* Helpers */,
 				B4E314ED1B8322EE00A80489 /* Serialization */,
-				B4E72F5A1B4DB8EF00B9EA77 /* GRTValueTransformer.h */,
-				B4E72F5B1B4DB8EF00B9EA77 /* GRTValueTransformer.m */,
-				B4DC1B171AA9CAC200F67403 /* NSPropertyDescription+Groot.h */,
-				B4DC1B181AA9CAC200F67403 /* NSPropertyDescription+Groot.m */,
-				B4DC1B111AA9CAC200F67403 /* NSAttributeDescription+Groot.h */,
-				B4DC1B121AA9CAC200F67403 /* NSAttributeDescription+Groot.m */,
-				B4DC1B151AA9CAC200F67403 /* NSEntityDescription+Groot.h */,
-				B4DC1B161AA9CAC200F67403 /* NSEntityDescription+Groot.m */,
-				B475B40E1B53FCE1001F29FE /* NSManagedObject+Groot.h */,
-				B475B40F1B53FCE1001F29FE /* NSManagedObject+Groot.m */,
-				B44B7F581B7240FD00490641 /* NSArray+DictionaryTransformer.h */,
-				B44B7F591B7240FD00490641 /* NSArray+DictionaryTransformer.m */,
 			);
 			path = Private;
 			sourceTree = "<group>";
