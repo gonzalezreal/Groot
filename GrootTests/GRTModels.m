@@ -59,6 +59,14 @@
 
 @end
 
+@implementation GRTCard
+
+@dynamic suit;
+@dynamic value;
+@dynamic numberOfTimesPlayed;
+
+@end
+
 @implementation NSManagedObjectModel (GrootTests)
 
 + (nonnull instancetype)grt_testModel {

@@ -63,6 +63,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface GRTCard : NSManagedObject
+
+@property (nonatomic, retain) NSString *suit;
+@property (nonatomic, retain) NSString *value;
+@property (nonatomic, retain) NSNumber *numberOfTimesPlayed;
+
+@end
+
 @interface NSManagedObjectModel (GrootTests)
 
 + (nonnull instancetype)grt_testModel;

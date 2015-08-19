@@ -78,15 +78,17 @@ If we were not interested in serializing characters back into JSON we could omit
 
 ## Entity annotations
 
-### `identityAttribute`
+### `identityAttributes`
 
-Use this key to specify the name of the attribute that uniquely identifies instances of an entity.
+Use this key to specify one or more attributes that uniquely identify instances of an entity.
 
-In our example, we should add an `identityAttribute` entry to both the `Character` and `Publisher` entities user dictionaries with the value `identifier`.
+In our example, we should add an `identityAttributes` entry to both the `Character` and `Publisher` entities user dictionaries with the value `identifier`.
 
-Specifying the `identityAttribute` in an entity is essential to preserve the object graph and avoid duplicate information when serializing from JSON.
+Multiple attributes must be separated by comma. For instance, suppose that we have an entity representing a card in a deck: We could set the value of the `identityAttributes` key to `suit, value`.
 
-Note that specifying multiple attributes for this annotation is not currently supported.
+Note that sub-entities implicitly extend their parent `identityAttributes`. For example, if you specify `UUID` as the `identityAttributes` for a parent entity and `email` for its sub-entity, Groot will use `UUID, email` to uniquely identify instances of the sub-entity.
+
+Specifying the `identityAttributes` for an entity is essential to preserve the object graph and avoid duplicate information when serializing from JSON.
 
 ### `entityMapperName`
 

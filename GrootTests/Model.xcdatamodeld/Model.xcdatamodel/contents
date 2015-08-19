@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14F27" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Abstract" representedClassName="GRTAbstract" isAbstract="YES" syncable="YES">
-        <attribute name="identifier" attributeType="Integer 32" syncable="YES">
+        <attribute name="identifier" attributeType="Integer 32" indexed="YES" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="id"/>
             </userInfo>
@@ -12,8 +12,28 @@
             <entry key="identityAttribute" value="identifier"/>
         </userInfo>
     </entity>
+    <entity name="Card" representedClassName="GRTCard" syncable="YES">
+        <attribute name="numberOfTimesPlayed" attributeType="Integer 16" defaultValueString="0" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="played"/>
+            </userInfo>
+        </attribute>
+        <attribute name="suit" attributeType="String" indexed="YES" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="suit"/>
+            </userInfo>
+        </attribute>
+        <attribute name="value" attributeType="String" indexed="YES" syncable="YES">
+            <userInfo>
+                <entry key="JSONKeyPath" value="value"/>
+            </userInfo>
+        </attribute>
+        <userInfo>
+            <entry key="identityAttributes" value="suit, value"/>
+        </userInfo>
+    </entity>
     <entity name="Character" representedClassName="GRTCharacter" syncable="YES">
-        <attribute name="identifier" attributeType="Integer 32" syncable="YES">
+        <attribute name="identifier" attributeType="Integer 32" indexed="YES" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="id"/>
                 <entry key="JSONTransformerName" value="GrootTests.Transformer"/>
@@ -65,7 +85,7 @@
         </relationship>
     </entity>
     <entity name="Power" representedClassName="GRTPower" syncable="YES">
-        <attribute name="identifier" attributeType="Integer 32" syncable="YES">
+        <attribute name="identifier" attributeType="Integer 32" indexed="YES" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="id"/>
                 <entry key="JSONTransformerName" value="GrootTests.Transformer"/>
@@ -82,7 +102,7 @@
         </userInfo>
     </entity>
     <entity name="Publisher" representedClassName="GRTPublisher" syncable="YES">
-        <attribute name="identifier" attributeType="Integer 32" syncable="YES">
+        <attribute name="identifier" attributeType="Integer 32" indexed="YES" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="id"/>
                 <entry key="JSONTransformerName" value="GrootTests.Transformer"/>
@@ -99,12 +119,13 @@
         </userInfo>
     </entity>
     <elements>
-        <element name="Abstract" positionX="-1053" positionY="-4365" width="128" height="75"/>
+        <element name="Abstract" positionX="-1053" positionY="-4365" width="128" height="73"/>
         <element name="Character" positionX="-1037" positionY="-4653" width="128" height="118"/>
         <element name="ConcreteA" positionX="-1053" positionY="-4248" width="128" height="58"/>
         <element name="ConcreteB" positionX="-846" positionY="-4356" width="128" height="58"/>
         <element name="Container" positionX="-1242" positionY="-4392" width="128" height="58"/>
         <element name="Power" positionX="-839" positionY="-4552" width="128" height="88"/>
         <element name="Publisher" positionX="-1242" positionY="-4527" width="128" height="88"/>
+        <element name="Card" positionX="-1026" positionY="-4428" width="128" height="90"/>
     </elements>
 </model>

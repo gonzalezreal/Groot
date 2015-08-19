@@ -28,14 +28,21 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@interface GRTUniquingSerializationStrategy ()
+
+@property (strong, nonatomic, readonly) NSAttributeDescription *uniqueAttribute;
+
+@end
+
 @implementation GRTUniquingSerializationStrategy
 
 @synthesize entity = _entity;
 
-- (instancetype)initWithEntity:(NSEntityDescription *)entity {
+- (instancetype)initWithEntity:(NSEntityDescription *)entity uniqueAttribute:(NSAttributeDescription *)uniqueAttribute {
     self = [super init];
     if (self) {
         _entity = entity;
+        _uniqueAttribute = uniqueAttribute;
     }
     return self;
 }
@@ -88,14 +95,11 @@ NS_ASSUME_NONNULL_BEGIN
                                               inContext:(NSManagedObjectContext *)context
                                                   error:(NSError *__autoreleasing  __nullable * __nullable)outError
 {
-    NSAttributeDescription *attribute = [self.entity grt_identityAttribute];
-    NSAssert(attribute != nil, @"Entity %@ has no identity attribute", self.entity.name);
-    
-    NSArray *identifiers = [attribute grt_valuesInJSONArray:array];
+    NSArray *identifiers = [self.uniqueAttribute grt_valuesInJSONArray:array];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     fetchRequest.entity = self.entity;
     fetchRequest.returnsObjectsAsFaults = NO;
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"%K IN %@", attribute.name, identifiers];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"%K IN %@", self.uniqueAttribute.name, identifiers];
     
     NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:outError];
     
@@ -103,7 +107,7 @@ NS_ASSUME_NONNULL_BEGIN
         NSMutableDictionary *objects = [NSMutableDictionary dictionaryWithCapacity:fetchedObjects.count];
         
         for (NSManagedObject *object in fetchedObjects) {
-            id identifier = [object valueForKey:attribute.name];
+            id identifier = [object valueForKey:self.uniqueAttribute.name];
             if (identifier != nil) {
                 objects[identifier] = object;
             }
@@ -127,7 +131,9 @@ NS_ASSUME_NONNULL_BEGIN
     if ([value isKindOfClass:[NSDictionary class]]) {
         [managedObject grt_serializeJSONDictionary:value mergeChanges:YES error:&error];
     } else {
-        [managedObject grt_serializeJSONValue:value error:&error];
+        [managedObject grt_serializeJSONValue:value
+                              uniqueAttribute:self.uniqueAttribute
+                                        error:&error];
     }
     
     if (error != nil) {
@@ -149,8 +155,7 @@ NS_ASSUME_NONNULL_BEGIN
 {
     NSManagedObject *managedObject = nil;
     
-    NSAttributeDescription *identityAttribute = [self.entity grt_identityAttribute];
-    id identifier = [identityAttribute grt_valueForJSONValue:value];
+    id identifier = [self.uniqueAttribute grt_valueForJSONValue:value];
     if (identifier != nil) {
         managedObject = existingObjects[identifier];
     }

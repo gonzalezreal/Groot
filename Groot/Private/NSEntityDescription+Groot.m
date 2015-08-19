@@ -45,20 +45,20 @@ NS_ASSUME_NONNULL_BEGIN
     return entity;
 }
 
-- (nullable NSAttributeDescription *)grt_identityAttribute {
-    NSString *attributeName = nil;
-    NSEntityDescription *entity = self;
+- (NSSet *)grt_identityAttributes {
+    NSSet *keys = [self grt_keysForUniquing];
+    NSMutableSet *attributes = [NSMutableSet setWithCapacity:keys.count];
     
-    while (entity != nil && attributeName == nil) {
-        attributeName = entity.userInfo[@"identityAttribute"];
-        entity = [entity superentity];
+    if (keys.count > 0) {
+        for (NSString *key in keys) {
+            NSAttributeDescription *attribute = self.attributesByName[key];
+            NSAssert(attribute != nil, @"Could not find attribute '%@.%@'.", self.name, key);
+            
+            [attributes addObject:attribute];
+        }
     }
     
-    if (attributeName != nil) {
-        return self.attributesByName[attributeName];
-    }
-    
-    return nil;
+    return attributes;
 }
 
 - (nullable NSValueTransformer *)grt_dictionaryTransformer {
@@ -91,6 +91,35 @@ NS_ASSUME_NONNULL_BEGIN
     }
     
     return [NSValueTransformer valueTransformerForName:name];
+}
+
+- (NSSet *)grt_keysForUniquing {
+    NSMutableSet *keys = [NSMutableSet set];
+    NSEntityDescription *entity = self;
+    
+    while (entity != nil) {
+        NSString *value = entity.userInfo[@"identityAttributes"];
+        
+        if (value == nil) {
+            // For backwards compatibility
+            value = entity.userInfo[@"identityAttribute"];
+        }
+        
+        if (value != nil) {
+            NSCharacterSet *characterSet = [NSCharacterSet characterSetWithCharactersInString:@" ,"];
+            NSArray *names = [value componentsSeparatedByCharactersInSet:characterSet];
+            
+            for (NSString *name in names) {
+                if (name.length > 0) {
+                    [keys addObject:name];
+                }
+            }
+        }
+        
+        entity = [entity superentity];
+    }
+    
+    return keys;
 }
 
 @end

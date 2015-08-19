@@ -27,5 +27,5 @@ extern NSString * const GRTErrorDomain;
 typedef NS_ENUM(NSInteger, GRTError) {
     GRTErrorEntityNotFound,
     GRTErrorInvalidJSONObject,
-    GRTErrorIdentityNotFound
+    GRTErrorIdentityNotFound __attribute__((deprecated("Not applicable")))
 };

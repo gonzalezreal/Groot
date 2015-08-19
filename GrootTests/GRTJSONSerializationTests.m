@@ -430,6 +430,45 @@
     XCTAssertEqualObjects(@"Bruce Wayne", batman.realName, @"should serialize attributes");
 }
 
+- (void)testSerializationWithCompositeKey {
+    NSData *data = [NSData grt_dataWithContentsOfResource:@"cards.json"];
+    XCTAssertNotNil(data, @"cards.json not found");
+    
+    NSError *error = nil;
+    NSArray *cards = [GRTJSONSerialization objectsWithEntityName:@"Card" fromJSONData:data inContext:self.context error:&error];
+    XCTAssertNil(error);
+    
+    XCTAssertEqual(2U, cards.count);
+    
+    GRTCard *threeOfDiamonds = cards[0];
+    XCTAssertEqual(2, threeOfDiamonds.numberOfTimesPlayed.integerValue);
+    XCTAssertEqualObjects(@"Diamonds", threeOfDiamonds.suit);
+    XCTAssertEqualObjects(@"Three", threeOfDiamonds.value);
+    
+    GRTCard *jackOfHearts = cards[1];
+    XCTAssertEqual(3, jackOfHearts.numberOfTimesPlayed.integerValue);
+    XCTAssertEqualObjects(@"Hearts", jackOfHearts.suit);
+    XCTAssertEqualObjects(@"Jack", jackOfHearts.value);
+    
+    NSData *updatedData = [NSData grt_dataWithContentsOfResource:@"cards_update.json"];
+    XCTAssertNotNil(data, @"cards_update.json not found");
+    
+    cards = [GRTJSONSerialization objectsWithEntityName:@"Card" fromJSONData:updatedData inContext:self.context error:&error];
+    XCTAssertNil(error);
+    
+    XCTAssertEqual(4, jackOfHearts.numberOfTimesPlayed.integerValue);
+    
+    GRTCard *threeOfClubs = cards[1];
+    XCTAssertEqual(1, threeOfClubs.numberOfTimesPlayed.integerValue);
+    XCTAssertEqualObjects(@"Clubs", threeOfClubs.suit);
+    XCTAssertEqualObjects(@"Three", threeOfClubs.value);
+    
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Card"];
+    cards = [self.context executeFetchRequest:fetchRequest error:&error];
+    XCTAssertNil(error);
+    XCTAssertEqual(3U, cards.count);
+}
+
 - (void)testSerializationToJSON {
     GRTPublisher *dc = [NSEntityDescription insertNewObjectForEntityForName:@"Publisher" inManagedObjectContext:self.context];
     dc.identifier = @10;
