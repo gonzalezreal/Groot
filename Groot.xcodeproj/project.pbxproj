@@ -88,10 +88,10 @@
 		B4E72F651B4DB9B300B9EA77 /* NSValueTransformer+Groot.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E72F631B4DB9B300B9EA77 /* NSValueTransformer+Groot.m */; };
 		B4E72F6D1B4DC4D500B9EA77 /* NSValueTransformer+Groot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E72F6C1B4DC4D500B9EA77 /* NSValueTransformer+Groot.swift */; };
 		B4E72F6F1B4DC7DA00B9EA77 /* NSValueTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E72F6E1B4DC7DA00B9EA77 /* NSValueTransformerTests.swift */; };
-		B4EB88B61B847D3800867F3F /* GRTCompoundUniquingSerializationStrategy.h in Headers */ = {isa = PBXBuildFile; fileRef = B4EB88B41B847D3800867F3F /* GRTCompoundUniquingSerializationStrategy.h */; };
-		B4EB88B71B847D3800867F3F /* GRTCompoundUniquingSerializationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EB88B51B847D3800867F3F /* GRTCompoundUniquingSerializationStrategy.m */; };
-		B4EB88B81B847E1900867F3F /* GRTCompoundUniquingSerializationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EB88B51B847D3800867F3F /* GRTCompoundUniquingSerializationStrategy.m */; };
-		B4EB88B91B847E2100867F3F /* GRTCompoundUniquingSerializationStrategy.h in Headers */ = {isa = PBXBuildFile; fileRef = B4EB88B41B847D3800867F3F /* GRTCompoundUniquingSerializationStrategy.h */; };
+		B4EB88B61B847D3800867F3F /* GRTCompositeUniquingSerializationStrategy.h in Headers */ = {isa = PBXBuildFile; fileRef = B4EB88B41B847D3800867F3F /* GRTCompositeUniquingSerializationStrategy.h */; };
+		B4EB88B71B847D3800867F3F /* GRTCompositeUniquingSerializationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EB88B51B847D3800867F3F /* GRTCompositeUniquingSerializationStrategy.m */; };
+		B4EB88B81B847E1900867F3F /* GRTCompositeUniquingSerializationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EB88B51B847D3800867F3F /* GRTCompositeUniquingSerializationStrategy.m */; };
+		B4EB88B91B847E2100867F3F /* GRTCompositeUniquingSerializationStrategy.h in Headers */ = {isa = PBXBuildFile; fileRef = B4EB88B41B847D3800867F3F /* GRTCompositeUniquingSerializationStrategy.h */; };
 		B4FD30711B569F1A002392F7 /* Groot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FD30701B569F1A002392F7 /* Groot.swift */; };
 /* End PBXBuildFile section */
 
@@ -160,8 +160,8 @@
 		B4E72F631B4DB9B300B9EA77 /* NSValueTransformer+Groot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValueTransformer+Groot.m"; sourceTree = "<group>"; };
 		B4E72F6C1B4DC4D500B9EA77 /* NSValueTransformer+Groot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSValueTransformer+Groot.swift"; sourceTree = "<group>"; };
 		B4E72F6E1B4DC7DA00B9EA77 /* NSValueTransformerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSValueTransformerTests.swift; sourceTree = "<group>"; };
-		B4EB88B41B847D3800867F3F /* GRTCompoundUniquingSerializationStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTCompoundUniquingSerializationStrategy.h; sourceTree = "<group>"; };
-		B4EB88B51B847D3800867F3F /* GRTCompoundUniquingSerializationStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTCompoundUniquingSerializationStrategy.m; sourceTree = "<group>"; };
+		B4EB88B41B847D3800867F3F /* GRTCompositeUniquingSerializationStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTCompositeUniquingSerializationStrategy.h; sourceTree = "<group>"; };
+		B4EB88B51B847D3800867F3F /* GRTCompositeUniquingSerializationStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTCompositeUniquingSerializationStrategy.m; sourceTree = "<group>"; };
 		B4FD30701B569F1A002392F7 /* Groot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Groot.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -321,8 +321,8 @@
 				B4944D111B83303B00EA2D29 /* GRTInsertSerializationStrategy.m */,
 				B4944D161B83320000EA2D29 /* GRTUniquingSerializationStrategy.h */,
 				B4944D171B83320000EA2D29 /* GRTUniquingSerializationStrategy.m */,
-				B4EB88B41B847D3800867F3F /* GRTCompoundUniquingSerializationStrategy.h */,
-				B4EB88B51B847D3800867F3F /* GRTCompoundUniquingSerializationStrategy.m */,
+				B4EB88B41B847D3800867F3F /* GRTCompositeUniquingSerializationStrategy.h */,
+				B4EB88B51B847D3800867F3F /* GRTCompositeUniquingSerializationStrategy.m */,
 			);
 			name = Serialization;
 			sourceTree = "<group>";
@@ -336,7 +336,7 @@
 			files = (
 				B408738C1B5AB87F0063F150 /* NSEntityDescription+Groot.h in Headers */,
 				B4E314FD1B832EF900A80489 /* GRTSerializationStrategy.h in Headers */,
-				B4EB88B91B847E2100867F3F /* GRTCompoundUniquingSerializationStrategy.h in Headers */,
+				B4EB88B91B847E2100867F3F /* GRTCompositeUniquingSerializationStrategy.h in Headers */,
 				B408737B1B5AB8350063F150 /* Groot.h in Headers */,
 				B40873831B5AB8470063F150 /* NSValueTransformer+Groot.h in Headers */,
 				B408737D1B5AB8470063F150 /* GRTError.h in Headers */,
@@ -359,7 +359,7 @@
 			files = (
 				B46200C21B4F07E4003B3B69 /* GRTError.h in Headers */,
 				B4E314FE1B832EFA00A80489 /* GRTSerializationStrategy.h in Headers */,
-				B4EB88B61B847D3800867F3F /* GRTCompoundUniquingSerializationStrategy.h in Headers */,
+				B4EB88B61B847D3800867F3F /* GRTCompositeUniquingSerializationStrategy.h in Headers */,
 				B4E72F641B4DB9B300B9EA77 /* NSValueTransformer+Groot.h in Headers */,
 				B4DC1B251AA9CAC200F67403 /* NSEntityDescription+Groot.h in Headers */,
 				B4DC1B271AA9CAC200F67403 /* NSPropertyDescription+Groot.h in Headers */,
@@ -547,7 +547,7 @@
 				B40873841B5AB8470063F150 /* NSValueTransformer+Groot.m in Sources */,
 				B408737E1B5AB8470063F150 /* GRTError.m in Sources */,
 				B408737C1B5AB83D0063F150 /* Groot.swift in Sources */,
-				B4EB88B81B847E1900867F3F /* GRTCompoundUniquingSerializationStrategy.m in Sources */,
+				B4EB88B81B847E1900867F3F /* GRTCompositeUniquingSerializationStrategy.m in Sources */,
 				B408738B1B5AB87F0063F150 /* NSAttributeDescription+Groot.m in Sources */,
 				B40873871B5AB87F0063F150 /* GRTValueTransformer.m in Sources */,
 				B4E314FC1B832BD500A80489 /* GRTManagedObjectSerializer.m in Sources */,
@@ -584,7 +584,7 @@
 				B4E72F651B4DB9B300B9EA77 /* NSValueTransformer+Groot.m in Sources */,
 				B4DC1B1C1AA9CAC200F67403 /* GRTJSONSerialization.m in Sources */,
 				B4DC1B221AA9CAC200F67403 /* NSAttributeDescription+Groot.m in Sources */,
-				B4EB88B71B847D3800867F3F /* GRTCompoundUniquingSerializationStrategy.m in Sources */,
+				B4EB88B71B847D3800867F3F /* GRTCompositeUniquingSerializationStrategy.m in Sources */,
 				B4E72F5D1B4DB8EF00B9EA77 /* GRTValueTransformer.m in Sources */,
 				B4DC1B1E1AA9CAC200F67403 /* GRTManagedStore.m in Sources */,
 				B4E314FB1B832BD500A80489 /* GRTManagedObjectSerializer.m in Sources */,

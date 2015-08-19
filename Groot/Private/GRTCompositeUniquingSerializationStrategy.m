@@ -1,4 +1,4 @@
-// GRTCompoundUniquingSerializationStrategy.m
+// GRTCompositeUniquingSerializationStrategy.m
 //
 // Copyright (c) 2014-2015 Guillermo Gonzalez
 //
@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "GRTCompoundUniquingSerializationStrategy.h"
+#import "GRTCompositeUniquingSerializationStrategy.h"
 #import "GRTError.h"
 
 #import "NSEntityDescription+Groot.h"
@@ -29,13 +29,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GRTCompoundUniquingSerializationStrategy ()
+@interface GRTCompositeUniquingSerializationStrategy ()
 
 @property (strong, nonatomic, readonly) NSSet *uniqueAttributes;
 
 @end
 
-@implementation GRTCompoundUniquingSerializationStrategy
+@implementation GRTCompositeUniquingSerializationStrategy
 
 @synthesize entity = _entity;
 
