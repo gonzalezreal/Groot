@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable NSAttributeDescription *)grt_identityAttribute;
 
+- (NSSet *)grt_identityAttributes;
+
 - (nullable NSValueTransformer *)grt_dictionaryTransformer;
 
 - (NSString *)grt_subentityNameForJSONValue:(id)value;

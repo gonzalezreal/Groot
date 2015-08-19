@@ -28,9 +28,14 @@
 #import "NSEntityDescription+Groot.h"
 
 id<GRTSerializationStrategy> GRTSerializationStrategyForEntity(NSEntityDescription *entity) {
-    if ([entity grt_identityAttribute] != nil) {
-        return [[GRTUniquingSerializationStrategy alloc] initWithEntity:entity];
-    }
+    NSSet *attributes = [entity grt_identityAttributes];
     
-    return [[GRTInsertSerializationStrategy alloc] initWithEntity:entity];
+    if (attributes.count == 0) {
+        return [[GRTInsertSerializationStrategy alloc] initWithEntity:entity];
+    } else if (attributes.count == 1) {
+        return [[GRTUniquingSerializationStrategy alloc] initWithEntity:entity];
+    } else {
+        // TODO: return a composite uniquing strategy
+        return nil;
+    }
 }
