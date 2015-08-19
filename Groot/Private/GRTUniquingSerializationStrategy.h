@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GRTUniquingSerializationStrategy : NSObject<GRTSerializationStrategy>
 
-- (instancetype)initWithEntity:(NSEntityDescription *)entity;
+- (instancetype)initWithEntity:(NSEntityDescription *)entity uniqueAttribute:(NSAttributeDescription *)uniqueAttribute;
 
 @end
 

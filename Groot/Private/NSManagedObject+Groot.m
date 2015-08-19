@@ -27,7 +27,6 @@
 
 #import "NSPropertyDescription+Groot.h"
 #import "NSAttributeDescription+Groot.h"
-#import "NSEntityDescription+Groot.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -61,21 +60,10 @@ NS_ASSUME_NONNULL_BEGIN
     }
 }
 
-- (void)grt_serializeJSONValue:(id)value error:(NSError *__autoreleasing  __nullable * __nullable)outError {
-    NSAttributeDescription *attribute = [self.entity grt_identityAttribute];
-    
-    if (attribute == nil) {
-        if (outError) {
-            NSString *format = NSLocalizedString(@"%@ has no identity attribute", @"Groot");
-            NSString *message = [NSString stringWithFormat:format, self.entity.name];
-            *outError = [NSError errorWithDomain:GRTErrorDomain
-                                            code:GRTErrorIdentityNotFound
-                                        userInfo:@{ NSLocalizedDescriptionKey: message }];
-        }
-        
-        return;
-    }
-    
+- (void)grt_serializeJSONValue:(id)value
+               uniqueAttribute:(NSAttributeDescription *)attribute
+                         error:(NSError *__autoreleasing  __nullable * __nullable)outError
+{
     id identifier = [attribute grt_valueForJSONValue:value];
     
     if ([self validateValue:&identifier forKey:attribute.name error:outError]) {

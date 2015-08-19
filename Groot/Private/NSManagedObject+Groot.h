@@ -30,7 +30,9 @@ NS_ASSUME_NONNULL_BEGIN
                        mergeChanges:(BOOL)mergeChanges
                               error:(NSError *__autoreleasing  __nullable * __nullable)error;
 
-- (void)grt_serializeJSONValue:(id)value error:(NSError *__autoreleasing  __nullable * __nullable)error;
+- (void)grt_serializeJSONValue:(id)value
+               uniqueAttribute:(NSAttributeDescription *)attribute
+                         error:(NSError *__autoreleasing  __nullable * __nullable)error;
 
 - (NSDictionary *)grt_JSONDictionarySerializingRelationships:(NSMutableSet *)serializingRelationships;
 

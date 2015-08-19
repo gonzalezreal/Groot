@@ -1,4 +1,4 @@
-// NSEntityDescription+Groot.h
+// GRTCompositeUniquingSerializationStrategy.h
 //
 // Copyright (c) 2014-2015 Guillermo Gonzalez
 //
@@ -20,21 +20,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <CoreData/CoreData.h>
+#import "GRTSerializationStrategy.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSEntityDescription (Groot)
+@interface GRTCompositeUniquingSerializationStrategy : NSObject<GRTSerializationStrategy>
 
-+ (nullable NSEntityDescription *)grt_entityForName:(NSString *)entityName
-                                          inContext:(NSManagedObjectContext *)context
-                                              error:(NSError * __nullable * __nullable)error;
-
-- (NSSet *)grt_identityAttributes;
-
-- (nullable NSValueTransformer *)grt_dictionaryTransformer;
-
-- (NSString *)grt_subentityNameForJSONValue:(id)value;
+- (instancetype)initWithEntity:(NSEntityDescription *)entity uniqueAttributes:(NSSet *)uniqueAttributes;
 
 @end
 

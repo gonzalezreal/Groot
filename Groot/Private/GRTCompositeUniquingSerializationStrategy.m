@@ -1,4 +1,4 @@
-// NSEntityDescription+Groot.h
+// GRTCompositeUniquingSerializationStrategy.m
 //
 // Copyright (c) 2014-2015 Guillermo Gonzalez
 //
@@ -20,21 +20,35 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <CoreData/CoreData.h>
+#import "GRTCompositeUniquingSerializationStrategy.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSEntityDescription (Groot)
+@interface GRTCompositeUniquingSerializationStrategy ()
 
-+ (nullable NSEntityDescription *)grt_entityForName:(NSString *)entityName
-                                          inContext:(NSManagedObjectContext *)context
-                                              error:(NSError * __nullable * __nullable)error;
+@property (strong, nonatomic, readonly) NSSet *uniqueAttributes;
 
-- (NSSet *)grt_identityAttributes;
+@end
 
-- (nullable NSValueTransformer *)grt_dictionaryTransformer;
+@implementation GRTCompositeUniquingSerializationStrategy
 
-- (NSString *)grt_subentityNameForJSONValue:(id)value;
+@synthesize entity = _entity;
+
+- (instancetype)initWithEntity:(NSEntityDescription *)entity uniqueAttributes:(NSSet *)uniqueAttributes {
+    self = [super init];
+    if (self) {
+        _entity = entity;
+        _uniqueAttributes = uniqueAttributes;
+    }
+    return self;
+}
+
+- (NSArray *)serializeJSONArray:(NSArray *)array
+                      inContext:(NSManagedObjectContext *)context
+                          error:(NSError *__autoreleasing  __nullable * __nullable)outError
+{
+    return nil;
+}
 
 @end
 

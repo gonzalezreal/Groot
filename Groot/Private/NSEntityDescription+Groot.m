@@ -45,10 +45,6 @@ NS_ASSUME_NONNULL_BEGIN
     return entity;
 }
 
-- (nullable NSAttributeDescription *)grt_identityAttribute {
-    return [self grt_identityAttributes].anyObject;
-}
-
 - (NSSet *)grt_identityAttributes {
     NSSet *keys = [self grt_keysForUniquing];
     NSMutableSet *attributes = [NSMutableSet setWithCapacity:keys.count];
