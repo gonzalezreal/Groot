@@ -92,6 +92,10 @@
 		B4EB88B71B847D3800867F3F /* GRTCompositeUniquingSerializationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EB88B51B847D3800867F3F /* GRTCompositeUniquingSerializationStrategy.m */; };
 		B4EB88B81B847E1900867F3F /* GRTCompositeUniquingSerializationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EB88B51B847D3800867F3F /* GRTCompositeUniquingSerializationStrategy.m */; };
 		B4EB88B91B847E2100867F3F /* GRTCompositeUniquingSerializationStrategy.h in Headers */ = {isa = PBXBuildFile; fileRef = B4EB88B41B847D3800867F3F /* GRTCompositeUniquingSerializationStrategy.h */; };
+		B4EB88BF1B84D77200867F3F /* cards.json in Resources */ = {isa = PBXBuildFile; fileRef = B4EB88BE1B84D77200867F3F /* cards.json */; };
+		B4EB88C11B84D83300867F3F /* cards_update.json in Resources */ = {isa = PBXBuildFile; fileRef = B4EB88C01B84D83300867F3F /* cards_update.json */; };
+		B4EB88C21B84D97F00867F3F /* cards.json in Resources */ = {isa = PBXBuildFile; fileRef = B4EB88BE1B84D77200867F3F /* cards.json */; };
+		B4EB88C31B84D98500867F3F /* cards_update.json in Resources */ = {isa = PBXBuildFile; fileRef = B4EB88C01B84D83300867F3F /* cards_update.json */; };
 		B4FD30711B569F1A002392F7 /* Groot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FD30701B569F1A002392F7 /* Groot.swift */; };
 /* End PBXBuildFile section */
 
@@ -162,6 +166,8 @@
 		B4E72F6E1B4DC7DA00B9EA77 /* NSValueTransformerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSValueTransformerTests.swift; sourceTree = "<group>"; };
 		B4EB88B41B847D3800867F3F /* GRTCompositeUniquingSerializationStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTCompositeUniquingSerializationStrategy.h; sourceTree = "<group>"; };
 		B4EB88B51B847D3800867F3F /* GRTCompositeUniquingSerializationStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTCompositeUniquingSerializationStrategy.m; sourceTree = "<group>"; };
+		B4EB88BE1B84D77200867F3F /* cards.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cards.json; sourceTree = "<group>"; };
+		B4EB88C01B84D83300867F3F /* cards_update.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cards_update.json; sourceTree = "<group>"; };
 		B4FD30701B569F1A002392F7 /* Groot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Groot.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -205,6 +211,8 @@
 				B42A1D911B56600000309637 /* characters.json */,
 				B42A1D921B56600000309637 /* characters_update.json */,
 				B409C72F1B5979E700C47D48 /* container.json */,
+				B4EB88BE1B84D77200867F3F /* cards.json */,
+				B4EB88C01B84D83300867F3F /* cards_update.json */,
 			);
 			path = JSON;
 			sourceTree = "<group>";
@@ -509,6 +517,8 @@
 				B40873941B5AB8AF0063F150 /* characters_update.json in Resources */,
 				B40873951B5AB8AF0063F150 /* container.json in Resources */,
 				B40873931B5AB8AF0063F150 /* characters.json in Resources */,
+				B4EB88C31B84D98500867F3F /* cards_update.json in Resources */,
+				B4EB88C21B84D97F00867F3F /* cards.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,6 +536,8 @@
 				B42A1D941B56600000309637 /* characters_update.json in Resources */,
 				B42A1D931B56600000309637 /* characters.json in Resources */,
 				B409C7301B5979E700C47D48 /* container.json in Resources */,
+				B4EB88C11B84D83300867F3F /* cards_update.json in Resources */,
+				B4EB88BF1B84D77200867F3F /* cards.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

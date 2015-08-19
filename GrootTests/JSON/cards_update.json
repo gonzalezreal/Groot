@@ -1,0 +1,12 @@
+[
+	{
+		"suit": "Hearts",
+		"value": "Jack",
+		"played": 4
+	},
+	{
+		"suit": "Clubs",
+		"value": "Three",
+		"played": 1
+	},
+]
