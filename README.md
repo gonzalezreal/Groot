@@ -127,7 +127,7 @@ NSValueTransformer.setValueTransformerWithName("StringToInteger", transform: toS
 
 To preserve the object graph and avoid duplicating information when serializing managed objects from JSON, Groot needs to know how to uniquely identify your model objects.
 
-In our example, we should add an `identityAttribute` entry to the `Character`, `Power` and `Publisher` entities user dictionaries with the value `identifier`.
+In our example, we should add an `identityAttributes` entry to the `Character`, `Power` and `Publisher` entities user dictionaries with the value `identifier`.
 
 For more information about annotating your model have a look at [Annotations](Documentation/Annotations.md).
 
@@ -242,6 +242,8 @@ NSDictionary *publisherJSON = @{
                                  inContext:self.context
                                      error:&error];
 ```
+
+Note that serializing relationships from identifiers only works with entities specifying **only one attribute** as the value of `identityAttributes` annotation.
 
 For more serialization methods check [GRTJSONSerialization.h](Groot/GRTJSONSerialization.h) and [Groot.swift](Groot/Groot.swift).
 
