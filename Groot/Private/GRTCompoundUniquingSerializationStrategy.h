@@ -1,4 +1,4 @@
-// GRTCompositeUniquingSerializationStrategy.h
+// GRTCompoundUniquingSerializationStrategy.h
 //
 // Copyright (c) 2014-2015 Guillermo Gonzalez
 //
@@ -24,7 +24,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GRTCompositeUniquingSerializationStrategy : NSObject<GRTSerializationStrategy>
+@interface GRTCompoundUniquingSerializationStrategy : NSObject<GRTSerializationStrategy>
 
 - (instancetype)initWithEntity:(NSEntityDescription *)entity uniqueAttributes:(NSSet *)uniqueAttributes;
 

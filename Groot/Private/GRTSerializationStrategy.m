@@ -24,7 +24,7 @@
 
 #import "GRTInsertSerializationStrategy.h"
 #import "GRTUniquingSerializationStrategy.h"
-#import "GRTCompositeUniquingSerializationStrategy.h"
+#import "GRTCompoundUniquingSerializationStrategy.h"
 
 #import "NSEntityDescription+Groot.h"
 
@@ -36,6 +36,6 @@ id<GRTSerializationStrategy> GRTSerializationStrategyForEntity(NSEntityDescripti
     } else if (attributes.count == 1) {
         return [[GRTUniquingSerializationStrategy alloc] initWithEntity:entity uniqueAttribute:attributes.anyObject];
     } else {
-        return [[GRTCompositeUniquingSerializationStrategy alloc] initWithEntity:entity uniqueAttributes:attributes];
+        return [[GRTCompoundUniquingSerializationStrategy alloc] initWithEntity:entity uniqueAttributes:attributes];
     }
 }
