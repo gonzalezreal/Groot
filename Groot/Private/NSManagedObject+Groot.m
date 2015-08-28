@@ -121,13 +121,29 @@ NS_ASSUME_NONNULL_BEGIN
                         
                         NSMutableArray *array = [NSMutableArray arrayWithCapacity:managedObjects.count];
                         for (NSManagedObject *managedObject in managedObjects) {
-                            NSDictionary *dictionary = [managedObject grt_JSONDictionarySerializingRelationships:serializingRelationships];
-                            [array addObject:dictionary];
+                            if ([property grt_JSONSerializationPath] != nil) {
+                                NSString *keyPath = [property grt_JSONSerializationPath];
+                                NSObject *value = [managedObject valueForKey:keyPath];
+                                [array addObject:value];
+                            }
+                            else {
+                                NSDictionary *dictionary = [managedObject grt_JSONDictionarySerializingRelationships:serializingRelationships];
+                                [array addObject:dictionary];
+                            }
                         }
                         value = array;
                     } else {
                         NSManagedObject *managedObject = value;
-                        value = [managedObject grt_JSONDictionarySerializingRelationships:serializingRelationships];
+                        
+                        // If we are requesting a sub-attribute to serialize, do so
+                        // Otherwise fallback to the default behavior
+                        if ([property grt_JSONSerializationPath] != nil) {
+                            NSString *keyPath = [property grt_JSONSerializationPath];
+                            value = [managedObject valueForKey:keyPath];
+                        }
+                        else {
+                            value = [managedObject grt_JSONDictionarySerializingRelationships:serializingRelationships];
+                        }
                     }
                 }
             }

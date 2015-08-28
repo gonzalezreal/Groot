@@ -32,6 +32,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSString *)grt_JSONKeyPath;
 
 /**
+ Used for relationships, identifies which attribute should represent its parent during the serialization process.
+ */
+- (nullable NSString *)grt_JSONSerializationPath;
+
+/**
  Returns `true` if this property should participate in the JSON serialization process.
  */
 - (BOOL)grt_JSONSerializable;
