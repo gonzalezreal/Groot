@@ -20,7 +20,7 @@ class NSValueTransformerTests: XCTestCase {
         let transformer = NSValueTransformer(forName: "testTransformer")!
         
         XCTAssertFalse(transformer.dynamicType.allowsReverseTransformation(), "should not allow reverse transformation")
-        XCTAssertEqual("42", transformer.transformedValue(42) as! String, "should call the transform function")
+        XCTAssertEqual("42", transformer.transformedValue(42) as? String, "should call the transform function")
         XCTAssertNil(transformer.transformedValue(nil), "should handle nil values")
         XCTAssertNil(transformer.transformedValue("unexpected"), "should handle unsupported values")
     }
@@ -31,17 +31,17 @@ class NSValueTransformerTests: XCTestCase {
         }
         
         func toInt(value: String) -> Int? {
-            return value.toInt()
+            return Int(value)
         }
         
         NSValueTransformer.setValueTransformerWithName("testReversibleTransformer", transform: toString, reverseTransform: toInt)
         let transformer = NSValueTransformer(forName: "testReversibleTransformer")!
         
         XCTAssertTrue(transformer.dynamicType.allowsReverseTransformation(), "should not allow reverse transformation")
-        XCTAssertEqual("42", transformer.transformedValue(42) as! String, "should call the transform function")
+        XCTAssertEqual("42", transformer.transformedValue(42) as? String, "should call the transform function")
         XCTAssertNil(transformer.transformedValue(nil), "should handle nil values")
         XCTAssertNil(transformer.transformedValue("unexpected"), "should handle unsupported values")
-        XCTAssertEqual(42, transformer.reverseTransformedValue("42") as! Int, "should call the reverse transform function")
+        XCTAssertEqual(42, transformer.reverseTransformedValue("42") as? Int, "should call the reverse transform function")
         XCTAssertNil(transformer.reverseTransformedValue(nil), "should handle nil values")
         XCTAssertNil(transformer.reverseTransformedValue("not a number"), "should handle unsupported values")
     }
@@ -85,8 +85,8 @@ class NSValueTransformerTests: XCTestCase {
         NSValueTransformer.setEntityMapperWithName("testEntityMapper", map: entityForJSONDictionary)
         
         let transformer = NSValueTransformer(forName: "testEntityMapper")!
-        XCTAssertEqual("ConcreteA", transformer.transformedValue(["type": "A"]) as! String, "should call the transform function")
-        XCTAssertEqual("ConcreteB", transformer.transformedValue(["type": "B"]) as! String,  "should call the transform function")
+        XCTAssertEqual("ConcreteA", transformer.transformedValue(["type": "A"]) as? String, "should call the transform function")
+        XCTAssertEqual("ConcreteB", transformer.transformedValue(["type": "B"]) as? String,  "should call the transform function")
         XCTAssertNil(transformer.transformedValue(nil), "should handle nil values")
     }
 }

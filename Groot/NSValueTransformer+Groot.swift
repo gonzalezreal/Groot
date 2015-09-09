@@ -26,8 +26,8 @@ extension NSValueTransformer {
     /**
      Registers a value transformer with a given name and transform function.
     
-     :param: name The name of the transformer.
-     :param: transform The function that performs the transformation.
+     - parameter name: The name of the transformer.
+     - parameter transform: The function that performs the transformation.
     */
     public class func setValueTransformerWithName<T, U>(name: String, transform: (T) -> (U?)) {
         grt_setValueTransformerWithName(name) { value in
@@ -40,9 +40,9 @@ extension NSValueTransformer {
     /**
      Registers a reversible value transformer with a given name and transform functions.
     
-     :param: name The name of the transformer.
-     :param: transform The function that performs the forward transformation.
-     :param: reverseTransform The function that performs the reverse transformation.
+     - parameter name: The name of the transformer.
+     - parameter transform: The function that performs the forward transformation.
+     - parameter reverseTransform: The function that performs the reverse transformation.
     */
     public class func setValueTransformerWithName<T, U>(name: String, transform: (T) -> (U?), reverseTransform: (U) -> (T?)) {
         grt_setValueTransformerWithName(name, transformBlock: { value in
@@ -62,8 +62,8 @@ extension NSValueTransformer {
      Dictionary transformers can be associated with Core Data entities in the user info
      dictionary by using the `JSONDictionaryTransformerName` key.
  
-     :param: name The name of the transformer.
-     :param: transform The function that performs the transformation.
+     - parameter name: The name of the transformer.
+     - parameter transform: The function that performs the transformation.
     */
     public class func setDictionaryTransformerWithName(name: String, transform: ([String: AnyObject]) -> ([String: AnyObject]?)) {
         grt_setDictionaryTransformerWithName(name) { value in
@@ -82,8 +82,8 @@ extension NSValueTransformer {
      Entity mappers can be associated with abstract core data entities in the user info
      dictionary by using the `entityMapperName` key.
     
-     :param: name The name of the mapper.
-     :param: map The function that performs the mapping.
+     - parameter name: The name of the mapper.
+     - parameter map: The function that performs the mapping.
     */
     public class func setEntityMapperWithName(name: String, map: ([String: AnyObject]) -> (String?)) {
         grt_setEntityMapperWithName(name) { value in

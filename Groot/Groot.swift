@@ -36,9 +36,8 @@ extension NSManagedObject {
     internal class func entityInManagedObjectContext(context: NSManagedObjectContext) -> NSEntityDescription {
         let className = NSStringFromClass(self)
         let model = context.managedObjectModel()
-        let entities = model.entities as! [NSEntityDescription]
         
-        for entity in entities {
+        for entity in model.entities {
             if entity.managedObjectClassName == className {
                 return entity
             }
@@ -51,29 +50,29 @@ extension NSManagedObject {
 /**
  Creates or updates a set of managed objects from JSON data.
  
- :param: entityName The name of an entity.
- :param: fromJSONData A data object containing JSON data.
- :param: inContext The context into which to fetch or insert the managed objects.
- :param: error If an error occurs, upon return contains an NSError object that describes the problem.
+ - parameter entityName: The name of an entity.
+ - parameter fromJSONData: A data object containing JSON data.
+ - parameter inContext: The context into which to fetch or insert the managed objects.
  
- :return: An array of managed objects, or `nil` if an error occurs.
+ - returns: An array of managed objects
  */
-public func objectsWithEntityName(name: String, fromJSONData data: NSData, inContext context: NSManagedObjectContext, error outError: NSErrorPointer) -> [NSManagedObject]? {
-    return GRTJSONSerialization.objectsWithEntityName(name, fromJSONData: data, inContext: context, error: outError) as? [NSManagedObject]
+public func objectsWithEntityName(name: String, fromJSONData data: NSData, inContext context: NSManagedObjectContext) throws -> [NSManagedObject] {
+    return try GRTJSONSerialization.objectsWithEntityName(name, fromJSONData: data, inContext: context)
 }
 
 /**
  Creates or updates a set of managed objects from JSON data.
 
- :param: fromJSONData A data object containing JSON data.
- :param: inContext The context into which to fetch or insert the managed objects.
- :param: error If an error occurs, upon return contains an NSError object that describes the problem.
+ - parameter fromJSONData: A data object containing JSON data.
+ - parameter inContext: The context into which to fetch or insert the managed objects.
  
- :return: An array of managed objects, or `nil` if an error occurs.
+ - returns: An array of managed objects.
  */
-public func objectsFromJSONData<T: NSManagedObject>(data: NSData, inContext context: NSManagedObjectContext, error outError: NSErrorPointer) -> [T]? {
+public func objectsFromJSONData<T: NSManagedObject>(data: NSData, inContext context: NSManagedObjectContext) throws -> [T] {
     let entity = T.entityInManagedObjectContext(context)
-    return objectsWithEntityName(entity.name!, fromJSONData: data, inContext: context, error: outError) as? [T]
+    let managedObjects = try objectsWithEntityName(entity.name!, fromJSONData: data, inContext: context)
+    
+    return managedObjects as! [T]
 }
 
 public typealias JSONDictionary = [String: AnyObject]
@@ -83,15 +82,14 @@ public typealias JSONDictionary = [String: AnyObject]
  
  This method converts the specified JSON dictionary into a managed object of a given entity.
  
- :param: entityName The name of an entity.
- :param: fromJSONDictionary A dictionary representing JSON data.
- :param: inContext The context into which to fetch or insert the managed objects.
- :param: error If an error occurs, upon return contains an NSError object that describes the problem.
+ - parameter entityName: The name of an entity.
+ - parameter fromJSONDictionary: A dictionary representing JSON data.
+ - parameter inContext: The context into which to fetch or insert the managed objects.
  
- :return: A managed object, or `nil` if an error occurs.
+ - returns: A managed object.
  */
-public func objectWithEntityName(name: String, fromJSONDictionary dictionary: JSONDictionary, inContext context: NSManagedObjectContext, error outError: NSErrorPointer) -> NSManagedObject? {
-    return GRTJSONSerialization.objectWithEntityName(name, fromJSONDictionary: dictionary, inContext: context, error: outError) as? NSManagedObject
+public func objectWithEntityName(name: String, fromJSONDictionary dictionary: JSONDictionary, inContext context: NSManagedObjectContext) throws -> NSManagedObject {
+    return try GRTJSONSerialization.objectWithEntityName(name, fromJSONDictionary: dictionary, inContext: context)
 }
 
 /**
@@ -99,15 +97,16 @@ public func objectWithEntityName(name: String, fromJSONDictionary dictionary: JS
  
  This method converts the specified JSON dictionary into a managed object.
 
- :param: fromJSONDictionary A dictionary representing JSON data.
- :param: inContext The context into which to fetch or insert the managed objects.
- :param: error If an error occurs, upon return contains an NSError object that describes the problem.
+ - parameter fromJSONDictionary: A dictionary representing JSON data.
+ - parameter inContext: The context into which to fetch or insert the managed objects.
  
- :return: A managed object, or `nil` if an error occurs.
+ - returns: A managed object.
  */
-public func objectFromJSONDictionary<T: NSManagedObject>(dictionary: JSONDictionary, inContext context: NSManagedObjectContext, error outError: NSErrorPointer) -> T? {
+public func objectFromJSONDictionary<T: NSManagedObject>(dictionary: JSONDictionary, inContext context: NSManagedObjectContext) throws -> T {
     let entity = T.entityInManagedObjectContext(context)
-    return objectWithEntityName(entity.name!, fromJSONDictionary: dictionary, inContext: context, error: outError) as? T;
+    let managedObject = try objectWithEntityName(entity.name!, fromJSONDictionary: dictionary, inContext: context)
+    
+    return managedObject as! T
 }
 
 public typealias JSONArray = [AnyObject]
@@ -115,35 +114,35 @@ public typealias JSONArray = [AnyObject]
 /**
  Creates or updates a set of managed objects from a JSON array.
  
- :param: entityName The name of an entity.
- :param: fromJSONArray An array representing JSON data.
- :param: context The context into which to fetch or insert the managed objects.
- :param: error If an error occurs, upon return contains an NSError object that describes the problem.
+ - parameter entityName: The name of an entity.
+ - parameter fromJSONArray: An array representing JSON data.
+ - parameter context: The context into which to fetch or insert the managed objects.
  
- :return: An array of managed objects, or `nil` if an error occurs.
+ - returns: An array of managed objects.
  */
-public func objectsWithEntityName(name: String, fromJSONArray array: JSONArray, inContext context: NSManagedObjectContext, error outError: NSErrorPointer) -> [NSManagedObject]? {
-    return GRTJSONSerialization.objectsWithEntityName(name, fromJSONArray: array, inContext: context, error: outError) as? [NSManagedObject]
+public func objectsWithEntityName(name: String, fromJSONArray array: JSONArray, inContext context: NSManagedObjectContext) throws -> [NSManagedObject] {
+    return try GRTJSONSerialization.objectsWithEntityName(name, fromJSONArray: array, inContext: context)
 }
 
 /**
  Creates or updates a set of managed objects from a JSON array.
  
- :param: fromJSONArray An array representing JSON data.
- :param: context The context into which to fetch or insert the managed objects.
- :param: error If an error occurs, upon return contains an NSError object that describes the problem.
+ - parameter fromJSONArray: An array representing JSON data.
+ - parameter context: The context into which to fetch or insert the managed objects.
  
- :return: An array of managed objects, or `nil` if an error occurs.
+ - returns: An array of managed objects.
  */
-public func objectsFromJSONArray<T: NSManagedObject>(array: JSONArray, inContext context: NSManagedObjectContext, error outError: NSErrorPointer) -> [T]? {
+public func objectsFromJSONArray<T: NSManagedObject>(array: JSONArray, inContext context: NSManagedObjectContext) throws -> [T] {
     let entity = T.entityInManagedObjectContext(context)
-    return objectsWithEntityName(entity.name!, fromJSONArray: array, inContext: context, error: outError) as? [T]
+    let managedObjects = try objectsWithEntityName(entity.name!, fromJSONArray: array, inContext: context)
+    
+    return managedObjects as! [T]
 }
 
 /**
  Converts a managed object into a JSON representation.
  
- :param: object The managed object to use for JSON serialization.
+ - parameter object: The managed object to use for JSON serialization.
 
  :return: A JSON dictionary.
  */
@@ -154,7 +153,7 @@ public func JSONDictionaryFromObject(object: NSManagedObject) -> JSONDictionary 
 /**
  Converts an array of managed objects into a JSON representation.
  
- :param: objects The array of managed objects to use for JSON serialization.
+ - parameter objects: The array of managed objects to use for JSON serialization.
  
  :return: A JSON array.
  */
