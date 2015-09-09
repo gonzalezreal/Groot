@@ -19,10 +19,17 @@ class NSValueTransformerTests: XCTestCase {
         NSValueTransformer.setValueTransformerWithName("testTransformer", transform: toString)
         let transformer = NSValueTransformer(forName: "testTransformer")!
         
-        XCTAssertFalse(transformer.dynamicType.allowsReverseTransformation(), "should not allow reverse transformation")
-        XCTAssertEqual("42", transformer.transformedValue(42) as? String, "should call the transform function")
-        XCTAssertNil(transformer.transformedValue(nil), "should handle nil values")
-        XCTAssertNil(transformer.transformedValue("unexpected"), "should handle unsupported values")
+        let reversible = transformer.dynamicType.allowsReverseTransformation()
+        XCTAssertFalse(reversible, "should not allow reverse transformation")
+        
+        let fortyTwo = transformer.transformedValue(42) as? String
+        XCTAssertEqual("42", fortyTwo, "should call the transform function")
+        
+        let nilValue = transformer.transformedValue(nil)
+        XCTAssertNil(nilValue, "should handle nil values")
+        
+        let unexpected = transformer.transformedValue("unexpected")
+        XCTAssertNil(unexpected, "should handle unsupported values")
     }
     
     func testReversibleValueTransformer() {
@@ -37,13 +44,26 @@ class NSValueTransformerTests: XCTestCase {
         NSValueTransformer.setValueTransformerWithName("testReversibleTransformer", transform: toString, reverseTransform: toInt)
         let transformer = NSValueTransformer(forName: "testReversibleTransformer")!
         
-        XCTAssertTrue(transformer.dynamicType.allowsReverseTransformation(), "should not allow reverse transformation")
-        XCTAssertEqual("42", transformer.transformedValue(42) as? String, "should call the transform function")
-        XCTAssertNil(transformer.transformedValue(nil), "should handle nil values")
-        XCTAssertNil(transformer.transformedValue("unexpected"), "should handle unsupported values")
-        XCTAssertEqual(42, transformer.reverseTransformedValue("42") as? Int, "should call the reverse transform function")
-        XCTAssertNil(transformer.reverseTransformedValue(nil), "should handle nil values")
-        XCTAssertNil(transformer.reverseTransformedValue("not a number"), "should handle unsupported values")
+        let reversible = transformer.dynamicType.allowsReverseTransformation()
+        XCTAssertTrue(reversible, "should allow reverse transformation")
+        
+        let fortyTwo = transformer.transformedValue(42) as? String
+        XCTAssertEqual("42", fortyTwo, "should call the transform function")
+        
+        let nilValue = transformer.transformedValue(nil)
+        XCTAssertNil(nilValue, "should handle nil values")
+        
+        let unexpected = transformer.transformedValue("unexpected")
+        XCTAssertNil(unexpected, "should handle unsupported values")
+        
+        let reversedFortyTwo = transformer.reverseTransformedValue("42") as? Int
+        XCTAssertEqual(42, reversedFortyTwo, "should call the reverse transform function")
+        
+        let reversedNilValue = transformer.reverseTransformedValue(nil)
+        XCTAssertNil(reversedNilValue, "should handle nil values")
+        
+        let reversedUnexpected = transformer.reverseTransformedValue("not a number")
+        XCTAssertNil(reversedUnexpected, "should handle unsupported values")
     }
     
     func testDictionaryTransformer() {
