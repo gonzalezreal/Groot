@@ -60,6 +60,10 @@ static NSURL *GRTCachesDirectoryURL(NSError **outError) {
     return store.URL;
 }
 
+- (instancetype)init {
+    return [self initWithURL:nil model:[NSManagedObjectModel mergedModelFromBundles:nil] error:NULL];
+}
+
 - (nullable instancetype)initWithURL:(nullable NSURL *)URL
                                model:(NSManagedObjectModel *)managedObjectModel
                                error:(NSError *__autoreleasing  __nullable * __nullable)outError

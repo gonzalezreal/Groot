@@ -157,7 +157,7 @@ let batmanJSON: JSONObject = [
     ]
 ]
 
-let batman: Character = objectFromJSONDictionary(batmanJSON, inContext: context, error: &error)
+let batman: Character = try objectFromJSONDictionary(batmanJSON, inContext: context)
 ```
 
 ```objc
