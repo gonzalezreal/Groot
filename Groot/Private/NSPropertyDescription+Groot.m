@@ -28,6 +28,10 @@
     return self.userInfo[@"JSONKeyPath"];
 }
 
+- (nullable NSString *)grt_JSONSerializationPath {
+    return self.userInfo[@"JSONSerializationPath"];
+}
+
 - (BOOL)grt_JSONSerializable {
     return [self grt_JSONKeyPath] != nil;
 }

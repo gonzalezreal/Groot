@@ -39,10 +39,10 @@ NS_ASSUME_NONNULL_BEGIN
  
  @return An array of managed objects, or `nil` if an error occurs.
  */
-+ (nullable NSArray *)objectsWithEntityName:(NSString *)entityName
-                               fromJSONData:(NSData *)data
-                                  inContext:(NSManagedObjectContext *)context
-                                      error:(NSError * __nullable * __nullable)error;
++ (nullable NSArray<__kindof NSManagedObject *> *)objectsWithEntityName:(NSString *)entityName
+                                                           fromJSONData:(NSData *)data
+                                                              inContext:(NSManagedObjectContext *)context
+                                                                  error:(NSError * __nullable * __nullable)error;
 
 /**
  Creates or updates a managed object from a JSON dictionary.
@@ -57,10 +57,10 @@ NS_ASSUME_NONNULL_BEGIN
  
  @return A managed object, or `nil` if an error occurs.
  */
-+ (nullable id)objectWithEntityName:(NSString *)entityName
-                 fromJSONDictionary:(NSDictionary *)JSONDictionary
-                          inContext:(NSManagedObjectContext *)context
-                              error:(NSError * __nullable * __nullable)error;
++ (nullable __kindof NSManagedObject *)objectWithEntityName:(NSString *)entityName
+                                         fromJSONDictionary:(NSDictionary *)JSONDictionary
+                                                  inContext:(NSManagedObjectContext *)context
+                                                      error:(NSError * __nullable * __nullable)error;
 
 /**
  Creates or updates a set of managed objects from a JSON array.
@@ -73,10 +73,10 @@ NS_ASSUME_NONNULL_BEGIN
  
  @return An array of managed objects, or `nil` if an error occurs.
  */
-+ (nullable NSArray *)objectsWithEntityName:(NSString *)entityName
-                              fromJSONArray:(NSArray *)JSONArray
-                                  inContext:(NSManagedObjectContext *)context
-                                      error:(NSError * __nullable * __nullable)error;
++ (nullable NSArray<__kindof NSManagedObject *> *)objectsWithEntityName:(NSString *)entityName
+                                                          fromJSONArray:(NSArray *)JSONArray
+                                                              inContext:(NSManagedObjectContext *)context
+                                                                  error:(NSError * __nullable * __nullable)error;
 
 /**
  Converts a managed object into a JSON representation.

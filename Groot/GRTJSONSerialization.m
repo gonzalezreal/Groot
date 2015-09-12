@@ -30,10 +30,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation GRTJSONSerialization
 
-+ (nullable NSArray *)objectsWithEntityName:(NSString *)entityName
-                               fromJSONData:(NSData *)data
-                                  inContext:(NSManagedObjectContext *)context
-                                      error:(NSError *__autoreleasing  __nullable * __nullable)outError
++ (nullable NSArray<__kindof NSManagedObject *> *)objectsWithEntityName:(NSString *)entityName
+                                                           fromJSONData:(NSData *)data
+                                                              inContext:(NSManagedObjectContext *)context
+                                                                  error:(NSError *__autoreleasing  __nullable * __nullable)outError
 {
     NSError *error = nil;
     id parsedJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
@@ -55,10 +55,10 @@ NS_ASSUME_NONNULL_BEGIN
     return [self objectsWithEntityName:entityName fromJSONArray:array inContext:context error:outError];
 }
 
-+ (nullable id)objectWithEntityName:(NSString *)entityName
-                 fromJSONDictionary:(NSDictionary *)JSONDictionary
-                          inContext:(NSManagedObjectContext *)context
-                              error:(NSError *__autoreleasing  __nullable * __nullable)outError
++ (nullable __kindof NSManagedObject *)objectWithEntityName:(NSString *)entityName
+                                         fromJSONDictionary:(NSDictionary *)JSONDictionary
+                                                  inContext:(NSManagedObjectContext *)context
+                                                      error:(NSError *__autoreleasing  __nullable * __nullable)outError
 {
     NSError *error = nil;
     NSEntityDescription *entity = [NSEntityDescription grt_entityForName:entityName inContext:context error:&error];
@@ -75,10 +75,10 @@ NS_ASSUME_NONNULL_BEGIN
                                     error:outError].firstObject;
 }
 
-+ (nullable NSArray *)objectsWithEntityName:(NSString *)entityName
-                              fromJSONArray:(NSArray *)JSONArray
-                                  inContext:(NSManagedObjectContext *)context
-                                      error:(NSError *__autoreleasing  __nullable * __nullable)outError
++ (nullable NSArray<__kindof NSManagedObject *> *)objectsWithEntityName:(NSString *)entityName
+                                                          fromJSONArray:(NSArray *)JSONArray
+                                                              inContext:(NSManagedObjectContext *)context
+                                                                  error:(NSError *__autoreleasing  __nullable * __nullable)outError
 {
     NSError *error = nil;
     NSEntityDescription *entity = [NSEntityDescription grt_entityForName:entityName inContext:context error:&error];
