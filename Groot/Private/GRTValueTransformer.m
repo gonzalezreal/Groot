@@ -52,7 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
     return NSObject.class;
 }
 
-- (id)transformedValue:(id)value {
+- (nullable id)transformedValue:(nullable id)value {
     if (value != nil) {
         return self.transformBlock(value);
     }
@@ -87,7 +87,7 @@ NS_ASSUME_NONNULL_BEGIN
     return YES;
 }
 
-- (id)reverseTransformedValue:(id)value {
+- (nullable id)reverseTransformedValue:(nullable id)value {
     if (value != nil) {
         return self.reverseTransformBlock(value);
     }
