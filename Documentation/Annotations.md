@@ -132,6 +132,8 @@ Finally we create the entity mapper and give it the name we just used:
 }];
 ```
 
+When using `JSONDictionaryTransformerName` and `entityMapperName` together, its important to put any JSONDictionaryTransformers onto the abstract base entity, not the child entity.  In this example, any JSONDictionaryTransformers need to be set on the Message entity, and any JSONDictionaryTransformers on TextMessage or PictureMessage will not be called.  
+
 ### `JSONDictionaryTransformerName`
 
 This is an optional key you can specify at entity level that contains the name of a value transformer that will be used to transform the JSON dictionaries before serializing them to the target entity.
