@@ -22,71 +22,64 @@
 
 import Foundation
 
-extension NSValueTransformer {
-    /**
-     Registers a value transformer with a given name and transform function.
-    
-     - parameter name: The name of the transformer.
-     - parameter transform: The function that performs the transformation.
-    */
-    public class func setValueTransformerWithName<T, U>(name: String, transform: (T) -> (U?)) {
-        grt_setValueTransformerWithName(name) { value in
+extension ValueTransformer {
+
+    /// Registers a value transformer with a given name and transform function.
+    ///
+    /// - parameter name:      The name of the transformer.
+    /// - parameter transform: The function that performs the transformation.
+    public class func setValueTransformer<T, U>(withName name: String, transform: @escaping (T) -> (U?)) {
+        grt_setValueTransformer(withName: name) { value in
             (value as? T).flatMap {
-                transform($0) as? AnyObject
+                transform($0)
             }
         }
     }
-    
-    /**
-     Registers a reversible value transformer with a given name and transform functions.
-    
-     - parameter name: The name of the transformer.
-     - parameter transform: The function that performs the forward transformation.
-     - parameter reverseTransform: The function that performs the reverse transformation.
-    */
-    public class func setValueTransformerWithName<T, U>(name: String, transform: (T) -> (U?), reverseTransform: (U) -> (T?)) {
-        grt_setValueTransformerWithName(name, transformBlock: { value in
+
+    /// Registers a reversible value transformer with a given name and transform functions.
+    ///
+    /// - parameter name:             The name of the transformer.
+    /// - parameter transform:        The function that performs the forward transformation.
+    /// - parameter reverseTransform: The function that performs the reverse transformation.
+    public class func setValueTransformer<T, U>(withName name: String, transform: @escaping (T) -> (U?), reverseTransform: @escaping (U) -> (T?)) {
+        grt_setValueTransformer(withName: name, transform: { value in
             return (value as? T).flatMap {
-                transform($0) as? AnyObject
+                transform($0)
             }
-            }, reverseTransformBlock: { value in
+            }, reverseTransform: { value in
                 return (value as? U).flatMap {
-                    reverseTransform($0) as? AnyObject
+                    reverseTransform($0)
                 }
         })
     }
-    
-    /**
-     Registers a dictionary transformer with a given name and transform function.
- 
-     Dictionary transformers can be associated with Core Data entities in the user info
-     dictionary by using the `JSONDictionaryTransformerName` key.
- 
-     - parameter name: The name of the transformer.
-     - parameter transform: The function that performs the transformation.
-    */
-    public class func setDictionaryTransformerWithName(name: String, transform: ([String: AnyObject]) -> ([String: AnyObject]?)) {
-        grt_setDictionaryTransformerWithName(name) { value in
+
+    /// Registers a dictionary transformer with a given name and transform function.
+    ///
+    /// Dictionary transformers can be associated with Core Data entities in the user info
+    /// dictionary by using the `JSONDictionaryTransformerName` key.
+    ///
+    /// - parameter name:      The name of the transformer.
+    /// - parameter transform: The function that performs the transformation.
+    public class func setDictionaryTransformer(withName name: String, transform: @escaping ([String: AnyObject]) -> ([String: AnyObject]?)) {
+        grt_setDictionaryTransformer(withName: name) { value in
             if let dictionary = value as? [String: AnyObject] {
                 return transform(dictionary)
             }
             return nil
         }
     }
-    
-    /**
-     Registers an entity mapper with a given name and map block.
-    
-     An entity mapper maps a JSON dictionary to an entity name.
-    
-     Entity mappers can be associated with abstract core data entities in the user info
-     dictionary by using the `entityMapperName` key.
-    
-     - parameter name: The name of the mapper.
-     - parameter map: The function that performs the mapping.
-    */
-    public class func setEntityMapperWithName(name: String, map: ([String: AnyObject]) -> (String?)) {
-        grt_setEntityMapperWithName(name) { value in
+
+    /// Registers an entity mapper with a given name and map block.
+    ///
+    /// An entity mapper maps a JSON dictionary to an entity name.
+    ///
+    /// Entity mappers can be associated with abstract core data entities in the user info
+    /// dictionary by using the `entityMapperName` key.
+    ///
+    /// - parameter name: The name of the mapper.
+    /// - parameter map:  The function that performs the mapping.
+    public class func setEntityMapper(withName name: String, map: @escaping ([String: AnyObject]) -> (String?)) {
+        grt_setEntityMapper(withName: name) { value in
             if let dictionary = value as? [String: AnyObject] {
                 return map(dictionary)
             }

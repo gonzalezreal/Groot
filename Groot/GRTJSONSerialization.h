@@ -98,32 +98,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface GRTJSONSerialization (Deprecated)
-
-+ (nullable id)insertObjectForEntityName:(NSString *)entityName
-                      fromJSONDictionary:(NSDictionary *)JSONDictionary
-                  inManagedObjectContext:(NSManagedObjectContext *)context
-                                   error:(NSError * __nullable * __nullable)error __attribute__((deprecated("Replaced by -objectWithEntityName:fromJSONDictionary:inContext:error:")));
-
-+ (nullable NSArray *)insertObjectsForEntityName:(NSString *)entityName
-                                   fromJSONArray:(NSArray *)JSONArray
-                          inManagedObjectContext:(NSManagedObjectContext *)context
-                                           error:(NSError * __nullable * __nullable)error __attribute__((deprecated("Replaced by -objectsWithEntityName:fromJSONArray:inContext:error:")));
-
-+ (nullable id)mergeObjectForEntityName:(NSString *)entityName
-                     fromJSONDictionary:(NSDictionary *)JSONDictionary
-                 inManagedObjectContext:(NSManagedObjectContext *)context
-                                  error:(NSError * __nullable * __nullable)error __attribute__((deprecated("Replaced by -objectWithEntityName:fromJSONDictionary:inContext:error:")));
-
-+ (nullable NSArray *)mergeObjectsForEntityName:(NSString *)entityName
-                                  fromJSONArray:(NSArray *)JSONArray
-                         inManagedObjectContext:(NSManagedObjectContext *)context
-                                          error:(NSError * __nullable * __nullable)error __attribute__((deprecated("Replaced by -objectsWithEntityName:fromJSONArray:inContext:error:")));
-
-+ (NSDictionary *)JSONDictionaryFromManagedObject:(NSManagedObject *)managedObject __attribute__((deprecated("Replaced by -JSONDictionaryFromObject:")));
-
-+ (NSArray *)JSONArrayFromManagedObjects:(NSArray *)managedObjects __attribute__((deprecated("Replaced by -JSONArrayFromObjects:")));
-
-@end
-
 NS_ASSUME_NONNULL_END
