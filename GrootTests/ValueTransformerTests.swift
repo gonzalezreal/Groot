@@ -1,5 +1,5 @@
 //
-//  NSValueTransformerTests.swift
+//  ValueTransformerTests.swift
 //  Groot
 //
 //  Created by Guillermo Gonzalez on 08/07/15.
@@ -9,7 +9,7 @@
 import XCTest
 import Groot
 
-class NSValueTransformerTests: XCTestCase {
+class ValueTransformerTests: XCTestCase {
 
     func testValueTransformer() {
         func toString(_ value: Int) -> String? {

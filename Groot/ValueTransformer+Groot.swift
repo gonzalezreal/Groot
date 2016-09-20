@@ -1,4 +1,4 @@
-// NSValueTransformer+Groot.swift
+// ValueTransformer+Groot.swift
 //
 // Copyright (c) 2014-2015 Guillermo Gonzalez
 //
