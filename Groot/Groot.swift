@@ -1,6 +1,6 @@
 // Groot.swift
 //
-// Copyright (c) 2015 Guillermo Gonzalez
+// Copyright (c) 2014-2016 Guillermo Gonzalez
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,140 +23,134 @@
 import CoreData
 
 extension NSManagedObjectContext {
-    internal func managedObjectModel() -> NSManagedObjectModel {
-        if let psc = persistentStoreCoordinator {
-            return psc.managedObjectModel
+
+    internal var managedObjectModel: NSManagedObjectModel? {
+        if let persistentStoreCoordinator = persistentStoreCoordinator {
+            return persistentStoreCoordinator.managedObjectModel
         }
-        
-        return parentContext!.managedObjectModel()
+
+        if let parent = parent {
+            return parent.managedObjectModel
+        }
+
+        return nil
     }
 }
 
 extension NSManagedObject {
-    internal class func entityInManagedObjectContext(context: NSManagedObjectContext) -> NSEntityDescription {
-        let className = NSStringFromClass(self)
-        let model = context.managedObjectModel()
-        
+
+    internal static func entity(inManagedObjectContext context: NSManagedObjectContext) -> NSEntityDescription {
+
+        guard let model = context.managedObjectModel else {
+            fatalError("Could not find managed object model for the provided context.")
+        }
+
+        let className = String(reflecting: self)
+
         for entity in model.entities {
             if entity.managedObjectClassName == className {
                 return entity
             }
         }
-        
+
         fatalError("Could not locate the entity for \(className).")
     }
 }
 
-/**
- Creates or updates a set of managed objects from JSON data.
- 
- - parameter entityName: The name of an entity.
- - parameter fromJSONData: A data object containing JSON data.
- - parameter inContext: The context into which to fetch or insert the managed objects.
- 
- - returns: An array of managed objects
- */
-public func objectsWithEntityName(name: String, fromJSONData data: NSData, inContext context: NSManagedObjectContext) throws -> [NSManagedObject] {
-    return try GRTJSONSerialization.objectsWithEntityName(name, fromJSONData: data, inContext: context)
+/// Creates or updates a set of managed objects from JSON data.
+///
+/// - parameter name:    The name of an entity.
+/// - parameter data:    A data object containing JSON data.
+/// - parameter context: The context into which to fetch or insert the managed objects.
+///
+/// - returns: An array of managed objects
+public func objects(withEntityName name: String, fromJSONData data: Data, inContext context: NSManagedObjectContext) throws -> [NSManagedObject] {
+    return try GRTJSONSerialization.objects(withEntityName: name, fromJSONData: data, in: context)
 }
 
-/**
- Creates or updates a set of managed objects from JSON data.
-
- - parameter fromJSONData: A data object containing JSON data.
- - parameter inContext: The context into which to fetch or insert the managed objects.
- 
- - returns: An array of managed objects.
- */
-public func objectsFromJSONData<T: NSManagedObject>(data: NSData, inContext context: NSManagedObjectContext) throws -> [T] {
-    let entity = T.entityInManagedObjectContext(context)
-    let managedObjects = try objectsWithEntityName(entity.name!, fromJSONData: data, inContext: context)
+/// Creates or updates a set of managed objects from JSON data.
+///
+/// - parameter data:    A data object containing JSON data.
+/// - parameter context: The context into which to fetch or insert the managed objects.
+///
+/// - returns: An array of managed objects.
+public func objects<T: NSManagedObject>(fromJSONData data: Data, inContext context: NSManagedObjectContext) throws -> [T] {
+    let entity = T.entity(inManagedObjectContext: context)
+    let managedObjects = try objects(withEntityName: entity.name!, fromJSONData: data, inContext: context)
     
     return managedObjects as! [T]
 }
 
-public typealias JSONDictionary = [String: AnyObject]
+public typealias JSONDictionary = [String: Any]
 
-/**
- Creates or updates a managed object from a JSON dictionary.
- 
- This method converts the specified JSON dictionary into a managed object of a given entity.
- 
- - parameter entityName: The name of an entity.
- - parameter fromJSONDictionary: A dictionary representing JSON data.
- - parameter inContext: The context into which to fetch or insert the managed objects.
- 
- - returns: A managed object.
- */
-public func objectWithEntityName(name: String, fromJSONDictionary dictionary: JSONDictionary, inContext context: NSManagedObjectContext) throws -> NSManagedObject {
-    return try GRTJSONSerialization.objectWithEntityName(name, fromJSONDictionary: dictionary, inContext: context)
+/// Creates or updates a managed object from a JSON dictionary.
+///
+/// This method converts the specified JSON dictionary into a managed object of a given entity.
+///
+/// - parameter name:       The name of an entity.
+/// - parameter dictionary: A dictionary representing JSON data.
+/// - parameter context:    The context into which to fetch or insert the managed objects.
+///
+/// - returns: A managed object.
+public func object(withEntityName name: String, fromJSONDictionary dictionary: JSONDictionary, inContext context: NSManagedObjectContext) throws -> NSManagedObject {
+    return try GRTJSONSerialization.object(withEntityName: name, fromJSONDictionary: dictionary, in: context)
 }
 
-/**
- Creates or updates a managed object from a JSON dictionary.
- 
- This method converts the specified JSON dictionary into a managed object.
-
- - parameter fromJSONDictionary: A dictionary representing JSON data.
- - parameter inContext: The context into which to fetch or insert the managed objects.
- 
- - returns: A managed object.
- */
-public func objectFromJSONDictionary<T: NSManagedObject>(dictionary: JSONDictionary, inContext context: NSManagedObjectContext) throws -> T {
-    let entity = T.entityInManagedObjectContext(context)
-    let managedObject = try objectWithEntityName(entity.name!, fromJSONDictionary: dictionary, inContext: context)
+/// Creates or updates a managed object from a JSON dictionary.
+///
+/// This method converts the specified JSON dictionary into a managed object.
+///
+/// - parameter dictionary: A dictionary representing JSON data.
+/// - parameter context:    The context into which to fetch or insert the managed objects.
+///
+/// - returns: A managed object.
+public func object<T: NSManagedObject>(fromJSONDictionary dictionary: JSONDictionary, inContext context: NSManagedObjectContext) throws -> T {
+    let entity = T.entity(inManagedObjectContext: context)
+    let managedObject = try object(withEntityName: entity.name!, fromJSONDictionary: dictionary, inContext: context)
     
     return managedObject as! T
 }
 
-public typealias JSONArray = [AnyObject]
+public typealias JSONArray = [Any]
 
-/**
- Creates or updates a set of managed objects from a JSON array.
- 
- - parameter entityName: The name of an entity.
- - parameter fromJSONArray: An array representing JSON data.
- - parameter context: The context into which to fetch or insert the managed objects.
- 
- - returns: An array of managed objects.
- */
-public func objectsWithEntityName(name: String, fromJSONArray array: JSONArray, inContext context: NSManagedObjectContext) throws -> [NSManagedObject] {
-    return try GRTJSONSerialization.objectsWithEntityName(name, fromJSONArray: array, inContext: context)
+/// Creates or updates a set of managed objects from a JSON array.
+///
+/// - parameter name:    The name of an entity.
+/// - parameter array:   An array representing JSON data.
+/// - parameter context: The context into which to fetch or insert the managed objects.
+///
+/// - returns: An array of managed objects.
+public func objects(withEntityName name: String, fromJSONArray array: JSONArray, inContext context: NSManagedObjectContext) throws -> [NSManagedObject] {
+    return try GRTJSONSerialization.objects(withEntityName: name, fromJSONArray: array, in: context)
 }
 
-/**
- Creates or updates a set of managed objects from a JSON array.
- 
- - parameter fromJSONArray: An array representing JSON data.
- - parameter context: The context into which to fetch or insert the managed objects.
- 
- - returns: An array of managed objects.
- */
-public func objectsFromJSONArray<T: NSManagedObject>(array: JSONArray, inContext context: NSManagedObjectContext) throws -> [T] {
-    let entity = T.entityInManagedObjectContext(context)
-    let managedObjects = try objectsWithEntityName(entity.name!, fromJSONArray: array, inContext: context)
+/// Creates or updates a set of managed objects from a JSON array.
+///
+/// - parameter array:   An array representing JSON data.
+/// - parameter context: The context into which to fetch or insert the managed objects.
+///
+/// - returns: An array of managed objects.
+public func objects<T: NSManagedObject>(fromJSONArray array: JSONArray, inContext context: NSManagedObjectContext) throws -> [T] {
+    let entity = T.entity(inManagedObjectContext: context)
+    let managedObjects = try objects(withEntityName: entity.name!, fromJSONArray: array, inContext: context)
     
     return managedObjects as! [T]
 }
 
-/**
- Converts a managed object into a JSON representation.
- 
- - parameter object: The managed object to use for JSON serialization.
-
- :return: A JSON dictionary.
- */
-public func JSONDictionaryFromObject(object: NSManagedObject) -> JSONDictionary {
-    return GRTJSONSerialization.JSONDictionaryFromObject(object) as! JSONDictionary;
+/// Converts a managed object into a JSON representation.
+///
+/// - parameter object: The managed object to use for JSON serialization.
+///
+/// - returns: A JSON dictionary.
+public func json(fromObject object: NSManagedObject) -> JSONDictionary {
+    return GRTJSONSerialization.jsonDictionary(from: object) as! JSONDictionary;
 }
 
-/**
- Converts an array of managed objects into a JSON representation.
- 
- - parameter objects: The array of managed objects to use for JSON serialization.
- 
- :return: A JSON array.
- */
-public func JSONArrayFromObjects(objects: [NSManagedObject]) -> JSONArray {
-    return GRTJSONSerialization.JSONArrayFromObjects(objects)
+/// Converts an array of managed objects into a JSON representation.
+///
+/// - parameter objects: The array of managed objects to use for JSON serialization.
+///
+/// - returns: A JSON array.
+public func json(fromObjects objects: [NSManagedObject]) -> JSONArray {
+    return GRTJSONSerialization.jsonArray(from: objects)
 }

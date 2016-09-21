@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		82BCF4DD1D9123BF00BC4E0F /* Data+Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BCF4DC1D9123BF00BC4E0F /* Data+Resource.swift */; };
+		82BCF4DF1D913EF700BC4E0F /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BCF4DE1D913EF700BC4E0F /* Models.swift */; };
+		82BCF4E71D9145DE00BC4E0F /* SerializationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BCF4E61D9145DE00BC4E0F /* SerializationTests.swift */; };
+		82BCF4E81D9145DE00BC4E0F /* SerializationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BCF4E61D9145DE00BC4E0F /* SerializationTests.swift */; };
+		82BCF4E91D9145EE00BC4E0F /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BCF4DE1D913EF700BC4E0F /* Models.swift */; };
+		82BCF4EA1D9145F100BC4E0F /* Data+Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BCF4DC1D9123BF00BC4E0F /* Data+Resource.swift */; };
+		82BCF4F01D91475200BC4E0F /* ManagedStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BCF4EF1D91475200BC4E0F /* ManagedStoreTests.swift */; };
+		82BCF4F11D91475200BC4E0F /* ManagedStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BCF4EF1D91475200BC4E0F /* ManagedStoreTests.swift */; };
 		B408736D1B5AB6930063F150 /* Groot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B40873621B5AB6930063F150 /* Groot.framework */; };
 		B408737B1B5AB8350063F150 /* Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B4DC1AF11AA9CA5E00F67403 /* Groot.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B408737C1B5AB83D0063F150 /* Groot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FD30701B569F1A002392F7 /* Groot.swift */; };
@@ -18,7 +26,7 @@
 		B40873821B5AB8470063F150 /* GRTManagedStore.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B0D1AA9CAC200F67403 /* GRTManagedStore.m */; };
 		B40873831B5AB8470063F150 /* NSValueTransformer+Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B4E72F621B4DB9B300B9EA77 /* NSValueTransformer+Groot.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B40873841B5AB8470063F150 /* NSValueTransformer+Groot.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E72F631B4DB9B300B9EA77 /* NSValueTransformer+Groot.m */; };
-		B40873851B5AB8470063F150 /* NSValueTransformer+Groot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E72F6C1B4DC4D500B9EA77 /* NSValueTransformer+Groot.swift */; };
+		B40873851B5AB8470063F150 /* ValueTransformer+Groot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E72F6C1B4DC4D500B9EA77 /* ValueTransformer+Groot.swift */; };
 		B40873861B5AB87F0063F150 /* GRTValueTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = B4E72F5A1B4DB8EF00B9EA77 /* GRTValueTransformer.h */; };
 		B40873871B5AB87F0063F150 /* GRTValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E72F5B1B4DB8EF00B9EA77 /* GRTValueTransformer.m */; };
 		B40873881B5AB87F0063F150 /* NSPropertyDescription+Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B4DC1B171AA9CAC200F67403 /* NSPropertyDescription+Groot.h */; };
@@ -29,19 +37,14 @@
 		B408738D1B5AB87F0063F150 /* NSEntityDescription+Groot.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B161AA9CAC200F67403 /* NSEntityDescription+Groot.m */; };
 		B408738E1B5AB87F0063F150 /* NSManagedObject+Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B475B40E1B53FCE1001F29FE /* NSManagedObject+Groot.h */; };
 		B408738F1B5AB87F0063F150 /* NSManagedObject+Groot.m in Sources */ = {isa = PBXBuildFile; fileRef = B475B40F1B53FCE1001F29FE /* NSManagedObject+Groot.m */; };
-		B40873901B5AB89C0063F150 /* NSValueTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E72F6E1B4DC7DA00B9EA77 /* NSValueTransformerTests.swift */; };
-		B40873911B5AB8A20063F150 /* GRTManagedStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B4BB8A0C1B4D17B600EBAADA /* GRTManagedStoreTests.m */; };
-		B40873921B5AB8A60063F150 /* GRTJSONSerializationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B291AA9CBAD00F67403 /* GRTJSONSerializationTests.m */; };
+		B40873901B5AB89C0063F150 /* ValueTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E72F6E1B4DC7DA00B9EA77 /* ValueTransformerTests.swift */; };
 		B40873931B5AB8AF0063F150 /* characters.json in Resources */ = {isa = PBXBuildFile; fileRef = B42A1D911B56600000309637 /* characters.json */; };
 		B40873941B5AB8AF0063F150 /* characters_update.json in Resources */ = {isa = PBXBuildFile; fileRef = B42A1D921B56600000309637 /* characters_update.json */; };
 		B40873951B5AB8AF0063F150 /* container.json in Resources */ = {isa = PBXBuildFile; fileRef = B409C72F1B5979E700C47D48 /* container.json */; };
-		B408739A1B5AB8DC0063F150 /* GRTModels.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B2B1AA9CBAD00F67403 /* GRTModels.m */; };
-		B408739B1B5AB8E20063F150 /* NSData+Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = B42A1D961B56614600309637 /* NSData+Resource.m */; };
 		B408739C1B5AB8E80063F150 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B2D1AA9CBAD00F67403 /* Model.xcdatamodeld */; };
 		B409C7301B5979E700C47D48 /* container.json in Resources */ = {isa = PBXBuildFile; fileRef = B409C72F1B5979E700C47D48 /* container.json */; };
 		B42A1D931B56600000309637 /* characters.json in Resources */ = {isa = PBXBuildFile; fileRef = B42A1D911B56600000309637 /* characters.json */; };
 		B42A1D941B56600000309637 /* characters_update.json in Resources */ = {isa = PBXBuildFile; fileRef = B42A1D921B56600000309637 /* characters_update.json */; };
-		B42A1D971B56614600309637 /* NSData+Resource.m in Sources */ = {isa = PBXBuildFile; fileRef = B42A1D961B56614600309637 /* NSData+Resource.m */; };
 		B44B7F5A1B7240FD00490641 /* NSArray+DictionaryTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = B44B7F581B7240FD00490641 /* NSArray+DictionaryTransformer.h */; };
 		B44B7F5B1B7240FD00490641 /* NSArray+DictionaryTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = B44B7F591B7240FD00490641 /* NSArray+DictionaryTransformer.m */; };
 		B44B7F5C1B72441D00490641 /* NSArray+DictionaryTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = B44B7F581B7240FD00490641 /* NSArray+DictionaryTransformer.h */; };
@@ -60,7 +63,6 @@
 		B4944D1B1B83320000EA2D29 /* GRTUniquingSerializationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = B4944D171B83320000EA2D29 /* GRTUniquingSerializationStrategy.m */; };
 		B4944D1D1B83355C00EA2D29 /* GRTSerializationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = B4944D1C1B83355C00EA2D29 /* GRTSerializationStrategy.m */; };
 		B4944D1E1B83355C00EA2D29 /* GRTSerializationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = B4944D1C1B83355C00EA2D29 /* GRTSerializationStrategy.m */; };
-		B4BB8A0D1B4D17B600EBAADA /* GRTManagedStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B4BB8A0C1B4D17B600EBAADA /* GRTManagedStoreTests.m */; };
 		B4DC1AF21AA9CA5E00F67403 /* Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B4DC1AF11AA9CA5E00F67403 /* Groot.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B4DC1AF81AA9CA5E00F67403 /* Groot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4DC1AEC1AA9CA5E00F67403 /* Groot.framework */; };
 		B4DC1B1B1AA9CAC200F67403 /* GRTJSONSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = B4DC1B0A1AA9CAC200F67403 /* GRTJSONSerialization.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -73,8 +75,6 @@
 		B4DC1B261AA9CAC200F67403 /* NSEntityDescription+Groot.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B161AA9CAC200F67403 /* NSEntityDescription+Groot.m */; };
 		B4DC1B271AA9CAC200F67403 /* NSPropertyDescription+Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B4DC1B171AA9CAC200F67403 /* NSPropertyDescription+Groot.h */; };
 		B4DC1B281AA9CAC200F67403 /* NSPropertyDescription+Groot.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B181AA9CAC200F67403 /* NSPropertyDescription+Groot.m */; };
-		B4DC1B2F1AA9CBAD00F67403 /* GRTJSONSerializationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B291AA9CBAD00F67403 /* GRTJSONSerializationTests.m */; };
-		B4DC1B301AA9CBAD00F67403 /* GRTModels.m in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B2B1AA9CBAD00F67403 /* GRTModels.m */; };
 		B4DC1B321AA9CBAD00F67403 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1B2D1AA9CBAD00F67403 /* Model.xcdatamodeld */; };
 		B4E314F91B832BD500A80489 /* GRTManagedObjectSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = B4E314F71B832BD500A80489 /* GRTManagedObjectSerializer.h */; };
 		B4E314FA1B832BD500A80489 /* GRTManagedObjectSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = B4E314F71B832BD500A80489 /* GRTManagedObjectSerializer.h */; };
@@ -86,8 +86,8 @@
 		B4E72F5D1B4DB8EF00B9EA77 /* GRTValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E72F5B1B4DB8EF00B9EA77 /* GRTValueTransformer.m */; };
 		B4E72F641B4DB9B300B9EA77 /* NSValueTransformer+Groot.h in Headers */ = {isa = PBXBuildFile; fileRef = B4E72F621B4DB9B300B9EA77 /* NSValueTransformer+Groot.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B4E72F651B4DB9B300B9EA77 /* NSValueTransformer+Groot.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E72F631B4DB9B300B9EA77 /* NSValueTransformer+Groot.m */; };
-		B4E72F6D1B4DC4D500B9EA77 /* NSValueTransformer+Groot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E72F6C1B4DC4D500B9EA77 /* NSValueTransformer+Groot.swift */; };
-		B4E72F6F1B4DC7DA00B9EA77 /* NSValueTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E72F6E1B4DC7DA00B9EA77 /* NSValueTransformerTests.swift */; };
+		B4E72F6D1B4DC4D500B9EA77 /* ValueTransformer+Groot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E72F6C1B4DC4D500B9EA77 /* ValueTransformer+Groot.swift */; };
+		B4E72F6F1B4DC7DA00B9EA77 /* ValueTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E72F6E1B4DC7DA00B9EA77 /* ValueTransformerTests.swift */; };
 		B4EB88B61B847D3800867F3F /* GRTCompositeUniquingSerializationStrategy.h in Headers */ = {isa = PBXBuildFile; fileRef = B4EB88B41B847D3800867F3F /* GRTCompositeUniquingSerializationStrategy.h */; };
 		B4EB88B71B847D3800867F3F /* GRTCompositeUniquingSerializationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EB88B51B847D3800867F3F /* GRTCompositeUniquingSerializationStrategy.m */; };
 		B4EB88B81B847E1900867F3F /* GRTCompositeUniquingSerializationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EB88B51B847D3800867F3F /* GRTCompositeUniquingSerializationStrategy.m */; };
@@ -117,13 +117,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		82BCF4DC1D9123BF00BC4E0F /* Data+Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Resource.swift"; sourceTree = "<group>"; };
+		82BCF4DE1D913EF700BC4E0F /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		82BCF4E61D9145DE00BC4E0F /* SerializationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerializationTests.swift; sourceTree = "<group>"; };
+		82BCF4EF1D91475200BC4E0F /* ManagedStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedStoreTests.swift; sourceTree = "<group>"; };
 		B40873621B5AB6930063F150 /* Groot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Groot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B408736C1B5AB6930063F150 /* GrootTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GrootTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B409C72F1B5979E700C47D48 /* container.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = container.json; sourceTree = "<group>"; };
 		B42A1D911B56600000309637 /* characters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = characters.json; sourceTree = "<group>"; };
 		B42A1D921B56600000309637 /* characters_update.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = characters_update.json; sourceTree = "<group>"; };
-		B42A1D951B56614600309637 /* NSData+Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Resource.h"; sourceTree = "<group>"; };
-		B42A1D961B56614600309637 /* NSData+Resource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Resource.m"; sourceTree = "<group>"; };
 		B44B7F581B7240FD00490641 /* NSArray+DictionaryTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+DictionaryTransformer.h"; sourceTree = "<group>"; };
 		B44B7F591B7240FD00490641 /* NSArray+DictionaryTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+DictionaryTransformer.m"; sourceTree = "<group>"; };
 		B46200C01B4F07E4003B3B69 /* GRTError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTError.h; sourceTree = "<group>"; };
@@ -135,7 +137,6 @@
 		B4944D161B83320000EA2D29 /* GRTUniquingSerializationStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTUniquingSerializationStrategy.h; sourceTree = "<group>"; };
 		B4944D171B83320000EA2D29 /* GRTUniquingSerializationStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTUniquingSerializationStrategy.m; sourceTree = "<group>"; };
 		B4944D1C1B83355C00EA2D29 /* GRTSerializationStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTSerializationStrategy.m; sourceTree = "<group>"; };
-		B4BB8A0C1B4D17B600EBAADA /* GRTManagedStoreTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTManagedStoreTests.m; sourceTree = "<group>"; };
 		B4DC1AEC1AA9CA5E00F67403 /* Groot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Groot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4DC1AF01AA9CA5E00F67403 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B4DC1AF11AA9CA5E00F67403 /* Groot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Groot.h; sourceTree = "<group>"; };
@@ -151,9 +152,6 @@
 		B4DC1B161AA9CAC200F67403 /* NSEntityDescription+Groot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSEntityDescription+Groot.m"; sourceTree = "<group>"; };
 		B4DC1B171AA9CAC200F67403 /* NSPropertyDescription+Groot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPropertyDescription+Groot.h"; sourceTree = "<group>"; };
 		B4DC1B181AA9CAC200F67403 /* NSPropertyDescription+Groot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSPropertyDescription+Groot.m"; sourceTree = "<group>"; };
-		B4DC1B291AA9CBAD00F67403 /* GRTJSONSerializationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTJSONSerializationTests.m; sourceTree = "<group>"; };
-		B4DC1B2A1AA9CBAD00F67403 /* GRTModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTModels.h; sourceTree = "<group>"; };
-		B4DC1B2B1AA9CBAD00F67403 /* GRTModels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTModels.m; sourceTree = "<group>"; };
 		B4DC1B2E1AA9CBAD00F67403 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		B4E314EE1B83233600A80489 /* GRTSerializationStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTSerializationStrategy.h; sourceTree = "<group>"; };
 		B4E314F71B832BD500A80489 /* GRTManagedObjectSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTManagedObjectSerializer.h; sourceTree = "<group>"; };
@@ -162,8 +160,8 @@
 		B4E72F5B1B4DB8EF00B9EA77 /* GRTValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTValueTransformer.m; sourceTree = "<group>"; };
 		B4E72F621B4DB9B300B9EA77 /* NSValueTransformer+Groot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValueTransformer+Groot.h"; sourceTree = "<group>"; };
 		B4E72F631B4DB9B300B9EA77 /* NSValueTransformer+Groot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValueTransformer+Groot.m"; sourceTree = "<group>"; };
-		B4E72F6C1B4DC4D500B9EA77 /* NSValueTransformer+Groot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSValueTransformer+Groot.swift"; sourceTree = "<group>"; };
-		B4E72F6E1B4DC7DA00B9EA77 /* NSValueTransformerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSValueTransformerTests.swift; sourceTree = "<group>"; };
+		B4E72F6C1B4DC4D500B9EA77 /* ValueTransformer+Groot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ValueTransformer+Groot.swift"; sourceTree = "<group>"; };
+		B4E72F6E1B4DC7DA00B9EA77 /* ValueTransformerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueTransformerTests.swift; sourceTree = "<group>"; };
 		B4EB88B41B847D3800867F3F /* GRTCompositeUniquingSerializationStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTCompositeUniquingSerializationStrategy.h; sourceTree = "<group>"; };
 		B4EB88B51B847D3800867F3F /* GRTCompositeUniquingSerializationStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTCompositeUniquingSerializationStrategy.m; sourceTree = "<group>"; };
 		B4EB88BE1B84D77200867F3F /* cards.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cards.json; sourceTree = "<group>"; };
@@ -269,7 +267,7 @@
 				B4DC1B0D1AA9CAC200F67403 /* GRTManagedStore.m */,
 				B4E72F621B4DB9B300B9EA77 /* NSValueTransformer+Groot.h */,
 				B4E72F631B4DB9B300B9EA77 /* NSValueTransformer+Groot.m */,
-				B4E72F6C1B4DC4D500B9EA77 /* NSValueTransformer+Groot.swift */,
+				B4E72F6C1B4DC4D500B9EA77 /* ValueTransformer+Groot.swift */,
 				B4DC1B101AA9CAC200F67403 /* Private */,
 				B4DC1AEF1AA9CA5E00F67403 /* Supporting Files */,
 			);
@@ -287,9 +285,9 @@
 		B4DC1AFB1AA9CA5E00F67403 /* GrootTests */ = {
 			isa = PBXGroup;
 			children = (
-				B4E72F6E1B4DC7DA00B9EA77 /* NSValueTransformerTests.swift */,
-				B4BB8A0C1B4D17B600EBAADA /* GRTManagedStoreTests.m */,
-				B4DC1B291AA9CBAD00F67403 /* GRTJSONSerializationTests.m */,
+				B4E72F6E1B4DC7DA00B9EA77 /* ValueTransformerTests.swift */,
+				82BCF4EF1D91475200BC4E0F /* ManagedStoreTests.swift */,
+				82BCF4E61D9145DE00BC4E0F /* SerializationTests.swift */,
 				B42A1D901B56600000309637 /* JSON */,
 				B4DC1AFC1AA9CA5E00F67403 /* Supporting Files */,
 			);
@@ -299,10 +297,8 @@
 		B4DC1AFC1AA9CA5E00F67403 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B4DC1B2A1AA9CBAD00F67403 /* GRTModels.h */,
-				B4DC1B2B1AA9CBAD00F67403 /* GRTModels.m */,
-				B42A1D951B56614600309637 /* NSData+Resource.h */,
-				B42A1D961B56614600309637 /* NSData+Resource.m */,
+				82BCF4DE1D913EF700BC4E0F /* Models.swift */,
+				82BCF4DC1D9123BF00BC4E0F /* Data+Resource.swift */,
 				B4DC1B2D1AA9CBAD00F67403 /* Model.xcdatamodeld */,
 				B4DC1AFD1AA9CA5E00F67403 /* Info.plist */,
 			);
@@ -467,7 +463,7 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Guillermo Gonzalez";
 				TargetAttributes = {
 					B40873611B5AB6930063F150 = {
@@ -478,9 +474,11 @@
 					};
 					B4DC1AEB1AA9CA5E00F67403 = {
 						CreatedOnToolsVersion = 6.1.1;
+						LastSwiftMigration = 0800;
 					};
 					B4DC1AF61AA9CA5E00F67403 = {
 						CreatedOnToolsVersion = 6.1.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -555,7 +553,7 @@
 				B4944D1B1B83320000EA2D29 /* GRTUniquingSerializationStrategy.m in Sources */,
 				B4944D1E1B83355C00EA2D29 /* GRTSerializationStrategy.m in Sources */,
 				B44B7F5D1B7299B800490641 /* NSArray+DictionaryTransformer.m in Sources */,
-				B40873851B5AB8470063F150 /* NSValueTransformer+Groot.swift in Sources */,
+				B40873851B5AB8470063F150 /* ValueTransformer+Groot.swift in Sources */,
 				B4944D151B83305600EA2D29 /* GRTInsertSerializationStrategy.m in Sources */,
 				B40873801B5AB8470063F150 /* GRTJSONSerialization.m in Sources */,
 				B40873841B5AB8470063F150 /* NSValueTransformer+Groot.m in Sources */,
@@ -574,12 +572,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B40873901B5AB89C0063F150 /* NSValueTransformerTests.swift in Sources */,
-				B408739B1B5AB8E20063F150 /* NSData+Resource.m in Sources */,
-				B40873921B5AB8A60063F150 /* GRTJSONSerializationTests.m in Sources */,
-				B40873911B5AB8A20063F150 /* GRTManagedStoreTests.m in Sources */,
-				B408739A1B5AB8DC0063F150 /* GRTModels.m in Sources */,
+				B40873901B5AB89C0063F150 /* ValueTransformerTests.swift in Sources */,
+				82BCF4E81D9145DE00BC4E0F /* SerializationTests.swift in Sources */,
+				82BCF4E91D9145EE00BC4E0F /* Models.swift in Sources */,
+				82BCF4EA1D9145F100BC4E0F /* Data+Resource.swift in Sources */,
 				B408739C1B5AB8E80063F150 /* Model.xcdatamodeld in Sources */,
+				82BCF4F11D91475200BC4E0F /* ManagedStoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -587,7 +585,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B4E72F6D1B4DC4D500B9EA77 /* NSValueTransformer+Groot.swift in Sources */,
+				B4E72F6D1B4DC4D500B9EA77 /* ValueTransformer+Groot.swift in Sources */,
 				B4DC1B281AA9CAC200F67403 /* NSPropertyDescription+Groot.m in Sources */,
 				B4944D1A1B83320000EA2D29 /* GRTUniquingSerializationStrategy.m in Sources */,
 				B4944D1D1B83355C00EA2D29 /* GRTSerializationStrategy.m in Sources */,
@@ -611,12 +609,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B4E72F6F1B4DC7DA00B9EA77 /* NSValueTransformerTests.swift in Sources */,
-				B4DC1B2F1AA9CBAD00F67403 /* GRTJSONSerializationTests.m in Sources */,
-				B42A1D971B56614600309637 /* NSData+Resource.m in Sources */,
+				B4E72F6F1B4DC7DA00B9EA77 /* ValueTransformerTests.swift in Sources */,
+				82BCF4E71D9145DE00BC4E0F /* SerializationTests.swift in Sources */,
+				82BCF4DF1D913EF700BC4E0F /* Models.swift in Sources */,
+				82BCF4DD1D9123BF00BC4E0F /* Data+Resource.swift in Sources */,
 				B4DC1B321AA9CBAD00F67403 /* Model.xcdatamodeld in Sources */,
-				B4DC1B301AA9CBAD00F67403 /* GRTModels.m in Sources */,
-				B4BB8A0D1B4D17B600EBAADA /* GRTManagedStoreTests.m in Sources */,
+				82BCF4F01D91475200BC4E0F /* ManagedStoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -659,6 +657,7 @@
 				PRODUCT_NAME = Groot;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -682,6 +681,7 @@
 				PRODUCT_NAME = Groot;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -705,6 +705,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gonzalezreal.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = GrootTests;
 				SDKROOT = macosx;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -725,6 +726,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gonzalezreal.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = GrootTests;
 				SDKROOT = macosx;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -741,8 +743,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -752,6 +756,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -787,8 +792,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -797,6 +804,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -806,6 +814,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -817,6 +826,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -828,6 +838,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -836,6 +847,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -846,6 +858,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gonzalezreal.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -854,10 +867,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -867,6 +876,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gonzalezreal.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -874,14 +884,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
 				INFOPLIST_FILE = GrootTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gonzalezreal.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

@@ -1,5 +1,5 @@
 //
-//  NSValueTransformerTests.swift
+//  ValueTransformerTests.swift
 //  Groot
 //
 //  Created by Guillermo Gonzalez on 08/07/15.
@@ -9,17 +9,17 @@
 import XCTest
 import Groot
 
-class NSValueTransformerTests: XCTestCase {
+class ValueTransformerTests: XCTestCase {
 
     func testValueTransformer() {
-        func toString(value: Int) -> String? {
-            return "\(value)"
+        func toString(_ value: Int) -> String? {
+            return String(value)
         }
         
-        NSValueTransformer.setValueTransformerWithName("testTransformer", transform: toString)
-        let transformer = NSValueTransformer(forName: "testTransformer")!
+        ValueTransformer.setValueTransformer(withName: "testTransformer", transform: toString)
+        let transformer = ValueTransformer(forName: NSValueTransformerName(rawValue: "testTransformer"))!
         
-        let reversible = transformer.dynamicType.allowsReverseTransformation()
+        let reversible = type(of: transformer).allowsReverseTransformation()
         XCTAssertFalse(reversible, "should not allow reverse transformation")
         
         let fortyTwo = transformer.transformedValue(42) as? String
@@ -33,18 +33,18 @@ class NSValueTransformerTests: XCTestCase {
     }
     
     func testReversibleValueTransformer() {
-        func toString(value: Int) -> String? {
-            return "\(value)"
+        func toString(_ value: Int) -> String? {
+            return String(value)
         }
         
-        func toInt(value: String) -> Int? {
+        func toInt(_ value: String) -> Int? {
             return Int(value)
         }
         
-        NSValueTransformer.setValueTransformerWithName("testReversibleTransformer", transform: toString, reverseTransform: toInt)
-        let transformer = NSValueTransformer(forName: "testReversibleTransformer")!
+        ValueTransformer.setValueTransformer(withName: "testReversibleTransformer", transform: toString, reverseTransform: toInt)
+        let transformer = ValueTransformer(forName: NSValueTransformerName(rawValue: "testReversibleTransformer"))!
         
-        let reversible = transformer.dynamicType.allowsReverseTransformation()
+        let reversible = type(of: transformer).allowsReverseTransformation()
         XCTAssertTrue(reversible, "should allow reverse transformation")
         
         let fortyTwo = transformer.transformedValue(42) as? String
@@ -67,16 +67,16 @@ class NSValueTransformerTests: XCTestCase {
     }
     
     func testDictionaryTransformer() {
-        func preprocessJSONDictionary(dictionary: [String: AnyObject]) -> [String: AnyObject]? {
+        func preprocessJSONDictionary(_ dictionary: [String: AnyObject]) -> [String: AnyObject]? {
             var transformedDictionary = dictionary
-            transformedDictionary["transformed"] = true
+            transformedDictionary["transformed"] = true as AnyObject?
             
             return transformedDictionary
         }
         
-        NSValueTransformer.setDictionaryTransformerWithName("testDictionaryTransformer", transform: preprocessJSONDictionary)
+        ValueTransformer.setDictionaryTransformer(withName: "testDictionaryTransformer", transform: preprocessJSONDictionary)
         
-        let transformer = NSValueTransformer(forName: "testDictionaryTransformer")!
+        let transformer = ValueTransformer(forName: NSValueTransformerName(rawValue: "testDictionaryTransformer"))!
         let transformedDictionary = transformer.transformedValue(["foo": "bar"]) as! [String: AnyObject]
         if let transformed = transformedDictionary["transformed"] as? Bool {
             XCTAssertTrue(transformed, "should call the transform function")
@@ -88,7 +88,7 @@ class NSValueTransformerTests: XCTestCase {
     }
 
     func testEntityMapper() {
-        func entityForJSONDictionary(dictionary: [String: AnyObject]) -> String? {
+        func entityForJSONDictionary(_ dictionary: [String: AnyObject]) -> String? {
             if let type = dictionary["type"] as? String {
                 switch type {
                 case "A":
@@ -102,9 +102,9 @@ class NSValueTransformerTests: XCTestCase {
             return nil
         }
         
-        NSValueTransformer.setEntityMapperWithName("testEntityMapper", map: entityForJSONDictionary)
+        ValueTransformer.setEntityMapper(withName: "testEntityMapper", map: entityForJSONDictionary)
         
-        let transformer = NSValueTransformer(forName: "testEntityMapper")!
+        let transformer = ValueTransformer(forName: NSValueTransformerName(rawValue: "testEntityMapper"))!
         XCTAssertEqual("ConcreteA", transformer.transformedValue(["type": "A"]) as? String, "should call the transform function")
         XCTAssertEqual("ConcreteB", transformer.transformedValue(["type": "B"]) as? String,  "should call the transform function")
         XCTAssertNil(transformer.transformedValue(nil), "should handle nil values")
