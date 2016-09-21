@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Groot"
-  s.version      = "1.2"
+  s.version      = "2.0"
   s.summary      = "From JSON to Core Data and back."
 
   s.description  = <<-DESC
