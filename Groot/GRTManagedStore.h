@@ -95,14 +95,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface GRTManagedStore (Deprecated)
-
-+ (instancetype)managedStoreWithModel:(nullable NSManagedObjectModel *)managedObjectModel __attribute__((deprecated("Replaced by -initWithModel:error:")));
-
-+ (instancetype)managedStoreWithCacheName:(NSString *)cacheName __attribute__((deprecated("Replaced by +storeWithCacheName:error:")));
-
-- (id)initWithPath:(nullable NSString *)path managedObjectModel:(nullable NSManagedObjectModel *)managedObjectModel  __attribute__((deprecated("Replaced by -initWithURL:model:error:")));
-
-@end
-
 NS_ASSUME_NONNULL_END

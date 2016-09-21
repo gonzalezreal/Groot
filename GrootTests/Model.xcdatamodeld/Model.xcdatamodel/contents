@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14F27" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Abstract" representedClassName="GRTAbstract" isAbstract="YES" syncable="YES">
-        <attribute name="identifier" attributeType="Integer 32" indexed="YES" syncable="YES">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="15G1004" minimumToolsVersion="Xcode 4.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="Abstract" representedClassName=".Abstract" isAbstract="YES" syncable="YES">
+        <attribute name="identifier" attributeType="Integer 64" usesScalarValueType="NO" indexed="YES" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="id"/>
             </userInfo>
@@ -12,8 +12,8 @@
             <entry key="identityAttribute" value="identifier"/>
         </userInfo>
     </entity>
-    <entity name="Card" representedClassName="GRTCard" syncable="YES">
-        <attribute name="numberOfTimesPlayed" attributeType="Integer 16" defaultValueString="0" syncable="YES">
+    <entity name="Card" representedClassName=".Card" syncable="YES">
+        <attribute name="numberOfTimesPlayed" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="played"/>
             </userInfo>
@@ -32,8 +32,8 @@
             <entry key="identityAttributes" value="suit, value"/>
         </userInfo>
     </entity>
-    <entity name="Character" representedClassName="GRTCharacter" syncable="YES">
-        <attribute name="identifier" attributeType="Integer 32" indexed="YES" syncable="YES">
+    <entity name="Character" representedClassName=".Character" syncable="YES">
+        <attribute name="identifier" attributeType="Integer 64" usesScalarValueType="NO" indexed="YES" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="id"/>
                 <entry key="JSONTransformerName" value="GrootTests.Transformer"/>
@@ -49,7 +49,7 @@
                 <entry key="JSONKeyPath" value="real_name"/>
             </userInfo>
         </attribute>
-        <relationship name="powers" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Power" inverseName="characters" inverseEntity="Power" syncable="YES">
+        <relationship name="powers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Power" inverseName="characters" inverseEntity="Power" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="powers"/>
             </userInfo>
@@ -63,29 +63,29 @@
             <entry key="identityAttribute" value="identifier"/>
         </userInfo>
     </entity>
-    <entity name="ConcreteA" representedClassName="GRTConcreteA" parentEntity="Abstract" syncable="YES">
+    <entity name="ConcreteA" representedClassName=".ConcreteA" parentEntity="Abstract" syncable="YES">
         <attribute name="foo" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="foo"/>
             </userInfo>
         </attribute>
     </entity>
-    <entity name="ConcreteB" representedClassName="GRTConcreteB" parentEntity="Abstract" syncable="YES">
+    <entity name="ConcreteB" representedClassName=".ConcreteB" parentEntity="Abstract" syncable="YES">
         <attribute name="bar" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="bar"/>
             </userInfo>
         </attribute>
     </entity>
-    <entity name="Container" representedClassName="GRTContainer" syncable="YES">
-        <relationship name="abstracts" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Abstract" inverseName="container" inverseEntity="Abstract" syncable="YES">
+    <entity name="Container" representedClassName=".Container" syncable="YES">
+        <relationship name="abstracts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Abstract" inverseName="container" inverseEntity="Abstract" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="abstracts"/>
             </userInfo>
         </relationship>
     </entity>
-    <entity name="Power" representedClassName="GRTPower" syncable="YES">
-        <attribute name="identifier" attributeType="Integer 32" indexed="YES" syncable="YES">
+    <entity name="Power" representedClassName=".Power" syncable="YES">
+        <attribute name="identifier" attributeType="Integer 64" usesScalarValueType="NO" indexed="YES" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="id"/>
                 <entry key="JSONTransformerName" value="GrootTests.Transformer"/>
@@ -101,8 +101,8 @@
             <entry key="identityAttribute" value="identifier"/>
         </userInfo>
     </entity>
-    <entity name="Publisher" representedClassName="GRTPublisher" syncable="YES">
-        <attribute name="identifier" attributeType="Integer 32" indexed="YES" syncable="YES">
+    <entity name="Publisher" representedClassName=".Publisher" syncable="YES">
+        <attribute name="identifier" attributeType="Integer 64" usesScalarValueType="NO" indexed="YES" syncable="YES">
             <userInfo>
                 <entry key="JSONKeyPath" value="id"/>
                 <entry key="JSONTransformerName" value="GrootTests.Transformer"/>
@@ -119,13 +119,13 @@
         </userInfo>
     </entity>
     <elements>
-        <element name="Abstract" positionX="-1053" positionY="-4365" width="128" height="73"/>
-        <element name="Character" positionX="-1037" positionY="-4653" width="128" height="118"/>
-        <element name="ConcreteA" positionX="-1053" positionY="-4248" width="128" height="58"/>
-        <element name="ConcreteB" positionX="-846" positionY="-4356" width="128" height="58"/>
-        <element name="Container" positionX="-1242" positionY="-4392" width="128" height="58"/>
-        <element name="Power" positionX="-839" positionY="-4552" width="128" height="88"/>
-        <element name="Publisher" positionX="-1242" positionY="-4527" width="128" height="88"/>
+        <element name="Abstract" positionX="-1053" positionY="-4365" width="128" height="75"/>
         <element name="Card" positionX="-1026" positionY="-4428" width="128" height="90"/>
+        <element name="Character" positionX="-1037" positionY="-4653" width="128" height="120"/>
+        <element name="ConcreteA" positionX="-1053" positionY="-4248" width="128" height="60"/>
+        <element name="ConcreteB" positionX="-846" positionY="-4356" width="128" height="60"/>
+        <element name="Container" positionX="-1242" positionY="-4392" width="128" height="60"/>
+        <element name="Power" positionX="-839" positionY="-4552" width="128" height="90"/>
+        <element name="Publisher" positionX="-1242" positionY="-4527" width="128" height="90"/>
     </elements>
 </model>

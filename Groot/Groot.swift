@@ -81,7 +81,7 @@ public func objects<T: NSManagedObject>(fromJSONData data: Data, inContext conte
     return managedObjects as! [T]
 }
 
-public typealias JSONDictionary = [String: AnyObject]
+public typealias JSONDictionary = [String: Any]
 
 /// Creates or updates a managed object from a JSON dictionary.
 ///
@@ -111,7 +111,7 @@ public func object<T: NSManagedObject>(fromJSONDictionary dictionary: JSONDictio
     return managedObject as! T
 }
 
-public typealias JSONArray = [AnyObject]
+public typealias JSONArray = [Any]
 
 /// Creates or updates a set of managed objects from a JSON array.
 ///
@@ -142,7 +142,7 @@ public func objects<T: NSManagedObject>(fromJSONArray array: JSONArray, inContex
 /// - parameter object: The managed object to use for JSON serialization.
 ///
 /// - returns: A JSON dictionary.
-public func jsonDictionary(fromObject object: NSManagedObject) -> JSONDictionary {
+public func json(fromObject object: NSManagedObject) -> JSONDictionary {
     return GRTJSONSerialization.jsonDictionary(from: object) as! JSONDictionary;
 }
 
@@ -151,6 +151,6 @@ public func jsonDictionary(fromObject object: NSManagedObject) -> JSONDictionary
 /// - parameter objects: The array of managed objects to use for JSON serialization.
 ///
 /// - returns: A JSON array.
-public func jsonArray(fromObjects objects: [NSManagedObject]) -> JSONArray {
-    return GRTJSONSerialization.jsonArray(from: objects) as JSONArray
+public func json(fromObjects objects: [NSManagedObject]) -> JSONArray {
+    return GRTJSONSerialization.jsonArray(from: objects)
 }
