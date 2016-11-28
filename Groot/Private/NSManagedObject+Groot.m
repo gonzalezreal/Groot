@@ -156,7 +156,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Private
 
-- (void)grt_setAttribute:(NSAttributeDescription *)attribute
+- (BOOL)grt_setAttribute:(NSAttributeDescription *)attribute
       fromJSONDictionary:(NSDictionary *)dictionary
             mergeChanges:(BOOL)mergeChanges
                    error:(NSError *__autoreleasing  __nullable * __nullable)outError
@@ -170,6 +170,11 @@ NS_ASSUME_NONNULL_BEGIN
             if (transformer) {
                 value = [transformer transformedValue:rawValue];
             } else {
+
+                if(![rawValue isKindOfClass:NSClassFromString([attribute attributeValueClassName])]){
+                    return FALSE;
+                }
+
                 value = rawValue;
             }
         }
@@ -178,12 +183,14 @@ NS_ASSUME_NONNULL_BEGIN
         value = [self valueForKey:attribute.name];
         [self validateValue:&value forKey:attribute.name error:outError];
         
-        return;
+        return *outError == nil ? TRUE : FALSE;
     }
     
     if ([self validateValue:&value forKey:attribute.name error:outError]) {
         [self setValue:value forKey:attribute.name];
     }
+    
+    return *outError == nil ? TRUE : FALSE;
 }
 
 - (void)grt_setRelationship:(NSRelationshipDescription *)relationship
