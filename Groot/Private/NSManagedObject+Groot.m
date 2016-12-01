@@ -67,7 +67,11 @@ NS_ASSUME_NONNULL_BEGIN
     id identifier = [attribute grt_valueForJSONValue:value];
     
     if ([self validateValue:&identifier forKey:attribute.name error:outError]) {
-        [self setValue:identifier forKey:attribute.name];
+        // only set the value if the new value and the old value are different
+        // this stops CoreData to think a entity was updated when in it wasnt
+        if(![[self valueForKey: attribute.name] isEqual: value]) {
+            [self setValue:value forKey:attribute.name];
+        }
     }
 }
 
@@ -182,7 +186,11 @@ NS_ASSUME_NONNULL_BEGIN
     }
     
     if ([self validateValue:&value forKey:attribute.name error:outError]) {
-        [self setValue:value forKey:attribute.name];
+        // only set the value if the new value and the old value are different
+        // this stops CoreData to think a entity was updated when in it wasnt
+        if(![[self valueForKey: attribute.name] isEqual: value]) {
+            [self setValue:value forKey:attribute.name];
+        }
     }
 }
 
@@ -240,7 +248,11 @@ NS_ASSUME_NONNULL_BEGIN
     }
     
     if ([self validateValue:&value forKey:relationship.name error:outError]) {
-        [self setValue:value forKey:relationship.name];
+        // only set the value if the new value and the old value are different
+        // this stops CoreData to think a entity was updated when in it wasnt
+        if(![[self valueForKey: relationship.name] isEqual:value]) {
+            [self setValue:value forKey:relationship.name];
+        }
     }
 }
 
