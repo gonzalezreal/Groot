@@ -25,7 +25,12 @@
 @implementation NSPropertyDescription (Groot)
 
 - (nullable NSString *)grt_JSONKeyPath {
-    return self.userInfo[@"JSONKeyPath"];
+    
+    if (self.userInfo[@"JSONKeyPath"]) {
+        return self.userInfo[@"JSONKeyPath"];
+    }
+    
+    return [self name];
 }
 
 - (BOOL)grt_JSONSerializable {
@@ -36,7 +41,27 @@
     NSString *keyPath = [self grt_JSONKeyPath];
     
     if (keyPath != nil) {
-        return [dictionary valueForKeyPath:keyPath];
+        //Try to split key path with '.'
+        NSArray *splitKeyPathWithDot = [keyPath componentsSeparatedByString:@"."];
+        //If only one item then that is our key
+        if ([splitKeyPathWithDot count] == 1) {
+            return [dictionary valueForKeyPath:keyPath];
+        } else {
+            //We have item similar to "links.users"
+            id object;
+            NSDictionary *tempDict;
+            //Iterate through each key in array
+            for (NSString *key in splitKeyPathWithDot) {
+                //if dictionary exists lets keep for next iteration
+                if ([dictionary[key] isKindOfClass:[NSDictionary class]]) {
+                    tempDict = dictionary[key];
+                }
+                //Try to get the object if it exists
+                object = tempDict ? tempDict[key] : nil;                
+            }            
+            return object;
+        }
+        
     }
     
     return nil;
