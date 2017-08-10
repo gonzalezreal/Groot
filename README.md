@@ -18,13 +18,13 @@ Add the following to your `Podfile`:
 
 ``` ruby
 use_frameworks!
-pod ‘Groot’
+pod 'Groot'
 ```
 
 Or, if you need to support iOS 6 / OS X 10.8:
 
 ``` ruby
-pod ‘Groot/ObjC’
+pod 'Groot/ObjC'
 ```
 
 Then run `$ pod install`.
@@ -36,7 +36,7 @@ If you don’t have CocoaPods installed or integrated into your project, you can
 Add the following to your `Cartfile`:
 
 ```
-github “gonzalezreal/Groot”
+github "gonzalezreal/Groot"
 ```
 
 Then run `$ carthage update`.
