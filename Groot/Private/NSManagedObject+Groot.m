@@ -164,14 +164,12 @@ NS_ASSUME_NONNULL_BEGIN
     id value = nil;
     id rawValue = [attribute grt_rawValueInJSONDictionary:dictionary];
     
-    if (rawValue != nil) {
-        if (rawValue != [NSNull null]) {
-            NSValueTransformer *transformer = [attribute grt_JSONTransformer];
-            if (transformer) {
-                value = [transformer transformedValue:rawValue];
-            } else {
-                value = rawValue;
-            }
+    if (rawValue != nil && rawValue != [NSNull null]) {
+        NSValueTransformer *transformer = [attribute grt_JSONTransformer];
+        if (transformer) {
+            value = [transformer transformedValue:rawValue];
+        } else {
+            value = rawValue;
         }
     } else if (mergeChanges) {
         // Just validate the current value
