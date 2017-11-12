@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.author             = { "Guillermo Gonzalez" => "gonzalezreal@icloud.com" }
   s.social_media_url   = "https://twitter.com/gonzalezreal"
   
-  s.source       = { :git => "https://github.com/gonzalezreal/Groot.git", :tag => s.version.to_s }
+  s.source       = { :git => "https://github.com/ValentinStrazdin/Groot.git", :tag => s.version.to_s }
   
   s.default_subspec = "Swift"
   s.ios.deployment_target = "8.0"
