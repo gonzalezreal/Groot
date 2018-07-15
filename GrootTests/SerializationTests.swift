@@ -562,8 +562,8 @@ class SerializationTests: XCTestCase {
         batman.identifier = 1699
         batman.name = "Batman"
         batman.realName = "Bruce Wayne"
-        batman.powers.insert(agility)
         batman.powers.insert(wealth)
+        batman.powers.insert(agility)
         batman.publisher = dc
 
         let ironMan = NSEntityDescription.insertNewObject(
@@ -594,11 +594,8 @@ class SerializationTests: XCTestCase {
                 ]
             ],
             [
-                "id": NSNull(),
                 "name": "Iron Man",
-                "real_name": NSNull(),
                 "powers": [],
-                "publisher": NSNull()
             ]
         ]
 
@@ -624,8 +621,6 @@ class SerializationTests: XCTestCase {
         let result = json(fromObject: batman)
 
         let expectedResult: JSONDictionary = [
-            "id": NSNull(),
-            "name": NSNull(),
             "real_name": [
                 "foo": [
                     "bar": [
@@ -634,7 +629,6 @@ class SerializationTests: XCTestCase {
                 ]
             ],
             "powers": [],
-            "publisher": NSNull()
         ]
 
         XCTAssertEqual(result as NSDictionary, expectedResult as NSDictionary)
