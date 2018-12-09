@@ -45,7 +45,7 @@ extension NSManagedObject {
             fatalError("Could not find managed object model for the provided context.")
         }
 
-        let className = String(reflecting: self)
+        let className = String(describing: self)
 
         for entity in model.entities {
             if entity.managedObjectClassName == className {
