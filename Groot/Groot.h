@@ -32,3 +32,4 @@ FOUNDATION_EXPORT const unsigned char GrootVersionString[];
 #import <Groot/GRTManagedStore.h>
 #import <Groot/NSValueTransformer+Groot.h>
 #import <Groot/GRTJSONSerialization.h>
+#import <Groot/NSManagedObject+GrootPublic.h>

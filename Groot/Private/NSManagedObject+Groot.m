@@ -27,6 +27,7 @@
 
 #import "NSPropertyDescription+Groot.h"
 #import "NSAttributeDescription+Groot.h"
+#import "NSManagedObject+GrootPublic.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -55,9 +56,13 @@ NS_ASSUME_NONNULL_BEGIN
         *stop = (error != nil); // break on error
     }];
     
-    if (error != nil && outError != nil) {
-        *outError = error;
-    }
+	if (error != nil) {
+		if (outError != nil) {
+        	*outError = error;
+		}
+	} else {
+		[self grt_awakeFromInsert];
+	}
 }
 
 - (void)grt_serializeJSONValue:(id)value
@@ -68,6 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
     
     if ([self validateValue:&identifier forKey:attribute.name error:outError]) {
         [self setValue:identifier forKey:attribute.name];
+		[self grt_awakeFromInsert];
     }
 }
 

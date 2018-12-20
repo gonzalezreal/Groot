@@ -7,6 +7,7 @@
 //
 
 import CoreData
+import Groot
 
 final class Character: NSManagedObject {
 
@@ -15,6 +16,13 @@ final class Character: NSManagedObject {
     @NSManaged var realName: String
     @NSManaged var publisher: Publisher?
     @NSManaged var powers: Set<Power>
+	
+	var awakeFromInsertCalled = false
+	
+	override func grt_awakeFromInsert() {
+		super.grt_awakeFromInsert()
+		awakeFromInsertCalled = true
+	}
 }
 
 final class Publisher: NSManagedObject {
@@ -29,6 +37,13 @@ final class Power: NSManagedObject {
     @NSManaged var identifier: Int
     @NSManaged var name: String
     @NSManaged var characters: Set<Character>
+	
+	var awakeFromInsertCalled = false
+	
+	override func grt_awakeFromInsert() {
+		super.grt_awakeFromInsert()
+		awakeFromInsertCalled = true
+	}
 }
 
 final class Container: NSManagedObject {

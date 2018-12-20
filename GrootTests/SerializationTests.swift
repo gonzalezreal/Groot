@@ -95,6 +95,7 @@ class SerializationTests: XCTestCase {
             XCTAssertEqual(1699, batman.identifier)
             XCTAssertEqual("Batman", batman.name)
             XCTAssertEqual("Bruce Wayne", batman.realName)
+			XCTAssertTrue(batman.awakeFromInsertCalled)
 
             let powers = batman.powers.sorted(by: identifierAscending)
 
@@ -194,7 +195,7 @@ class SerializationTests: XCTestCase {
             XCTFail()
             return
         }
-
+		
         let updateJSON: JSONArray = [
             [
                 "id": "1699",
@@ -242,7 +243,8 @@ class SerializationTests: XCTestCase {
         XCTAssertEqual("Iron Man", ironMan.name)
         XCTAssertEqual(1455, ironMan.identifier)
         XCTAssertEqual("Tony Stark", ironMan.realName)
-
+		XCTAssertTrue(ironMan.awakeFromInsertCalled)
+		
         var powers = ironMan.powers.sorted(by: identifierAscending)
 
         let ironManRich = powers[0];
@@ -260,7 +262,8 @@ class SerializationTests: XCTestCase {
         XCTAssertEqual("Batman", batman.name)
         XCTAssertEqual(1699, batman.identifier)
         XCTAssertEqual("Bruce Wayne", batman.realName)
-
+		XCTAssertTrue(batman.awakeFromInsertCalled)
+		
         powers = batman.powers.sorted(by: identifierAscending)
 
         let agility = powers[0]
@@ -325,8 +328,10 @@ class SerializationTests: XCTestCase {
 
             XCTAssertEqual("Character", characters[0].entity.name)
             XCTAssertEqual(1699, characters[0].identifier)
+			XCTAssertTrue(characters[0].awakeFromInsertCalled)
             XCTAssertEqual("Character", characters[1].entity.name)
             XCTAssertEqual(1455, characters[1].identifier)
+			XCTAssertTrue(characters[1].awakeFromInsertCalled)
         } catch {
             XCTFail("error: \(error)")
         }
@@ -342,7 +347,7 @@ class SerializationTests: XCTestCase {
             "name": "Batman",
             "real_name": "Bruce Wayne",
             "id": "1699",
-            "powers": ["4", NSNull(), "9"],
+            "powers": ["4", NSNull(), "9", "10"],
             "publisher": "10"
         ]
 
@@ -367,7 +372,7 @@ class SerializationTests: XCTestCase {
             let _: [Power] = try objects(fromJSONArray: powersJSON, inContext: context)
             let _: Publisher = try object(fromJSONDictionary: publisherJSON, inContext: context)
 
-            XCTAssertEqual(2, batman.powers.count)
+            XCTAssertEqual(3, batman.powers.count)
 
             let powers = batman.powers.sorted(by: identifierAscending)
 
@@ -380,6 +385,11 @@ class SerializationTests: XCTestCase {
 
             XCTAssertEqual(9, wealth.identifier)
             XCTAssertEqual("Insanely Rich", wealth.name)
+			
+			let unknownPower = powers[2]
+			
+			XCTAssertEqual(10, unknownPower.identifier)
+			XCTAssertTrue(unknownPower.awakeFromInsertCalled)
 
             let publisher = batman.publisher
 
