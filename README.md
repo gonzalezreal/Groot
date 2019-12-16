@@ -110,7 +110,7 @@ func toInt(_ value: String) -> Int? {
     return Int(value)
 }
 
-ValueTransformer.setValueTransformer(withName: "StringToInteger", transform: toString, reverseTransform: toInt)
+ValueTransformer.setValueTransformer(withName: "StringToInteger", transform: toInt, reverseTransform: toString)
 ```
 
 ```objc
